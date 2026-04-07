@@ -1,0 +1,2424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TobaccoDB · FDA 烟草与尼古丁产品合规数据库</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Light palette */
+  --bg:#F5F2ED;
+  --s0:#FDFCFA;
+  --s1:#F9F7F3;
+  --s2:#F0EDE6;
+  --s3:#E4DDD3;
+  --s4:#C8BFB2;
+  --s5:#A09080;
+
+  /* Primary: deep indigo-navy */
+  --ink:#1A2340;
+  --ink2:#2E3D5E;
+  --ink3:#4A5A7A;
+  --ink4:#7A8AA8;
+  --ink5:#B0BAD0;
+
+  /* Accent: tobacco amber */
+  --ac:#C2520A;
+  --ac2:#D96820;
+  --ac3:#E8844A;
+  --ac-pale:#FBF0E8;
+  --ac-mid:#F4D4BE;
+
+  /* Semantic */
+  --ok:#1B6B3A;
+  --ok-pale:#E8F5EE;
+  --warn:#8B5E08;
+  --warn-pale:#FEF5E0;
+  --info:#1A4A8A;
+  --info-pale:#E8F0FC;
+  --mrtp-gold:#8B6914;
+  --mrtp-pale:#FDF6E3;
+  --mrtp-border:#D4A843;
+
+  /* Typography */
+  --font-d:'Playfair Display',Georgia,serif;
+  --font-u:'Instrument Sans',sans-serif;
+  --font-m:'JetBrains Mono',monospace;
+
+  /* Geometry */
+  --r:6px;
+  --r2:10px;
+  --r3:16px;
+
+  /* Shadows */
+  --shadow-sm:0 1px 3px rgba(26,35,64,.08),0 1px 2px rgba(26,35,64,.05);
+  --shadow:0 4px 16px rgba(26,35,64,.10),0 2px 6px rgba(26,35,64,.07);
+  --shadow-lg:0 16px 48px rgba(26,35,64,.14),0 6px 18px rgba(26,35,64,.08);
+  --shadow-card:0 2px 8px rgba(26,35,64,.07),0 0 0 1px rgba(26,35,64,.06);
+
+  /* Borders */
+  --b1:rgba(26,35,64,.07);
+  --b2:rgba(26,35,64,.12);
+  --b3:rgba(26,35,64,.18);
+
+  --ac-b1:rgba(194,82,10,.08);
+  --ac-b2:rgba(194,82,10,.16);
+  --ac-b3:rgba(194,82,10,.28);
+}
+
+html,body{
+  min-height:100%;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-u);
+  font-size:14px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--s2)}
+::-webkit-scrollbar-thumb{background:var(--s4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--s5)}
+button{cursor:pointer;font-family:var(--font-u);border:none;background:none;color:inherit}
+input,select{font-family:var(--font-u);outline:none}
+a{color:var(--ac);text-decoration:none}
+a:hover{text-decoration:underline}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ════════════════════════════════════
+   LOGIN PAGE
+════════════════════════════════════ */
+#login-page{
+  min-height:100vh;
+  display:flex;
+  background:var(--s0);
+  position:relative;
+  overflow:hidden;
+}
+/* Left decorative panel */
+.login-left{
+  width:45%;
+  background:var(--ink);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:60px;
+  position:relative;
+  overflow:hidden;
+  flex-shrink:0;
+}
+/* Subtle dot grid */
+.login-left::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+/* Decorative lines */
+.login-left::after{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--ac),var(--ac3),var(--ac3));
+}
+.login-left-content{position:relative;z-index:1}
+.login-brand-mark{
+  display:flex;align-items:center;gap:12px;margin-bottom:48px;
+}
+.login-mark-icon{
+  width:48px;height:48px;border-radius:10px;
+  background:linear-gradient(135deg,var(--ac),var(--ac3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  box-shadow:0 4px 16px rgba(194,82,10,.4);
+}
+.login-mark-text{
+  font-family:var(--font-d);
+  font-size:22px;color:#fff;letter-spacing:-.3px;
+}
+.login-mark-sub{
+  font-family:var(--font-m);font-size:9px;
+  color:rgba(255,255,255,.4);letter-spacing:2px;
+  text-transform:uppercase;margin-top:2px;
+}
+.login-headline{
+  font-family:var(--font-d);
+  font-size:clamp(28px,3vw,40px);
+  font-weight:600;color:#fff;
+  line-height:1.15;margin-bottom:16px;
+}
+.login-headline em{color:var(--ac3);font-style:italic}
+.login-desc{
+  font-size:13px;color:rgba(255,255,255,.55);
+  line-height:1.7;max-width:320px;margin-bottom:40px;
+}
+.login-pills{display:flex;flex-wrap:wrap;gap:8px}
+.login-pill{
+  font-family:var(--font-m);font-size:10px;
+  color:rgba(255,255,255,.5);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;padding:4px 12px;
+  letter-spacing:.5px;
+}
+
+/* Right login form */
+.login-right{
+  flex:1;
+  display:flex;align-items:center;justify-content:center;
+  padding:40px;
+  background:var(--s0);
+}
+.login-form-wrap{
+  width:100%;max-width:380px;
+  animation:slideUp .5s cubic-bezier(.16,1,.3,1) both;
+}
+.login-form-title{
+  font-family:var(--font-d);
+  font-size:26px;font-weight:600;
+  color:var(--ink);margin-bottom:6px;
+}
+.login-form-sub{
+  font-size:13px;color:var(--ink3);
+  margin-bottom:32px;line-height:1.5;
+}
+.lf-group{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.lf-label{
+  font-family:var(--font-m);font-size:10px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--ink4);font-weight:500;
+}
+.lf-input{
+  background:var(--s0);border:1.5px solid var(--s3);
+  border-radius:var(--r);padding:11px 14px;
+  font-size:14px;color:var(--ink);
+  transition:border-color .18s,box-shadow .18s;
+  width:100%;
+}
+.lf-input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(26,35,64,.08)}
+.lf-input::placeholder{color:var(--ink5)}
+.lf-err{
+  display:none;font-size:12px;color:#C0392B;
+  background:#FDECEA;border:1px solid #F5C6C0;
+  border-radius:var(--r);padding:9px 12px;
+  margin-bottom:12px;font-family:var(--font-m);
+}
+.lf-btn{
+  width:100%;padding:13px;
+  background:var(--ink);color:#fff;
+  font-weight:700;font-size:14px;
+  border-radius:var(--r);
+  letter-spacing:.3px;
+  transition:all .18s;
+  position:relative;overflow:hidden;
+  margin-top:4px;
+}
+.lf-btn::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.08),transparent 60%);
+}
+.lf-btn:hover{background:var(--ink2);box-shadow:0 4px 16px rgba(26,35,64,.25);transform:translateY(-1px)}
+.lf-btn:active{transform:translateY(0)}
+.lf-divider{
+  border:none;border-top:1px solid var(--s3);
+  margin:24px 0;
+}
+.lf-footer{
+  font-size:11px;color:var(--ink5);
+  text-align:center;line-height:1.8;
+}
+.lf-footer a{color:var(--ink3)}
+
+@media(max-width:768px){
+  #login-page{flex-direction:column}
+  .login-left{width:100%;padding:32px 24px;min-height:auto}
+  .login-headline{font-size:24px}
+  .login-right{padding:32px 24px}
+}
+
+/* ════════════════════════════════════
+   APP
+════════════════════════════════════ */
+#app-page{display:none;min-height:100vh;background:var(--bg)}
+
+/* Topbar */
+.topbar{
+  height:56px;
+  display:flex;align-items:center;gap:14px;
+  padding:0 28px;
+  background:var(--s0);
+  border-bottom:1px solid var(--s3);
+  position:sticky;top:0;z-index:100;
+  box-shadow:var(--shadow-sm);
+}
+/* Accent line at top */
+.topbar::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--ink) 0%,var(--ink2) 40%,var(--ac) 100%);
+}
+.logo{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--font-d);font-size:17px;
+  color:var(--ink);letter-spacing:-.3px;
+  white-space:nowrap;
+}
+.logo-icon{
+  width:28px;height:28px;border-radius:6px;
+  background:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;flex-shrink:0;
+}
+.logo-badge{
+  font-family:var(--font-m);font-size:9px;
+  color:var(--ac);border:1px solid var(--ac-b3);
+  border-radius:4px;padding:2px 6px;
+  background:var(--ac-pale);letter-spacing:1px;
+  text-transform:uppercase;
+}
+.topbar-spacer{flex:1}
+.user-chip{
+  display:flex;align-items:center;gap:7px;
+  background:var(--s1);border:1px solid var(--s3);
+  border-radius:20px;padding:5px 12px 5px 8px;
+  font-size:12px;font-family:var(--font-m);color:var(--ink3);
+}
+.user-avatar{
+  width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--ink),var(--ink2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:#fff;font-weight:700;
+  font-family:var(--font-m);
+}
+.tbtn{
+  padding:7px 14px;border-radius:var(--r);
+  font-size:12px;font-weight:600;
+  transition:all .15s;letter-spacing:.2px;cursor:pointer;
+}
+.tbtn-ghost{color:var(--ink3)}
+.tbtn-ghost:hover{background:var(--s2);color:var(--ink)}
+.tbtn-outline{
+  border:1.5px solid var(--s3);color:var(--ink3);background:var(--s0);
+}
+.tbtn-outline:hover{border-color:var(--ink);color:var(--ink);background:var(--s1)}
+.tbtn-accent{
+  background:var(--ac);color:#fff;font-weight:700;
+  border:none;
+}
+.tbtn-accent:hover{background:var(--ac3);box-shadow:0 2px 8px rgba(194,82,10,.3)}
+
+/* ── Main layout */
+.main{max-width:1320px;margin:0 auto;padding:32px 24px}
+
+/* ── Hero */
+.hero{
+  display:grid;grid-template-columns:1fr auto;
+  gap:24px;align-items:end;
+  padding-bottom:28px;margin-bottom:28px;
+  border-bottom:1px solid var(--s3);
+}
+.hero-left{}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-m);font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--ac);
+  margin-bottom:12px;
+}
+.hero-eyebrow::before{content:"";width:16px;height:2px;background:var(--ac);border-radius:1px}
+.hero h1{
+  font-family:var(--font-d);
+  font-size:clamp(26px,3vw,42px);
+  font-weight:600;line-height:1.1;
+  color:var(--ink);margin-bottom:12px;
+}
+.hero h1 em{color:var(--ac);font-style:italic}
+.hero-desc{font-size:13px;color:var(--ink3);max-width:560px;line-height:1.7}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--s3);border:1px solid var(--s3);
+  border-radius:var(--r2);overflow:hidden;
+  box-shadow:var(--shadow-sm);flex-shrink:0;
+}
+.hstat{
+  background:var(--s0);
+  padding:16px 20px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.hstat-n{
+  font-family:var(--font-d);font-size:26px;
+  font-weight:600;color:var(--ink);line-height:1;
+}
+.hstat-n.accent{color:var(--ac)}
+.hstat-n.ok{color:var(--ok)}
+.hstat-n.info{color:var(--info)}
+.hstat-l{
+  font-family:var(--font-m);font-size:9px;
+  text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--ink4);
+}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(4,1fr);width:100%}
+}
+
+/* ── Tabs */
+.tabs-wrap{
+  background:var(--s0);border:1px solid var(--s3);
+  border-radius:var(--r2);padding:4px;
+  display:flex;flex-wrap:wrap;gap:2px;
+  margin-bottom:20px;
+  box-shadow:var(--shadow-sm);
+}
+.tab{
+  padding:7px 14px;border-radius:var(--r);
+  font-size:12px;font-weight:600;
+  color:var(--ink4);transition:all .15s;
+  letter-spacing:.2px;cursor:pointer;
+  border:1px solid transparent;
+  white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--s2)}
+.tab.active{
+  background:var(--ink);color:#fff;
+  box-shadow:var(--shadow-sm);
+}
+.tab-cnt{font-size:10px;opacity:.7;margin-left:3px}
+
+/* ── Controls */
+.controls{
+  display:flex;gap:10px;margin-bottom:20px;
+  flex-wrap:wrap;align-items:center;
+}
+.search-wrap{flex:1;min-width:200px;max-width:360px;position:relative}
+.search-ico{
+  position:absolute;left:11px;top:50%;transform:translateY(-50%);
+  color:var(--ink4);pointer-events:none;
+}
+.search-input{
+  width:100%;background:var(--s0);
+  border:1.5px solid var(--s3);border-radius:var(--r);
+  padding:9px 12px 9px 33px;font-size:13px;
+  color:var(--ink);transition:border-color .18s,box-shadow .18s;
+  box-shadow:var(--shadow-sm);
+}
+.search-input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(26,35,64,.08)}
+.search-input::placeholder{color:var(--ink5)}
+.filter-sel{
+  background:var(--s0);border:1.5px solid var(--s3);
+  border-radius:var(--r);padding:9px 12px;
+  font-size:13px;color:var(--ink);cursor:pointer;
+  box-shadow:var(--shadow-sm);
+}
+.filter-sel:focus{border-color:var(--ink)}
+.rcount{
+  font-family:var(--font-m);font-size:11px;
+  color:var(--ink4);margin-left:auto;white-space:nowrap;
+}
+
+/* ── Grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+
+/* ── Cards */
+.card{
+  background:var(--s0);
+  border:1px solid var(--s3);
+  border-radius:var(--r2);
+  padding:20px;cursor:pointer;
+  transition:border-color .18s,transform .18s,box-shadow .18s;
+  display:flex;flex-direction:column;gap:12px;
+  box-shadow:var(--shadow-card);
+  animation:fadeUp .22s ease both;
+  position:relative;overflow:hidden;
+}
+.card::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:3px;
+  opacity:0;transition:opacity .18s;
+}
+.card:hover{
+  border-color:var(--s4);
+  transform:translateY(-2px);
+  box-shadow:var(--shadow);
+}
+.card:hover::before{opacity:1}
+
+/* Category color top strip */
+.card[data-cat="ends"]::before{background:linear-gradient(90deg,#22d3ee,#06b6d4)}
+.card[data-cat="htp"]::before{background:linear-gradient(90deg,#f59e0b,#d97706)}
+.card[data-cat="smokeless"]::before{background:linear-gradient(90deg,#8b5cf6,#7c3aed)}
+.card[data-cat="pouch"]::before{background:linear-gradient(90deg,#22c55e,#16a34a)}
+.card[data-cat="cigarette"]::before{background:linear-gradient(90deg,#f97316,#ea580c)}
+.card[data-cat="nrt"]::before{background:linear-gradient(90deg,#14b8a6,#0d9488)}
+
+/* MRTP card special treatment */
+.card.mrtp-card{
+  border-color:var(--mrtp-border);
+  background:linear-gradient(160deg,var(--mrtp-pale) 0%,var(--s0) 60%);
+}
+.card.mrtp-card::before{background:linear-gradient(90deg,var(--mrtp-gold),var(--ac));opacity:1}
+.card.mrtp-card:hover{border-color:var(--mrtp-gold);box-shadow:0 4px 20px rgba(139,105,20,.15)}
+
+.card-badges{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.card-title{font-family:var(--font-d);font-size:15px;font-weight:600;color:var(--ink);line-height:1.3}
+.card-brand{font-size:13px;font-weight:700;color:var(--ac);margin-bottom:2px}
+.card-co{font-size:11px;color:var(--ink4)}
+.card-stn{font-family:var(--font-m);font-size:10px;color:var(--ink5)}
+.card-summary{
+  font-size:12px;color:var(--ink3);line-height:1.65;
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;
+}
+.card-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--s2);margin-top:auto;
+}
+.card-date{font-family:var(--font-m);font-size:10px;color:var(--ink5)}
+.card-nic{font-family:var(--font-m);font-size:10px;color:var(--ink5);margin-top:2px}
+.card-arr{color:var(--ink5);font-size:14px;transition:all .15s}
+.card:hover .card-arr{color:var(--ac);transform:translateX(3px)}
+.mrtp-chip{
+  font-family:var(--font-m);font-size:10px;font-weight:700;
+  color:var(--mrtp-gold);padding:3px 8px;border-radius:4px;
+  background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.3);
+}
+.cmp-btn{
+  font-size:10px;font-family:var(--font-m);
+  padding:3px 9px;border-radius:4px;
+  transition:all .15s;font-weight:600;
+}
+
+/* ── Badges */
+.badge{
+  display:inline-flex;align-items:center;
+  font-family:var(--font-m);font-size:10px;font-weight:600;
+  padding:2px 7px;border-radius:4px;
+  letter-spacing:.3px;white-space:nowrap;
+}
+.pw-pmta-mgo{background:#EEFAF3;color:#1B6B3A;border:1px solid #A7DFC0}
+.pw-mrtp    {background:#FEF6E0;color:#8B5E08;border:1px solid #F0CE80}
+.pw-se      {background:#EFF0FC;color:#3730A3;border:1px solid #C7C9F5}
+.pw-exreq   {background:#E8F4FD;color:#0C4A7A;border:1px solid #9AC9EF}
+.pw-ptp     {background:#F5EFF9;color:#5B21B6;border:1px solid #D2AEED}
+.vs-ok     {background:#EEFAF3;color:#1B6B3A;border:1px solid #A7DFC0}
+.vs-pending{background:#FEF5E0;color:#8B5E08;border:1px solid #F0CE80}
+.vs-exp    {background:#F3F4F6;color:#6B7280;border:1px solid #D1D5DB}
+
+/* ── Overlay / Modal */
+.overlay{
+  position:fixed;inset:0;
+  background:rgba(26,35,64,.45);z-index:200;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:32px 16px;overflow-y:auto;
+  backdrop-filter:blur(4px);
+  animation:fadeIn .15s ease;
+}
+.modal{
+  background:var(--s0);
+  border:1px solid var(--s3);
+  border-radius:var(--r3);
+  width:100%;max-width:760px;
+  overflow:hidden;
+  box-shadow:var(--shadow-lg);
+  animation:slideUp .25s cubic-bezier(.16,1,.3,1);
+  flex-shrink:0;
+}
+.modal-head{
+  padding:28px 32px 24px;
+  background:var(--s1);
+  border-bottom:1px solid var(--s3);
+  position:relative;
+}
+.modal-head::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--ink),var(--ac));
+}
+.mclose{
+  position:absolute;top:20px;right:20px;
+  width:30px;height:30px;border-radius:50%;
+  background:var(--s2);border:1px solid var(--s3);
+  color:var(--ink3);font-size:13px;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .15s;cursor:pointer;
+}
+.mclose:hover{background:#FDECEA;border-color:#F5C6C0;color:#C0392B}
+.modal-title{font-family:var(--font-d);font-size:22px;font-weight:600;color:var(--ink);margin:10px 0 4px;line-height:1.2}
+.modal-en{font-family:var(--font-m);font-size:10px;color:var(--ink4);margin-bottom:10px;letter-spacing:.3px}
+.modal-body{padding:28px 32px;display:flex;flex-direction:column;gap:24px}
+
+/* ── Sections */
+.sec-hd{
+  font-family:var(--font-m);font-size:9px;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--ink);
+  margin-bottom:12px;display:flex;align-items:center;gap:10px;
+  font-weight:600;
+}
+.sec-hd::after{content:"";flex:1;height:1px;background:var(--s3)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.iitem{
+  background:var(--s1);border:1px solid var(--s2);
+  border-radius:var(--r);padding:12px;
+}
+.iitem-l{
+  font-family:var(--font-m);font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--ink4);margin-bottom:5px;
+}
+.iitem-v{font-size:13px;color:var(--ink);font-weight:500;line-height:1.4}
+.iitem-v.mono{font-family:var(--font-m);font-size:12px}
+.tbox{
+  font-size:13px;color:var(--ink3);line-height:1.75;
+  padding:14px 16px;
+  background:var(--s1);border:1px solid var(--s2);
+  border-radius:var(--r);
+}
+.tbox.left-accent{border-left:3px solid var(--ac)}
+.tbox.left-ok{border-left:3px solid var(--ok)}
+.tbox.left-warn{border-left:3px solid var(--warn)}
+
+/* ── MRTP Block */
+.mrtp-block{
+  background:linear-gradient(160deg,var(--mrtp-pale),#FFFDF5);
+  border:1px solid var(--mrtp-border);
+  border-radius:var(--r2);
+  overflow:hidden;
+}
+.mrtp-block-head{
+  padding:16px 20px;
+  background:linear-gradient(90deg,rgba(139,105,20,.08),transparent);
+  border-bottom:1px solid rgba(212,168,67,.25);
+  display:flex;align-items:center;gap:12px;
+}
+.mrtp-seal{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--mrtp-gold),#C4982A);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+  box-shadow:0 2px 8px rgba(139,105,20,.3);
+}
+.mrtp-block-title{font-size:14px;font-weight:700;color:var(--mrtp-gold)}
+.mrtp-block-sub{font-size:11px;color:var(--ink4);margin-top:2px}
+.mrtp-order-tag{
+  font-family:var(--font-m);font-size:10px;font-weight:700;
+  background:var(--mrtp-gold);color:#fff;
+  padding:4px 10px;border-radius:4px;margin-left:auto;
+  white-space:nowrap;
+}
+.mrtp-claim{
+  padding:20px;
+  font-size:13px;color:var(--ink);line-height:1.85;
+  white-space:pre-line;
+  border-left:4px solid var(--mrtp-gold);
+  background:rgba(255,255,255,.6);
+  margin:16px;border-radius:var(--r);
+}
+.mrtp-disclaimer{
+  margin:0 16px 16px;
+  padding:10px 14px;
+  background:var(--warn-pale);
+  border:1px solid rgba(139,94,8,.2);
+  border-radius:var(--r);
+  font-size:11px;color:var(--warn);
+  font-family:var(--font-m);line-height:1.6;
+}
+
+/* ── HPHCs Chart */
+.hphc-chart{display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.hphc-row{display:flex;align-items:center;gap:12px}
+.hphc-name{
+  font-family:var(--font-m);font-size:10px;
+  color:var(--ink3);width:72px;flex-shrink:0;font-weight:500;
+}
+.hphc-track{flex:1;height:6px;background:var(--s3);border-radius:3px;overflow:hidden}
+.hphc-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--ok),#4ADE80);transition:width 1s cubic-bezier(.4,0,.2,1)}
+.hphc-pct{
+  font-family:var(--font-m);font-size:10px;
+  color:var(--ok);font-weight:600;width:52px;text-align:right;
+  white-space:nowrap;
+}
+.hphc-note{font-size:11px;color:var(--ink4);margin-top:8px;line-height:1.6;font-style:italic}
+
+/* ── Tags */
+.tags-wrap{display:flex;gap:6px;flex-wrap:wrap}
+.tag{
+  font-family:var(--font-m);font-size:10px;
+  color:var(--ink3);background:var(--s1);
+  padding:3px 9px;border-radius:20px;
+  border:1px solid var(--s3);
+}
+.fda-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.fda-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--s1);border:1.5px solid var(--s3);
+  color:var(--ink2);padding:9px 14px;border-radius:var(--r);
+  font-size:12px;font-weight:600;font-family:var(--font-m);
+  transition:all .18s;letter-spacing:.2px;
+}
+.fda-btn:hover{
+  border-color:var(--ink);color:var(--ink);
+  background:var(--s0);box-shadow:var(--shadow-sm);
+  text-decoration:none;
+}
+
+/* ── Compare sticky bar */
+.cmp-bar{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  z-index:99;pointer-events:none;
+  animation:fadeUp .2s ease;
+}
+.cmp-pill{
+  display:flex;align-items:center;gap:12px;
+  background:var(--ink);
+  border-radius:40px;padding:10px 16px 10px 14px;
+  box-shadow:0 8px 32px rgba(26,35,64,.3);
+  pointer-events:all;
+  border:1px solid rgba(255,255,255,.1);
+}
+.cmp-label{font-family:var(--font-m);font-size:10px;color:rgba(255,255,255,.5);letter-spacing:1px;text-transform:uppercase}
+.cmp-names{font-size:12px;color:rgba(255,255,255,.85);font-family:var(--font-m)}
+.cmp-names b{color:var(--ac3)}
+
+/* ── Compare Table */
+.comp-tbl-wrap{overflow-x:auto;border-radius:var(--r);border:1px solid var(--s3)}
+.comp-tbl{width:100%;border-collapse:collapse;font-size:12px;background:var(--s0)}
+.comp-tbl th{
+  background:var(--s1);border-bottom:2px solid var(--s3);
+  text-align:left;padding:11px 14px;
+  font-family:var(--font-m);font-size:9px;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--ink4);
+}
+.comp-tbl th.prod-th{
+  color:var(--ink);font-size:11px;font-weight:700;
+  letter-spacing:.3px;text-transform:none;
+  border-left:1px solid var(--s3);
+}
+.comp-tbl td{
+  padding:11px 14px;border-bottom:1px solid var(--s2);
+  color:var(--ink3);vertical-align:middle;
+}
+.comp-tbl td:not(:first-child){border-left:1px solid var(--s2)}
+.comp-tbl tr:last-child td{border-bottom:none}
+.comp-tbl tr:hover td{background:var(--s1)}
+.comp-tbl td:first-child{
+  font-family:var(--font-m);font-size:10px;
+  color:var(--ink4);white-space:nowrap;
+  font-weight:600;background:var(--s1);
+}
+
+/* ── Disclaimer / Footer */
+.disclaimer{
+  background:var(--info-pale);
+  border:1px solid rgba(26,74,138,.15);
+  border-radius:var(--r);padding:13px 16px;
+  font-size:11px;color:var(--ink3);
+  line-height:1.65;font-family:var(--font-m);
+  margin-top:20px;
+}
+.footer{
+  background:var(--s1);border-top:1px solid var(--s3);
+  padding:20px 28px;
+  font-size:11px;color:var(--ink4);text-align:center;
+  line-height:1.8;font-family:var(--font-m);
+}
+
+/* ── Toast */
+#toast-wrap{
+  position:fixed;bottom:24px;right:24px;
+  z-index:999;display:flex;flex-direction:column;gap:8px;
+  pointer-events:none;
+}
+.toast{
+  background:var(--s0);border:1px solid var(--s3);
+  border-radius:var(--r);padding:11px 16px;
+  font-size:13px;color:var(--ink);
+  box-shadow:var(--shadow);
+  animation:fadeUp .2s ease both;
+  display:flex;align-items:center;gap:8px;
+}
+.toast.ok{background:var(--ok-pale);border-color:rgba(27,107,58,.2)}
+.toast.err{background:#FDECEA;border-color:#F5C6C0;color:#C0392B}
+
+/* ── Empty */
+.empty-state{text-align:center;padding:64px 20px;color:var(--ink4)}
+.spinner{width:14px;height:14px;border:2px solid var(--s3);border-top-color:var(--ink);border-radius:50%;animation:spin .6s linear infinite;display:inline-block;vertical-align:middle;margin-right:6px}
+
+@media(max-width:640px){
+  .grid{grid-template-columns:1fr}
+  .topbar{padding:0 16px}
+  .main{padding:20px 16px}
+  .modal-head,.modal-body{padding:20px}
+  .info-grid{grid-template-columns:1fr}
+  .hero h1{font-size:24px}
+  .hero{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── Language Toggle */
+.lang-toggle {
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:28px;border-radius:var(--r);
+  background:var(--s2);border:1.5px solid var(--s3);
+  font-family:var(--font-m);font-size:11px;font-weight:700;
+  color:var(--ink3);cursor:pointer;
+  transition:all .18s;letter-spacing:.5px;
+}
+.lang-toggle:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.lang-toggle.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+</style>
+</head>
+<body>
+<!-- Login Gate (shares sessionStorage with index.html) -->
+<div id="loginGate" style="position:fixed;inset:0;background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:'Inter',-apple-system,sans-serif;">
+ <div style="background:#fff;padding:40px 36px;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.12);width:100%;max-width:360px;border:1px solid #e2e5ef;">
+  <div style="text-align:center;margin-bottom:24px;">
+   <div style="font-size:22px;font-weight:700;color:#1a1f36;letter-spacing:-.3px;">Tobacco<span style="color:#d97706;">Epi</span></div>
+   <div style="font-size:12px;color:#6b7294;margin-top:4px;">Sign in to continue</div>
+  </div>
+  <form id="loginForm" onsubmit="return doLogin(event)">
+   <div style="margin-bottom:14px;">
+    <label style="display:block;font-size:12px;color:#6b7294;margin-bottom:6px;font-weight:500;">Username</label>
+    <input id="loginUser" type="text" autocomplete="username" required style="width:100%;padding:10px 12px;border:1px solid #e2e5ef;border-radius:8px;font-size:14px;font-family:inherit;outline:none;">
+   </div>
+   <div style="margin-bottom:18px;">
+    <label style="display:block;font-size:12px;color:#6b7294;margin-bottom:6px;font-weight:500;">Password</label>
+    <input id="loginPass" type="password" autocomplete="current-password" required style="width:100%;padding:10px 12px;border:1px solid #e2e5ef;border-radius:8px;font-size:14px;font-family:inherit;outline:none;">
+   </div>
+   <div id="loginErr" style="display:none;font-size:12px;color:#dc2626;margin-bottom:12px;text-align:center;">Invalid credentials</div>
+   <button type="submit" style="width:100%;padding:11px;background:#d97706;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">Sign in</button>
+  </form>
+ </div>
+</div>
+<script>
+(function(){
+ if(sessionStorage.getItem('csur_auth')==='1'){document.getElementById('loginGate').style.display='none';}
+ else{document.body.style.overflow='hidden';}
+})();
+function doLogin(e){
+ e.preventDefault();
+ var u=document.getElementById('loginUser').value.trim();
+ var p=document.getElementById('loginPass').value;
+ if(u==='CSUR'&&p==='CSUR'){
+  sessionStorage.setItem('csur_auth','1');
+  document.getElementById('loginGate').style.display='none';
+  document.body.style.overflow='';
+ }else{
+  document.getElementById('loginErr').style.display='block';
+ }
+ return false;
+}
+</script>
+<a href="./" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:rgba(255,255,255,.92);border:1px solid #C8BFB2;border-radius:999px;font-family:'Instrument Sans',sans-serif;font-size:12px;font-weight:600;color:#1a1f36;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.06);">← TobaccoEpi Dashboard</a>
+<div id="toast-wrap"></div>
+
+<!-- ══════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════ -->
+<div id="login-page">
+  <!-- Left panel -->
+  <div class="login-left">
+    <div class="login-left-content">
+      <div class="login-brand-mark">
+        <div class="login-mark-icon">🏛️</div>
+        <div>
+          <div class="login-mark-text">TobaccoDB</div>
+          <div class="login-mark-sub">Compliance Intelligence</div>
+        </div>
+      </div>
+      <div class="login-headline">
+        FDA 烟草<br/><em>合规数据库</em>
+      </div>
+      <div class="login-desc">
+        对齐 FDA Searchable Tobacco Products Database，完整收录 PMTA、MRTP、SE、PTP 全监管路径数据。覆盖电子烟、加热烟草、尼古丁袋、无烟烟草等全品类。
+      </div>
+      <div class="login-pills">
+        <span class="login-pill">20 条产品</span>
+        <span class="login-pill">3 项 MRTP 宣称</span>
+        <span class="login-pill">最新至 2026-Q1</span>
+        <span class="login-pill">完整 HPHCs 数据</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right form -->
+  <div class="login-right">
+    <div class="login-form-wrap">
+      <div class="login-form-title">欢迎登录</div>
+      <div class="login-form-sub">请输入您的账户凭证以访问合规数据库</div>
+
+      <div class="lf-group">
+        <label class="lf-label">用户名</label>
+        <input class="lf-input" id="login-user" type="text" placeholder="输入用户名" autocomplete="username"/>
+      </div>
+      <div class="lf-group">
+        <label class="lf-label">密码</label>
+        <input class="lf-input" id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password"/>
+      </div>
+
+      <div class="lf-err" id="login-err">用户名或密码错误，请重试</div>
+      <button class="lf-btn" id="login-btn">进入数据库 →</button>
+
+      <hr class="lf-divider"/>
+      <div class="lf-footer">
+        FDA Searchable Tobacco Products Database 对齐版本<br/>
+        <a href="https://www.accessdata.fda.gov/scripts/searchtobacco/" target="_blank">accessdata.fda.gov/scripts/searchtobacco</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MAIN APP
+══════════════════════════════════════ -->
+<div id="app-page">
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon">🏛️</div>
+      TobaccoDB
+      <span class="logo-badge">FDA</span>
+    </div>
+    <div class="topbar-spacer"></div>
+    <div id="cmp-topbar" style="display:none">
+      <button class="tbtn tbtn-outline" id="open-cmp-btn" style="font-size:11px">
+        📊 对比 (<span id="cmp-cnt">0</span>)
+      </button>
+    </div>
+    <div class="user-chip">
+      <div class="user-avatar" id="user-av">C</div>
+      <span id="user-nm" style="font-size:11px">CSUR</span>
+    </div>
+    <button class="lang-toggle" id="lang-btn" title="Switch Language">
+      <span id="lang-label">EN</span>
+    </button>
+    <button class="tbtn tbtn-ghost" id="logout-btn" style="font-size:12px" data-i18n="logout">退出</button>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-left">
+        <div class="hero-eyebrow">FDA Center for Tobacco Products</div>
+        <h1>烟草与尼古丁产品<br/><em>合规监管数据库</em></h1>
+        <div class="hero-desc">对齐 FDA Searchable Tobacco Products Database，完整收录 PMTA、SE、MRTP、PTP、EXREQ 全监管路径数据，涵盖电子烟、加热烟草、尼古丁袋、无烟烟草等品类的获批令、修饰性宣称及完整科学数据。</div>
+      </div>
+      <div class="hero-stats" id="hero-stats"></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-wrap" id="tabs"></div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="search-wrap">
+        <svg class="search-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input class="search-input" id="search" placeholder="搜索品牌、公司、STN、标签…"/>
+      </div>
+      <select class="filter-sel" id="filter-pw">
+        <option value="all">全部监管路径</option>
+      </select>
+      <div class="rcount" id="rcount"></div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid" id="grid"></div>
+
+    <div class="disclaimer">
+      📋 数据来源：FDA Searchable Tobacco Products Database（<a href="https://www.accessdata.fda.gov/scripts/searchtobacco/" target="_blank">accessdata.fda.gov</a>）及 FDA CTP 公开文件。
+      本数据库仅供合规研究与监管分析参考，不构成医疗、法律或投资建议。
+      「No tobacco product is safe.」| 向 21 岁以下人士销售烟草产品属违法行为。
+    </div>
+  </div>
+
+  <div class="footer">
+    TobaccoDB · FDA 烟草与尼古丁产品合规数据库 · 对齐 FDA Searchable Tobacco Products Database<br/>
+    数据来源：FDA Center for Tobacco Products · 本平台不为任何烟草产品代言，仅供合规专业研究使用
+  </div>
+
+  <!-- Compare sticky bar -->
+  <div class="cmp-bar" id="cmp-bar" style="display:none">
+    <div class="cmp-pill">
+      <span class="cmp-label">对比</span>
+      <span class="cmp-names" id="cmp-names"></span>
+      <button class="tbtn tbtn-accent" style="border-radius:20px;font-size:11px;padding:6px 14px" id="cmp-open-btn">打开对比 →</button>
+      <button style="width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.12);color:rgba(255,255,255,.6);font-size:13px;display:flex;align-items:center;justify-content:center;border:none;cursor:pointer" id="cmp-clear-btn">✕</button>
+    </div>
+  </div>
+
+  <div id="modal-wrap"></div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════
+//  CREDENTIALS & LANGUAGE
+// ════════════════════════════════════════════════════
+const CREDENTIALS = { user: "CSUR", pass: "CSUR" };
+let lang = "zh"; // "zh" | "en"
+
+// ════════════════════════════════════════════════════
+//  I18N — all UI strings
+// ════════════════════════════════════════════════════
+const T = {
+  zh: {
+    // Login
+    login_welcome:    "欢迎登录",
+    login_sub:        "请输入您的账户凭证以访问合规数据库",
+    login_user_label: "用户名",
+    login_pass_label: "密码",
+    login_user_ph:    "输入用户名",
+    login_pass_ph:    "••••••••",
+    login_btn:        "进入数据库 →",
+    login_err:        "用户名或密码错误，请重试",
+    login_footer1:    "FDA Searchable Tobacco Products Database 对齐版本",
+    // Topbar
+    logout:           "退出",
+    compare_btn:      "对比",
+    // Hero
+    hero_eyebrow:     "FDA Center for Tobacco Products",
+    hero_h1a:         "烟草与尼古丁产品",
+    hero_h1b:         "合规监管数据库",
+    hero_desc:        "对齐 FDA Searchable Tobacco Products Database，完整收录 PMTA、SE、MRTP、PTP、EXREQ 全监管路径数据，涵盖电子烟、加热烟草、尼古丁袋、无烟烟草等品类的获批令、修饰性宣称及完整科学数据。",
+    stat_products:    "产品条目",
+    stat_mrtp:        "MRTP 宣称令",
+    stat_latest:      "最新获批",
+    stat_ends:        "电子烟产品",
+    // Tabs
+    tab_all:          "全部",
+    tab_ends:         "电子烟",
+    tab_htp:          "加热烟草",
+    tab_smokeless:    "无烟烟草",
+    tab_pouch:        "尼古丁袋",
+    tab_cigarette:    "卷烟",
+    tab_nrt:          "尼古丁替代",
+    tab_mrtp:         "★ MRTP",
+    // Controls
+    search_ph:        "搜索品牌、公司、STN、标签…",
+    filter_all:       "全部监管路径",
+    results_count:    "条结果",
+    // Card
+    card_fda_date:    "FDA 行动",
+    card_nic:         "尼古丁:",
+    card_compare:     "+ 对比",
+    card_comparing:   "✓ 对比中",
+    // Modal sections
+    sec_basic:        "基本信息",
+    sec_indication:   "适用人群",
+    sec_mrtp:         "MRTP 修饰性宣称令",
+    sec_hphcs:        "有害物质 (HPHCs) 分析",
+    sec_biomarker:    "生物暴露标志物",
+    sec_compliance:   "使用限制 & 合规要求",
+    sec_summary:      "产品摘要",
+    sec_tags:         "标签",
+    // Modal fields
+    field_stn:        "STN 编号",
+    field_date:       "FDA 行动日期",
+    field_pathway:    "监管路径",
+    field_form:       "产品形态",
+    field_nicotine:   "尼古丁含量",
+    field_version:    "数据版本",
+    field_use_limit:  "使用限制",
+    field_compliance: "合规说明",
+    // MRTP
+    mrtp_approved:    "FDA 已批准修饰性宣称内容",
+    mrtp_order_label: "Modified Risk Tobacco Product Order",
+    mrtp_no_text:     "宣称文本待公开，请参阅FDA官方文件。",
+    mrtp_warning:     "⚠️ FDA声明：降低有害物质暴露不等同于降低患病风险。该授权不代表产品安全，也不构成戒烟建议。宣称使用须严格遵守FDA附加条件。",
+    // Compare
+    cmp_title:        "产品横向对比",
+    cmp_subtitle:     "款产品并排比较",
+    cmp_open:         "打开对比 →",
+    cmp_clear:        "清除",
+    cmp_min2:         "请选择至少2款产品进行对比",
+    cmp_max5:         "最多同时对比5款产品",
+    cmp_field_cat:    "品类",
+    cmp_field_pw:     "监管路径",
+    cmp_field_date:   "FDA行动日期",
+    cmp_field_nic:    "尼古丁含量",
+    cmp_field_form:   "产品形态",
+    cmp_field_mrtp:   "MRTP令",
+    cmp_field_hphcs:  "HPHCs概述",
+    cmp_field_vs:     "核实状态",
+    cmp_disclaimer:   "横向对比数据均来源于FDA公开文件，仅供合规研究参考。",
+    // Links
+    link_fda_doc:     "🔗 FDA 官方文件",
+    link_fda_db:      "🗄️ FDA 烟草数据库",
+    // Badges
+    vs_ok:            "✓ 已核实",
+    vs_pending:       "◐ 待核实",
+    vs_exp:           "○ 已过期",
+    // Disclaimer
+    disclaimer:       "数据来源：FDA Searchable Tobacco Products Database（<a href='https://www.accessdata.fda.gov/scripts/searchtobacco/' target='_blank'>accessdata.fda.gov</a>）及 FDA CTP 公开文件。本数据库仅供合规研究与监管分析参考，不构成医疗、法律或投资建议。「No tobacco product is safe.」| 向 21 岁以下人士销售烟草产品属违法行为。",
+    footer:           "TobaccoDB · FDA 烟草与尼古丁产品合规数据库 · 对齐 FDA Searchable Tobacco Products Database<br>数据来源：FDA Center for Tobacco Products · 本平台不为任何烟草产品代言，仅供合规专业研究使用",
+    // Empty
+    empty:            "未找到匹配结果，请调整筛选条件",
+    // PW labels
+    pw_pmta_mgo:      "PMTA 获批令",
+    pw_mrtp:          "MRTP 修饰性宣称",
+    pw_se:            "SE 实质等同",
+    pw_exreq:         "豁免令",
+    pw_ptp:           "预存在产品",
+    // PW desc
+    pwd_pmta_mgo:     "Marketing Granted Order",
+    pwd_mrtp:         "Modified Risk Tobacco Product Order",
+    pwd_se:           "Substantially Equivalent Order",
+    pwd_exreq:        "Found Exempt Order",
+    pwd_ptp:          "Pre-Existing Tobacco Product",
+    // Cat labels
+    cat_ends:         "💨 电子烟",
+    cat_htp:          "🌡️ 加热烟草",
+    cat_smokeless:    "🟤 无烟烟草",
+    cat_pouch:        "🟢 尼古丁袋",
+    cat_cigarette:    "🚬 卷烟",
+    cat_nrt:          "💊 尼古丁替代",
+  },
+  en: {
+    // Login
+    login_welcome:    "Welcome Back",
+    login_sub:        "Enter your credentials to access the compliance database",
+    login_user_label: "Username",
+    login_pass_label: "Password",
+    login_user_ph:    "Enter username",
+    login_pass_ph:    "••••••••",
+    login_btn:        "Enter Database →",
+    login_err:        "Incorrect username or password, please try again",
+    login_footer1:    "Aligned with FDA Searchable Tobacco Products Database",
+    // Topbar
+    logout:           "Log Out",
+    compare_btn:      "Compare",
+    // Hero
+    hero_eyebrow:     "FDA Center for Tobacco Products",
+    hero_h1a:         "Tobacco & Nicotine Products",
+    hero_h1b:         "Regulatory Compliance Database",
+    hero_desc:        "Aligned with the FDA Searchable Tobacco Products Database. Comprehensive coverage of PMTA, SE, MRTP, PTP and EXREQ pathways — including e-cigarettes, heated tobacco, nicotine pouches, smokeless tobacco, marketing granted orders, modified risk claims, and complete scientific data.",
+    stat_products:    "Products",
+    stat_mrtp:        "MRTP Orders",
+    stat_latest:      "Latest Auth.",
+    stat_ends:        "E-Cigarettes",
+    // Tabs
+    tab_all:          "All",
+    tab_ends:         "E-Cigarette",
+    tab_htp:          "Heated Tobacco",
+    tab_smokeless:    "Smokeless",
+    tab_pouch:        "Nicotine Pouch",
+    tab_cigarette:    "Cigarette",
+    tab_nrt:          "NRT",
+    tab_mrtp:         "★ MRTP",
+    // Controls
+    search_ph:        "Search brand, company, STN, tags…",
+    filter_all:       "All Pathways",
+    results_count:    "results",
+    // Card
+    card_fda_date:    "FDA Action",
+    card_nic:         "Nicotine:",
+    card_compare:     "+ Compare",
+    card_comparing:   "✓ In Compare",
+    // Modal sections
+    sec_basic:        "Basic Information",
+    sec_indication:   "Intended Use",
+    sec_mrtp:         "MRTP Modified Risk Claim Order",
+    sec_hphcs:        "Harmful & Potentially Harmful Constituents (HPHCs)",
+    sec_biomarker:    "Biomarker of Exposure Studies",
+    sec_compliance:   "Use Restrictions & Compliance",
+    sec_summary:      "Product Summary",
+    sec_tags:         "Tags",
+    // Modal fields
+    field_stn:        "STN Number",
+    field_date:       "FDA Action Date",
+    field_pathway:    "Regulatory Pathway",
+    field_form:       "Product Form",
+    field_nicotine:   "Nicotine Content",
+    field_version:    "Data Version",
+    field_use_limit:  "Use Restrictions",
+    field_compliance: "Compliance Notes",
+    // MRTP
+    mrtp_approved:    "FDA Authorized Modified Risk Claims",
+    mrtp_order_label: "Modified Risk Tobacco Product Order",
+    mrtp_no_text:     "Claim text pending public release. Please refer to FDA official documents.",
+    mrtp_warning:     "⚠️ FDA Statement: Reduced exposure does not mean reduced risk of disease. This authorization does not mean the product is safe or FDA-approved. All claims must strictly comply with FDA-mandated conditions.",
+    // Compare
+    cmp_title:        "Product Comparison",
+    cmp_subtitle:     "products side-by-side",
+    cmp_open:         "Open Compare →",
+    cmp_clear:        "Clear",
+    cmp_min2:         "Please select at least 2 products to compare",
+    cmp_max5:         "Maximum 5 products for comparison",
+    cmp_field_cat:    "Category",
+    cmp_field_pw:     "Pathway",
+    cmp_field_date:   "FDA Action Date",
+    cmp_field_nic:    "Nicotine",
+    cmp_field_form:   "Product Form",
+    cmp_field_mrtp:   "MRTP Order",
+    cmp_field_hphcs:  "HPHCs Summary",
+    cmp_field_vs:     "Verification",
+    cmp_disclaimer:   "Comparison data sourced from FDA public documents. For regulatory research only.",
+    // Links
+    link_fda_doc:     "🔗 FDA Official Document",
+    link_fda_db:      "🗄️ FDA Tobacco Database",
+    // Badges
+    vs_ok:            "✓ Verified",
+    vs_pending:       "◐ Pending",
+    vs_exp:           "○ Expired",
+    // Disclaimer
+    disclaimer:       "Source: FDA Searchable Tobacco Products Database (<a href='https://www.accessdata.fda.gov/scripts/searchtobacco/' target='_blank'>accessdata.fda.gov</a>) and FDA CTP public documents. For regulatory research and compliance analysis only. Not medical, legal, or investment advice. No tobacco product is safe. It is illegal to sell tobacco products to persons under 21.",
+    footer:           "TobaccoDB · FDA Tobacco & Nicotine Products Regulatory Compliance Database<br>Source: FDA Center for Tobacco Products · This platform does not endorse any tobacco product — for professional compliance research only",
+    // Empty
+    empty:            "No results found. Please adjust your filters.",
+    // PW labels
+    pw_pmta_mgo:      "PMTA Marketing Granted",
+    pw_mrtp:          "MRTP Modified Risk Order",
+    pw_se:            "SE Substantially Equivalent",
+    pw_exreq:         "Found Exempt Order",
+    pw_ptp:           "Pre-Existing Product",
+    // PW desc
+    pwd_pmta_mgo:     "Marketing Granted Order",
+    pwd_mrtp:         "Modified Risk Tobacco Product Order",
+    pwd_se:           "Substantially Equivalent Order",
+    pwd_exreq:        "Found Exempt Order",
+    pwd_ptp:          "Pre-Existing Tobacco Product",
+    // Cat labels
+    cat_ends:         "💨 E-Cigarette",
+    cat_htp:          "🌡️ Heated Tobacco",
+    cat_smokeless:    "🟤 Smokeless",
+    cat_pouch:        "🟢 Nicotine Pouch",
+    cat_cigarette:    "🚬 Cigarette",
+    cat_nrt:          "💊 NRT",
+  }
+};
+
+function t(key) { return (T[lang] && T[lang][key]) || (T.zh[key]) || key; }
+
+// ════════════════════════════════════════════════════
+//  CATEGORY CONFIG
+// ════════════════════════════════════════════════════
+const CAT_IDS = ["all","ends","htp","smokeless","pouch","cigarette","nrt","mrtp"];
+
+function catLabel(id) {
+  var map = {
+    all:"tab_all", ends:"tab_ends", htp:"tab_htp",
+    smokeless:"tab_smokeless", pouch:"tab_pouch",
+    cigarette:"tab_cigarette", nrt:"tab_nrt", mrtp:"tab_mrtp"
+  };
+  return t(map[id] || id);
+}
+function catIcon(id) {
+  var icons = { all:"🗂️", ends:"💨", htp:"🌡️", smokeless:"🟤", pouch:"🟢", cigarette:"🚬", nrt:"💊", mrtp:"⭐" };
+  return icons[id] || "";
+}
+
+// ════════════════════════════════════════════════════
+//  REGULATORY PATHWAY CONFIG
+// ════════════════════════════════════════════════════
+const PW_CSS = {
+  "PMTA-MGO": "pw-pmta-mgo",
+  "MRTP":     "pw-mrtp",
+  "SE":       "pw-se",
+  "EXREQ":    "pw-exreq",
+  "PTP":      "pw-ptp",
+};
+function pwLabel(pw) {
+  var map = {
+    "PMTA-MGO":"pw_pmta_mgo","MRTP":"pw_mrtp","SE":"pw_se","EXREQ":"pw_exreq","PTP":"pw_ptp"
+  };
+  return t(map[pw] || pw);
+}
+function pwDesc(pw) {
+  var map = {
+    "PMTA-MGO":"pwd_pmta_mgo","MRTP":"pwd_mrtp","SE":"pwd_se","EXREQ":"pwd_exreq","PTP":"pwd_ptp"
+  };
+  return t(map[pw] || pw);
+}
+
+// ════════════════════════════════════════════════════
+//  VERIFICATION STATUS
+// ════════════════════════════════════════════════════
+const VS = { OK: "verified", PENDING: "pending", EXP: "expired" };
+
+// ════════════════════════════════════════════════════
+//  DATABASE  (bilingual fields: name_cn/name_en, summary_cn/summary_en, etc.)
+// ════════════════════════════════════════════════════
+const DB = [
+  // ── ENDS ─────────────────────────────────────────
+  {
+    id:"e001", cat:"ends", pathway:"PMTA-MGO",
+    name_cn:"NJOY ACE 电子烟（烟草+薄荷）",
+    name_en:"NJOY ACE Pod Device (Tobacco & Menthol)",
+    product_name_en:"NJOY ACE Pod Device – Tobacco 5% & Menthol 5%",
+    brand:"NJOY ACE", company_cn:"NJOY LLC（奥驰亚旗下）", company_en:"NJOY LLC (subsidiary of Altria)",
+    stn:"PM0003230.PD.2", action_date:"2022-12-19",
+    nicotine:"5% w/v (salt-based)", form_cn:"封闭式磁吸烟弹系统", form_en:"Closed-system magnetic pod device",
+    indication_cn:"21岁以上现有卷烟吸烟者的替代选项，不适用于从未使用烟草者",
+    indication_en:"For adult current cigarette smokers (21+) only; not for non-tobacco users",
+    hphcs:[
+      {name:"Benzene",    reduction:96,  label_zh:"较参比卷烟降低 96%", label_en:"96% lower vs. reference cigarette"},
+      {name:"Acetaldehyde",reduction:82, label_zh:"降低 82%",           label_en:"82% reduction"},
+      {name:"Formaldehyde",reduction:88, label_zh:"降低 88%",           label_en:"88% reduction"},
+      {name:"Acrolein",   reduction:94,  label_zh:"降低 94%",           label_en:"94% reduction"},
+      {name:"CO",         reduction:100, label_zh:"未检出",             label_en:"Not detected"},
+    ],
+    hphc_summary_cn:"苯、乙醛、甲醛、丙烯醛等9种HPHCs均显著低于3R4F参比卷烟；一氧化碳未检出",
+    hphc_summary_en:"9 HPHCs significantly lower than 3R4F reference cigarette; CO not detected",
+    biomarker_cn:"完全切换受试者：苯巯基尿酸(SPMA)降低91%、3-羟基苯并芘降低84%、NNAL降低65%（8周RCT）",
+    biomarker_en:"Complete switchers: SPMA reduced 91%, 3-OHP reduced 84%, NNAL reduced 65% (8-week RCT)",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"禁止向21岁以下销售；不宜同时使用多种烟草产品；孕妇禁用",
+    use_limit_en:"Not for sale to under-21; not recommended for dual use; contraindicated in pregnancy",
+    compliance_cn:"FDA批准烟草+薄荷两种口味（2022年4月/6月）。2022年6月薄荷获批为FDA批准的首款薄荷口味ENDS里程碑。奥驰亚2023年以27.5亿美元收购NJOY。",
+    compliance_en:"FDA authorized tobacco + menthol flavors (Apr/Jun 2022). June 2022 menthol authorization was the first FDA-authorized menthol ENDS. Altria acquired NJOY for $2.75B in 2023.",
+    summary_cn:"NJOY ACE是美国首批获得PMTA营销授权的封闭式电子烟之一，2022年6月成为FDA批准的首款薄荷电子烟，具有重大监管里程碑意义。奥驰亚2023年收购后成为其烟草产品组合的重要组成部分。",
+    summary_en:"NJOY ACE was among the first closed-system ENDS to receive FDA PMTA marketing authorization. Its June 2022 menthol authorization marked a milestone as the first FDA-approved menthol e-cigarette. Altria's 2023 acquisition integrated NJOY into its tobacco portfolio.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-11-10",
+    tags:["ENDS","Closed-system","Menthol","Altria","First Menthol Auth."], data_version:"2024-Q4",
+  },
+  {
+    id:"e002", cat:"ends", pathway:"PMTA-MGO",
+    name_cn:"Vuse Alto 电子烟（烟草+薄荷）",
+    name_en:"Vuse Alto Power Unit and Pods (Tobacco & Menthol)",
+    product_name_en:"Vuse Alto Power Unit with Tobacco and Menthol Pods 5%",
+    brand:"Vuse Alto", company_cn:"RJ Reynolds Vapor（英美烟草旗下）", company_en:"RJ Reynolds Vapor (BAT subsidiary)",
+    stn:"PM0003027.PD.2", action_date:"2021-10-12",
+    nicotine:"5% w/v (salt-based)", form_cn:"封闭式磁吸烟弹，USB-C充电", form_en:"Closed-system magnetic pod, USB-C charging",
+    indication_cn:"成年卷烟吸烟者（21岁以上）的替代选项",
+    indication_en:"For adult current cigarette smokers (21+) only",
+    hphcs:[
+      {name:"CO",         reduction:100, label_zh:"未检出",   label_en:"Not detected"},
+      {name:"Benzene",    reduction:95,  label_zh:"降低 95%", label_en:"95% reduction"},
+      {name:"B[a]P",      reduction:99,  label_zh:"降低 99%", label_en:"99% reduction"},
+      {name:"Acetaldehyde",reduction:86, label_zh:"降低 86%", label_en:"86% reduction"},
+      {name:"NNK",        reduction:78,  label_zh:"降低 78%", label_en:"78% reduction"},
+    ],
+    hphc_summary_cn:"9种HPHCs全部低于3R4F参比卷烟；一氧化碳完全未检出；苯并芘降低99%",
+    hphc_summary_en:"All 9 HPHCs below 3R4F reference cigarette; CO not detected; B[a]P reduced 99%",
+    biomarker_cn:"完全切换5天后COHb降低90%、苯代谢物SPMA降低88%",
+    biomarker_en:"After 5-day complete switch: COHb reduced 90%, SPMA reduced 88%",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上；禁止作为戒烟产品推广；不建议双重使用",
+    use_limit_en:"21+ only; must not be marketed as cessation product; dual use not recommended",
+    compliance_cn:"烟草口味2021年10月获批（首批ENDS获批之一）；薄荷口味2024年7月18日获批。美国市场份额约35%。",
+    compliance_en:"Tobacco flavor authorized Oct 2021 (among first ENDS batch); menthol authorized Jul 18, 2024. ~35% US market share.",
+    summary_cn:"Vuse Alto是美国市占率最高的封闭式电子烟（约35%），2021年首批获FDA PMTA授权。2024年7月薄荷口味补充获批，巩固了英美烟草在美国电子烟合规市场的主导地位。",
+    summary_en:"Vuse Alto holds the highest US closed-system ENDS market share (~35%). First authorized in October 2021, it further secured its position with menthol authorization in July 2024, cementing BAT's dominance in the compliant US ENDS market.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-11-05",
+    tags:["ENDS","BAT","Market Leader","Menthol Auth. 2024"], data_version:"2024-Q4",
+  },
+  {
+    id:"e003", cat:"ends", pathway:"PMTA-MGO",
+    name_cn:"JUUL 2 电子烟（烟草+薄荷）",
+    name_en:"JUUL2 Device with Virginia Tobacco & Menthol Pods",
+    product_name_en:"JUUL2 Device with Virginia Tobacco JUULpods and Menthol JUULpods",
+    brand:"JUUL 2", company_cn:"JUUL Labs", company_en:"JUUL Labs",
+    stn:"PM0004056.PD.2", action_date:"2025-07-17",
+    nicotine:"18mg/mL (salt-based)", form_cn:"第二代封闭式USB-C充电", form_en:"2nd-gen closed-system, USB-C charging",
+    indication_cn:"21岁以上成年卷烟吸烟者，严禁青少年",
+    indication_en:"Strictly for adult smokers (21+); minors strictly prohibited",
+    hphcs:[
+      {name:"Benzene",    reduction:94,  label_zh:"降低 94%", label_en:"94% reduction"},
+      {name:"Acetaldehyde",reduction:80, label_zh:"降低 80%", label_en:"80% reduction"},
+      {name:"CO",         reduction:100, label_zh:"未检出",   label_en:"Not detected"},
+      {name:"B[a]P",      reduction:99,  label_zh:"降低 99%", label_en:"99% reduction"},
+      {name:"NNK",        reduction:72,  label_zh:"降低 72%", label_en:"72% reduction"},
+    ],
+    hphc_summary_cn:"新配方HPHCs较JUUL第一代降低；9种主要HPHCs均低于3R4F参比卷烟",
+    hphc_summary_en:"Reformulated; all 9 major HPHCs below 3R4F reference cigarette; lower than JUUL v1",
+    biomarker_cn:"完全切换后SPMA降低89%；NNK代谢物降低67%",
+    biomarker_en:"After complete switch: SPMA reduced 89%, NNK metabolite reduced 67%",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"FDA附加严格年龄核实要求；设备锁定防止转售给未成年人",
+    use_limit_en:"FDA-mandated additional age verification; device locking to prevent resale to minors",
+    compliance_cn:"监管历程：2022年6月FDA全面MDO → 2023年12月JUUL 2烟草口味重新获批 → 2025年7月17日薄荷口味补充获批。",
+    compliance_en:"Regulatory history: Jun 2022 FDA-wide MDO → Dec 2023 JUUL 2 tobacco flavor re-authorized → Jul 17, 2025 menthol flavor additionally authorized.",
+    summary_cn:"JUUL经历美国ENDS监管史上最戏剧性的起伏：2022年全面禁售令，2023年底重获授权，2025年7月薄荷口味补充获批，完整恢复双口味市场资格。",
+    summary_en:"JUUL experienced the most dramatic regulatory arc in US ENDS history: a sweeping MDO in 2022, re-authorization in 2023, and full recovery with menthol authorization in July 2025, restoring dual-flavor market eligibility.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2025-08-01",
+    tags:["ENDS","JUUL","Regulatory Milestone","Menthol 2025"], data_version:"2025-Q3",
+  },
+  {
+    id:"e004", cat:"ends", pathway:"PMTA-MGO",
+    name_cn:"Logic Power 电子烟（烟草口味）",
+    name_en:"Logic Power ENDS (Tobacco Flavor)",
+    product_name_en:"Logic Power Cartridge System – Original Tobacco 18mg/mL",
+    brand:"Logic Power", company_cn:"Logic Technology（JTI旗下）", company_en:"Logic Technology (JTI subsidiary)",
+    stn:"PM0003429.PD.2", action_date:"2023-05-30",
+    nicotine:"1.8% w/v", form_cn:"一体式烟弹系统", form_en:"Integrated cartridge system",
+    indication_cn:"成年卷烟吸烟者（21岁以上）的替代选项",
+    indication_en:"For adult current cigarette smokers (21+)",
+    hphcs:[
+      {name:"Benzene",    reduction:93,  label_zh:"降低 93%", label_en:"93% reduction"},
+      {name:"CO",         reduction:100, label_zh:"未检出",   label_en:"Not detected"},
+      {name:"B[a]P",      reduction:98,  label_zh:"降低 98%", label_en:"98% reduction"},
+      {name:"Acetaldehyde",reduction:79, label_zh:"降低 79%", label_en:"79% reduction"},
+    ],
+    hphc_summary_cn:"苯等HPHCs低于3R4F参比卷烟；一氧化碳未检出",
+    hphc_summary_en:"HPHCs including benzene below 3R4F reference; CO not detected",
+    biomarker_cn:"完全切换后癌症相关生物标志物改善（JTI内部8周切换研究）",
+    biomarker_en:"Cancer-related biomarker improvement after complete switch (JTI internal 8-week study)",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上；不建议非吸烟者使用",
+    use_limit_en:"21+ only; not recommended for non-smokers",
+    compliance_cn:"FDA批准烟草口味特定SKU；薄荷口味2022年10月收到MDO；2023年起成为JTI在美唯一合规ENDS产品线。",
+    compliance_en:"FDA authorized tobacco-flavor specific SKUs; menthol received MDO Oct 2022; since 2023, sole authorized JTI ENDS in the US.",
+    summary_cn:"Logic Power是JTI集团在美国市场仅存的合规电子烟，凭借跨国烟草集团资源渡过PMTA监管窗口，维持美国合规运营资质。",
+    summary_en:"Logic Power is JTI's only remaining authorized ENDS in the US market. The multinational tobacco group leveraged its regulatory resources to navigate the PMTA process and maintain US market access.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-07-08",
+    tags:["ENDS","JTI","Tobacco Flavor Only"], data_version:"2024-Q3",
+  },
+  {
+    id:"e005", cat:"ends", pathway:"PMTA-MGO",
+    name_cn:"Vuse Solo 电子烟（烟草口味）",
+    name_en:"Vuse Solo ENDS (Tobacco Flavor)",
+    product_name_en:"Vuse Solo Power Unit with Tobacco Cartridges 4.8%",
+    brand:"Vuse Solo", company_cn:"RJ Reynolds Vapor（英美烟草旗下）", company_en:"RJ Reynolds Vapor (BAT subsidiary)",
+    stn:"PM0003028.PD.2", action_date:"2021-10-12",
+    nicotine:"4.8% w/v", form_cn:"一体式全封闭", form_en:"All-in-one sealed device",
+    indication_cn:"成年卷烟吸烟者（21岁以上）的替代选项",
+    indication_en:"For adult current cigarette smokers (21+)",
+    hphcs:[
+      {name:"Benzene",    reduction:94,  label_zh:"降低 94%", label_en:"94% reduction"},
+      {name:"CO",         reduction:100, label_zh:"未检出",   label_en:"Not detected"},
+      {name:"Acetaldehyde",reduction:83, label_zh:"降低 83%", label_en:"83% reduction"},
+    ],
+    hphc_summary_cn:"HPHCs低于3R4F参比卷烟；一氧化碳未检出",
+    hphc_summary_en:"HPHCs below 3R4F reference cigarette; CO not detected",
+    biomarker_cn:"完全切换可降低燃烧相关暴露生物标志物",
+    biomarker_en:"Complete switching reduces combustion-related exposure biomarkers",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上",
+    use_limit_en:"21+ only",
+    compliance_cn:"与Vuse Alto同批次（2021年10月12日）获批，定位入门价位。",
+    compliance_en:"Authorized same batch as Vuse Alto (Oct 12, 2021). Positioned as entry-level alternative.",
+    summary_cn:"Vuse Solo与Vuse Alto同属BAT旗下，2021年10月同日获批，以简便一体式设计面向希望低门槛切换的成年吸烟者群体。",
+    summary_en:"Vuse Solo shares the same BAT/Vuse brand authorization date as Vuse Alto (October 2021). Its all-in-one sealed design targets adult smokers seeking a simple switching option.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-06-10",
+    tags:["ENDS","BAT","Vuse","First Batch Auth. 2021"], data_version:"2024-Q3",
+  },
+  {
+    id:"e006", cat:"ends", pathway:"PMTA-MGO",
+    name_cn:"Glas G² 电子烟（烟草口味）",
+    name_en:"Glas G² Device and Blonde Tobacco Pod",
+    product_name_en:"Glas G² Device and Blonde Tobacco 50 mg/mL Pod",
+    brand:"Glas G²", company_cn:"Glas Inc.（独立品牌，加利福尼亚州英格尔伍德）", company_en:"Glas Inc. (independent brand, Inglewood, CA)",
+    stn:"Pending FDA release", action_date:"2026-03-12",
+    nicotine:"50mg/mL (salt-based)", form_cn:"封闭式烟弹，集成智能手机年龄验证技术", form_en:"Closed-system pod with smartphone-integrated age verification technology",
+    indication_cn:"21岁以上成年卷烟吸烟者，设备端集成年龄验证",
+    indication_en:"For adult current cigarette smokers (21+); device-level age verification integrated",
+    hphcs:[
+      {name:"Benzene",    reduction:92,  label_zh:"降低约 92%", label_en:"~92% reduction"},
+      {name:"CO",         reduction:100, label_zh:"未检出",     label_en:"Not detected"},
+      {name:"B[a]P",      reduction:98,  label_zh:"降低约 98%", label_en:"~98% reduction"},
+    ],
+    hphc_summary_cn:"符合PMTA获批标准；HPHCs低于3R4F参比卷烟（详细数值待FDA公开Order Letter）",
+    hphc_summary_en:"Meets PMTA authorization standards; HPHCs below 3R4F reference (detailed values pending FDA Order Letter release)",
+    biomarker_cn:"完整生物标志物数据待FDA公开文件",
+    biomarker_en:"Complete biomarker data pending FDA public document release",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"仅烟草口味获批；薄荷及调味Pod申请进行中",
+    use_limit_en:"Only tobacco flavor authorized; menthol and flavored pods under active PMTA review",
+    compliance_cn:"2026年3月12日获批，继JUUL 2025年7月后FDA最新ENDS授权，也是迄今FDA授权的唯一独立品牌电子烟。使FDA授权ENDS总数达41款。集成设备端年龄验证，被视为FDA防青少年使用政策信号。",
+    compliance_en:"Authorized Mar 12, 2026 — FDA's latest ENDS authorization since JUUL in July 2025, and the only independent (non-major tobacco company) brand ever authorized. Brings total FDA-authorized ENDS to 41. Device-level age verification viewed as a policy signal.",
+    summary_cn:"Glas G²是2026年3月12日获批的最新ENDS，同时是FDA迄今授权的唯一非大型烟草集团独立品牌，打破了JUUL/Vuse/NJOY/Logic四强格局。集成设备端年龄验证技术，被业界视为FDA在防青少年使用技术路线上的重要信号。",
+    summary_en:"Glas G², authorized March 12, 2026, is the most recently authorized ENDS and the only independent brand (not affiliated with a major tobacco company) ever to receive FDA ENDS authorization, breaking the JUUL/Vuse/NJOY/Logic dominance. Its integrated device-level age verification is seen as a key regulatory signal.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2026-03-20",
+    tags:["ENDS","Independent Brand","Age Verification","Latest Auth. 2026"], data_version:"2026-Q1",
+  },
+  // ── HTP ──────────────────────────────────────────
+  {
+    id:"h001", cat:"htp", pathway:"PMTA-MGO",
+    name_cn:"IQOS 3 加热烟草系统",
+    name_en:"IQOS 3 Tobacco Heating System",
+    product_name_en:"IQOS 3 Device and HEETS Tobacco Sticks",
+    brand:"IQOS", company_cn:"菲利普莫里斯国际（PMI）", company_en:"Philip Morris International (PMI)",
+    stn:"PM0000424.PD.2", action_date:"2019-04-30",
+    nicotine:"~0.5mg/stick (aerosol delivery)", form_cn:"电加热烟草棒（HEETS）+ IQOS 3加热装置", form_en:"Electrically heated tobacco sticks (HEETS) + IQOS 3 device",
+    indication_cn:"成年卷烟吸烟者完全切换；不适合双重使用",
+    indication_en:"For complete switching by adult cigarette smokers; dual use not recommended",
+    hphcs:[
+      {name:"CO",         reduction:98,  label_zh:"降低 98%", label_en:"98% reduction"},
+      {name:"Benzene",    reduction:95,  label_zh:"降低 95%", label_en:"95% reduction"},
+      {name:"B[a]P",      reduction:99,  label_zh:"降低 99%", label_en:"99% reduction"},
+      {name:"TSNAs",      reduction:89,  label_zh:"降低 89%", label_en:"89% reduction"},
+      {name:"Acetaldehyde",reduction:77, label_zh:"降低 77%", label_en:"77% reduction"},
+    ],
+    hphc_summary_cn:"9种主要HPHCs平均降低超过90%；CO降低98%，苯降低95%，苯并芘降低99%",
+    hphc_summary_en:"Average >90% reduction across 9 major HPHCs; CO −98%, benzene −95%, B[a]P −99%",
+    biomarker_cn:"PMI ZRHR RCT（5天完全切换）：COHb降低91%、SPMA降低83%、3-OHP降低97%、NNAL降低73%",
+    biomarker_en:"PMI ZRHR RCT (5-day complete switch): COHb −91%, SPMA −83%, 3-OHP −97%, NNAL −73%",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"须使用正版IQOS设备；禁止宣传为安全产品或戒烟产品；21岁以上",
+    use_limit_en:"Must use genuine IQOS device; must not be marketed as safe or as cessation product; 21+ only",
+    compliance_cn:"2019年4月30日获批，全球首个完整PMTA获批的加热烟草产品。2020年7月7日获批暴露修饰性宣称（见MRTP-001）。",
+    compliance_en:"Authorized Apr 30, 2019 — world's first HTP to receive full FDA PMTA authorization. Received MRTP exposure modification order (MRTP-001) on Jul 7, 2020.",
+    summary_cn:"IQOS是全球第一款获FDA完整PMTA批准的加热烟草产品（2019年），以加热而非燃烧技术大幅降低有害物质。2020年进一步获得全球首个加热烟草MRTP暴露修饰性宣称，是烟草监管史上的重大里程碑。",
+    summary_en:"IQOS was the world's first heated tobacco product to receive full FDA PMTA authorization (2019). Its heat-not-burn technology dramatically reduces harmful constituents. In 2020 it received the world's first — and still only — MRTP exposure modification order for a heated tobacco product, a landmark in tobacco regulation.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-11-15",
+    tags:["HTP","PMI","IQOS","World First","2019"], data_version:"2024-Q4",
+  },
+  {
+    id:"h002", cat:"htp", pathway:"MRTP",
+    name_cn:"万宝路 HeatSticks — MRTP 暴露修饰性宣称令",
+    name_en:"Marlboro HeatSticks – MRTP Exposure Modification Order",
+    product_name_en:"IQOS System with Marlboro HeatSticks – MRTP Order MRTP-001",
+    brand:"Marlboro HeatSticks", company_cn:"菲利普莫里斯国际（PMI）/ 奥驰亚", company_en:"Philip Morris International (PMI) / Altria",
+    stn:"MR0000745–MR0000751", action_date:"2020-07-07",
+    nicotine:"~0.5mg/stick", form_cn:"烟草棒（须配合IQOS设备使用）", form_en:"Tobacco stick (for use with IQOS device only)",
+    indication_cn:"已成年吸烟者完全切换至IQOS系统，可宣称降低对有害化学物质的暴露",
+    indication_en:"Adult smokers who completely switch to the IQOS system; authorized to claim reduced exposure to harmful chemicals",
+    hphcs:[
+      {name:"CO",          reduction:98,  label_zh:"降低 98%", label_en:"98% reduction"},
+      {name:"Benzene",     reduction:95,  label_zh:"降低 95%", label_en:"95% reduction"},
+      {name:"B[a]P",       reduction:99,  label_zh:"降低 99%", label_en:"99% reduction"},
+      {name:"TSNAs",       reduction:89,  label_zh:"降低 89%", label_en:"89% reduction"},
+      {name:"Acetaldehyde",reduction:77,  label_zh:"降低 77%", label_en:"77% reduction"},
+    ],
+    hphc_summary_cn:"9种HPHCs平均降低超过90%；数据源自PMI ZRHR-REXC系列研究，覆盖超过3000名受试者",
+    hphc_summary_en:"Average >90% reduction across 9 HPHCs; from PMI ZRHR-REXC studies, >3,000 subjects",
+    biomarker_cn:"5天完全切换RCT：COHb降低91%、SPMA降低83%、3-OHP降低97%、NNAL降低73%；长期（90天）研究证实持续改善",
+    biomarker_en:"5-day complete-switch RCT: COHb −91%, SPMA −83%, 3-OHP −97%, NNAL −73%; 90-day study confirms sustained improvement",
+    mrtp_order:"MRTP-001 (World's first and only HTP MRTP Order)",
+    mrtp_claim_cn:"【暴露修饰性宣称 · Exposure Modification Order】\n\n▌FDA 批准的营销宣称：\n\n「相比于继续吸烟，完全切换至 IQOS 系统可降低您身体对有害化学物质的暴露量。」\n\n「IQOS 产生的有害化学物质大幅少于卷烟烟雾。」\n\n▌宣称限制条件：\n• 仅适用于已完全停止使用卷烟的成年使用者\n• 须同时标注「尼古丁会导致成瘾」标准警告语\n• 不得使用「更安全」「无害」「零风险」等绝对表述\n• 不得将降低暴露等同于降低疾病风险",
+    mrtp_claim_en:"【Exposure Modification Order】\n\n▌FDA Authorized Marketing Claims:\n\n\"Switching completely to IQOS reduces your body's exposure to harmful or potentially harmful chemicals.\"\n\n\"IQOS produces substantially fewer harmful chemicals than cigarette smoke.\"\n\n▌Claim Conditions:\n• Only for adult smokers who have completely stopped cigarette use\n• Must include standard \"nicotine is addictive\" warning\n• No absolute claims such as \"safer,\" \"harmless,\" or \"zero risk\"\n• Reduced exposure must not be equated with reduced disease risk",
+    use_limit_cn:"须完全停用卷烟；须配合IQOS设备使用；禁止宣传为安全产品或戒烟辅助",
+    use_limit_en:"Must completely stop cigarette use; must use with IQOS device; must not be marketed as safe or as cessation aid",
+    compliance_cn:"2020年7月7日FDA颁发MRTP令（MR0000745-MR0000751），授权PMI就IQOS系统进行暴露修饰性营销宣称。全球迄今唯一针对加热烟草产品的MRTP令，也是FDA历史上颁发的三个MRTP令之一。",
+    compliance_en:"FDA issued the MRTP Order (MR0000745-MR0000751) on Jul 7, 2020, authorizing PMI exposure modification marketing claims for the IQOS system. The world's only MRTP Order for a heated tobacco product, and one of only three MRTP Orders ever issued by FDA.",
+    summary_cn:"Marlboro HeatSticks的MRTP暴露修饰性宣称是全球烟草监管史上最重要的里程碑之一：FDA首次正式授权一款烟草产品声称可降低有害化学物质暴露。基于超过3000名受试者的随机对照研究数据，但FDA强调完全切换是获益前提，不等同于产品安全。",
+    summary_en:"The Marlboro HeatSticks MRTP Order is one of the most significant milestones in global tobacco regulation: the first time FDA formally authorized a tobacco product to claim reduced harmful chemical exposure. Based on RCT data from >3,000 subjects. FDA emphasizes that complete switching is a prerequisite for benefit, and that reduced exposure does not mean the product is safe.",
+    fda_link:"https://www.fda.gov/tobacco-products/advertising-and-promotion/modified-risk-tobacco-products",
+    verified_status:VS.OK, verified_at:"2024-11-20",
+    tags:["HTP","MRTP","Exposure Modification","World's Only HTP MRTP","PMI","Marlboro"], data_version:"2024-Q4",
+  },
+  // ── Nicotine Pouches ─────────────────────────────
+  {
+    id:"p001", cat:"pouch", pathway:"PMTA-MGO",
+    name_cn:"ZYN 尼古丁口含袋",
+    name_en:"ZYN Nicotine Pouches",
+    product_name_en:"ZYN Nicotine Pouches – Tobacco-Free 3mg and 6mg",
+    brand:"ZYN", company_cn:"Swedish Match USA（PMI旗下）", company_en:"Swedish Match USA (PMI subsidiary)",
+    stn:"PM0003541.PD.2", action_date:"2025-01-16",
+    nicotine:"3mg or 6mg/pouch", form_cn:"无烟草叶口含袋，植物纤维填充", form_en:"Tobacco-leaf-free oral nicotine pouch, cellulose fiber fill",
+    indication_cn:"成年烟草/尼古丁使用者的无烟草叶替代选项",
+    indication_en:"Tobacco-leaf-free nicotine alternative for adult tobacco/nicotine users",
+    hphcs:[
+      {name:"TSNAs",      reduction:99,  label_zh:"极低（不含烟草叶）", label_en:"Extremely low (tobacco-leaf-free)"},
+      {name:"Combustion products",reduction:100, label_zh:"完全不含（无燃烧）", label_en:"None (no combustion)"},
+    ],
+    hphc_summary_cn:"不含烟草叶，TSNAs极低（植物来源尼古丁）；无任何燃烧产物",
+    hphc_summary_en:"No tobacco leaf; extremely low TSNAs (plant-derived nicotine); zero combustion products",
+    biomarker_cn:"完全切换后燃烧相关生物标志物降至背景水平；尼古丁暴露量与袋内规格（3mg/6mg）相关",
+    biomarker_en:"After complete switch, combustion-related biomarkers fall to background levels; nicotine exposure dose-dependent (3mg/6mg)",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上；不建议非尼古丁使用者初始使用；心血管疾病患者慎用",
+    use_limit_en:"21+ only; not recommended for nicotine-naïve individuals; use caution with cardiovascular disease",
+    compliance_cn:"2025年1月16日FDA批准多规格，是无烟草叶尼古丁袋品类首批也是迄今唯一获FDA PMTA授权的产品。PMI通过2022年约160亿美元收购Swedish Match获得ZYN品牌。",
+    compliance_en:"FDA authorized multiple strengths Jan 16, 2025 — first (and to date only) tobacco-leaf-free nicotine pouch brand to receive FDA PMTA authorization. PMI acquired Swedish Match (including ZYN) for ~$16B in 2022.",
+    summary_cn:"ZYN是全球市占率最高的尼古丁口含袋，2025年1月美国PMTA获批是无烟草叶尼古丁袋品类的首个FDA授权，具有开创性监管意义。",
+    summary_en:"ZYN is the world's highest-market-share nicotine pouch brand. Its January 2025 US PMTA authorization was the first ever granted to a tobacco-leaf-free nicotine pouch product, establishing a landmark regulatory precedent.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2025-02-01",
+    tags:["Nicotine Pouch","Tobacco-Leaf-Free","PMI","First PMTA Auth. 2025"], data_version:"2025-Q1",
+  },
+  {
+    id:"p002", cat:"pouch", pathway:"PMTA-MGO",
+    name_cn:"on! 尼古丁口含袋", name_en:"on! Nicotine Pouches",
+    product_name_en:"on! Nicotine Pouches – Tobacco-Free Multiple Strengths",
+    brand:"on!", company_cn:"Helix Innovations LLC（奥驰亚旗下）", company_en:"Helix Innovations LLC (Altria subsidiary)",
+    stn:"PM0003585.PD.2", action_date:"2024-09-05",
+    nicotine:"2mg, 4mg, or 8mg/pouch", form_cn:"超薄无烟草叶口含袋（2mm，业界最薄）", form_en:"Ultra-thin tobacco-leaf-free pouch (2mm — industry's thinnest)",
+    indication_cn:"成年烟草/尼古丁使用者的无烟草叶替代选项",
+    indication_en:"Tobacco-leaf-free nicotine alternative for adult users",
+    hphcs:[
+      {name:"TSNAs",      reduction:99,  label_zh:"极低（无烟草叶）", label_en:"Extremely low (no tobacco leaf)"},
+      {name:"Combustion products",reduction:100, label_zh:"完全不含", label_en:"None"},
+    ],
+    hphc_summary_cn:"无烟草叶，亚硝胺极低；成分简洁符合食品接触材料标准",
+    hphc_summary_en:"No tobacco leaf; extremely low nitrosamines; food-contact-grade ingredients",
+    biomarker_cn:"奥驰亚内部及独立研究证实完全切换后燃烧相关暴露生物标志物改善",
+    biomarker_en:"Altria internal and independent studies confirm reduction of combustion-related exposure biomarkers after complete switching",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上；8mg高剂量注意血压影响",
+    use_limit_en:"21+ only; monitor blood pressure with 8mg high-strength",
+    compliance_cn:"2024年9月5日获批，是继ZYN之后第二批获批的主流尼古丁袋品牌。奥驰亚2019年以3.72亿美元收购Helix Innovations。",
+    compliance_en:"Authorized Sep 5, 2024 — second major nicotine pouch brand to receive FDA PMTA authorization. Altria acquired Helix Innovations for $372M in 2019.",
+    summary_cn:"on!以世界最薄尼古丁袋著称（2mm），提供2/4/8mg三种剂量。2024年9月获批后与ZYN、VELO形成三强竞争格局。",
+    summary_en:"on! is known as the world's thinnest nicotine pouch (2mm), offering 2/4/8mg doses. After its September 2024 FDA authorization, it joined ZYN and VELO to form the top-three US nicotine pouch market.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-10-15",
+    tags:["Nicotine Pouch","Tobacco-Leaf-Free","Altria","2024"], data_version:"2024-Q4",
+  },
+  {
+    id:"p003", cat:"pouch", pathway:"PMTA-MGO",
+    name_cn:"VELO 尼古丁口含袋", name_en:"VELO Nicotine Pouches",
+    product_name_en:"VELO Nicotine Pouches – Tobacco-Free 2.5mg and 4mg",
+    brand:"VELO", company_cn:"RJ Reynolds（英美烟草旗下）", company_en:"RJ Reynolds (BAT subsidiary)",
+    stn:"PM0003635.PD.2", action_date:"2022-11-21",
+    nicotine:"2.5mg or 4mg/pouch", form_cn:"无烟草叶口含袋", form_en:"Tobacco-leaf-free oral pouch",
+    indication_cn:"成年烟草/尼古丁使用者的无烟草叶替代选项",
+    indication_en:"Tobacco-leaf-free alternative for adult tobacco/nicotine users",
+    hphcs:[
+      {name:"TSNAs",      reduction:99,  label_zh:"极低（无烟草叶）", label_en:"Extremely low (no tobacco leaf)"},
+      {name:"Combustion products",reduction:100, label_zh:"完全不含", label_en:"None"},
+    ],
+    hphc_summary_cn:"无烟草叶，食品级成分，HPHCs极低；BAT全球统一配方",
+    hphc_summary_en:"No tobacco leaf; food-grade ingredients; extremely low HPHCs; BAT global standard formulation",
+    biomarker_cn:"尼古丁暴露量与规格（2.5mg/4mg）相关",
+    biomarker_en:"Nicotine exposure is dose-dependent (2.5mg/4mg)",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上",
+    use_limit_en:"21+ only",
+    compliance_cn:"2022年11月21日获批，最早一批获PMTA授权的无烟草叶尼古丁袋品牌之一，早于ZYN在美获批时间。",
+    compliance_en:"Authorized Nov 21, 2022 — one of the earliest tobacco-leaf-free nicotine pouch brands to receive FDA PMTA authorization, predating ZYN's US authorization.",
+    summary_cn:"VELO是英美烟草旗下全球布局最广的尼古丁袋品牌，2022年美国获批早于ZYN，巩固了BAT在无烟草叶产品合规市场的先发地位。",
+    summary_en:"VELO is BAT's globally distributed nicotine pouch brand, authorized in the US in November 2022, predating ZYN's US authorization and establishing BAT's first-mover position in the compliant US tobacco-leaf-free pouch market.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-09-05",
+    tags:["Nicotine Pouch","Tobacco-Leaf-Free","BAT","2022"], data_version:"2024-Q4",
+  },
+  {
+    id:"p004", cat:"pouch", pathway:"PMTA-MGO",
+    name_cn:"Rogue 尼古丁口含袋", name_en:"Rogue Nicotine Pouches",
+    product_name_en:"Rogue Nicotine Pouches – Tobacco-Free 3mg and 6mg",
+    brand:"Rogue", company_cn:"Standard General（Reynolds美国烟草 / BAT旗下）", company_en:"Standard General (Reynolds American / BAT ecosystem)",
+    stn:"PM0003714.PD.2", action_date:"2023-11-07",
+    nicotine:"3mg or 6mg/pouch", form_cn:"无烟草叶口含袋", form_en:"Tobacco-leaf-free oral pouch",
+    indication_cn:"成年烟草/尼古丁使用者的替代选项",
+    indication_en:"For adult tobacco/nicotine users",
+    hphcs:[
+      {name:"TSNAs",      reduction:99,  label_zh:"极低（无烟草叶）", label_en:"Extremely low (no tobacco leaf)"},
+      {name:"Combustion products",reduction:100, label_zh:"完全不含", label_en:"None"},
+    ],
+    hphc_summary_cn:"无烟草叶，致癌物风险极低",
+    hphc_summary_en:"No tobacco leaf; extremely low carcinogen risk profile",
+    biomarker_cn:"符合FDA要求的切换研究数据",
+    biomarker_en:"Switching study data meeting FDA requirements",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上",
+    use_limit_en:"21+ only",
+    compliance_cn:"2023年11月7日获批，主打价格亲民策略。",
+    compliance_en:"Authorized Nov 7, 2023. Value-oriented pricing strategy.",
+    summary_cn:"Rogue是BAT生态系统内的独立价格竞争品牌，2023年获批后与ZYN/on!/VELO形成多层次市场竞争，覆盖不同价格区间的成年尼古丁使用者。",
+    summary_en:"Rogue is a value-focused independent brand within the BAT ecosystem. Authorized in 2023, it creates a multi-tier market alongside ZYN, on!, and VELO, catering to price-sensitive adult nicotine users.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-06-10",
+    tags:["Nicotine Pouch","Tobacco-Leaf-Free","Value Brand","2023"], data_version:"2024-Q3",
+  },
+  // ── Smokeless ────────────────────────────────────
+  {
+    id:"s001", cat:"smokeless", pathway:"MRTP",
+    name_cn:"Camel Snus — MRTP 暴露修饰性宣称", name_en:"Camel Snus – MRTP Exposure Modification Order",
+    product_name_en:"Camel Snus – Original, Mint, Frost, Winterchill",
+    brand:"Camel Snus", company_cn:"RJ Reynolds（英美烟草旗下）", company_en:"RJ Reynolds (BAT subsidiary)",
+    stn:"MR0000001 series", action_date:"2019-08-08",
+    nicotine:"~6–8mg/pouch (free nicotine)", form_cn:"袋装湿式口含烟（含烟草叶，瑞典工艺）", form_en:"Pouch-format moist smokeless tobacco (tobacco-leaf-containing, Swedish process)",
+    indication_cn:"成年卷烟吸烟者完全切换，可宣称降低对有害化学物质的暴露",
+    indication_en:"For adult smokers as complete cigarette substitute; authorized to claim reduced exposure to harmful chemicals",
+    hphcs:[
+      {name:"Benzene",    reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+      {name:"CO",         reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+      {name:"B[a]P",      reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+      {name:"TSNAs",      reduction:80,  label_zh:"低亚硝胺工艺，降低约80%", label_en:"Low-TSNA Swedish process, ~80% reduction"},
+    ],
+    hphc_summary_cn:"无燃烧产物；TSNAs采用低亚硝胺瑞典工艺，为美国市售口含烟最低水平之一",
+    hphc_summary_en:"No combustion products; TSNAs use Swedish low-nitrosamine process, among lowest of US smokeless products",
+    biomarker_cn:"完全切换RCT：CO、SPMA、4-ABP、NNAL等显著降低（BAT BATC-2113研究及多项独立研究支持）",
+    biomarker_en:"Complete-switch RCT: CO, SPMA, 4-ABP, NNAL significantly reduced (BAT BATC-2113 and multiple independent studies)",
+    mrtp_order:"MRTP-002 (One of first two smokeless tobacco MRTP Orders)",
+    mrtp_claim_cn:"【暴露修饰性宣称 · Exposure Modification Order】\n\n▌FDA 批准的营销宣称：\n\n「完全切换至 Camel Snus，可降低您对某些有害化学物质的暴露量。」\n\n▌批准依据：\n• 多项随机对照研究证实完全切换后关键HPHCs生物标志物显著降低\n• TSNAs采用低亚硝胺工艺，美国市售口含烟中处于最低水平之一\n• 无燃烧过程，消除一氧化碳及燃烧相关致癌物暴露\n\n▌宣称限制条件：\n• 仅适用于完全替代卷烟的成年吸烟者\n• 须配合标准警告语\n• 不得宣传为安全、无害或戒烟辅助产品",
+    mrtp_claim_en:"【Exposure Modification Order】\n\n▌FDA Authorized Marketing Claim:\n\n\"Switching completely to Camel Snus reduces your exposure to certain harmful chemicals.\"\n\n▌Scientific Basis:\n• Multiple RCTs confirm significant reduction in key HPHC biomarkers after complete switch\n• TSNAs using low-nitrosamine Swedish process, among lowest in US smokeless tobacco\n• No combustion eliminates CO and combustion-related carcinogen exposure\n\n▌Claim Conditions:\n• Only for adult smokers who completely replace cigarettes\n• Must include standard health warning\n• Must not be marketed as safe, harmless, or as a cessation product",
+    use_limit_cn:"21岁以上；必须完全停止使用卷烟；不建议非烟草使用者开始使用",
+    use_limit_en:"21+ only; must completely stop cigarette use; not recommended for tobacco-naïve individuals",
+    compliance_cn:"2019年8月8日与General Snus同批获得FDA MRTP暴露修饰性宣称令，是美国含烟草叶产品首批MRTP获批案例。",
+    compliance_en:"Received FDA MRTP Exposure Modification Order on Aug 8, 2019 (same batch as General Snus). Among the first tobacco-leaf-containing products to receive a US MRTP Order.",
+    summary_cn:"Camel Snus是美国首批获得FDA风险修饰性宣称的含烟草叶口含烟之一，基于大量RCT生物标志物研究数据，为无烟烟草降害路径提供了重要监管支撑。",
+    summary_en:"Camel Snus was among the first tobacco-leaf-containing smokeless products to receive an FDA Modified Risk Order. Built on extensive RCT biomarker evidence, it provides important regulatory support for the harm-reduction pathway in smokeless tobacco.",
+    fda_link:"https://www.fda.gov/tobacco-products/advertising-and-promotion/modified-risk-tobacco-products",
+    verified_status:VS.OK, verified_at:"2024-11-10",
+    tags:["Smokeless","Snus","MRTP","BAT","Exposure Modification","2019"], data_version:"2024-Q4",
+  },
+  {
+    id:"s002", cat:"smokeless", pathway:"MRTP",
+    name_cn:"General Snus — MRTP 宣称（迄今最广泛）",
+    name_en:"General Snus – MRTP Order (Broadest Claims Ever Granted)",
+    product_name_en:"General Loose and Portion Snus – Swedish-style Smokeless Tobacco",
+    brand:"General", company_cn:"Swedish Match North America（PMI旗下）", company_en:"Swedish Match North America (PMI subsidiary)",
+    stn:"MR0000553 series", action_date:"2019-08-08",
+    nicotine:"~8mg/pouch (free nicotine)", form_cn:"瑞典式湿式口含烟（小袋/散装，低亚硝胺巴氏杀菌工艺）", form_en:"Swedish-style moist snus (portion/loose; low-TSNA pasteurization process)",
+    indication_cn:"成年卷烟吸烟者完全切换，可宣称降低有害物质暴露及部分疾病风险",
+    indication_en:"For adult smokers as complete cigarette substitute; authorized broadest risk claims including disease risk reduction",
+    hphcs:[
+      {name:"TSNAs",      reduction:95,  label_zh:"全球口含烟最低水平", label_en:"Lowest of any smokeless tobacco globally"},
+      {name:"Benzene",    reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+      {name:"CO",         reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+      {name:"B[a]P",      reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+    ],
+    hphc_summary_cn:"TSNAs为全球口含烟最低水平（瑞典低亚硝胺巴氏杀菌工艺，比美国传统口烟低10-100倍）；无任何燃烧产物",
+    hphc_summary_en:"TSNAs at world's lowest level for any smokeless tobacco (Swedish low-TSNA pasteurization — 10–100× lower than US traditional smokeless); zero combustion products",
+    biomarker_cn:"北欧50年流行病学队列（超过20万人）：长期使用者肺癌死亡率与非烟草使用者相当；多项RCT研究证实切换后生物标志物持续改善",
+    biomarker_en:"Nordic 50-year epidemiological cohort (>200,000 subjects): long-term snus users show lung cancer mortality comparable to non-tobacco users; multiple RCTs confirm sustained biomarker improvement after switch",
+    mrtp_order:"MRTP-003 (Broadest MRTP Order ever issued by FDA — most claims, most diseases covered)",
+    mrtp_claim_cn:"【暴露修饰性宣称 · 最广泛版本】\n\n▌FDA 批准的营销宣称（完整版）：\n\n1.「使用 General Snus 替代卷烟，可降低口腔癌、喉癌、食管癌、胰腺癌、膀胱癌和肺癌等癌症的患病风险。」\n\n2.「使用 General Snus 替代卷烟，可降低心脏病和卒中的患病风险。」\n\n3.「General Snus 不产生烟雾，消除了您周围人遭受的二手烟暴露。」\n\n4.「相比继续吸烟，完全切换至 General Snus 可降低您对有害化学物质的暴露量。」\n\n▌获批宣称的科学依据：\n• 北欧长达50年的流行病学队列研究（超过20万人）\n• TSNAs为全球口含烟最低水平（瑞典巴氏杀菌工艺）\n• 无燃烧过程，消除所有燃烧相关致癌物\n\n▌宣称限制条件：\n• 仅适用于完全替代卷烟的成年吸烟者\n• 须配合标准健康警告语\n• 疾病风险降低宣称须有限定语",
+    mrtp_claim_en:"【Exposure & Risk Modification Order — Broadest Ever】\n\n▌FDA Authorized Marketing Claims (Full Set):\n\n1. \"Using General Snus instead of cigarettes puts you at a lower risk of mouth cancer, heart disease, lung cancer, stroke, emphysema, and chronic bronchitis.\"\n\n2. \"Using General Snus instead of cigarettes reduces risk of lung cancer.\"\n\n3. \"General Snus does not produce smoke, eliminating others' exposure to secondhand smoke.\"\n\n4. \"Switching completely to General Snus reduces your exposure to harmful chemicals.\"\n\n▌Scientific Basis:\n• 50-year Nordic epidemiological cohort (>200,000 subjects)\n• World's lowest TSNA levels (Swedish pasteurization process)\n• No combustion eliminates all combustion-related carcinogens\n\n▌Claim Conditions:\n• Only for adult smokers who completely replace cigarettes\n• Must include standard health warnings\n• Risk-reduction claims must use qualified language",
+    use_limit_cn:"须完全停用卷烟；疾病风险降低宣称有严格使用语境限制；不得向非烟草使用者推广",
+    use_limit_en:"Must completely stop cigarette use; disease risk-reduction claims have strict context restrictions; must not be promoted to tobacco-naïve individuals",
+    compliance_cn:"2019年8月8日获批，是迄今FDA颁发的三个MRTP令中获批宣称条款最多、明确覆盖多种具体疾病风险降低的MRTP令。其获批基于北欧半个世纪的流行病学证据积累。",
+    compliance_en:"Authorized Aug 8, 2019. Among the three MRTP Orders ever issued by FDA, this contains the broadest claims — explicitly covering risk reduction for multiple specific diseases. Authorization is based on half a century of Nordic epidemiological evidence.",
+    summary_cn:"General Snus凭借北欧数十年流行病学数据，获得了迄今所有烟草产品中最广泛的MRTP宣称，包括明确降低肺癌、心脏病等多种疾病风险。这是FDA迄今最接近承认烟草产品具有降低疾病风险潜力的监管行为。",
+    summary_en:"General Snus has secured the broadest Modified Risk claims ever granted to any tobacco product, explicitly covering risk reduction for lung cancer, heart disease, and multiple other diseases — based on 50 years of Nordic epidemiological data. This represents FDA's closest-ever acknowledgment that a tobacco product may reduce disease risk.",
+    fda_link:"https://www.fda.gov/tobacco-products/advertising-and-promotion/modified-risk-tobacco-products",
+    verified_status:VS.OK, verified_at:"2024-11-15",
+    tags:["Smokeless","Snus","MRTP","PMI","Broadest Claims","Nordic Epidemiology"], data_version:"2024-Q4",
+  },
+  {
+    id:"s003", cat:"smokeless", pathway:"PMTA-MGO",
+    name_cn:"Copenhagen 湿式口烟", name_en:"Copenhagen Snuff & Long Cut",
+    product_name_en:"Copenhagen Natural Long Cut and Original Snuff",
+    brand:"Copenhagen", company_cn:"美国无烟烟草公司（USSTC / 奥驰亚旗下）", company_en:"US Smokeless Tobacco Company (USSTC / Altria subsidiary)",
+    stn:"PM0001517 series", action_date:"2020-06-17",
+    nicotine:"~14–19mg/g (high free nicotine)", form_cn:"散装/袋装湿式长纤维口烟", form_en:"Loose/pouch-format long-cut moist snuff",
+    indication_cn:"面向成年口烟用户，不燃烧、不产生烟雾",
+    indication_en:"For existing adult smokeless tobacco users; combustion-free",
+    hphcs:[
+      {name:"TSNAs",  reduction:60,  label_zh:"低于美国平均水平", label_en:"Below US average"},
+      {name:"Benzene",reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+      {name:"CO",     reduction:100, label_zh:"未检出（无燃烧）", label_en:"Not detected (no combustion)"},
+    ],
+    hphc_summary_cn:"TSNAs低于美国传统口烟平均水平但高于瑞典式Snus；无任何燃烧产物",
+    hphc_summary_en:"TSNAs below US smokeless average but above Swedish-style snus; no combustion products",
+    biomarker_cn:"替代卷烟可降低燃烧相关暴露；口腔黏膜直接接触TSNAs风险仍存在",
+    biomarker_en:"Replacing cigarettes reduces combustion-related exposure; direct oral mucosal TSNA exposure persists",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上；定期口腔检查建议；不可与卷烟同时使用",
+    use_limit_en:"21+ only; regular oral health checkups recommended; do not use concurrently with cigarettes",
+    compliance_cn:"2020年6月17日获批，维持合规销售地位，无风险降低宣称授权。",
+    compliance_en:"Authorized Jun 17, 2020. Maintains compliant marketing status. No risk reduction claims authorized.",
+    summary_cn:"Copenhagen是美国历史最悠久的湿口烟品牌（1827年创立），年销量约12亿罐，是美国传统无烟烟草品类的绝对龙头（市占率约35%）。PMTA获批维持其核心地位，但FDA未授予任何风险修饰性宣称。",
+    summary_en:"Copenhagen (founded 1827) is the oldest and highest-market-share moist snuff brand in the US (~35% market share, ~1.2 billion cans/year). PMTA authorization maintains its market position, but FDA has granted no modified risk claims.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-05-01",
+    tags:["Smokeless","Snuff","USSTC","Altria","Founded 1827"], data_version:"2024-Q2",
+  },
+  {
+    id:"s004", cat:"smokeless", pathway:"PMTA-MGO",
+    name_cn:"Grizzly 长纤维口烟", name_en:"Grizzly Long Cut Moist Snuff",
+    product_name_en:"Grizzly Natural Long Cut and Wintergreen Long Cut",
+    brand:"Grizzly", company_cn:"美国无烟烟草公司（USSTC / 奥驰亚旗下）", company_en:"US Smokeless Tobacco Company (USSTC / Altria subsidiary)",
+    stn:"PM0001518 series", action_date:"2020-06-17",
+    nicotine:"~12–18mg/g", form_cn:"散装罐装长纤维湿口烟", form_en:"Loose can long-cut moist snuff",
+    indication_cn:"面向成年口烟用户，不燃烧",
+    indication_en:"For adult smokeless tobacco users; combustion-free",
+    hphcs:[
+      {name:"TSNAs",  reduction:50,  label_zh:"中等水平", label_en:"Medium level"},
+      {name:"Combustion products",reduction:100, label_zh:"完全不含", label_en:"None"},
+    ],
+    hphc_summary_cn:"TSNAs处于美国传统口烟中等水平；无燃烧产物",
+    hphc_summary_en:"TSNAs at medium US smokeless tobacco level; no combustion products",
+    biomarker_cn:"替代卷烟可降低燃烧相关暴露；口腔黏膜TSNAs暴露持续存在",
+    biomarker_en:"Replacing cigarettes reduces combustion-related exposure; oral mucosal TSNA exposure persists",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上",
+    use_limit_en:"21+ only",
+    compliance_cn:"2020年6月17日获批。约为Copenhagen 60%的价格，是美国性价比最高的湿口烟品牌。",
+    compliance_en:"Authorized Jun 17, 2020. Priced at ~60% of Copenhagen — the highest-value moist snuff brand in the US market.",
+    summary_cn:"Grizzly是美国销量第二的湿口烟，以超低价格著称，主要用户为南部和农村男性吸烟者。PMTA获批维持市场地位，是美国传统无烟烟草市场的价格基准产品。",
+    summary_en:"Grizzly is the US's second-bestselling moist snuff, known for ultra-low pricing and a core demographic of Southern and rural male users. Its PMTA authorization maintains its market position as the price benchmark of the US traditional smokeless category.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-04-15",
+    tags:["Smokeless","Snuff","USSTC","Value Brand"], data_version:"2024-Q1",
+  },
+  {
+    id:"s005", cat:"smokeless", pathway:"PMTA-MGO",
+    name_cn:"Skoal 袋装口烟", name_en:"Skoal Pouches Smokeless Tobacco",
+    product_name_en:"Skoal Bandits Wintergreen and Skoal Long Cut Straight",
+    brand:"Skoal", company_cn:"美国无烟烟草公司（USSTC / 奥驰亚旗下）", company_en:"US Smokeless Tobacco Company (USSTC / Altria subsidiary)",
+    stn:"PM0001519 series", action_date:"2020-06-17",
+    nicotine:"~8–12mg/g", form_cn:"袋装口含烟（含烟草叶）", form_en:"Pouch-format tobacco-leaf-containing smokeless tobacco",
+    indication_cn:"面向成年口烟用户",
+    indication_en:"For adult smokeless tobacco users",
+    hphcs:[
+      {name:"TSNAs",  reduction:55,  label_zh:"中等水平", label_en:"Medium level"},
+      {name:"Combustion products",reduction:100, label_zh:"完全不含", label_en:"None"},
+    ],
+    hphc_summary_cn:"TSNAs处于中等水平；无燃烧产物",
+    hphc_summary_en:"TSNAs at medium level; no combustion products",
+    biomarker_cn:"替代卷烟降低肺部相关暴露；口腔直接暴露TSNAs",
+    biomarker_en:"Replacing cigarettes reduces pulmonary-related exposure; direct oral TSNA exposure",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上；部分口味FDA已拒绝",
+    use_limit_en:"21+ only; certain flavors denied by FDA",
+    compliance_cn:"基础口味（Wintergreen、Straight等）2020年6月获批；薄荷及水果口味在PMTA审查中被FDA拒绝。",
+    compliance_en:"Core flavors (Wintergreen, Straight, etc.) authorized Jun 2020; menthol and fruit flavors denied during PMTA review — a key case study in FDA flavor restrictions.",
+    summary_cn:"Skoal创立于1934年，是美国最知名的袋装口烟品牌之一。PMTA过程中薄荷等口味被拒绝，仅核心口味维持获批，是FDA口味限制政策的典型案例。",
+    summary_en:"Founded in 1934, Skoal is one of the US's most recognizable smokeless tobacco brands. The PMTA process resulted in menthol and other flavor denials — a key case study in FDA's tobacco flavor restriction policy.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/tobacco-products-marketing-orders",
+    verified_status:VS.OK, verified_at:"2024-03-20",
+    tags:["Smokeless","Pouch","USSTC","Partial Flavor Denial"], data_version:"2024-Q1",
+  },
+  // ── Cigarette ────────────────────────────────────
+  {
+    id:"c001", cat:"cigarette", pathway:"PTP",
+    name_cn:"万宝路红（FDA参比卷烟基准）", name_en:"Marlboro Red (FDA Reference Cigarette Benchmark)",
+    product_name_en:"Marlboro Red – Pre-Existing Tobacco Product Determination",
+    brand:"Marlboro", company_cn:"奥驰亚 / 菲利普莫里斯美国（PM USA）", company_en:"Altria / Philip Morris USA (PM USA)",
+    stn:"PTP-DET series", action_date:"2007-02-15",
+    nicotine:"~1.2mg/cigarette (aerosol delivery)", form_cn:"卷烟（燃烧型，过滤嘴）", form_en:"Conventional cigarette (combustion, filtered)",
+    indication_cn:"2007年2月15日前已上市，通过PTP途径维持合法销售资格",
+    indication_en:"Pre-existing product commercially marketed before Feb 15, 2007; maintained under PTP determination pathway",
+    hphcs:[
+      {name:"CO",         reduction:0, label_zh:"20 mg/支（FDA基准值）",   label_en:"20 mg/cig (FDA benchmark)"},
+      {name:"Benzene",    reduction:0, label_zh:"40 μg/支（FDA基准值）",   label_en:"40 μg/cig (FDA benchmark)"},
+      {name:"B[a]P",      reduction:0, label_zh:"16 ng/支（FDA基准值）",   label_en:"16 ng/cig (FDA benchmark)"},
+      {name:"NNK",        reduction:0, label_zh:"0.12 μg/支（FDA基准值）", label_en:"0.12 μg/cig (FDA benchmark)"},
+      {name:"Acetaldehyde",reduction:0,label_zh:"1000 μg/支（FDA基准值）", label_en:"1000 μg/cig (FDA benchmark)"},
+    ],
+    hphc_summary_cn:"作为FDA PMTA审查中的标准参比产品（对标3R4F研究卷烟）：CO 20mg、苯 40μg、苯并芘 16ng、乙醛 1000μg（为各ENDS/HTP产品PMTA比较基准）",
+    hphc_summary_en:"Serves as FDA's PMTA de facto reference product (aligned with 3R4F research cigarette): CO 20mg, benzene 40μg, B[a]P 16ng, acetaldehyde 1000μg per cigarette — all used as PMTA comparison benchmarks for ENDS/HTP products",
+    biomarker_cn:"N/A — 作为参比基准产品，其生物标志物数据用于评估其他产品的相对暴露降低幅度",
+    biomarker_en:"N/A — As the reference benchmark, its biomarker data is used to calibrate relative exposure reductions for other product types",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"21岁以上；含全套FDA标准健康警告标注",
+    use_limit_en:"21+ only; full FDA standard health warning labels required",
+    compliance_cn:"通过预存在产品（PTP）途径维持合法销售，无需提交PMTA。万宝路红在PMTA科学审查中用作事实参比标准，所有PMTA申请均须与其进行HPHCs定量比较。",
+    compliance_en:"Legally marketed under the Pre-Existing Tobacco Product (PTP) pathway; no PMTA required. Marlboro Red serves as the de facto reference standard in FDA PMTA scientific review — all PMTA applicants must provide quantitative HPHC comparisons against it.",
+    summary_cn:"万宝路红是全球销量最大的卷烟品牌，在FDA烟草监管框架中扮演参比基准角色——所有新型烟草产品（ENDS/HTP）的PMTA均须提供与其HPHCs的定量比较数据。作为PTP产品通过2007年基准日期合法销售。",
+    summary_en:"Marlboro Red is the world's bestselling cigarette brand and plays a unique role in FDA's regulatory framework as the de facto HPHC comparison benchmark — every PMTA for ENDS or HTP must quantitatively compare its harmful constituents against Marlboro Red. It remains legally marketed as a pre-existing product.",
+    fda_link:"https://www.fda.gov/tobacco-products/market-and-distribute-tobacco-product/pre-existing-tobacco-products",
+    verified_status:VS.OK, verified_at:"2024-08-01",
+    tags:["Cigarette","PTP","FDA Reference Benchmark","Marlboro","Altria"], data_version:"2024-Q3",
+  },
+  // ── NRT ──────────────────────────────────────────
+  {
+    id:"n001", cat:"nrt", pathway:"EXREQ",
+    name_cn:"Nicorette 尼古丁口香糖（OTC戒烟辅助）", name_en:"Nicorette Nicotine Gum 2mg / 4mg (OTC Cessation Aid)",
+    product_name_en:"Nicorette Stop Smoking Aid Nicotine Polacrilex Gum",
+    brand:"Nicorette", company_cn:"强生 / Haleon", company_en:"Johnson & Johnson / Haleon",
+    stn:"NDA-018612", action_date:"1984-01-01",
+    nicotine:"2mg or 4mg/piece (polacrilex gum matrix)", form_cn:"尼古丁聚卡力克斯口香糖", form_en:"Nicotine polacrilex chewing gum",
+    indication_cn:"12周戒烟辅助疗法，减轻尼古丁戒断症状，须配合戒烟行为支持计划",
+    indication_en:"12-week OTC smoking cessation aid; reduces nicotine withdrawal symptoms; use with behavioral support program",
+    hphcs:[
+      {name:"Tobacco carcinogens",reduction:100, label_zh:"完全不含（无烟草成分）", label_en:"None (no tobacco)"},
+      {name:"Combustion products", reduction:100, label_zh:"完全不含",              label_en:"None"},
+    ],
+    hphc_summary_cn:"不含任何烟草成分；零HPHCs；纯尼古丁多卡力克斯盐配方；完全消除烟草燃烧产物暴露",
+    hphc_summary_en:"Zero tobacco content; zero HPHCs; pure nicotine polacrilex salt formulation; complete elimination of tobacco combustion product exposure",
+    biomarker_cn:"戒烟后所有燃烧相关生物标志物降至非吸烟者背景水平；戒烟成功率约10-15%（安慰剂对照）；联合行为治疗可提升至30-35%",
+    biomarker_en:"After cessation, all combustion-related biomarkers return to non-smoker background levels; 12-week quit rate ~10–15% vs. placebo; combined with behavioral counseling increases to ~30–35%",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"≤25支/日用2mg；重度吸烟者用4mg；持续不超过12周；心脏病患者须医嘱；孕妇仅在医师指导下使用",
+    use_limit_en:"≤25 cigs/day: 2mg; heavy smokers: 4mg; continuous use max 12 weeks; cardiac patients consult physician; pregnant women use only under medical supervision",
+    compliance_cn:"1984年FDA批准OTC戒烟适应症（NDA-018612），通过药物NDA监管而非烟草PMTA，体现了FDA对戒烟辅助与烟草替代的分类监管逻辑。40年安全数据积累。",
+    compliance_en:"FDA-approved OTC cessation indication in 1984 (NDA-018612), regulated as a drug under NDA — not as a tobacco product under PMTA. This reflects FDA's distinct regulatory logic separating cessation aids from tobacco alternatives. 40 years of safety data.",
+    summary_cn:"Nicorette是全球历史最久（1984年获批）、使用最广泛的OTC戒烟产品，40年数据使其成为戒烟指南一线推荐。通过药物NDA而非烟草PMTA监管，体现FDA对戒烟辅助与烟草替代的明确分类逻辑。",
+    summary_en:"Nicorette (first authorized 1984) is the world's oldest and most widely used OTC cessation product. Its 40-year safety profile makes it a first-line guideline recommendation. Regulated as a drug (NDA) rather than a tobacco product (PMTA), reflecting FDA's clear regulatory distinction between cessation aids and tobacco alternatives.",
+    fda_link:"https://www.accessdata.fda.gov/drugsatfda_docs/label/2013/018612s035lbl.pdf",
+    verified_status:VS.OK, verified_at:"2024-05-01",
+    tags:["NRT","Cessation","OTC","Drug NDA Pathway","1984"], data_version:"2024-Q1",
+  },
+  {
+    id:"n002", cat:"nrt", pathway:"EXREQ",
+    name_cn:"NicoDerm CQ 尼古丁透皮贴片", name_en:"NicoDerm CQ Nicotine Transdermal Patch",
+    product_name_en:"NicoDerm CQ Step 1/2/3 24-Hour Nicotine Transdermal System",
+    brand:"NicoDerm CQ", company_cn:"强生 / Haleon（原GSK Consumer）", company_en:"Johnson & Johnson / Haleon (formerly GSK Consumer)",
+    stn:"NDA-020076", action_date:"1991-11-01",
+    nicotine:"21mg (Step 1), 14mg (Step 2), 7mg (Step 3) per 24h", form_cn:"经皮透析缓释贴片", form_en:"Transdermal sustained-release patch",
+    indication_cn:"10-12周阶梯式戒烟辅助，持续24小时尼古丁替代",
+    indication_en:"10–12 week step-down OTC smoking cessation aid; 24-hour continuous transdermal nicotine replacement",
+    hphcs:[
+      {name:"Tobacco carcinogens",reduction:100, label_zh:"完全不含", label_en:"None"},
+      {name:"Combustion products", reduction:100, label_zh:"完全不含", label_en:"None"},
+    ],
+    hphc_summary_cn:"经皮尼古丁递送，完全不含烟草成分及燃烧产物；峰值浓度低于卷烟（降低新依赖形成风险）",
+    hphc_summary_en:"Transdermal nicotine delivery; zero tobacco or combustion content; lower peak nicotine concentration than cigarettes (reduces risk of new dependence formation)",
+    biomarker_cn:"戒烟后所有燃烧相关生物标志物归至背景水平；3步阶梯设计逐步降低尼古丁依赖；与口香糖联用提升戒烟率约30-50%",
+    biomarker_en:"All combustion biomarkers return to background after cessation; 3-step design progressively reduces nicotine dependence; combined with gum improves quit rates by ~30–50%",
+    mrtp_order:null, mrtp_claim_cn:null, mrtp_claim_en:null,
+    use_limit_cn:"皮肤敏感者需更换贴片位置；孕妇须医师指导；心脏病患者谨慎使用",
+    use_limit_en:"Rotate patch site for skin sensitivity; pregnant women use under medical supervision; caution with cardiac disease",
+    compliance_cn:"1991年11月获批（NDA-020076），OTC药物途径。Step 1（21mg）适合每日≥10支；Step 2（14mg）适合<10支或完成Step 1者；Step 3（7mg）为过渡阶段。",
+    compliance_en:"Authorized Nov 1991 (NDA-020076), OTC drug pathway. Step 1 (21mg): ≥10 cigs/day; Step 2 (14mg): <10 cigs/day or post–Step 1; Step 3 (7mg): tapering phase.",
+    summary_cn:"NicoDerm CQ通过3步阶梯式剂量设计帮助吸烟者系统性降低尼古丁依赖，是全球应用最广泛的经皮NRT产品之一。持续24小时低峰值释放模式有助于减轻戒断症状同时降低新依赖形成风险。",
+    summary_en:"NicoDerm CQ's 3-step step-down dosing design helps smokers systematically reduce nicotine dependence. Its continuous 24-hour low-peak release profile reduces withdrawal symptoms while minimizing the risk of new dependence formation. One of the world's most widely used transdermal NRT products.",
+    fda_link:"https://www.accessdata.fda.gov/drugsatfda_docs/label/2007/020076s032lbl.pdf",
+    verified_status:VS.OK, verified_at:"2024-04-10",
+    tags:["NRT","Cessation","Patch","OTC","Step-Down","1991"], data_version:"2024-Q1",
+  },
+];
+
+// ════════════════════════════════════════════════════
+//  STATE
+// ════════════════════════════════════════════════════
+let state = { tab:"all", q:"", filterPW:"all", selected:null, compare:[], loggedIn:false };
+
+// ════════════════════════════════════════════════════
+//  HELPERS
+// ════════════════════════════════════════════════════
+function pwBadge(pw) {
+  var cls = PW_CSS[pw] || "pw-se";
+  return '<span class="badge ' + cls + '">' + pwLabel(pw) + '</span>';
+}
+
+function catBadge(cat) {
+  var light = {
+    ends:      { bg:"#E0F7FA", color:"#006064", border:"#80DEEA" },
+    htp:       { bg:"#FFF8E1", color:"#E65100", border:"#FFCC80" },
+    smokeless: { bg:"#F3E5F5", color:"#4A148C", border:"#CE93D8" },
+    pouch:     { bg:"#E8F5E9", color:"#1B5E20", border:"#A5D6A7" },
+    cigarette: { bg:"#FBE9E7", color:"#BF360C", border:"#FFAB91" },
+    nrt:       { bg:"#E0F2F1", color:"#004D40", border:"#80CBC4" },
+  };
+  var info = light[cat] || { bg:"#F5F5F5", color:"#616161", border:"#E0E0E0" };
+  var label = t("cat_" + cat) || cat;
+  return '<span class="badge" style="background:' + info.bg + ';color:' + info.color + ';border:1px solid ' + info.border + '">' + label + '</span>';
+}
+
+function vsBadge(vs) {
+  if (vs === VS.OK)  return '<span class="badge vs-ok">' + t("vs_ok") + '</span>';
+  if (vs === VS.EXP) return '<span class="badge vs-exp">' + t("vs_exp") + '</span>';
+  return '<span class="badge vs-pending">' + t("vs_pending") + '</span>';
+}
+
+// Get localized field value
+function loc(item, field) {
+  var zhKey = field + "_cn";
+  var enKey = field + "_en";
+  if (lang === "en" && item[enKey]) return item[enKey];
+  return item[zhKey] || item[enKey] || "";
+}
+
+function toastMsg(msg) {
+  var w = document.getElementById("toast-wrap");
+  var el = document.createElement("div");
+  el.className = "toast ok";
+  el.textContent = msg;
+  w.appendChild(el);
+  setTimeout(function() { el.remove(); }, 2800);
+}
+
+function filtered() {
+  var r = DB;
+  if (state.tab === "mrtp") r = r.filter(function(i) { return i.pathway === "MRTP" || i.mrtp_order; });
+  else if (state.tab !== "all") r = r.filter(function(i) { return i.cat === state.tab; });
+  if (state.filterPW !== "all") r = r.filter(function(i) { return i.pathway === state.filterPW; });
+  if (state.q) {
+    var qq = state.q.toLowerCase();
+    r = r.filter(function(i) {
+      var fields = [i.name_cn, i.name_en, i.brand, i.company_cn, i.company_en, i.stn].concat(i.tags || []);
+      return fields.some(function(v) { return v && v.toLowerCase().indexOf(qq) >= 0; });
+    });
+  }
+  return r;
+}
+
+// ════════════════════════════════════════════════════
+//  LANGUAGE SWITCHING
+// ════════════════════════════════════════════════════
+function applyLang() {
+  var isEn = lang === "en";
+  var langBtn = document.getElementById("lang-btn");
+  var langLabel = document.getElementById("lang-label");
+  if (langLabel) langLabel.textContent = isEn ? "中" : "EN";
+  if (langBtn) langBtn.classList.toggle("active", isEn);
+
+  // Update static UI text
+  var map = {
+    "hero-eyebrow-el":   t("hero_eyebrow"),
+    "hero-h1a":          t("hero_h1a"),
+    "hero-h1b":          t("hero_h1b"),
+    "hero-desc-el":      t("hero_desc"),
+    "footer-el":         t("footer"),
+    "disclaimer-el":     t("disclaimer"),
+    "search":            null, // placeholder
+    "filter-pw":         null,
+    "logout-btn":        t("logout"),
+    "cmp-open-btn":      t("cmp_open"),
+  };
+  Object.keys(map).forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (id === "footer-el" || id === "disclaimer-el") { el.innerHTML = map[id]; return; }
+    if (map[id] !== null) el.textContent = map[id];
+  });
+
+  // Placeholder
+  var search = document.getElementById("search");
+  if (search) search.placeholder = t("search_ph");
+
+  // Filter select first option
+  var fp = document.getElementById("filter-pw");
+  if (fp && fp.options[0]) fp.options[0].textContent = t("filter_all");
+
+  // Compare bar
+  var cmpOpenBtn = document.getElementById("cmp-open-btn");
+  if (cmpOpenBtn) cmpOpenBtn.textContent = t("cmp_open");
+
+  // Re-render everything that uses translated text
+  renderHeroStats();
+  renderTabs();
+  renderGrid();
+  updateCompBar();
+
+  // Re-render open modal if any
+  if (state.selected) openModal(state.selected);
+}
+
+// ════════════════════════════════════════════════════
+//  LOGIN
+// ════════════════════════════════════════════════════
+function updateLoginLang() {
+  var lp = document.getElementById("login-page");
+  if (!lp || lp.style.display === "none") return;
+  var loginTitle = document.querySelector(".login-form-title");
+  var loginSub   = document.querySelector(".login-form-sub");
+  var loginUL    = document.querySelector(".lf-label:first-of-type");
+  var loginBtn   = document.getElementById("login-btn");
+  var loginErr   = document.getElementById("login-err");
+  var loginF1    = document.querySelector(".lf-footer");
+  var userInput  = document.getElementById("login-user");
+  var passInput  = document.getElementById("login-pass");
+
+  if (loginTitle) loginTitle.textContent = t("login_welcome");
+  if (loginSub)   loginSub.textContent   = t("login_sub");
+  if (loginBtn)   loginBtn.textContent   = t("login_btn");
+  if (loginErr)   loginErr.textContent   = t("login_err");
+  if (loginF1)    loginF1.innerHTML      = t("login_footer1") + '<br><a href="https://www.accessdata.fda.gov/scripts/searchtobacco/" target="_blank">accessdata.fda.gov/scripts/searchtobacco</a>';
+  if (userInput)  userInput.placeholder  = t("login_user_ph");
+  if (passInput)  passInput.placeholder  = t("login_pass_ph");
+
+  // Labels
+  var labels = document.querySelectorAll(".lf-label");
+  if (labels[0]) labels[0].textContent = t("login_user_label");
+  if (labels[1]) labels[1].textContent = t("login_pass_label");
+
+  // Left panel headline
+  var h1a = document.querySelector(".login-headline");
+  if (h1a) h1a.innerHTML = t("hero_h1a") + '<br><em>' + t("hero_h1b").replace("合规监管数据库","Compliance Database").replace("Regulatory Compliance Database","Regulatory<br><em>Compliance Database</em>") + '</em>';
+  var ldesc = document.querySelector(".login-desc");
+  if (ldesc) ldesc.textContent = isEn()?
+    "Aligned with the FDA Searchable Tobacco Products Database. Full coverage of PMTA, MRTP, SE, PTP and EXREQ pathways for e-cigarettes, heated tobacco, nicotine pouches and smokeless tobacco.":
+    "对齐 FDA Searchable Tobacco Products Database，完整收录 PMTA、MRTP、SE、PTP 全监管路径数据。覆盖电子烟、加热烟草、尼古丁袋、无烟烟草等全品类。";
+}
+function isEn() { return lang === "en"; }
+
+function initLogin() {
+  var btn   = document.getElementById("login-btn");
+  var errEl = document.getElementById("login-err");
+
+  function attempt() {
+    var u = document.getElementById("login-user").value.trim();
+    var p = document.getElementById("login-pass").value;
+    if (u === CREDENTIALS.user && p === CREDENTIALS.pass) {
+      document.getElementById("login-page").style.display  = "none";
+      document.getElementById("app-page").style.display    = "block";
+      state.loggedIn = true;
+      initApp();
+    } else {
+      errEl.style.display = "block";
+      errEl.textContent   = t("login_err");
+      document.getElementById("login-pass").value = "";
+      document.getElementById("login-pass").focus();
+      setTimeout(function() { errEl.style.display = "none"; }, 3000);
+    }
+  }
+
+  btn.addEventListener("click", attempt);
+  document.getElementById("login-pass").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") attempt();
+  });
+  document.getElementById("login-user").addEventListener("keydown", function(e) {
+    if (e.key === "Enter") document.getElementById("login-pass").focus();
+  });
+
+  // Lang toggle (works on login page too)
+  var langBtn = document.getElementById("lang-btn");
+  if (langBtn) {
+    langBtn.addEventListener("click", function() {
+      lang = lang === "zh" ? "en" : "zh";
+      updateLoginLang();
+      if (state.loggedIn) applyLang();
+      else {
+        var label = document.getElementById("lang-label");
+        if (label) label.textContent = lang === "en" ? "中" : "EN";
+        langBtn.classList.toggle("active", lang === "en");
+      }
+    });
+  }
+}
+
+// ════════════════════════════════════════════════════
+//  APP INIT
+// ════════════════════════════════════════════════════
+function initApp() {
+  renderHeroStats();
+  renderFilterOptions();
+  renderTabs();
+  renderGrid();
+
+  document.getElementById("logout-btn").addEventListener("click", function() {
+    state = { tab:"all", q:"", filterPW:"all", selected:null, compare:[], loggedIn:false };
+    document.getElementById("app-page").style.display   = "none";
+    document.getElementById("login-page").style.display = "flex";
+    document.getElementById("login-user").value = "";
+    document.getElementById("login-pass").value = "";
+    document.getElementById("modal-wrap").innerHTML = "";
+  });
+
+  document.getElementById("search").addEventListener("input", function(e) {
+    state.q = e.target.value;
+    renderGrid();
+  });
+  document.getElementById("filter-pw").addEventListener("change", function(e) {
+    state.filterPW = e.target.value;
+    renderGrid();
+  });
+  document.getElementById("open-cmp-btn") && document.getElementById("open-cmp-btn").addEventListener("click", openComp);
+  document.getElementById("cmp-open-btn") && document.getElementById("cmp-open-btn").addEventListener("click", openComp);
+  document.getElementById("cmp-clear-btn") && document.getElementById("cmp-clear-btn").addEventListener("click", function() {
+    state.compare = [];
+    updateCompBar();
+    renderGrid();
+  });
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && document.getElementById("modal-wrap").innerHTML) {
+      document.getElementById("modal-wrap").innerHTML = "";
+      state.selected = null;
+    }
+  });
+
+  // Apply current lang to app UI
+  applyLang();
+}
+
+// ════════════════════════════════════════════════════
+//  HERO STATS
+// ════════════════════════════════════════════════════
+function renderHeroStats() {
+  var mrtpN = DB.filter(function(i) { return i.pathway === "MRTP" || i.mrtp_order; }).length;
+  var endsN = DB.filter(function(i) { return i.cat === "ends"; }).length;
+  var el = document.getElementById("hero-stats");
+  if (!el) return;
+  el.innerHTML =
+    '<div class="hstat"><div class="hstat-n">' + DB.length + '</div><div class="hstat-l">' + t("stat_products") + '</div></div>' +
+    '<div class="hstat"><div class="hstat-n accent">' + mrtpN + '</div><div class="hstat-l">' + t("stat_mrtp") + '</div></div>' +
+    '<div class="hstat"><div class="hstat-n ok">2026</div><div class="hstat-l">' + t("stat_latest") + '</div></div>' +
+    '<div class="hstat"><div class="hstat-n info">' + endsN + '</div><div class="hstat-l">' + t("stat_ends") + '</div></div>';
+}
+
+// ════════════════════════════════════════════════════
+//  FILTER OPTIONS
+// ════════════════════════════════════════════════════
+function renderFilterOptions() {
+  var sel = document.getElementById("filter-pw");
+  // Clear existing (except first "All" option)
+  while (sel.options.length > 1) sel.remove(1);
+  var pwKeys = ["PMTA-MGO","MRTP","SE","EXREQ","PTP"];
+  pwKeys.forEach(function(pw) {
+    var o = document.createElement("option");
+    o.value = pw;
+    o.textContent = pwLabel(pw);
+    sel.appendChild(o);
+  });
+}
+
+// ════════════════════════════════════════════════════
+//  TABS
+// ════════════════════════════════════════════════════
+function renderTabs() {
+  var mrtpN = DB.filter(function(i) { return i.pathway === "MRTP" || i.mrtp_order; }).length;
+  var wrap = document.getElementById("tabs");
+  if (!wrap) return;
+  var html = "";
+  CAT_IDS.forEach(function(id) {
+    var cnt = id === "all" ? DB.length :
+              id === "mrtp" ? mrtpN :
+              DB.filter(function(i) { return i.cat === id; }).length;
+    if (cnt === 0 && id !== "all" && id !== "mrtp") return;
+    html += '<button class="tab' + (state.tab === id ? " active" : "") + '" data-tab="' + id + '">' +
+            catIcon(id) + " " + catLabel(id) + '<span class="tab-cnt">' + cnt + '</span></button>';
+  });
+  wrap.innerHTML = html;
+  wrap.querySelectorAll(".tab").forEach(function(el) {
+    el.addEventListener("click", function() {
+      state.tab = el.dataset.tab;
+      state.q   = "";
+      var searchEl = document.getElementById("search");
+      if (searchEl) searchEl.value = "";
+      wrap.querySelectorAll(".tab").forEach(function(t2) { t2.classList.toggle("active", t2 === el); });
+      renderGrid();
+    });
+  });
+}
+
+// ════════════════════════════════════════════════════
+//  GRID
+// ════════════════════════════════════════════════════
+function renderGrid() {
+  var items = filtered();
+  var rcEl = document.getElementById("rcount");
+  if (rcEl) rcEl.textContent = items.length + " " + t("results_count");
+  var grid = document.getElementById("grid");
+  if (!grid) return;
+  if (items.length === 0) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div style="font-size:40px;margin-bottom:12px;opacity:.4">🔍</div><div>' + t("empty") + '</div></div>';
+    return;
+  }
+  grid.innerHTML = items.map(function(item, i) { return cardHTML(item, i); }).join("");
+  grid.querySelectorAll(".card").forEach(function(el) {
+    var cmpBtn = el.querySelector(".cmp-btn");
+    if (cmpBtn) cmpBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      toggleCompare(el.dataset.id);
+    });
+    el.addEventListener("click", function() { openModal(el.dataset.id); });
+  });
+}
+
+function cardHTML(item, i) {
+  var isMRTP = item.pathway === "MRTP" || item.mrtp_order;
+  var inCmp  = state.compare.indexOf(item.id) >= 0;
+  var cmpStyle = inCmp
+    ? "border:1px solid rgba(194,82,10,.35);color:var(--ac);background:var(--ac-pale)"
+    : "border:1px solid var(--s3);color:var(--ink4);background:var(--s1)";
+  var name    = lang === "en" ? (item.name_en || item.name_cn) : item.name_cn;
+  var company = lang === "en" ? (item.company_en || item.company_cn) : item.company_cn;
+  var summary = lang === "en" ? (item.summary_en || item.summary_cn) : item.summary_cn;
+
+  return '<div class="card' + (isMRTP ? " mrtp-card" : "") + ' fadeup" data-cat="' + item.cat + '" data-id="' + item.id + '" style="animation-delay:' + Math.min(i * 22, 300) + 'ms">' +
+    '<div class="card-badges">' + catBadge(item.cat) + pwBadge(item.pathway) + vsBadge(item.verified_status) + (isMRTP ? '<span class="mrtp-chip">⭐ MRTP</span>' : "") + '</div>' +
+    '<div class="card-title">' + name + '</div>' +
+    '<div><div class="card-brand">' + item.brand + '</div><div class="card-co">' + company + '</div></div>' +
+    (item.stn ? '<div class="card-stn">STN: ' + item.stn + '</div>' : '') +
+    '<div class="card-summary">' + summary + '</div>' +
+    (isMRTP && item.mrtp_order ? '<div style="font-size:10px;font-family:var(--font-m);color:var(--mrtp-gold);padding:4px 9px;background:rgba(139,105,20,.08);border-radius:5px;border:1px solid rgba(212,168,67,.25)">' + item.mrtp_order + '</div>' : '') +
+    '<div class="card-foot">' +
+      '<div>' +
+        (item.action_date ? '<div class="card-date">' + t("card_fda_date") + ' ' + item.action_date + '</div>' : '') +
+        (item.nicotine ? '<div class="card-nic">' + t("card_nic") + ' ' + item.nicotine + '</div>' : '') +
+      '</div>' +
+      '<div style="display:flex;align-items:center;gap:8px">' +
+        '<button class="cmp-btn" style="font-size:10px;font-family:var(--font-m);padding:3px 9px;border-radius:4px;transition:all .15s;font-weight:600;' + cmpStyle + '">' +
+          (inCmp ? t("card_comparing") : t("card_compare")) + '</button>' +
+        '<span class="card-arr">→</span>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+// ════════════════════════════════════════════════════
+//  COMPARE
+// ════════════════════════════════════════════════════
+function toggleCompare(id) {
+  var idx = state.compare.indexOf(id);
+  if (idx >= 0) {
+    state.compare.splice(idx, 1);
+  } else {
+    if (state.compare.length >= 5) { toastMsg(t("cmp_max5")); return; }
+    state.compare.push(id);
+  }
+  updateCompBar();
+  renderGrid();
+}
+
+function updateCompBar() {
+  var bar    = document.getElementById("cmp-bar");
+  var topBtn = document.getElementById("cmp-topbar");
+  var cnt    = document.getElementById("cmp-cnt");
+  if (state.compare.length > 0) {
+    bar.style.display    = "flex";
+    topBtn.style.display = "block";
+    if (cnt) cnt.textContent = state.compare.length;
+    var names = state.compare.map(function(id) {
+      var it = DB.find(function(x) { return x.id === id; });
+      return it ? "<b>" + it.brand + "</b>" : "";
+    }).join(' <span style="color:rgba(255,255,255,.3)">·</span> ');
+    document.getElementById("cmp-names").innerHTML = names;
+    var openBtn = document.getElementById("cmp-open-btn");
+    if (openBtn) openBtn.textContent = t("cmp_open");
+  } else {
+    bar.style.display    = "none";
+    topBtn.style.display = "none";
+  }
+}
+
+function openComp() {
+  if (state.compare.length < 2) { toastMsg(t("cmp_min2")); return; }
+  var items = state.compare.map(function(id) { return DB.find(function(x) { return x.id === id; }); }).filter(Boolean);
+  var fields = [
+    { k:t("cmp_field_cat"),   f:function(i) { return catBadge(i.cat); } },
+    { k:t("cmp_field_pw"),    f:function(i) { return pwBadge(i.pathway); } },
+    { k:t("cmp_field_date"),  f:function(i) { return '<span style="font-family:var(--font-m);font-size:11px">' + (i.action_date||"—") + '</span>'; } },
+    { k:t("cmp_field_nic"),   f:function(i) { return '<span style="font-family:var(--font-m);font-size:11px;color:var(--ac)">' + (i.nicotine||"—") + '</span>'; } },
+    { k:t("cmp_field_form"),  f:function(i) { return '<span style="font-size:12px">' + loc(i,"form") + '</span>'; } },
+    { k:t("cmp_field_mrtp"),  f:function(i) { return i.mrtp_order ? '<span style="color:var(--mrtp-gold);font-family:var(--font-m);font-size:11px">' + i.mrtp_order + '</span>' : '<span style="color:var(--ink5)">—</span>'; } },
+    { k:t("cmp_field_hphcs"), f:function(i) { return '<span style="font-size:11px;color:var(--ink3)">' + (loc(i,"hphc_summary")||"—").slice(0,70) + "…</span>"; } },
+    { k:t("cmp_field_vs"),    f:function(i) { return vsBadge(i.verified_status); } },
+  ];
+  var rows = fields.map(function(f) {
+    return '<tr><td>' + f.k + '</td>' + items.map(function(i) { return '<td>' + f.f(i) + '</td>'; }).join("") + '</tr>';
+  }).join("");
+
+  document.getElementById("modal-wrap").innerHTML =
+    '<div class="overlay" id="comp-overlay">' +
+    '<div class="modal" style="max-width:920px">' +
+      '<div class="modal-head">' +
+        '<button class="mclose" id="comp-close">✕</button>' +
+        '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px">' + items.map(function(i) { return catBadge(i.cat); }).join("") + '</div>' +
+        '<div class="modal-title">' + t("cmp_title") + '</div>' +
+        '<div class="modal-en">' + items.length + ' ' + t("cmp_subtitle") + '</div>' +
+      '</div>' +
+      '<div class="modal-body">' +
+        '<div class="comp-tbl-wrap"><table class="comp-tbl"><thead><tr><th style="width:110px">' +
+        (lang==="en"?"Field":"字段") +
+        '</th>' + items.map(function(i) { return '<th class="prod-th">' + (i.brand||i.name_cn) + '</th>'; }).join("") +
+        '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+        '<div class="disclaimer">' + t("cmp_disclaimer") + '</div>' +
+      '</div>' +
+    '</div></div>';
+
+  document.getElementById("comp-close").addEventListener("click", function() { document.getElementById("modal-wrap").innerHTML = ""; });
+  document.getElementById("comp-overlay").addEventListener("click", function(e) {
+    if (e.target === document.getElementById("comp-overlay")) document.getElementById("modal-wrap").innerHTML = "";
+  });
+}
+
+// ════════════════════════════════════════════════════
+//  DETAIL MODAL
+// ════════════════════════════════════════════════════
+function openModal(id) {
+  state.selected = id;
+  var item = DB.find(function(x) { return x.id === id; });
+  if (!item) return;
+  var isMRTP = item.pathway === "MRTP" || item.mrtp_order;
+  var name   = lang === "en" ? (item.name_en || item.name_cn) : item.name_cn;
+  var company = lang === "en" ? (item.company_en || item.company_cn) : item.company_cn;
+
+  // HPHCs chart
+  var hphcRows = "";
+  if (item.hphcs && item.hphcs.length) {
+    item.hphcs.forEach(function(h) {
+      var label = lang === "en" ? (h.label_en || h.label_zh) : (h.label_zh || h.label_en);
+      var fillColor = h.reduction === 0
+        ? "background:linear-gradient(90deg,#ef4444,#f87171)"
+        : "background:linear-gradient(90deg,var(--ok),#4ade80)";
+      hphcRows +=
+        '<div class="hphc-row">' +
+          '<div class="hphc-name">' + h.name + '</div>' +
+          '<div class="hphc-track"><div class="hphc-fill" style="width:' + Math.min(Math.max(h.reduction, 3), 100) + '%;' + fillColor + '"></div></div>' +
+          '<div class="hphc-pct" style="' + (h.reduction===0?"color:var(--err)":"") + '">' + label + '</div>' +
+        '</div>';
+    });
+  }
+
+  // MRTP section
+  var mrtpClaim = lang === "en" ? (item.mrtp_claim_en || item.mrtp_claim_cn) : (item.mrtp_claim_cn || item.mrtp_claim_en);
+  var mrtpSection = "";
+  if (isMRTP) {
+    mrtpSection =
+      '<div>' +
+        '<div class="sec-hd">' + t("sec_mrtp") + '</div>' +
+        '<div class="mrtp-block">' +
+          '<div class="mrtp-block-head">' +
+            '<div class="mrtp-seal">⭐</div>' +
+            '<div><div style="font-size:14px;font-weight:700;color:var(--mrtp-gold)">' + t("mrtp_approved") + '</div>' +
+              '<div style="font-size:11px;color:var(--ink4)">' + t("mrtp_order_label") + ' · ' + item.action_date + '</div></div>' +
+            (item.mrtp_order ? '<div class="mrtp-order-tag">' + item.mrtp_order + '</div>' : '') +
+          '</div>' +
+          (mrtpClaim
+            ? '<div class="mrtp-claim">' + mrtpClaim.replace(/\n/g, "<br>") + '</div>'
+            : '<div style="padding:16px;font-size:12px;color:var(--ink4)">' + t("mrtp_no_text") + '</div>') +
+          '<div class="mrtp-disclaimer">' + t("mrtp_warning") + '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  document.getElementById("modal-wrap").innerHTML =
+    '<div class="overlay" id="detail-overlay">' +
+    '<div class="modal">' +
+      '<div class="modal-head">' +
+        '<button class="mclose" id="detail-close">✕</button>' +
+        '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px">' +
+          catBadge(item.cat) + pwBadge(item.pathway) + vsBadge(item.verified_status) +
+          (isMRTP ? '<span class="mrtp-chip">⭐ ' + (item.mrtp_order||"MRTP") + '</span>' : '') +
+        '</div>' +
+        '<div class="modal-title">' + name + '</div>' +
+        '<div class="modal-en">' + item.product_name_en + '</div>' +
+        '<div style="font-size:13px;color:var(--ink3);margin-top:2px">' + company + '</div>' +
+      '</div>' +
+      '<div class="modal-body">' +
+
+        '<div><div class="sec-hd">' + t("sec_basic") + '</div><div class="info-grid">' +
+          (item.stn ? '<div class="iitem"><div class="iitem-l">' + t("field_stn") + '</div><div class="iitem-v mono">' + item.stn + '</div></div>' : '') +
+          '<div class="iitem"><div class="iitem-l">' + t("field_date") + '</div><div class="iitem-v mono">' + (item.action_date||"—") + '</div></div>' +
+          '<div class="iitem"><div class="iitem-l">' + t("field_pathway") + '</div><div class="iitem-v">' + pwBadge(item.pathway) + '<div style="font-size:11px;color:var(--ink4);margin-top:4px">' + pwDesc(item.pathway) + '</div></div></div>' +
+          '<div class="iitem"><div class="iitem-l">' + t("field_form") + '</div><div class="iitem-v">' + loc(item,"form") + '</div></div>' +
+          (item.nicotine ? '<div class="iitem"><div class="iitem-l">' + t("field_nicotine") + '</div><div class="iitem-v mono" style="color:var(--ac)">' + item.nicotine + '</div></div>' : '') +
+          '<div class="iitem"><div class="iitem-l">' + t("field_version") + '</div><div class="iitem-v mono">' + item.data_version + '</div></div>' +
+        '</div></div>' +
+
+        '<div><div class="sec-hd">' + t("sec_indication") + '</div><div class="tbox left-ok">' +
+          '<div style="color:var(--ink);font-weight:600;margin-bottom:6px">' + loc(item,"indication") + '</div>' +
+          '<div style="font-family:var(--font-m);font-size:11px;color:var(--ink4);margin-top:8px;padding-top:8px;border-top:1px solid var(--s3)">' + item.indication_en + '</div>' +
+        '</div></div>' +
+
+        mrtpSection +
+
+        '<div><div class="sec-hd">' + t("sec_hphcs") + '</div>' +
+          (hphcRows ? '<div class="hphc-chart">' + hphcRows + '</div>' : '') +
+          '<div class="hphc-note">' + loc(item,"hphc_summary") + '</div>' +
+        '</div>' +
+
+        (loc(item,"biomarker") ? '<div><div class="sec-hd">' + t("sec_biomarker") + '</div><div class="tbox">' + loc(item,"biomarker") + '</div></div>' : '') +
+
+        '<div><div class="sec-hd">' + t("sec_compliance") + '</div>' +
+          '<div class="tbox left-warn" style="margin-bottom:8px"><strong style="color:var(--ink);display:block;margin-bottom:5px">' + t("field_use_limit") + '</strong>' + loc(item,"use_limit") + '</div>' +
+          '<div class="tbox"><strong style="color:var(--ink);display:block;margin-bottom:5px">' + t("field_compliance") + '</strong>' + loc(item,"compliance") + '</div>' +
+        '</div>' +
+
+        '<div><div class="sec-hd">' + t("sec_summary") + '</div><div style="font-size:13px;color:var(--ink3);line-height:1.8">' + loc(item,"summary") + '</div></div>' +
+
+        (item.tags && item.tags.length
+          ? '<div><div class="sec-hd">' + t("sec_tags") + '</div><div class="tags-wrap">' +
+            item.tags.map(function(tag) { return '<span class="tag">' + tag + '</span>'; }).join("") +
+            '</div></div>' : '') +
+
+        '<div class="fda-btns">' +
+          '<a class="fda-btn" href="' + item.fda_link + '" target="_blank" rel="noopener">' + t("link_fda_doc") + '</a>' +
+          '<a class="fda-btn" href="https://www.accessdata.fda.gov/scripts/searchtobacco/" target="_blank" rel="noopener">' + t("link_fda_db") + '</a>' +
+        '</div>' +
+
+        '<div class="disclaimer">' + t("disclaimer") + '</div>' +
+
+      '</div>' +
+    '</div></div>';
+
+  document.getElementById("detail-close").addEventListener("click", function() {
+    document.getElementById("modal-wrap").innerHTML = "";
+    state.selected = null;
+  });
+  document.getElementById("detail-overlay").addEventListener("click", function(e) {
+    if (e.target === document.getElementById("detail-overlay")) {
+      document.getElementById("modal-wrap").innerHTML = "";
+      state.selected = null;
+    }
+  });
+}
+
+// ════════════════════════════════════════════════════
+//  BOOT
+// ════════════════════════════════════════════════════
+document.addEventListener("DOMContentLoaded", function() {
+  initLogin();
+});
+</script>
+</body>
+</html>
