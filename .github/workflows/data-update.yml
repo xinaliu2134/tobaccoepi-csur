@@ -1,0 +1,61 @@
+name: Weekly FDA Data Update
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Every Monday 06:00 UTC
+  workflow_dispatch:       # Manual trigger
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout tobaccoepi-csur
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run FDA data updater
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/fda_updater.py
+
+      - name: Commit tobaccoepi-csur changes
+        run: |
+          git config user.name "FDA Data Bot"
+          git config user.email "bot@tobaccoepi.eu"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "data: auto-update openFDA adverse events $(date +%Y-%m-%d)"
+            git push
+          else
+            echo "No changes to tobaccoepi-csur"
+          fi
+
+      - name: Update tobaccodb repo
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          git clone https://x-access-token:$GH_TOKEN@github.com/xinaliu2134/tobaccodb.git /tmp/tobaccodb
+          cp /tmp/tobaccodb-patch/index.html /tmp/tobaccodb/index.html 2>/dev/null || true
+          cd /tmp/tobaccodb
+          git config user.name "FDA Data Bot"
+          git config user.email "bot@tobaccoepi.eu"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "data: auto-update PMTA/SE entries $(date +%Y-%m-%d)"
+            git push
+          else
+            echo "No changes to tobaccodb"
+          fi
