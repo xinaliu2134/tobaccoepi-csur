@@ -528,18 +528,18 @@ function doLogin(e){
 <div class="section-sub" data-i="a7_sub">TPL-confirmed clinical outcomes across FDA-authorized ENDS — switching rates, biomarker reduction, abuse liability, CPD trajectory</div>
 <div class="callout callout-info" data-ih="a7_usecase"><strong>Data Source:</strong> All data is extracted directly from FDA Technical Project Lead (TPL) Review documents — FDA's internal decision summaries for each PMTA. Only authorized products with available TPL documents are shown. This is the first cross-brand visualization of TPL-confirmed clinical endpoints.</div>
 <div class="stats-row">
- <div class="stat-card"><div class="stat-label" data-i="a7_s1l">Products with TPL Data</div><div class="stat-value">5</div><div class="stat-detail">NJOY ACE · Daily · Menthol · Vuse · Logic</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s2l">Switching Rate Range</div><div class="stat-value blue">21–43%</div><div class="stat-detail" data-i="a7_s2d">3–6 months, complete switch</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a7_s1l">Brands with TPL Data</div><div class="stat-value">6</div><div class="stat-detail">NJOY ACE · Daily · Menthol · Vuse · Logic · JUUL</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a7_s2l">Switching Rate Range</div><div class="stat-value blue">21–62%</div><div class="stat-detail" data-i="a7_s2d">3–24 months, complete switch</div></div>
  <div class="stat-card"><div class="stat-label" data-i="a7_s3l">Max CPD Reduction</div><div class="stat-value green">&gt;80%</div><div class="stat-detail" data-i="a7_s3d">Logic, Day 59 (60-day study)</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s4l">Menthol Advantage</div><div class="stat-value" style="color:var(--amber);font-size:20px;font-family:var(--mono)">aOR 1.24–1.50</div><div class="stat-detail" data-i="a7_s4d">vs tobacco flavor at 3 months</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a7_s4l">Menthol Advantage</div><div class="stat-value" style="color:var(--amber);font-size:20px;font-family:var(--mono)">aOR/aRR 1.11–1.50</div><div class="stat-detail" data-i="a7_s4d">NJOY aOR 1.24–1.50 (3mo) · JUUL aRR 1.11–1.28 (24mo)</div></div>
 </div>
 
 <div class="chart-grid">
  <div class="chart-card full">
   <h3 data-i="a7_c1t">Complete Switching Rate — TPL-Confirmed <span class="source-tag">Longitudinal Cohort Studies · Range = reported study timepoints</span></h3>
   <div class="chart-wrap" style="height:220px"><canvas id="c-a7-switching"></canvas></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:6px">Floating bars show reported ranges across study timepoints (3–6 months). Logic shown as 60-day cohort exit range. Literature baseline from ENDS meta-analysis (approximate). Floating bar = uncertainty range; not confidence interval.</p>
-  <span class="source-tag">NJOY Daily TPL (PM0000630-631) · NJOY Menthol TPL (PM0000628-629) · Logic TPL (PM0000529-541) · Literature ~15–20%</span>
+  <p style="font-size:11px;color:var(--muted);margin-top:6px">Floating bars show reported ranges across study timepoints (3–24 months). JUUL bar = ADJUSTST 2-yr modeled range (38.4–51.9%) to observed 24-month rate (61.5%). Logic shown as 60-day cohort exit range. Literature baseline from ENDS meta-analysis (approximate). Floating bar = uncertainty range; not confidence interval.</p>
+  <span class="source-tag">NJOY Daily TPL (PM0000630-631) · NJOY Menthol TPL (PM0000628-629) · Logic TPL (PM0000529-541) · JUUL TPL (PM0000864-878, Jul 2025) · Literature ~15–20%</span>
  </div>
 </div>
 
@@ -548,7 +548,7 @@ function doLogin(e){
   <h3 data-i="a7_c2t">Abuse Liability Spectrum <span class="source-tag">Qualitative-ordinal from TPL language</span></h3>
   <div class="chart-wrap tall"><canvas id="c-a7-abuse"></canvas></div>
   <p style="font-size:11px;color:var(--muted);margin-top:6px">*NRT gum benchmarks from published pharmacology; used as reference in multiple TPLs. ENDS scores are qualitative-ordinal derived from TPL descriptive language, not numeric assays. CC = Combusted Cigarettes = 100 (reference).</p>
-  <span class="source-tag">NJOY ACE/Daily/Menthol TPL · Vuse (RJRV) TPL · Logic TPL · IQOS TPL</span>
+  <span class="source-tag">NJOY ACE/Daily/Menthol TPL · Vuse (RJRV) TPL · Logic TPL · IQOS TPL · JUUL TPL (Jul 2025)</span>
  </div>
  <div class="chart-card">
   <h3 data-i="a7_c3t">Menthol Policy Tradeoff <span class="source-tag">NJOY Menthol TPL · NYTS 2023</span></h3>
@@ -578,20 +578,21 @@ function doLogin(e){
   <th>Vuse Ciro/Solo+<br><span style="font-weight:400;font-size:10px">PM0000635-712</span></th>
   <th>Logic (all)<br><span style="font-weight:400;font-size:10px">PM0000529-541</span></th>
   <th>IQOS<br><span style="font-weight:400;font-size:10px">PM0000424</span></th>
+  <th>JUUL<br><span style="font-weight:400;font-size:10px">PM0000864-878</span></th>
  </tr></thead>
  <tbody>
-  <tr><td><strong>CO / COHb</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ COHb sig.↓ (quant.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ non-nic BOE ↓</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td></tr>
-  <tr><td><strong>Cotinine</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td></tr>
-  <tr><td><strong>CEMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td></tr>
-  <tr><td><strong>3-HPMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td></tr>
-  <tr><td><strong>NNAL (NNK metabolite)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td></tr>
-  <tr><td><strong>TNE (total nic. equiv.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#dcfce7;color:#15803d"><strong>−31% urinary TNE (quant.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td></tr>
-  <tr><td><strong>HPHC Aerosol vs Smoke</strong></td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower; ELCR sig.↓</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (most HPHCs)</td><td style="background:#f0fdf4;color:#166534">↓ below/≈ CC smoke</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ greatly reduced (TPL)</strong></td></tr>
+  <tr><td><strong>CO / COHb</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ COHb sig.↓ (quant.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ non-nic BOE ↓</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ ~cessation level</strong></td></tr>
+  <tr><td><strong>Cotinine</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td></tr>
+  <tr><td><strong>CEMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed (6-day)</td></tr>
+  <tr><td><strong>3-HPMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ (ADJUSTST)</strong></td></tr>
+  <tr><td><strong>NNAL (NNK metabolite)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ (ADJUSTST)</strong></td></tr>
+  <tr><td><strong>TNE (total nic. equiv.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#dcfce7;color:#15803d"><strong>−31% urinary TNE (quant.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td></tr>
+  <tr><td><strong>HPHC Aerosol vs Smoke</strong></td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower; ELCR sig.↓</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (most HPHCs)</td><td style="background:#f0fdf4;color:#166534">↓ below/≈ CC smoke</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ greatly reduced (TPL)</strong></td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ ELCRc &lt;5% of 1R6F CC</strong></td></tr>
  </tbody>
 </table>
 </div>
 <p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7"><strong>Legend:</strong> ↓ = statistically significant reduction confirmed in TPL narrative. ↓↓ = quantitative reduction with reported value. ≤ LOD = at or below limit of detection. — = not primary endpoint; nicotine maintained by design. CEMA/3-HPMA = urinary acrolein metabolites. NNAL = 4-(methylnitrosamino)-1-(3-pyridyl)-1-butanol. TNE = total nicotine equivalent. HPHC = Harmful and Potentially Harmful Constituents. ELCR = Excess Lifetime Cancer Risk.</p>
-<span class="source-tag">All data: FDA TPL Review documents · PM0000613-622 (Apr 2022) · PM0000630-631 (Jun 2022) · PM0000628-629 (Jun 2024) · PM0000635-712 (May 2022) · PM0000529-541 (Mar 2022) · PM0000424 (Apr 2019)</span>
+<span class="source-tag">All data: FDA TPL Review documents · PM0000613-622 (Apr 2022) · PM0000630-631 (Jun 2022) · PM0000628-629 (Jun 2024) · PM0000635-712 (May 2022) · PM0000529-541 (Mar 2022) · PM0000424 (Apr 2019) · PM0000864-878 (Jul 2025)</span>
 </div><!-- /panel-a7 -->
 
 </div><!-- /main -->
@@ -1064,12 +1065,13 @@ function buildAllCharts(){
     curLang==='zh'?'NJOY Daily\n烟草口味':'NJOY Daily\nTobacco',
     curLang==='zh'?'NJOY Daily\n薄荷口味':'NJOY Daily\nMenthol',
     curLang==='zh'?'Logic\n（全产品线）':'Logic\n(all products)',
+    curLang==='zh'?'JUUL\n（ADJUSTST 2年随访）':'JUUL\n(ADJUSTST 2-yr)',
     curLang==='zh'?'文献基准\n（ENDS综合）':'Literature\nBaseline (ENDS)'
    ],
    datasets:[{
     label:curLang==='zh'?'完全转用率范围 %':'Complete Switching Rate Range %',
-    data:[[21,37],[32,43],[29,37],[15,20]],
-    backgroundColor:[amber,'#f59e0b',blue,'#94a3b8'],
+    data:[[21,37],[32,43],[29,37],[38,62],[15,20]],
+    backgroundColor:[amber,'#f59e0b',blue,'#7c3aed','#94a3b8'],
     borderRadius:4
    }]
   },
@@ -1079,7 +1081,7 @@ function buildAllCharts(){
     legend:{display:false},
     tooltip:{callbacks:{label:function(c){var d=c.raw;return (Array.isArray(d)?d[0]+'%–'+d[1]+'%':d+'%')+' complete switching';}}}
    },
-   scales:{y:{min:0,max:55,title:{display:true,text:'% complete switch'}}}
+   scales:{y:{min:0,max:70,title:{display:true,text:'% complete switch'}}}
   }
  });
 
@@ -1087,10 +1089,10 @@ function buildAllCharts(){
  charts.a7abuse=new Chart(document.getElementById('c-a7-abuse'),{
   type:'bar',
   data:{
-   labels:['Logic Vapeleaf','2mg NRT Gum*','Logic Pro/Power','Vuse Ciro/Solo+','4mg NRT Gum*','NJOY Menthol','NJOY ACE','IQOS HTP','Combusted Cigarettes'],
+   labels:['Logic Vapeleaf','2mg NRT Gum*','Logic Pro/Power','Vuse Ciro/Solo+','4mg NRT Gum*','NJOY Menthol','NJOY ACE','IQOS HTP','JUUL','Combusted Cigarettes'],
    datasets:[{
-    data:[27,33,42,55,50,83,88,95,100],
-    backgroundColor:['#22c55e','#94a3b8','#22c55e',amber,'#94a3b8','#f59e0b',amber,teal,red],
+    data:[27,33,42,55,50,83,88,95,90,100],
+    backgroundColor:['#22c55e','#94a3b8','#22c55e',amber,'#94a3b8','#f59e0b',amber,teal,'#7c3aed',red],
     borderRadius:4
    }]
   },
@@ -1099,7 +1101,7 @@ function buildAllCharts(){
    indexAxis:'y',
    plugins:{
     legend:{display:false},
-    tooltip:{callbacks:{label:function(c){var labels=['Below 2mg NRT gum (TPL)','Reference benchmark','Lower than CC (TPL)','Lower than CC, slightly > 4mg NRT (TPL)','Reference benchmark','Similar to CC for ENDS-experienced (TPL)','Comparable to CC (TPL)','Similar to CC (TPL)','Reference = 100'];return labels[c.dataIndex]||c.raw;}}}
+    tooltip:{callbacks:{label:function(c){var labels=['Below 2mg NRT gum (TPL)','Reference benchmark','Lower than CC (TPL)','Lower than CC, slightly > 4mg NRT (TPL)','Reference benchmark','Similar to CC for ENDS-experienced (TPL)','Comparable to CC (TPL)','Similar to CC (TPL)','Comparable to UB CC in adults (TPL Jul 2025)','Reference = 100'];return labels[c.dataIndex]||c.raw;}}}
    },
    scales:{x:{beginAtZero:true,max:115,title:{display:true,text:'Relative Abuse Liability (CC=100, qualitative-ordinal)'}}}
   }
