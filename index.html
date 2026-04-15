@@ -209,7 +209,6 @@ function doLogin(e){
  <button class="tab-btn" data-tab="a3" onclick="switchTab('a3')" data-i="tab_a3">Adverse Events</button>
  <button class="tab-btn" data-tab="a4" onclick="switchTab('a4')" data-i="tab_a4">Switching Simulator</button>
  <button class="tab-btn" data-tab="a6" onclick="switchTab('a6')" data-i="tab_a6">PMTA Benchmark</button>
- <button class="tab-btn" data-tab="a7" onclick="switchTab('a7')" data-i="tab_a7">Clinical Evidence</button>
  <button class="tab-btn" data-tab="a8" onclick="switchTab('a8')" data-i="tab_a8">PMTA Roadmap</button>
 </div>
 
@@ -565,32 +564,8 @@ function doLogin(e){
 </div>
 <span class="source-tag">Analytical framework — EpiDataKit · Based on confirmed FDA MGO records · Not an official FDA statement</span>
 
-<h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_timeline_title">Authorization Timeline Benchmarks — All Confirmed ENDS/NP/HTP MGOs (12 Products)</h4>
-<table class="data-table" style="font-size:12px">
- <thead><tr><th>Product</th><th>Submitted</th><th>Authorized</th><th>Duration</th><th>Key Success Factor</th></tr></thead>
- <tbody>
-  <tr><td>IQOS — HTP (Philip Morris)</td><td>May 2017</td><td>Apr 2019</td><td class="hl" style="color:#15803d;font-weight:700">~23 months</td><td>First HTP MGO; ambulatory switching cohort + HPHC aerosol reduction; aided by PMI's long MRTP data package</td></tr>
-  <tr><td>Vuse Solo — tobacco (RJR/BAT)</td><td>Sep 2020</td><td>Oct 2021</td><td class="hl" style="color:#15803d;font-weight:700">~13 months</td><td>Tobacco-only; strong adult use data; first E-cig MGO ever granted</td></tr>
-  <tr><td>Logic (3 lines, JTI)</td><td>Sep 2020</td><td>Mar 2022</td><td class="hl">~18 months</td><td>60-day longitudinal CPD data; &gt;80% CPD reduction pivotal</td></tr>
-  <tr><td>NJOY ACE — tobacco</td><td>Mar 2020</td><td>Apr 2022</td><td class="hl">~26 months</td><td>Consumer switching evidence; first closed-system pod authorized</td></tr>
-  <tr><td>Vuse Vibe/Ciro — tobacco</td><td>Sep 2020</td><td>May 2022</td><td class="hl">~20 months</td><td>Consistent package with Vuse Solo; BOE reduction confirmed</td></tr>
-  <tr><td>NJOY Daily — tobacco (disposable)</td><td>Mar 2020</td><td>Jun 2022</td><td class="hl">~27 months</td><td>First authorized disposable e-cigarette</td></tr>
-  <tr><td>NJOY ACE/Daily — menthol</td><td>~2021</td><td>Jun 2024</td><td class="hl">~30 months</td><td>Menthol required aOR 1.24–1.50 vs tobacco flavor evidence + Device Access Restrictions</td></tr>
-  <tr><td>Vuse Alto — tobacco</td><td>Sep 2020</td><td>Jul 2024</td><td class="hl" style="color:#92400e">~46 months</td><td>Adult migration + BOE; slot machine form factor required extended review</td></tr>
-  <tr><td>ZYN — 20 NP products</td><td>Mar 2020</td><td>Jan 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>First NP category; novel framework required; 10-wk cohort: 24% complete switch (83/346)</td></tr>
-  <tr><td>JUUL — tobacco + menthol</td><td>Sep 2020</td><td>Jul 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>MDO Jun 2022 (stayed) → rescinded Jun 2024 → MGO Jul 2025; ADJUSTST 2-yr cohort pivotal</td></tr>
-  <tr><td>Glas G2 — tobacco (Glas Inc.)</td><td>Jul 21, 2021</td><td>Mar 12, 2026</td><td class="hl" style="color:var(--red)">~56 months</td><td>First independent vape company; first age-gated device (Bluetooth + ID); 3-month RCT submitted Apr 2025 after 2nd deficiency letter — pivotal for authorization</td></tr>
-  <tr><td>on! PLUS — 6 NP products</td><td>~2021</td><td>Dec 2025</td><td class="hl" style="color:var(--red)">~48 months</td><td>15% complete quit + 35% ≥50% CPD reduction at 6-wk actual-use study</td></tr>
- </tbody>
-</table>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6">Statutory 180-day clock is routinely paused when applicants submit amendments with new data; real-world review time significantly exceeds statutory limits. <strong>Tobacco-only ENDS:</strong> 13–27 months (2021–2022 era). <strong>Menthol/novel flavors:</strong> ~30 months. <strong>Novel product categories (NP) or MDO-challenged products:</strong> 4–5 years.</p>
-<span class="source-tag">FDA PMTA Marketing Granted Orders · FDA CTP PMTA records · Not an official FDA statement</span>
-
-</div>
-
-<!-- ===== A7: Clinical Evidence Atlas ===== -->
-<div class="panel" id="panel-a7">
-<h2 data-i="a7_title">Clinical Evidence Atlas</h2>
+<!-- Clinical Evidence (moved from a7) -->
+<h3 style="margin-top:28px;margin-bottom:4px" data-i="a7_title">Clinical Evidence Atlas</h3>
 <div class="section-sub" data-i="a7_sub">TPL-confirmed clinical outcomes across FDA-authorized ENDS — switching rates, biomarker reduction, abuse liability, CPD trajectory</div>
 <div class="callout callout-info" data-ih="a7_usecase"><strong>Data Source:</strong> All data is extracted directly from FDA Technical Project Lead (TPL) Review documents — FDA's internal decision summaries for each PMTA. Only authorized products with available TPL documents are shown. This is the first cross-brand visualization of TPL-confirmed clinical endpoints.</div>
 <div class="stats-row">
@@ -659,7 +634,30 @@ function doLogin(e){
 </div>
 <p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7"><strong>Legend:</strong> ↓ = statistically significant reduction confirmed in TPL narrative. ↓↓ = quantitative reduction with reported value. ≤ LOD = at or below limit of detection. — = not primary endpoint; nicotine maintained by design. CEMA/3-HPMA = urinary acrolein metabolites. NNAL = 4-(methylnitrosamino)-1-(3-pyridyl)-1-butanol. TNE = total nicotine equivalent. HPHC = Harmful and Potentially Harmful Constituents. ELCR = Excess Lifetime Cancer Risk.</p>
 <span class="source-tag">All data: FDA TPL Review documents · PM0000613-622 (Apr 2022) · PM0000630-631 (Jun 2022) · PM0000628-629 (Jun 2024) · PM0000635-712 (May 2022) · PM0000529-541 (Mar 2022) · PM0000424 (Apr 2019) · PM0000864-878 (Jul 2025)</span>
-</div><!-- /panel-a7 -->
+
+<h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_timeline_title">Authorization Timeline Benchmarks — All Confirmed ENDS/NP/HTP MGOs (12 Products)</h4>
+<table class="data-table" style="font-size:12px">
+ <thead><tr><th>Product</th><th>Submitted</th><th>Authorized</th><th>Duration</th><th>Key Success Factor</th></tr></thead>
+ <tbody>
+  <tr><td>IQOS — HTP (Philip Morris)</td><td>May 2017</td><td>Apr 2019</td><td class="hl" style="color:#15803d;font-weight:700">~23 months</td><td>First HTP MGO; ambulatory switching cohort + HPHC aerosol reduction; aided by PMI's long MRTP data package</td></tr>
+  <tr><td>Vuse Solo — tobacco (RJR/BAT)</td><td>Sep 2020</td><td>Oct 2021</td><td class="hl" style="color:#15803d;font-weight:700">~13 months</td><td>Tobacco-only; strong adult use data; first E-cig MGO ever granted</td></tr>
+  <tr><td>Logic (3 lines, JTI)</td><td>Sep 2020</td><td>Mar 2022</td><td class="hl">~18 months</td><td>60-day longitudinal CPD data; &gt;80% CPD reduction pivotal</td></tr>
+  <tr><td>NJOY ACE — tobacco</td><td>Mar 2020</td><td>Apr 2022</td><td class="hl">~26 months</td><td>Consumer switching evidence; first closed-system pod authorized</td></tr>
+  <tr><td>Vuse Vibe/Ciro — tobacco</td><td>Sep 2020</td><td>May 2022</td><td class="hl">~20 months</td><td>Consistent package with Vuse Solo; BOE reduction confirmed</td></tr>
+  <tr><td>NJOY Daily — tobacco (disposable)</td><td>Mar 2020</td><td>Jun 2022</td><td class="hl">~27 months</td><td>First authorized disposable e-cigarette</td></tr>
+  <tr><td>NJOY ACE/Daily — menthol</td><td>~2021</td><td>Jun 2024</td><td class="hl">~30 months</td><td>Menthol required aOR 1.24–1.50 vs tobacco flavor evidence + Device Access Restrictions</td></tr>
+  <tr><td>Vuse Alto — tobacco</td><td>Sep 2020</td><td>Jul 2024</td><td class="hl" style="color:#92400e">~46 months</td><td>Adult migration + BOE; slot machine form factor required extended review</td></tr>
+  <tr><td>ZYN — 20 NP products</td><td>Mar 2020</td><td>Jan 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>First NP category; novel framework required; 10-wk cohort: 24% complete switch (83/346)</td></tr>
+  <tr><td>JUUL — tobacco + menthol</td><td>Sep 2020</td><td>Jul 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>MDO Jun 2022 (stayed) → rescinded Jun 2024 → MGO Jul 2025; ADJUSTST 2-yr cohort pivotal</td></tr>
+  <tr><td>Glas G2 — tobacco (Glas Inc.)</td><td>Jul 21, 2021</td><td>Mar 12, 2026</td><td class="hl" style="color:var(--red)">~56 months</td><td>First independent vape company; first age-gated device (Bluetooth + ID); 3-month RCT submitted Apr 2025 after 2nd deficiency letter — pivotal for authorization</td></tr>
+  <tr><td>on! PLUS — 6 NP products</td><td>~2021</td><td>Dec 2025</td><td class="hl" style="color:var(--red)">~48 months</td><td>15% complete quit + 35% ≥50% CPD reduction at 6-wk actual-use study</td></tr>
+ </tbody>
+</table>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6">Statutory 180-day clock is routinely paused when applicants submit amendments with new data; real-world review time significantly exceeds statutory limits. <strong>Tobacco-only ENDS:</strong> 13–27 months (2021–2022 era). <strong>Menthol/novel flavors:</strong> ~30 months. <strong>Novel product categories (NP) or MDO-challenged products:</strong> 4–5 years.</p>
+<span class="source-tag">FDA PMTA Marketing Granted Orders · FDA CTP PMTA records · Not an official FDA statement</span>
+
+</div>
+
 
 <!-- ===== A8: PMTA Roadmap ===== -->
 <div class="panel" id="panel-a8">
@@ -1033,23 +1031,6 @@ var I={
  tab_a8:{en:'PMTA Roadmap',zh:'PMTA路线图'},
  a8_title:{en:'PMTA Roadmap',zh:'PMTA申请路线图'},
  a8_sub:{en:'FDA Premarket Tobacco Application — 6 Phases from Pre-Submission to Post-Market · 21 U.S.C. § 387j · 21 CFR Part 1114',zh:'FDA烟草产品上市前申请 — 6个阶段（递交前至上市后）· 21 U.S.C. § 387j · 21 CFR Part 1114'},
- /* A7 */
- tab_a7:{en:'Clinical Evidence',zh:'临床证据图谱'},
- a7_title:{en:'Clinical Evidence Atlas',zh:'临床证据图谱'},
- a7_sub:{en:'TPL-confirmed clinical outcomes across FDA-authorized ENDS — switching rates, biomarker reduction, abuse liability, CPD trajectory',zh:'FDA授权ENDS产品TPL确认临床数据——转用率、生物标志物降低、滥用风险、CPD减少轨迹'},
- a7_usecase:{en:'<strong>Data Source:</strong> All data is extracted directly from FDA Technical Project Lead (TPL) Review documents — FDA\'s internal decision summaries for each PMTA. Only authorized products with available TPL documents are shown. This is the first cross-brand visualization of TPL-confirmed clinical endpoints.',zh:'<strong>数据来源：</strong>所有数据直接来源于FDA技术项目负责人（TPL）审查文件——每项PMTA的FDA内部决策摘要。仅显示有公开TPL文件的授权产品。这是首个基于TPL确认数据的跨品牌临床指标可视化。'},
- a7_s1l:{en:'Products with TPL Data',zh:'有TPL数据的产品'},
- a7_s2l:{en:'Switching Rate Range',zh:'转用率范围'},
- a7_s2d:{en:'3–6 months, complete switch',zh:'3–6个月，完全转用'},
- a7_s3l:{en:'Max CPD Reduction',zh:'最大CPD减少'},
- a7_s3d:{en:'Logic, Day 59 (60-day study)',zh:'Logic，第59天（60天研究）'},
- a7_s4l:{en:'Menthol Added Benefits',zh:'薄荷口味附加获益'},
- a7_s4d:{en:'vs tobacco flavor at 3 months',zh:'vs 烟草口味，3个月时点'},
- a7_c1t:{en:'Complete Switching Rate — TPL-Confirmed',zh:'完全转用率 — TPL确认数据'},
- a7_c2t:{en:'Abuse Liability Spectrum',zh:'滥用风险梯级图谱'},
- a7_c3t:{en:'Menthol Policy Tradeoff',zh:'薄荷口味政策两难分析'},
- a7_c4t:{en:'Logic CPD Reduction Trajectory — 3 Product Lines (60-Day Study)',zh:'Logic CPD减少轨迹 — 3产品线（60天研究）'},
- a7_boe_title:{en:'Biomarker of Exposure (BOE) Reduction Summary — Complete Switchers vs Continued CC',zh:'暴露生物标志物（BOE）降低汇总 — 完全转用者 vs 持续吸烟者'},
  cta_text:{en:'Regulatory Intelligence Platform — Independent NYTS 2025 Weighted Analysis Available',zh:'监管情报平台 — NYTS 2025独立加权分析已发布'},
  cta_btn:{en:'Request Demo',zh:'申请演示'},
  cta_linkedin:{en:'About the Founder',zh:'关于创始人'},
@@ -1366,99 +1347,7 @@ function buildAllCharts(){
   datasets:[{data:[59.6,24.3,18.1,9.6,9.1,8.0],backgroundColor:amber,borderRadius:4}]
  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}}}});
 
- /* A7: Complete Switching Rate — floating bars [min, max] */
- charts.a7switching=new Chart(document.getElementById('c-a7-switching'),{
-  type:'bar',
-  data:{
-   labels:[
-    curLang==='zh'?'NJOY Daily\n烟草口味':'NJOY Daily\nTobacco',
-    curLang==='zh'?'NJOY Daily\n薄荷口味':'NJOY Daily\nMenthol',
-    curLang==='zh'?'Logic\n（全产品线）':'Logic\n(all products)',
-    curLang==='zh'?'JUUL\n（ADJUSTST 2年随访）':'JUUL\n(ADJUSTST 2-yr)',
-    curLang==='zh'?'文献基准\n（ENDS综合）':'Literature\nBaseline (ENDS)'
-   ],
-   datasets:[{
-    label:curLang==='zh'?'完全转用率范围 %':'Complete Switching Rate Range %',
-    data:[[21,37],[32,43],[29,37],[38,62],[15,20]],
-    backgroundColor:[amber,'#f59e0b',blue,'#7c3aed','#94a3b8'],
-    borderRadius:4
-   }]
-  },
-  options:{
-   responsive:true,maintainAspectRatio:false,
-   plugins:{
-    legend:{display:false},
-    tooltip:{callbacks:{label:function(c){var d=c.raw;return (Array.isArray(d)?d[0]+'%–'+d[1]+'%':d+'%')+' complete switching';}}}
-   },
-   scales:{y:{min:0,max:70,title:{display:true,text:'% complete switch'}}}
-  }
- });
-
- /* A7: Abuse Liability Spectrum */
- charts.a7abuse=new Chart(document.getElementById('c-a7-abuse'),{
-  type:'bar',
-  data:{
-   labels:['Logic Vapeleaf','2mg NRT Gum*','Logic Pro/Power','Vuse Ciro/Solo+','4mg NRT Gum*','NJOY Menthol','NJOY ACE','IQOS HTP','JUUL','Combusted Cigarettes'],
-   datasets:[{
-    data:[27,33,42,55,50,83,88,95,90,100],
-    backgroundColor:['#22c55e','#94a3b8','#22c55e',amber,'#94a3b8','#f59e0b',amber,teal,'#7c3aed',red],
-    borderRadius:4
-   }]
-  },
-  options:{
-   responsive:true,maintainAspectRatio:false,
-   indexAxis:'y',
-   plugins:{
-    legend:{display:false},
-    tooltip:{callbacks:{label:function(c){var labels=['Below 2mg NRT gum (TPL)','Reference benchmark','Lower than CC (TPL)','Lower than CC, slightly > 4mg NRT (TPL)','Reference benchmark','Similar to CC for ENDS-experienced (TPL)','Comparable to CC (TPL)','Similar to CC (TPL)','Comparable to UB CC in adults (TPL Jul 2025)','Reference = 100'];return labels[c.dataIndex]||c.raw;}}}
-   },
-   scales:{x:{beginAtZero:true,max:115,title:{display:true,text:'Relative Abuse Liability (CC=100, qualitative-ordinal)'}}}
-  }
- });
-
- /* A7: Menthol Policy Tradeoff */
- charts.a7menthol=new Chart(document.getElementById('c-a7-menthol'),{
-  type:'bar',
-  data:{
-   labels:[curLang==='zh'?'烟草口味\n(NJOY Daily)':'Tobacco Flavor\n(NJOY Daily)',curLang==='zh'?'薄荷口味\n(NJOY Daily)':'Menthol Flavor\n(NJOY Daily)'],
-   datasets:[
-    {label:curLang==='zh'?'成人完全转用率 % (3-6月)':'Adult Complete Switching % (3–6 mo midpoint)',data:[29,37.5],backgroundColor:[amber,'#f59e0b'],borderRadius:4},
-    {label:curLang==='zh'?'青少年ENDS口味使用率 % (NYTS 2023)':'Youth ENDS Flavor Use % (NYTS 2023)',data:[6.4,20.1],backgroundColor:['rgba(220,38,38,0.45)','rgba(220,38,38,0.85)'],borderRadius:4}
-   ]
-  },
-  options:{
-   responsive:true,maintainAspectRatio:false,
-   plugins:{legend:{display:true,position:'bottom'}},
-   scales:{y:{beginAtZero:true,max:50,title:{display:true,text:'%'}}}
-  }
- });
-
- /* A7: Logic CPD Trajectory */
- charts.a7cpd=new Chart(document.getElementById('c-a7-cpd'),{
-  type:'line',
-  data:{
-   labels:['Day 1','Day 7','Day 14','Day 21','Day 30','Day 45','Day 59'],
-   datasets:[
-    {label:'Logic Vapeleaf',data:[14.5,7.0,4.2,2.8,2.0,1.5,1.3],borderColor:'#22c55e',backgroundColor:'rgba(34,197,94,0.1)',tension:.35,fill:false,pointRadius:4,pointHoverRadius:6},
-    {label:'Logic Pro',data:[14.5,7.5,4.5,3.0,2.2,1.7,1.5],borderColor:blue,backgroundColor:blueL,tension:.35,fill:false,pointRadius:4,pointHoverRadius:6},
-    {label:'Logic Power',data:[15.0,8.5,5.5,3.8,2.8,2.2,2.0],borderColor:amber,backgroundColor:amberL,tension:.35,fill:false,pointRadius:4,pointHoverRadius:6}
-   ]
-  },
-  options:{
-   responsive:true,maintainAspectRatio:false,
-   plugins:{
-    legend:{display:true},
-    tooltip:{callbacks:{label:function(c){return c.dataset.label+': '+c.raw+' CPD';}}}
-   },
-   scales:{
-    y:{beginAtZero:true,max:18,title:{display:true,text:'Mean CPD (Cigarettes Per Day)'},ticks:{callback:function(v){return v+' CPD';}}},
-    x:{title:{display:true,text:'Study Day'}}
-   },
-   interaction:{mode:'index',intersect:false}
-  }
- });
-
- /* A4: PAF chart (initial) */
+  /* A4: PAF chart (initial) */
  buildSimCharts();
 }
 
