@@ -440,16 +440,17 @@ function doLogin(e){
    <span style="display:inline-block;width:12px;height:3px;background:#0d9488;margin-right:5px;vertical-align:middle;border-radius:2px"></span>HTP authorization (IQOS)
   </div>
  </div>
- <div class="chart-card">
-  <h3 data-i="a6_c2t">NYTS Youth Prevalence at Time of Each Authorization</h3>
-  <div class="chart-wrap tall"><canvas id="c-a6-nyts-at-auth"></canvas></div>
-  <span class="source-tag">NYTS weighted · FDA MGO dates</span>
- </div>
- <div class="chart-card">
-  <h3 data-i="a6_c3t">Confirmed Adult Benefit — NP Authorizations (Decision Summary)</h3>
-  <div class="chart-wrap"><canvas id="c-a6-np-benefit"></canvas></div>
-  <span class="source-tag">FDA Decision Summary · ZYN Jan 2025 · on! PLUS Dec 2025</span>
-  <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6">Only NP authorizations had specific quantitative adult benefit metrics published in FDA Decision Summaries. E-cig and HTP Decision Summaries cite biomarker of exposure (BoE) reductions vs cigarettes; see FDA PMTA records for full details.</div>
+ <div class="chart-card full">
+  <h3 data-i="a6_c2t">Youth Risk vs Adult Benefit — FDA PMTA Authorization Decision Map</h3>
+  <div class="chart-wrap" style="height:380px"><canvas id="c-a6-scatter"></canvas></div>
+  <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.7">
+   <span style="display:inline-block;width:10px;height:10px;background:#d97706;border-radius:50%;margin-right:5px;vertical-align:middle"></span>E-cig — TPL-confirmed switching rate (bar = study range) &nbsp;
+   <span style="display:inline-block;width:10px;height:10px;background:#2563eb;border-radius:50%;margin-right:5px;vertical-align:middle"></span>NP — FDA Decision Summary (point estimate) &nbsp;
+   <span style="border-top:2px dashed #94a3b8;display:inline-block;width:22px;margin-right:5px;vertical-align:middle"></span>Literature baseline 15–20% &nbsp; ★ JUUL = 2-yr ADJUSTST cohort; others = 2–3 months
+  </div>
+  <span class="source-tag">TPL: PM0000628-631 (NJOY) · PM0000529-541 (Logic) · PM0000864-878 (JUUL) · PM0004879 (Glas) · FDA Decision Summary (ZYN, on! PLUS) · NYTS 2019–2025 (X-axis) · Products with BOE-only benefit (Vuse, NJOY ACE, IQOS) excluded</span>
+  <strong data-i="method_label" style="display:block;margin-top:6px;font-size:11px;color:var(--muted)">Analysis:</strong>
+  <span style="font-size:11px;color:var(--muted)">X-axis = NYTS youth E-cig or NP % at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range across study timepoints. Only TPL-confirmed or Decision Summary endpoints plotted.</span>
  </div>
 </div>
 
@@ -556,6 +557,15 @@ function doLogin(e){
  </tbody>
 </table>
 <span class="source-tag">FDA PMTA Marketing Granted Orders · NYTS 2025 weighted (all youth) · FDA Decision Summaries</span>
+
+<div class="chart-grid" style="margin-top:12px">
+ <div class="chart-card">
+  <h3 data-i="a6_c3t">Confirmed Adult Benefit — NP Authorizations (Decision Summary)</h3>
+  <div class="chart-wrap"><canvas id="c-a6-np-benefit"></canvas></div>
+  <span class="source-tag">FDA Decision Summary · ZYN Jan 2025 · on! PLUS Dec 2025</span>
+  <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6">Only NP authorizations had specific quantitative adult benefit metrics published in FDA Decision Summaries. E-cig and HTP Decision Summaries cite biomarker of exposure (BoE) reductions vs cigarettes; see FDA PMTA records for full details.</div>
+ </div>
+</div>
 
 <h3 style="margin-top:20px;padding:10px 14px;background:#f0fdfa;border-radius:8px;border-left:3px solid var(--teal)" data-i="a6_htp_title">Heated Tobacco Products — 1 Marketing Granted Order (2019) + MRTP (2020)</h3>
 <table class="data-table" style="margin-top:8px">
@@ -1024,7 +1034,7 @@ var I={
  a6_s3l:{en:'Authorized NP Products',zh:'已获批尼古丁袋产品数'},a6_s3d:{en:'ZYN 20 · on! PLUS 6',zh:'ZYN 20 · on! PLUS 6'},
  a6_s4l:{en:'HTP MGOs',zh:'加热烟草授权'},a6_s4d:{en:'IQOS (+ MRTP 2020)',zh:'IQOS（+MRTP 2020）'},
  a6_c1t:{en:'NYTS Youth Prevalence Trend with FDA Authorization Events (All Youth, Weighted)',zh:'NYTS青少年使用率趋势与FDA授权事件（全部青少年，加权）'},
- a6_c2t:{en:'NYTS Youth Prevalence at Time of Each Authorization',zh:'各授权时点的NYTS青少年使用率'},
+ a6_c2t:{en:'Youth Risk vs Adult Benefit — FDA PMTA Authorization Decision Map',zh:'青少年风险与成人获益 — FDA PMTA授权决策图'},
  a6_c3t:{en:'Confirmed Adult Benefit — NP Authorizations (Decision Summary)',zh:'已确认成人获益 — 尼古丁袋授权（决策摘要）'},
  a6_ecig_title:{en:'E-Cigarettes — 9 Marketing Granted Orders (2021–2026)',zh:'电子烟 — 9项营销授权令（2021–2026）'},
  a6_np_title:{en:'Nicotine Pouches — 2 Marketing Granted Orders (2025)',zh:'尼古丁袋 — 2项营销授权令（2025）'},
@@ -1314,16 +1324,88 @@ function buildAllCharts(){
    scales:{y:{beginAtZero:true,title:{display:true,text:'% all youth (NYTS weighted)'}}}
   }
  });
- var a6AuthLabels=[['IQOS','2019'],['Vuse Solo','2021'],['NJOY/Vuse','2022'],['Vuse Alto','2024'],['JUUL','2025'],['ZYN','2025'],['on! PLUS','2025']];
- var a6AuthVals  =[20.0, 7.5, 9.4, 5.9, 5.2, 1.7, 1.7];
- var a6AuthColors=[teal,amber,amber,amber,amber,blue,blue];
- charts.a6auth=new Chart(document.getElementById('c-a6-nyts-at-auth'),{
-  type:'bar',
-  data:{labels:a6AuthLabels,datasets:[{label:'NYTS % at authorization',data:a6AuthVals,backgroundColor:a6AuthColors,borderRadius:4}]},
+ var a6ScatterEC=[
+  {x:9.4,y:29,lo:21,hi:37,lbl:'NJOY Daily Tobacco',note:'Jun 2022 · 2-mo cohort · PM0000630-631'},
+  {x:9.4,y:33,lo:29,hi:37,lbl:'Logic (3 lines)',note:'Mar 2022 · Day-59 · PM0000529-541'},
+  {x:5.9,y:37.5,lo:32,hi:43,lbl:'NJOY Daily Menthol',note:'Jun 2024 · 3-mo · PM0000628-629'},
+  {x:5.2,y:50,lo:38,hi:62,lbl:'JUUL ★',note:'Jul 2025 · ADJUSTST 2-yr cohort · ★ longer follow-up'},
+  {x:5.2,y:17,lo:13,hi:21,lbl:'Glas G2',note:'Mar 2026 · 3-mo RCT · PM0004879'},
+ ];
+ var a6ScatterNP=[
+  {x:1.7,y:24,lo:null,hi:null,lbl:'ZYN',note:'Jan 2025 · wk-10 cohort · 24% (83/346)'},
+  {x:1.7,y:15,lo:null,hi:null,lbl:'on! PLUS',note:'Dec 2025 · 6-wk actual-use · 15% complete quit'},
+ ];
+ var scatterAnnotPlugin={
+  id:'scatterAnnot',
+  afterDatasetsDraw:function(chart){
+   var ctx=chart.ctx,xs=chart.scales.x,ys=chart.scales.y;
+   // Literature baseline band 15–20%
+   var y15=ys.getPixelForValue(15),y20=ys.getPixelForValue(20),y175=ys.getPixelForValue(17.5);
+   ctx.save();
+   ctx.fillStyle='rgba(148,163,184,0.12)';
+   ctx.fillRect(xs.left,Math.min(y15,y20),xs.right-xs.left,Math.abs(y15-y20));
+   ctx.setLineDash([5,4]);ctx.strokeStyle='#94a3b8';ctx.lineWidth=1;
+   ctx.beginPath();ctx.moveTo(xs.left,y175);ctx.lineTo(xs.right,y175);ctx.stroke();
+   ctx.setLineDash([]);
+   ctx.font='9px -apple-system,sans-serif';ctx.fillStyle='#9ca3af';ctx.textAlign='right';
+   ctx.fillText('Literature baseline (15–20%)',xs.right-4,y175-4);
+   ctx.restore();
+   // Error bars + labels per dataset
+   var groups=[
+    {raw:a6ScatterEC,color:'#d97706',offsets:[[8,-14],[8,10],[8,-6],[-86,-6],[8,10]]},
+    {raw:a6ScatterNP,color:'#2563eb',offsets:[[-44,-14],[-60,14]]},
+   ];
+   groups.forEach(function(g,gi){
+    var meta=chart.getDatasetMeta(gi);
+    meta.data.forEach(function(pt,pi){
+     var d=g.raw[pi],off=g.offsets[pi];
+     ctx.save();
+     if(d.lo!==null){
+      var yT=ys.getPixelForValue(d.hi),yB=ys.getPixelForValue(d.lo);
+      ctx.strokeStyle=g.color+'99';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(pt.x,yT);ctx.lineTo(pt.x,yB);ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pt.x-3,yT);ctx.lineTo(pt.x+3,yT);
+      ctx.moveTo(pt.x-3,yB);ctx.lineTo(pt.x+3,yB);
+      ctx.stroke();
+     }
+     ctx.font='10px -apple-system,sans-serif';ctx.fillStyle='#374151';
+     ctx.textAlign=off[0]<0?'right':'left';
+     ctx.fillText(d.lbl,pt.x+off[0],pt.y+off[1]);
+     ctx.restore();
+    });
+   });
+  }
+ };
+ charts.a6scatter=new Chart(document.getElementById('c-a6-scatter'),{
+  type:'scatter',
+  plugins:[scatterAnnotPlugin],
+  data:{datasets:[
+   {label:'E-cig (TPL switching rate)',
+    data:a6ScatterEC.map(function(d){return{x:d.x,y:d.y};}),
+    backgroundColor:'rgba(217,119,6,0.82)',borderColor:'#d97706',
+    pointRadius:7,pointHoverRadius:9,borderWidth:1.5},
+   {label:'NP (Decision Summary)',
+    data:a6ScatterNP.map(function(d){return{x:d.x,y:d.y};}),
+    backgroundColor:'rgba(37,99,235,0.82)',borderColor:'#2563eb',
+    pointRadius:7,pointHoverRadius:9,borderWidth:1.5},
+  ]},
   options:{
    responsive:true,maintainAspectRatio:false,
-   plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return c.raw+'% ('+['HTP','E-cig','E-cig','E-cig','E-cig','NP','NP'][c.dataIndex]+')';},title:function(c){var l=c[0].label;return Array.isArray(l)?l.join(' '):l;}}}},
-   scales:{y:{beginAtZero:true,title:{display:true,text:'NYTS youth prevalence %'}}}
+   layout:{padding:{top:10,right:20}},
+   plugins:{
+    legend:{display:true,position:'top',labels:{usePointStyle:true,padding:16,font:{size:11}}},
+    tooltip:{callbacks:{label:function(c){
+     var ds=c.datasetIndex===0?a6ScatterEC:a6ScatterNP;
+     var d=ds[c.dataIndex];
+     var rate=d.lo!==null?d.lo+'–'+d.hi+'% (mid '+d.y+'%)':d.y+'%';
+     return[d.lbl,'Youth at auth: '+d.x+'%','Switching: '+rate,d.note];
+    }}}
+   },
+   scales:{
+    x:{min:0,max:22,title:{display:true,text:'NYTS Youth Prevalence at Time of Authorization (%)'},grid:{color:'rgba(0,0,0,0.05)'}},
+    y:{min:0,max:70,title:{display:true,text:'Adult Complete Switching Rate (%)'},grid:{color:'rgba(0,0,0,0.05)'}}
+   }
   }
  });
  charts.a6npbenefit=new Chart(document.getElementById('c-a6-np-benefit'),{
