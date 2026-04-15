@@ -231,7 +231,7 @@ function doLogin(e){
  <div class="chart-card"><h3 data-i="a1_c1t">E-Cig Brand Share Among Youth</h3><div class="chart-wrap"><canvas id="c-a1-brand"></canvas></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Multi-select: past 30-day brands used; totals &gt;100%</div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
  <div class="chart-card"><h3 data-i="a1_c2t">Brand Contact Rate 2024 vs 2025</h3><div class="chart-wrap"><canvas id="c-a1-compare"></canvas></div><span class="source-tag">NYTS 2024–2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
 </div>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> Complex survey-weighted estimates using NYTS FDA CTP Public Use File (PUF) design variables (STRATUM, PSU); Taylor linearization for variance estimation. Contact rate = proportion of current youth e-cigarette users (past 30-day use) reporting each brand; multi-select, totals exceed 100%. n≈16,000 middle + high school students. Cross-validated against Altria Legacy Cohort Study (ALCS) independent estimates.</p>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> Complex survey-weighted estimates using NYTS FDA CTP Public Use File (PUF) design variables (STRATUM, PSU); Taylor linearization for variance estimation. Contact rate = proportion of current youth e-cigarette users (past 30-day use) reporting each brand; multi-select, totals exceed 100%. n≈16,000 middle + high school students. Cross-validated against Altria Legacy Cohort Study (ALCS) independent estimates.</p>
 <h3 data-i="a1_tbl_title">PMTA Authorization Status</h3>
 <table class="data-table">
  <thead><tr><th data-i="th_brand">Brand</th><th data-i="th_status">Status</th><th data-i="th_date">Date</th><th data-i="th_products">Products</th></tr></thead>
@@ -290,7 +290,7 @@ function doLogin(e){
  <div class="chart-card"><h3 data-i="a2_c4t">E-Cigarette Flavor Preferences 2025</h3><div class="chart-wrap"><canvas id="c-a2-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth e-cig users</span></div>
  <div class="chart-card"><h3 data-i="a2_c5t">E-Cigarette Device Type 2025</h3><div class="chart-wrap"><canvas id="c-a2-device"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth e-cig users</span></div>
 </div>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> Annual prevalence estimates are complex survey-weighted proportions using NYTS PUF design variables (STRATUM, PSU) with Taylor linearization for variance estimation. 2011–2024 trend points use CDC MMWR published estimates; 2025 independently re-estimated from FDA CTP PUF. Population denominator: U.S. middle + high school enrollment (~27M). Flavor and device estimates are conditional proportions among current past-30-day e-cigarette users. Subgroup estimates (race/ethnicity, school level) carry higher relative standard errors in smaller strata.</p>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> Annual prevalence estimates are complex survey-weighted proportions using NYTS PUF design variables (STRATUM, PSU) with Taylor linearization for variance estimation. 2011–2024 trend points use CDC MMWR published estimates; 2025 independently re-estimated from FDA CTP PUF. Population denominator: U.S. middle + high school enrollment (~27M). Flavor and device estimates are conditional proportions among current past-30-day e-cigarette users. Subgroup estimates (race/ethnicity, school level) carry higher relative standard errors in smaller strata.</p>
 <h3 data-i="a2_tbl_title">Race/Ethnicity Breakdown</h3>
 <table class="data-table">
  <thead><tr><th data-i="th_race">Race/Ethnicity</th><th data-i="th_any_tobacco">Any Tobacco Use</th></tr></thead>
@@ -326,7 +326,7 @@ function doLogin(e){
  <div class="chart-card"><h3 data-i="a3_c2t">Top Health Problems</h3><div class="chart-wrap"><canvas id="c-a3-health"></canvas></div><span class="source-tag">FDA CTP Adverse Event Reports · FOIA · Problem categories per CTP coding schema</span></div>
  <div class="chart-card"><h3 data-i="a3_c3t">AE by Product Type</h3><div class="chart-wrap"><canvas id="c-a3-type"></canvas></div><span class="source-tag">FDA CTP Adverse Event Reports · FOIA · Classification by submitted product category</span></div>
 </div>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> Raw counts of adverse event reports submitted to FDA CTP obtained via Freedom of Information Act (FOIA) request. Data represent report counts only — not adjusted for product sales volume, user population size, or market share. A single report may include multiple health problems. The 2019 peak reflects the EVALI (e-cigarette or vaping product use-associated lung injury) outbreak, predominantly linked to vitamin E acetate in illicit THC cartridges — not established as causally related to tobacco ENDS specifically.</p>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> Raw counts of adverse event reports submitted to FDA CTP obtained via Freedom of Information Act (FOIA) request. Data represent report counts only — not adjusted for product sales volume, user population size, or market share. A single report may include multiple health problems. The 2019 peak reflects the EVALI (e-cigarette or vaping product use-associated lung injury) outbreak, predominantly linked to vitamin E acetate in illicit THC cartridges — not established as causally related to tobacco ENDS specifically.</p>
 <div class="callout callout-err"><strong data-i="a3_callout_title">EVALI Context:</strong> <span data-i="a3_callout_text">The 2019 spike was driven by the EVALI outbreak (Vitamin E acetate in THC cartridges). 2025 shows an uptick — monitoring ongoing.</span></div>
 </div>
 
@@ -391,7 +391,7 @@ function doLogin(e){
  <div class="chart-card"><h3 data-i="a5_c2t">NP Brand Share</h3><div class="chart-wrap"><canvas id="c-a5-brand"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth nicotine pouch users</span></div>
  <div class="chart-card"><h3 data-i="a5_c3t">NP Flavor Preferences</h3><div class="chart-wrap"><canvas id="c-a5-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth nicotine pouch users</span></div>
 </div>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> NP trend uses two parallel surveillance series with different sampling frames: MTF (Monitoring the Future) surveys 8th/10th/12th grade students annually (NIDA; NP item added 2022); NYTS surveys middle + high school students (CDC/FDA CTP; probability sample). Both are weighted for national representativeness but are not directly comparable due to differing age ranges and survey designs. Brand share and flavor estimates are complex survey-weighted proportions (NYTS PUF; Taylor linearization) conditional on current past-30-day NP use.</p>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> NP trend uses two parallel surveillance series with different sampling frames: MTF (Monitoring the Future) surveys 8th/10th/12th grade students annually (NIDA; NP item added 2022); NYTS surveys middle + high school students (CDC/FDA CTP; probability sample). Both are weighted for national representativeness but are not directly comparable due to differing age ranges and survey designs. Brand share and flavor estimates are complex survey-weighted proportions (NYTS PUF; Taylor linearization) conditional on current past-30-day NP use.</p>
 <h3 data-i="a5_tbl1_title">MRTP Timeline</h3>
 <table class="data-table">
  <thead><tr><th data-i="th_date">Date</th><th data-i="th_event">Event</th></tr></thead>
@@ -454,6 +454,7 @@ function doLogin(e){
 </div>
 
 <h3 style="margin-top:20px" data-i="a6_adult_title">Adult Benefit — TPL-Confirmed Complete Switching Rates &amp; CPD Reduction</h3>
+
 <table class="data-table" style="margin-top:8px">
  <thead><tr>
   <th data-i="th_brand">Brand</th>
@@ -578,15 +579,14 @@ function doLogin(e){
 <span class="source-tag">Analytical framework — EpiDataKit · Based on confirmed FDA MGO records · Not an official FDA statement</span>
 
 <!-- PMTA Roadmap -->
-<h3 style="margin-top:28px;margin-bottom:4px">PMTA Roadmap</h3>
-<div class="section-sub" style="margin-bottom:14px">FDA Premarket Tobacco Application — 6 Phases from Pre-Submission to Post-Market · 21 U.S.C. § 387j · 21 CFR Part 1114</div>
-<div class="callout callout-info" style="font-size:12px;margin-bottom:16px"><strong>APPH Standard:</strong> All PMTAs must demonstrate the product is "Appropriate for the Protection of Public Health" — meaning net population benefit (adult user benefit from reduced harm/switching) outweighs population risk (youth initiation). This requires weighing the totality of evidence across clinical, toxicological, behavioral, and epidemiological domains.</div>
+<h3 style="margin-top:28px;margin-bottom:4px" data-i="a6_roadmap_title">PMTA Roadmap</h3>
+<div class="section-sub" style="margin-bottom:14px" data-i="a6_roadmap_sub">FDA Premarket Tobacco Application — 6 Phases from Pre-Submission to Post-Market · 21 U.S.C. § 387j · 21 CFR Part 1114</div>
+<div class="callout callout-info" style="font-size:12px;margin-bottom:16px" data-ih="a6_apph"><strong>APPH Standard:</strong> All PMTAs must demonstrate the product is "Appropriate for the Protection of Public Health" — net population benefit (adult user benefit from reduced harm/switching) outweighs population risk (youth initiation). Requires weighing totality of evidence across clinical, toxicological, behavioral, and epidemiological domains.</div>
 
 <!-- Phase Flow -->
-<div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px;align-items:stretch">
- <div style="flex:1;min-width:130px;background:#eff6ff;border-top:3px solid var(--blue);border-radius:8px;padding:12px 10px;font-size:11px">
-  <div style="font-weight:700;color:var(--blue);font-size:12px;margin-bottom:5px">① Pre-Submission</div>
-  <div style="color:#6b7280;font-size:10px;margin-bottom:5px">⏱ 6–18 months</div>
+<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;align-items:stretch">
+ <div style="flex:1;min-width:140px;background:#eff6ff;border-top:3px solid var(--blue);border-radius:8px;padding:12px 10px;font-size:11px">
+  <div style="font-weight:700;color:var(--blue);font-size:12px;margin-bottom:8px" data-ih="a6_ph1">① Pre-Submission<br><span style="font-weight:400;font-size:10px">⏱ 6–18 months</span></div>
   <ul style="margin:0;padding-left:13px;line-height:1.7;color:#374151">
    <li>FDA Type B Pre-Sub meeting (strongly recommended)</li>
    <li>Protocol alignment with CTP</li>
@@ -595,10 +595,8 @@ function doLogin(e){
    <li>Lab selection (ISO 17025 required)</li>
   </ul>
  </div>
- <div style="align-self:center;color:#9ca3af;font-size:18px;padding:0 1px">›</div>
- <div style="flex:1;min-width:130px;background:#fffbeb;border-top:3px solid var(--amber);border-radius:8px;padding:12px 10px;font-size:11px">
-  <div style="font-weight:700;color:#92400e;font-size:12px;margin-bottom:5px">② Application Prep</div>
-  <div style="color:#6b7280;font-size:10px;margin-bottom:5px">⏱ 12–36 months</div>
+ <div style="flex:1;min-width:140px;background:#fffbeb;border-top:3px solid var(--amber);border-radius:8px;padding:12px 10px;font-size:11px">
+  <div style="font-weight:700;color:#92400e;font-size:12px;margin-bottom:8px" data-ih="a6_ph2">② Application Prep<br><span style="font-weight:400;font-size:10px">⏱ 12–36 months</span></div>
   <ul style="margin:0;padding-left:13px;line-height:1.7;color:#374151">
    <li>Clinical studies: AUS, BOE, switching</li>
    <li>Toxicology &amp; HPHC characterization</li>
@@ -608,10 +606,8 @@ function doLogin(e){
    <li>All 11 sections + labeling package</li>
   </ul>
  </div>
- <div style="align-self:center;color:#9ca3af;font-size:18px;padding:0 1px">›</div>
- <div style="flex:1;min-width:130px;background:#f0fdfa;border-top:3px solid var(--teal);border-radius:8px;padding:12px 10px;font-size:11px">
-  <div style="font-weight:700;color:var(--teal);font-size:12px;margin-bottom:5px">③ Submission &amp; Filing</div>
-  <div style="color:#6b7280;font-size:10px;margin-bottom:5px">⏱ 1–3 months</div>
+ <div style="flex:1;min-width:140px;background:#f0fdfa;border-top:3px solid var(--teal);border-radius:8px;padding:12px 10px;font-size:11px">
+  <div style="font-weight:700;color:var(--teal);font-size:12px;margin-bottom:8px" data-ih="a6_ph3">③ Submission &amp; Filing<br><span style="font-weight:400;font-size:10px">⏱ 1–3 months</span></div>
   <ul style="margin:0;padding-left:13px;line-height:1.7;color:#374151">
    <li>Submit via FDA Form 4057/4057a</li>
    <li>Acceptance (RTA) review — format/completeness</li>
@@ -620,10 +616,8 @@ function doLogin(e){
    <li>RTF = refuse to file; RTA = refuse to accept</li>
   </ul>
  </div>
- <div style="align-self:center;color:#9ca3af;font-size:18px;padding:0 1px">›</div>
- <div style="flex:1;min-width:130px;background:#fdf4ff;border-top:3px solid #9333ea;border-radius:8px;padding:12px 10px;font-size:11px">
-  <div style="font-weight:700;color:#7e22ce;font-size:12px;margin-bottom:5px">④ Scientific Review</div>
-  <div style="color:#6b7280;font-size:10px;margin-bottom:5px">⏱ 12–48 months*</div>
+ <div style="flex:1;min-width:140px;background:#fdf4ff;border-top:3px solid #9333ea;border-radius:8px;padding:12px 10px;font-size:11px">
+  <div style="font-weight:700;color:#7e22ce;font-size:12px;margin-bottom:8px" data-ih="a6_ph4">④ Scientific Review<br><span style="font-weight:400;font-size:10px">⏱ 12–48 months*</span></div>
   <ul style="margin:0;padding-left:13px;line-height:1.7;color:#374151">
    <li>12 parallel discipline reviews</li>
    <li>Chemistry · Toxicology · Clinical pharmacology</li>
@@ -633,10 +627,8 @@ function doLogin(e){
    <li>TPSAC referral (optional, advisory only)</li>
   </ul>
  </div>
- <div style="align-self:center;color:#9ca3af;font-size:18px;padding:0 1px">›</div>
- <div style="flex:1;min-width:130px;background:#f0fdf4;border-top:3px solid var(--green);border-radius:8px;padding:12px 10px;font-size:11px">
-  <div style="font-weight:700;color:var(--green);font-size:12px;margin-bottom:5px">⑤ Decision</div>
-  <div style="color:#6b7280;font-size:10px;margin-bottom:5px">⏱ Stat. 180 days*</div>
+ <div style="flex:1;min-width:140px;background:#f0fdf4;border-top:3px solid var(--green);border-radius:8px;padding:12px 10px;font-size:11px">
+  <div style="font-weight:700;color:var(--green);font-size:12px;margin-bottom:8px" data-ih="a6_ph5">⑤ Decision<br><span style="font-weight:400;font-size:10px">⏱ Stat. 180 days*</span></div>
   <ul style="margin:0;padding-left:13px;line-height:1.7;color:#374151">
    <li>✅ <strong>MGO</strong> — product may be marketed under stated conditions</li>
    <li>❌ <strong>MDO</strong> — with specific denial grounds; challengeable in federal court</li>
@@ -644,10 +636,8 @@ function doLogin(e){
    <li>*Stat. clock routinely paused; real time = 13–58 months</li>
   </ul>
  </div>
- <div style="align-self:center;color:#9ca3af;font-size:18px;padding:0 1px">›</div>
- <div style="flex:1;min-width:130px;background:#ecfdf5;border-top:3px solid #059669;border-radius:8px;padding:12px 10px;font-size:11px">
-  <div style="font-weight:700;color:#065f46;font-size:12px;margin-bottom:5px">⑥ Post-Market</div>
-  <div style="color:#6b7280;font-size:10px;margin-bottom:5px">⏱ Ongoing</div>
+ <div style="flex:1;min-width:140px;background:#ecfdf5;border-top:3px solid #059669;border-radius:8px;padding:12px 10px;font-size:11px">
+  <div style="font-weight:700;color:#065f46;font-size:12px;margin-bottom:8px" data-ih="a6_ph6">⑥ Post-Market<br><span style="font-weight:400;font-size:10px">⏱ Ongoing</span></div>
   <ul style="margin:0;padding-left:13px;line-height:1.7;color:#374151">
    <li>Semi-annual/annual periodic reports (60-day deadline)</li>
    <li>Serious AE: report within 15 calendar days</li>
@@ -659,7 +649,7 @@ function doLogin(e){
 </div>
 
 <!-- 11 Required Sections -->
-<h4 style="margin-top:4px;margin-bottom:8px">11 Required Application Sections — 21 CFR § 1114.7</h4>
+<h4 style="margin-top:4px;margin-bottom:8px" data-i="a6_sections_title">11 Required Application Sections — 21 CFR § 1114.7</h4>
 <table class="data-table" style="font-size:12px">
  <thead><tr><th>#</th><th>Section</th><th>Core Requirements</th><th>ENDS Priority</th></tr></thead>
  <tbody>
@@ -678,7 +668,7 @@ function doLogin(e){
 </table>
 
 <!-- Critical Study Types -->
-<h4 style="margin-top:20px;margin-bottom:8px">Section 9 — Critical Study Requirements for ENDS PMTAs</h4>
+<h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_studies_title">Section 9 — Critical Study Requirements for ENDS PMTAs</h4>
 <table class="data-table" style="font-size:12px">
  <thead><tr><th>Study Type</th><th>Typical Design</th><th>Primary Endpoints</th><th>Regulatory Weight</th></tr></thead>
  <tbody>
@@ -722,7 +712,7 @@ function doLogin(e){
 </table>
 
 <!-- Timeline Benchmarks -->
-<h4 style="margin-top:20px;margin-bottom:8px">Authorization Timeline Benchmarks — All Confirmed ENDS/NP MGOs</h4>
+<h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_timeline_title">Authorization Timeline Benchmarks — All Confirmed ENDS/NP MGOs</h4>
 <table class="data-table" style="font-size:12px">
  <thead><tr><th>Product</th><th>Submitted</th><th>Authorized</th><th>Duration</th><th>Key Success Factor</th></tr></thead>
  <tbody>
@@ -743,7 +733,7 @@ function doLogin(e){
 
 <!-- MDO Reasons -->
 <div class="callout callout-err" style="margin-top:16px;font-size:12px">
- <strong>⚠️ Common Marketing Denial Order (MDO) Reasons — Why Applications Fail:</strong>
+ <strong data-i="a6_mdo_title">⚠️ Common MDO Reasons — Why Applications Fail:</strong>
  <ul style="margin-top:8px;padding-left:16px;line-height:2">
   <li><strong>Flavored products — insufficient comparative switching evidence:</strong> FDA's "fatal flaw" standard: flavored ENDS must show added adult benefit outweighing youth initiation risk. ~55,000 MDOs for fruit/candy/sweet products (Aug 2021); ~6,500 additional flavored MDOs subsequently. New flavor framework (Mar 2026): sliding-scale burden — fruit/candy highest, menthol/mint moderate.</li>
   <li><strong>Toxicological data gaps (Section 7):</strong> JUUL's 2022 MDO cited "insufficient and conflicting genotoxicity data and potentially harmful chemicals" — ISO 17025 accreditation and complete HPHC package are non-negotiable; conflicting data between studies is a fatal flaw.</li>
@@ -754,7 +744,7 @@ function doLogin(e){
 </div>
 
 <!-- Post-Market Obligations -->
-<h4 style="margin-top:20px;margin-bottom:8px">Post-Market Obligations for MGO Holders (21 CFR § 1114.41)</h4>
+<h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_postmarket_title">Post-Market Obligations for MGO Holders (21 CFR § 1114.41)</h4>
 <table class="data-table" style="font-size:12px">
  <thead><tr><th>Obligation</th><th>Timeline / Frequency</th><th>Key Requirements</th></tr></thead>
  <tbody>
@@ -1050,6 +1040,23 @@ var I={
  a6_fw2:{en:'Nicotine pouches: MGOs granted when youth NP use was 1.7% (2025) — FDA simultaneously required manufacturer commitments on youth access prevention',zh:'尼古丁袋：授权时青少年NP使用率为1.7%（2025年）——FDA同步要求厂商作出防止青少年获取的承诺'},
  a6_fw3:{en:'HTP (IQOS): PMTA granted when e-cig youth use was 20.0% (2019) — highest youth prevalence at time of any MGO; IQOS youth uptake was minimal',zh:'加热烟草（IQOS）：授权时青少年电子烟使用率为20.0%（2019年）——所有MGO中青少年使用率最高时期；IQOS青少年使用极少'},
  a6_fw4:{en:'Adult benefit threshold: Quantitative switching/cessation evidence (NP) or biomarker of exposure reduction vs cigarettes (E-cig, HTP) required in all categories',zh:'成人获益门槛：所有品类均需提供定量切换/戒烟证据（NP）或相对卷烟的生物标志物暴露降低证据（电子烟、HTP）'},
+ /* A6 new sections */
+ a6_adult_title:{en:'Adult Benefit — TPL-Confirmed Complete Switching Rates &amp; CPD Reduction',zh:'成人收益 — TPL确认的完全转换率与CPD减少率'},
+ a6_roadmap_title:{en:'PMTA Roadmap',zh:'PMTA申请路线图'},
+ a6_roadmap_sub:{en:'FDA Premarket Tobacco Application — 6 Phases from Pre-Submission to Post-Market · 21 U.S.C. § 387j · 21 CFR Part 1114',zh:'FDA烟草产品上市前申请 — 6个阶段（递交前至上市后）· 21 U.S.C. § 387j · 21 CFR Part 1114'},
+ a6_apph:{en:'<strong>APPH Standard:</strong> All PMTAs must demonstrate the product is "Appropriate for the Protection of Public Health" — net population benefit (adult user benefit from reduced harm/switching) outweighs population risk (youth initiation). Requires weighing totality of evidence across clinical, toxicological, behavioral, and epidemiological domains.',zh:'<strong>APPH标准：</strong>所有PMTA必须证明产品"适合保护公共健康"——净人群收益（成人危害降低/转用获益）超过青少年启用风险。需综合临床、毒理学、行为学和流行病学全部证据进行权衡。'},
+ a6_ph1:{en:'① Pre-Submission<br><span style="font-weight:400;font-size:10px">⏱ 6–18 months</span>',zh:'① 递交前准备<br><span style="font-weight:400;font-size:10px">⏱ 6–18个月</span>'},
+ a6_ph2:{en:'② Application Prep<br><span style="font-weight:400;font-size:10px">⏱ 12–36 months</span>',zh:'② 申请材料准备<br><span style="font-weight:400;font-size:10px">⏱ 12–36个月</span>'},
+ a6_ph3:{en:'③ Submission &amp; Filing<br><span style="font-weight:400;font-size:10px">⏱ 1–3 months</span>',zh:'③ 递交与存档审查<br><span style="font-weight:400;font-size:10px">⏱ 1–3个月</span>'},
+ a6_ph4:{en:'④ Scientific Review<br><span style="font-weight:400;font-size:10px">⏱ 12–48 months*</span>',zh:'④ 科学审评<br><span style="font-weight:400;font-size:10px">⏱ 12–48个月*</span>'},
+ a6_ph5:{en:'⑤ Decision<br><span style="font-weight:400;font-size:10px">⏱ Stat. 180 days*</span>',zh:'⑤ 最终决定<br><span style="font-weight:400;font-size:10px">⏱ 法定180天*</span>'},
+ a6_ph6:{en:'⑥ Post-Market<br><span style="font-weight:400;font-size:10px">⏱ Ongoing</span>',zh:'⑥ 上市后监管<br><span style="font-weight:400;font-size:10px">⏱ 持续监管</span>'},
+ a6_sections_title:{en:'11 Required Application Sections — 21 CFR § 1114.7',zh:'11个必要申请章节 — 21 CFR § 1114.7'},
+ a6_studies_title:{en:'Section 9 — Critical Study Requirements for ENDS PMTAs',zh:'第9章 — ENDS PMTA关键研究要求'},
+ a6_timeline_title:{en:'Authorization Timeline Benchmarks — All Confirmed ENDS/NP MGOs',zh:'授权时间线基准 — 已确认的ENDS/NP营销授权令'},
+ a6_mdo_title:{en:'⚠️ Common MDO Reasons — Why Applications Fail:',zh:'⚠️ 常见营销拒绝令（MDO）原因：'},
+ a6_postmarket_title:{en:'Post-Market Obligations for MGO Holders (21 CFR § 1114.41)',zh:'授权后合规义务（MGO持有者）· 21 CFR § 1114.41'},
+ method_label:{en:'Analysis:',zh:'分析方法：'},
  /* A7 */
  tab_a7:{en:'Clinical Evidence',zh:'临床证据图谱'},
  a7_title:{en:'Clinical Evidence Atlas',zh:'临床证据图谱'},
