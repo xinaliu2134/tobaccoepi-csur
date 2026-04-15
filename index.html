@@ -519,16 +519,15 @@ function doLogin(e){
 <span class="source-tag">FDA PMTA Marketing Granted Orders · NYTS 2025 weighted (all youth) · FDA Decision Summaries</span>
 
 <div class="chart-grid" style="margin-top:12px">
+ <div class="chart-card full"><h3 data-i="a5_c1t">Nicotine Pouch Trend (MTF/NYTS)</h3><div class="chart-wrap"><canvas id="c-a6-np-trend"></canvas></div><span class="source-tag">MTF 2022–2025 (NIDA · 8th/10th/12th grade) · NYTS 2021–2025 (CDC/FDA CTP PUF · middle + high school)</span></div>
+</div>
+<div class="chart-grid" style="margin-top:12px">
  <div class="chart-card">
   <h3 data-i="a6_c3t">Confirmed Adult Benefit — NP Authorizations (Decision Summary)</h3>
   <div class="chart-wrap"><canvas id="c-a6-np-benefit"></canvas></div>
   <span class="source-tag">FDA Decision Summary · ZYN Jan 2025 · on! PLUS Dec 2025</span>
   <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6">Only NP authorizations had specific quantitative adult benefit metrics published in FDA Decision Summaries. E-cig and HTP Decision Summaries cite biomarker of exposure (BoE) reductions vs cigarettes; see FDA PMTA records for full details.</div>
  </div>
-</div>
-
-<div class="chart-grid" style="margin-top:12px">
- <div class="chart-card full"><h3 data-i="a5_c1t">Nicotine Pouch Trend (MTF/NYTS)</h3><div class="chart-wrap"><canvas id="c-a6-np-trend"></canvas></div><span class="source-tag">MTF 2022–2025 (NIDA · 8th/10th/12th grade) · NYTS 2021–2025 (CDC/FDA CTP PUF · middle + high school)</span></div>
  <div class="chart-card"><h3 data-i="a5_c3t">NP Flavor Preferences</h3><div class="chart-wrap"><canvas id="c-a6-np-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted · Among current youth NP users</span></div>
 </div>
 <p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> NP trend uses two parallel surveillance series: MTF (Monitoring the Future) surveys 8th/10th/12th grade students (NIDA; NP item added 2022); NYTS surveys middle + high school students (CDC/FDA CTP; probability sample). Both weighted for national representativeness; not directly comparable due to differing age ranges and survey designs. Flavor estimates are complex survey-weighted proportions conditional on current past-30-day NP use.</p>
@@ -1351,6 +1350,21 @@ function buildAllCharts(){
    scales:{y:{beginAtZero:true,max:50,title:{display:true,text:'% of study participants'}}}
   }
  });
+
+ /* A6: NP surveillance charts */
+ charts.a6nptrend=new Chart(document.getElementById('c-a6-np-trend'),{type:'line',data:{
+  labels:['2021','2022','2023','2024','2025'],
+  datasets:[
+   {label:curLang==='zh'?'12年级 (MTF)':'12th Grade (MTF)',data:[null,null,1.4,2.6,4.4],borderColor:red,backgroundColor:'rgba(220,38,38,.1)',tension:.3,fill:false,spanGaps:true},
+   {label:curLang==='zh'?'终生使用 (MTF)':'Lifetime (MTF)',data:[null,null,3.0,5.4,null],borderColor:amber,backgroundColor:amberL,tension:.3,fill:false,borderDash:[4,4],spanGaps:true},
+   {label:curLang==='zh'?'全部青少年 (NYTS加权)':'All Youth (NYTS weighted)',data:[0.6,0.3,0.8,1.8,1.7],borderColor:blue,backgroundColor:blueL,tension:.3,fill:false}
+  ]
+ },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}}}});
+ var npFlavorLabels2=curLang==='zh'?['薄荷','水果','薄荷醇','香料','非酒精饮料','糖果']:['Mint','Fruit','Menthol','Spice','Non-alc Drinks','Candy'];
+ charts.a6npflavor=new Chart(document.getElementById('c-a6-np-flavor'),{type:'bar',data:{
+  labels:npFlavorLabels2,
+  datasets:[{data:[59.6,24.3,18.1,9.6,9.1,8.0],backgroundColor:amber,borderRadius:4}]
+ },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}}}});
 
  /* A7: Complete Switching Rate — floating bars [min, max] */
  charts.a7switching=new Chart(document.getElementById('c-a7-switching'),{
