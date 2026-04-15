@@ -1318,6 +1318,45 @@ function buildAllCharts(){
   datasets:[{data:[59.6,24.3,18.1,9.6,9.1,8.0],backgroundColor:amber,borderRadius:4}]
  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}}}});
 
+ /* A7: Abuse Liability Spectrum */
+ charts.a7abuse=new Chart(document.getElementById('c-a7-abuse'),{
+  type:'bar',
+  data:{
+   labels:['Logic Vapeleaf','2mg NRT Gum*','Logic Pro/Power','Vuse Ciro/Solo+','4mg NRT Gum*','NJOY Menthol','NJOY ACE','IQOS HTP','JUUL','Combusted Cigarettes'],
+   datasets:[{
+    data:[27,33,42,55,50,83,88,95,90,100],
+    backgroundColor:['#22c55e','#94a3b8','#22c55e',amber,'#94a3b8','#f59e0b',amber,teal,'#7c3aed',red],
+    borderRadius:4
+   }]
+  },
+  options:{
+   responsive:true,maintainAspectRatio:false,
+   indexAxis:'y',
+   plugins:{
+    legend:{display:false},
+    tooltip:{callbacks:{label:function(c){var labels=['Below 2mg NRT gum (TPL)','Reference benchmark','Lower than CC (TPL)','Lower than CC, slightly > 4mg NRT (TPL)','Reference benchmark','Similar to CC for ENDS-experienced (TPL)','Comparable to CC (TPL)','Similar to CC (TPL)','Comparable to UB CC in adults (TPL Jul 2025)','Reference = 100'];return labels[c.dataIndex]||c.raw;}}}
+   },
+   scales:{x:{beginAtZero:true,max:115,title:{display:true,text:'Relative Abuse Liability (CC=100, qualitative-ordinal)'}}}
+  }
+ });
+
+ /* A7: Menthol Policy Tradeoff */
+ charts.a7menthol=new Chart(document.getElementById('c-a7-menthol'),{
+  type:'bar',
+  data:{
+   labels:[curLang==='zh'?'烟草口味\n(NJOY Daily)':'Tobacco Flavor\n(NJOY Daily)',curLang==='zh'?'薄荷口味\n(NJOY Daily)':'Menthol Flavor\n(NJOY Daily)'],
+   datasets:[
+    {label:curLang==='zh'?'成人完全转用率 % (3-6月)':'Adult Complete Switching % (3–6 mo midpoint)',data:[29,37.5],backgroundColor:[amber,'#f59e0b'],borderRadius:4},
+    {label:curLang==='zh'?'青少年ENDS口味使用率 % (NYTS 2023)':'Youth ENDS Flavor Use % (NYTS 2023)',data:[6.4,20.1],backgroundColor:['rgba(220,38,38,0.45)','rgba(220,38,38,0.85)'],borderRadius:4}
+   ]
+  },
+  options:{
+   responsive:true,maintainAspectRatio:false,
+   plugins:{legend:{display:true,position:'bottom'}},
+   scales:{y:{beginAtZero:true,max:50,title:{display:true,text:'%'}}}
+  }
+ });
+
   /* A4: PAF chart (initial) */
  buildSimCharts();
 }
