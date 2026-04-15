@@ -211,6 +211,7 @@ function doLogin(e){
  <button class="tab-btn" data-tab="a5" onclick="switchTab('a5')" data-i="tab_a5">MRTP Intelligence</button>
  <button class="tab-btn" data-tab="a6" onclick="switchTab('a6')" data-i="tab_a6">PMTA Benchmark</button>
  <button class="tab-btn" data-tab="a7" onclick="switchTab('a7')" data-i="tab_a7">Clinical Evidence</button>
+ <button class="tab-btn" data-tab="a8" onclick="switchTab('a8')" data-i="tab_a8">PMTA Roadmap</button>
 </div>
 
 <div class="main">
@@ -601,9 +602,85 @@ function doLogin(e){
 </div>
 <span class="source-tag">Analytical framework — EpiDataKit · Based on confirmed FDA MGO records · Not an official FDA statement</span>
 
-<!-- PMTA Roadmap -->
-<h3 style="margin-top:28px;margin-bottom:4px" data-i="a6_roadmap_title">PMTA Roadmap</h3>
-<div class="section-sub" style="margin-bottom:14px" data-i="a6_roadmap_sub">FDA Premarket Tobacco Application — 6 Phases from Pre-Submission to Post-Market · 21 U.S.C. § 387j · 21 CFR Part 1114</div>
+</div>
+
+<!-- ===== A7: Clinical Evidence Atlas ===== -->
+<div class="panel" id="panel-a7">
+<h2 data-i="a7_title">Clinical Evidence Atlas</h2>
+<div class="section-sub" data-i="a7_sub">TPL-confirmed clinical outcomes across FDA-authorized ENDS — switching rates, biomarker reduction, abuse liability, CPD trajectory</div>
+<div class="callout callout-info" data-ih="a7_usecase"><strong>Data Source:</strong> All data is extracted directly from FDA Technical Project Lead (TPL) Review documents — FDA's internal decision summaries for each PMTA. Only authorized products with available TPL documents are shown. This is the first cross-brand visualization of TPL-confirmed clinical endpoints.</div>
+<div class="stats-row">
+ <div class="stat-card"><div class="stat-label" data-i="a7_s1l">Brands with TPL Data</div><div class="stat-value">7</div><div class="stat-detail">NJOY ACE · Daily · Menthol · Vuse · Logic · IQOS · JUUL</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a7_s2l">Switching Rate Range</div><div class="stat-value blue">21–62%</div><div class="stat-detail" data-i="a7_s2d">3–24 months, complete switch</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a7_s3l">Max CPD Reduction</div><div class="stat-value green">&gt;80%</div><div class="stat-detail" data-i="a7_s3d">Logic, Day 59 (60-day study)</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a7_s4l">Menthol Added Benefits</div><div class="stat-value" style="color:var(--amber);font-size:20px;font-family:var(--mono)">aOR/aRR 1.11–1.50</div><div class="stat-detail" data-i="a7_s4d">NJOY aOR 1.24–1.50 (3mo) · JUUL aRR 1.11–1.28 (24mo)</div></div>
+</div>
+
+<div class="chart-grid">
+ <div class="chart-card full">
+  <h3 data-i="a7_c1t">Complete Switching Rate — TPL-Confirmed <span class="source-tag">Longitudinal Cohort Studies · Range = reported study timepoints</span></h3>
+  <div class="chart-wrap" style="height:220px"><canvas id="c-a7-switching"></canvas></div>
+  <p style="font-size:11px;color:var(--muted);margin-top:6px">Floating bars show reported ranges across study timepoints (3–24 months). JUUL bar = ADJUSTST 2-yr modeled range (38.4–51.9%) to observed 24-month rate (61.5%). Logic shown as 60-day cohort exit range. Floating bar = uncertainty range; not confidence interval.<br><strong>Literature baseline (15–20%):</strong> PATH Wave 1–2 longitudinal cohort, 12-month complete switching rate (Yong et al., 2019, <em>Nicotine &amp; Tobacco Research</em>); corroborated by Hartmann-Boyce et al. (2022) Cochrane systematic review on electronic cigarettes for smoking cessation; represents real-world population-level switching without product-specific promotion or study support.</p>
+  <span class="source-tag">NJOY Daily TPL (PM0000630-631) · NJOY Menthol TPL (PM0000628-629) · Logic TPL (PM0000529-541) · JUUL TPL (PM0000864-878, Jul 2025) · Literature baseline: PATH Wave 1–2 (Yong et al., 2019, NTR) · Hartmann-Boyce et al., 2022 (Cochrane)</span>
+ </div>
+</div>
+
+<div class="chart-grid">
+ <div class="chart-card">
+  <h3 data-i="a7_c2t">Abuse Liability Spectrum <span class="source-tag">Qualitative-ordinal from TPL language</span></h3>
+  <div class="chart-wrap tall"><canvas id="c-a7-abuse"></canvas></div>
+  <p style="font-size:11px;color:var(--muted);margin-top:6px">*NRT gum benchmarks from published pharmacology; used as reference in multiple TPLs. ENDS scores are qualitative-ordinal derived from TPL descriptive language, not numeric assays. CC = Combusted Cigarettes = 100 (reference).</p>
+  <span class="source-tag">NJOY ACE/Daily/Menthol TPL · Vuse (RJRV) TPL · Logic TPL · IQOS TPL · JUUL TPL (Jul 2025)</span>
+ </div>
+ <div class="chart-card">
+  <h3 data-i="a7_c3t">Menthol Policy Tradeoff <span class="source-tag">NJOY Menthol TPL · NYTS 2023</span></h3>
+  <div class="chart-wrap tall"><canvas id="c-a7-menthol"></canvas></div>
+  <p style="font-size:11px;color:var(--muted);margin-top:6px">FDA authorized NJOY Menthol (Jun 2024) despite higher youth flavor appeal (20.1% vs 6.4% tobacco) because menthol demonstrated statistically significant additional adult benefit (aOR 1.24–1.50 vs tobacco at 3 months; 24–50% higher switching odds). Device access restrictions were the only measure FDA found sufficient to mitigate menthol youth risk.</p>
+  <span class="source-tag">NJOY Menthol TPL (PM0000628-629, Jun 2024) · NYTS 2023 current youth ENDS users</span>
+ </div>
+</div>
+
+<div class="chart-grid">
+ <div class="chart-card full">
+  <h3 data-i="a7_c4t">Logic CPD Reduction Trajectory — 3 Product Lines (60-Day Study) <span class="source-tag">Logic TPL PM0000529–541 · Mar 2022</span></h3>
+  <div class="chart-wrap"><canvas id="c-a7-cpd"></canvas></div>
+  <p style="font-size:11px;color:var(--muted);margin-top:6px">Mean CPD trajectory modeled from TPL-reported endpoints: baseline avg 13–16 CPD → 1–2 CPD by Day 59. Product-line trajectories reflect differential participation in ≥80% CPD reduction: Vapeleaf 73–77%, Pro 70–80%, Power 63–72%. ~2/3 of participants remained dual-users at exit. Logic is the only FDA-authorized ENDS brand with TPL-confirmed 60-day longitudinal CPD data.</p>
+  <span class="source-tag">Logic Technology Development LLC TPL (PM0000529-541, Mar 2022) · LP004/LP005 60-day longitudinal cohort studies</span>
+ </div>
+</div>
+
+<h3 style="margin-top:8px;margin-bottom:12px" data-i="a7_boe_title">Biomarker of Exposure (BOE) Reduction Summary — Complete Switchers vs Continued CC</h3>
+<div style="overflow-x:auto">
+<table class="data-table">
+ <thead><tr>
+  <th>Biomarker</th>
+  <th>NJOY ACE<br><span style="font-weight:400;font-size:10px">PM0000613-622</span></th>
+  <th>NJOY Daily<br><span style="font-weight:400;font-size:10px">PM0000630-631</span></th>
+  <th>NJOY Menthol<br><span style="font-weight:400;font-size:10px">PM0000628-629</span></th>
+  <th>Vuse Ciro/Solo+<br><span style="font-weight:400;font-size:10px">PM0000635-712</span></th>
+  <th>Logic (all)<br><span style="font-weight:400;font-size:10px">PM0000529-541</span></th>
+  <th>IQOS<br><span style="font-weight:400;font-size:10px">PM0000424</span></th>
+  <th>JUUL<br><span style="font-weight:400;font-size:10px">PM0000864-878</span></th>
+ </tr></thead>
+ <tbody>
+  <tr><td><strong>CO / COHb</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ COHb sig.↓ (quant.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ non-nic BOE ↓</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ ~cessation level</strong></td></tr>
+  <tr><td><strong>Cotinine</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td></tr>
+  <tr><td><strong>CEMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed (6-day)</td></tr>
+  <tr><td><strong>3-HPMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ (ADJUSTST)</strong></td></tr>
+  <tr><td><strong>NNAL (NNK metabolite)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ (ADJUSTST)</strong></td></tr>
+  <tr><td><strong>TNE (total nic. equiv.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#dcfce7;color:#15803d"><strong>−31% urinary TNE (quant.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td></tr>
+  <tr><td><strong>HPHC Aerosol vs Smoke</strong></td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower; ELCR sig.↓</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (most HPHCs)</td><td style="background:#f0fdf4;color:#166534">↓ below/≈ CC smoke</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ greatly reduced (TPL)</strong></td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ ELCRc &lt;5% of 1R6F CC</strong></td></tr>
+ </tbody>
+</table>
+</div>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7"><strong>Legend:</strong> ↓ = statistically significant reduction confirmed in TPL narrative. ↓↓ = quantitative reduction with reported value. ≤ LOD = at or below limit of detection. — = not primary endpoint; nicotine maintained by design. CEMA/3-HPMA = urinary acrolein metabolites. NNAL = 4-(methylnitrosamino)-1-(3-pyridyl)-1-butanol. TNE = total nicotine equivalent. HPHC = Harmful and Potentially Harmful Constituents. ELCR = Excess Lifetime Cancer Risk.</p>
+<span class="source-tag">All data: FDA TPL Review documents · PM0000613-622 (Apr 2022) · PM0000630-631 (Jun 2022) · PM0000628-629 (Jun 2024) · PM0000635-712 (May 2022) · PM0000529-541 (Mar 2022) · PM0000424 (Apr 2019) · PM0000864-878 (Jul 2025)</span>
+</div><!-- /panel-a7 -->
+
+<!-- ===== A8: PMTA Roadmap ===== -->
+<div class="panel" id="panel-a8">
+<h2 data-i="a8_title">PMTA Roadmap</h2>
+<div class="section-sub" data-i="a8_sub">FDA Premarket Tobacco Application — 6 Phases from Pre-Submission to Post-Market · 21 U.S.C. § 387j · 21 CFR Part 1114</div>
 <div class="callout callout-info" style="font-size:12px;margin-bottom:16px" data-ih="a6_apph"><strong>APPH Standard:</strong> All PMTAs must demonstrate the product is "Appropriate for the Protection of Public Health" — net population benefit (adult user benefit from reduced harm/switching) outweighs population risk (youth initiation). Requires weighing totality of evidence across clinical, toxicological, behavioral, and epidemiological domains.</div>
 
 <!-- Phase Flow -->
@@ -735,11 +812,12 @@ function doLogin(e){
 </table>
 
 <!-- Timeline Benchmarks -->
-<h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_timeline_title">Authorization Timeline Benchmarks — All Confirmed ENDS/NP MGOs</h4>
+<h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_timeline_title">Authorization Timeline Benchmarks — All Confirmed ENDS/NP/HTP MGOs (12 Products)</h4>
 <table class="data-table" style="font-size:12px">
  <thead><tr><th>Product</th><th>Submitted</th><th>Authorized</th><th>Duration</th><th>Key Success Factor</th></tr></thead>
  <tbody>
-  <tr><td>Vuse Solo — tobacco (RJR/BAT)</td><td>Sep 2020</td><td>Oct 2021</td><td class="hl" style="color:#15803d;font-weight:700">~13 months</td><td>Tobacco-only; strong adult use data; first MGO ever granted</td></tr>
+  <tr><td>IQOS — HTP (Philip Morris)</td><td>May 2017</td><td>Apr 2019</td><td class="hl" style="color:#15803d;font-weight:700">~23 months</td><td>First HTP MGO; ambulatory switching cohort + HPHC aerosol reduction; aided by PMI's long MRTP data package</td></tr>
+  <tr><td>Vuse Solo — tobacco (RJR/BAT)</td><td>Sep 2020</td><td>Oct 2021</td><td class="hl" style="color:#15803d;font-weight:700">~13 months</td><td>Tobacco-only; strong adult use data; first E-cig MGO ever granted</td></tr>
   <tr><td>Logic (3 lines, JTI)</td><td>Sep 2020</td><td>Mar 2022</td><td class="hl">~18 months</td><td>60-day longitudinal CPD data; &gt;80% CPD reduction pivotal</td></tr>
   <tr><td>NJOY ACE — tobacco</td><td>Mar 2020</td><td>Apr 2022</td><td class="hl">~26 months</td><td>Consumer switching evidence; first closed-system pod authorized</td></tr>
   <tr><td>Vuse Vibe/Ciro — tobacco</td><td>Sep 2020</td><td>May 2022</td><td class="hl">~20 months</td><td>Consistent package with Vuse Solo; BOE reduction confirmed</td></tr>
@@ -798,80 +876,7 @@ function doLogin(e){
  <strong>💰 Estimated PMTA Preparation Costs:</strong> FDA official estimate: $117,000–$466,000 per application. Industry real-world (large brands): often $5M–$50M+ including multi-year clinical programs. Key cost drivers: clinical studies (AUS + BOE + switching: $2M–$15M) · Analytical chemistry/HPHC package ($500K–$2M) · Toxicology ($500K–$2M) · Consumer perception (TPPI) studies ($200K–$1M) · Regulatory consulting + documentation ($200K–$2M+). Note: ENDS companies are currently <strong>not subject</strong> to the §919 tobacco user fee assessments (fee classes cover cigarettes, snuff, roll-your-own, cigars, pipe tobacco only).
 </div>
 <span class="source-tag">21 U.S.C. § 387j · 21 CFR Part 1114 (Oct 5, 2021) · FDA CTP ENDS PMTA Guidance · FDA Tobacco Products Marketing Granted Orders · OIG Report HHS-OIG-2023 · Not an official FDA statement</span>
-</div>
-
-<!-- ===== A7: Clinical Evidence Atlas ===== -->
-<div class="panel" id="panel-a7">
-<h2 data-i="a7_title">Clinical Evidence Atlas</h2>
-<div class="section-sub" data-i="a7_sub">TPL-confirmed clinical outcomes across FDA-authorized ENDS — switching rates, biomarker reduction, abuse liability, CPD trajectory</div>
-<div class="callout callout-info" data-ih="a7_usecase"><strong>Data Source:</strong> All data is extracted directly from FDA Technical Project Lead (TPL) Review documents — FDA's internal decision summaries for each PMTA. Only authorized products with available TPL documents are shown. This is the first cross-brand visualization of TPL-confirmed clinical endpoints.</div>
-<div class="stats-row">
- <div class="stat-card"><div class="stat-label" data-i="a7_s1l">Brands with TPL Data</div><div class="stat-value">7</div><div class="stat-detail">NJOY ACE · Daily · Menthol · Vuse · Logic · IQOS · JUUL</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s2l">Switching Rate Range</div><div class="stat-value blue">21–62%</div><div class="stat-detail" data-i="a7_s2d">3–24 months, complete switch</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s3l">Max CPD Reduction</div><div class="stat-value green">&gt;80%</div><div class="stat-detail" data-i="a7_s3d">Logic, Day 59 (60-day study)</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s4l">Menthol Added Benefits</div><div class="stat-value" style="color:var(--amber);font-size:20px;font-family:var(--mono)">aOR/aRR 1.11–1.50</div><div class="stat-detail" data-i="a7_s4d">NJOY aOR 1.24–1.50 (3mo) · JUUL aRR 1.11–1.28 (24mo)</div></div>
-</div>
-
-<div class="chart-grid">
- <div class="chart-card full">
-  <h3 data-i="a7_c1t">Complete Switching Rate — TPL-Confirmed <span class="source-tag">Longitudinal Cohort Studies · Range = reported study timepoints</span></h3>
-  <div class="chart-wrap" style="height:220px"><canvas id="c-a7-switching"></canvas></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:6px">Floating bars show reported ranges across study timepoints (3–24 months). JUUL bar = ADJUSTST 2-yr modeled range (38.4–51.9%) to observed 24-month rate (61.5%). Logic shown as 60-day cohort exit range. Floating bar = uncertainty range; not confidence interval.<br><strong>Literature baseline (15–20%):</strong> PATH Wave 1–2 longitudinal cohort, 12-month complete switching rate (Yong et al., 2019, <em>Nicotine &amp; Tobacco Research</em>); corroborated by Hartmann-Boyce et al. (2022) Cochrane systematic review on electronic cigarettes for smoking cessation; represents real-world population-level switching without product-specific promotion or study support.</p>
-  <span class="source-tag">NJOY Daily TPL (PM0000630-631) · NJOY Menthol TPL (PM0000628-629) · Logic TPL (PM0000529-541) · JUUL TPL (PM0000864-878, Jul 2025) · Literature baseline: PATH Wave 1–2 (Yong et al., 2019, NTR) · Hartmann-Boyce et al., 2022 (Cochrane)</span>
- </div>
-</div>
-
-<div class="chart-grid">
- <div class="chart-card">
-  <h3 data-i="a7_c2t">Abuse Liability Spectrum <span class="source-tag">Qualitative-ordinal from TPL language</span></h3>
-  <div class="chart-wrap tall"><canvas id="c-a7-abuse"></canvas></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:6px">*NRT gum benchmarks from published pharmacology; used as reference in multiple TPLs. ENDS scores are qualitative-ordinal derived from TPL descriptive language, not numeric assays. CC = Combusted Cigarettes = 100 (reference).</p>
-  <span class="source-tag">NJOY ACE/Daily/Menthol TPL · Vuse (RJRV) TPL · Logic TPL · IQOS TPL · JUUL TPL (Jul 2025)</span>
- </div>
- <div class="chart-card">
-  <h3 data-i="a7_c3t">Menthol Policy Tradeoff <span class="source-tag">NJOY Menthol TPL · NYTS 2023</span></h3>
-  <div class="chart-wrap tall"><canvas id="c-a7-menthol"></canvas></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:6px">FDA authorized NJOY Menthol (Jun 2024) despite higher youth flavor appeal (20.1% vs 6.4% tobacco) because menthol demonstrated statistically significant additional adult benefit (aOR 1.24–1.50 vs tobacco at 3 months; 24–50% higher switching odds). Device access restrictions were the only measure FDA found sufficient to mitigate menthol youth risk.</p>
-  <span class="source-tag">NJOY Menthol TPL (PM0000628-629, Jun 2024) · NYTS 2023 current youth ENDS users</span>
- </div>
-</div>
-
-<div class="chart-grid">
- <div class="chart-card full">
-  <h3 data-i="a7_c4t">Logic CPD Reduction Trajectory — 3 Product Lines (60-Day Study) <span class="source-tag">Logic TPL PM0000529–541 · Mar 2022</span></h3>
-  <div class="chart-wrap"><canvas id="c-a7-cpd"></canvas></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:6px">Mean CPD trajectory modeled from TPL-reported endpoints: baseline avg 13–16 CPD → 1–2 CPD by Day 59. Product-line trajectories reflect differential participation in ≥80% CPD reduction: Vapeleaf 73–77%, Pro 70–80%, Power 63–72%. ~2/3 of participants remained dual-users at exit. Logic is the only FDA-authorized ENDS brand with TPL-confirmed 60-day longitudinal CPD data.</p>
-  <span class="source-tag">Logic Technology Development LLC TPL (PM0000529-541, Mar 2022) · LP004/LP005 60-day longitudinal cohort studies</span>
- </div>
-</div>
-
-<h3 style="margin-top:8px;margin-bottom:12px" data-i="a7_boe_title">Biomarker of Exposure (BOE) Reduction Summary — Complete Switchers vs Continued CC</h3>
-<div style="overflow-x:auto">
-<table class="data-table">
- <thead><tr>
-  <th>Biomarker</th>
-  <th>NJOY ACE<br><span style="font-weight:400;font-size:10px">PM0000613-622</span></th>
-  <th>NJOY Daily<br><span style="font-weight:400;font-size:10px">PM0000630-631</span></th>
-  <th>NJOY Menthol<br><span style="font-weight:400;font-size:10px">PM0000628-629</span></th>
-  <th>Vuse Ciro/Solo+<br><span style="font-weight:400;font-size:10px">PM0000635-712</span></th>
-  <th>Logic (all)<br><span style="font-weight:400;font-size:10px">PM0000529-541</span></th>
-  <th>IQOS<br><span style="font-weight:400;font-size:10px">PM0000424</span></th>
-  <th>JUUL<br><span style="font-weight:400;font-size:10px">PM0000864-878</span></th>
- </tr></thead>
- <tbody>
-  <tr><td><strong>CO / COHb</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ COHb sig.↓ (quant.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ non-nic BOE ↓</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ ~cessation level</strong></td></tr>
-  <tr><td><strong>Cotinine</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f8f9fc;color:#6b7294">— nicotine maintained</td></tr>
-  <tr><td><strong>CEMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed (6-day)</td></tr>
-  <tr><td><strong>3-HPMA (acrolein met.)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ (ADJUSTST)</strong></td></tr>
-  <tr><td><strong>NNAL (NNK metabolite)</strong></td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#f0fdf4;color:#166534">↓ lower HPHC</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (aerosol)</td><td style="background:#f0fdf4;color:#166534">↓ vs CC</td><td style="background:#f0fdf4;color:#166534">↓ confirmed</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ sig.↓ (ADJUSTST)</strong></td></tr>
-  <tr><td><strong>TNE (total nic. equiv.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#dcfce7;color:#15803d"><strong>−31% urinary TNE (quant.)</strong></td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td><td style="background:#f8f9fc;color:#6b7294">— maintained</td></tr>
-  <tr><td><strong>HPHC Aerosol vs Smoke</strong></td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower than CC smoke</td><td style="background:#f0fdf4;color:#166534">↓ lower; ELCR sig.↓</td><td style="background:#e0f2fe;color:#0369a1">≤ LOD (most HPHCs)</td><td style="background:#f0fdf4;color:#166534">↓ below/≈ CC smoke</td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ greatly reduced (TPL)</strong></td><td style="background:#dcfce7;color:#15803d"><strong>↓↓ ELCRc &lt;5% of 1R6F CC</strong></td></tr>
- </tbody>
-</table>
-</div>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7"><strong>Legend:</strong> ↓ = statistically significant reduction confirmed in TPL narrative. ↓↓ = quantitative reduction with reported value. ≤ LOD = at or below limit of detection. — = not primary endpoint; nicotine maintained by design. CEMA/3-HPMA = urinary acrolein metabolites. NNAL = 4-(methylnitrosamino)-1-(3-pyridyl)-1-butanol. TNE = total nicotine equivalent. HPHC = Harmful and Potentially Harmful Constituents. ELCR = Excess Lifetime Cancer Risk.</p>
-<span class="source-tag">All data: FDA TPL Review documents · PM0000613-622 (Apr 2022) · PM0000630-631 (Jun 2022) · PM0000628-629 (Jun 2024) · PM0000635-712 (May 2022) · PM0000529-541 (Mar 2022) · PM0000424 (Apr 2019) · PM0000864-878 (Jul 2025)</span>
-</div><!-- /panel-a7 -->
+</div><!-- /panel-a8 -->
 
 </div><!-- /main -->
 
@@ -1076,10 +1081,14 @@ var I={
  a6_ph6:{en:'⑥ Post-Market<br><span style="font-weight:400;font-size:10px">⏱ Ongoing</span>',zh:'⑥ 上市后监管<br><span style="font-weight:400;font-size:10px">⏱ 持续监管</span>'},
  a6_sections_title:{en:'11 Required Application Sections — 21 CFR § 1114.7',zh:'11个必要申请章节 — 21 CFR § 1114.7'},
  a6_studies_title:{en:'Section 9 — Critical Study Requirements for ENDS PMTAs',zh:'第9章 — ENDS PMTA关键研究要求'},
- a6_timeline_title:{en:'Authorization Timeline Benchmarks — All Confirmed ENDS/NP MGOs',zh:'授权时间线基准 — 已确认的ENDS/NP营销授权令'},
+ a6_timeline_title:{en:'Authorization Timeline Benchmarks — All Confirmed ENDS/NP/HTP MGOs (12 Products)',zh:'授权时间线基准 — 已确认的ENDS/NP/HTP营销授权令（12个产品）'},
  a6_mdo_title:{en:'⚠️ Common MDO Reasons — Why Applications Fail:',zh:'⚠️ 常见营销拒绝令（MDO）原因：'},
  a6_postmarket_title:{en:'Post-Market Obligations for MGO Holders (21 CFR § 1114.41)',zh:'授权后合规义务（MGO持有者）· 21 CFR § 1114.41'},
  method_label:{en:'Analysis:',zh:'分析方法：'},
+ /* A8 */
+ tab_a8:{en:'PMTA Roadmap',zh:'PMTA路线图'},
+ a8_title:{en:'PMTA Roadmap',zh:'PMTA申请路线图'},
+ a8_sub:{en:'FDA Premarket Tobacco Application — 6 Phases from Pre-Submission to Post-Market · 21 U.S.C. § 387j · 21 CFR Part 1114',zh:'FDA烟草产品上市前申请 — 6个阶段（递交前至上市后）· 21 U.S.C. § 387j · 21 CFR Part 1114'},
  /* A7 */
  tab_a7:{en:'Clinical Evidence',zh:'临床证据图谱'},
  a7_title:{en:'Clinical Evidence Atlas',zh:'临床证据图谱'},
