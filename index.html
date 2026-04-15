@@ -208,7 +208,6 @@ function doLogin(e){
  <button class="tab-btn" data-tab="a2" onclick="switchTab('a2')" data-i="tab_a2">Youth Prevalence</button>
  <button class="tab-btn" data-tab="a3" onclick="switchTab('a3')" data-i="tab_a3">Adverse Events</button>
  <button class="tab-btn" data-tab="a4" onclick="switchTab('a4')" data-i="tab_a4">Switching Simulator</button>
- <button class="tab-btn" data-tab="a5" onclick="switchTab('a5')" data-i="tab_a5">MRTP Intelligence</button>
  <button class="tab-btn" data-tab="a6" onclick="switchTab('a6')" data-i="tab_a6">PMTA Benchmark</button>
  <button class="tab-btn" data-tab="a7" onclick="switchTab('a7')" data-i="tab_a7">Clinical Evidence</button>
  <button class="tab-btn" data-tab="a8" onclick="switchTab('a8')" data-i="tab_a8">PMTA Roadmap</button>
@@ -377,46 +376,6 @@ function doLogin(e){
 </div>
 
 <!-- ===== A5: MRTP Intelligence ===== -->
-<div class="panel" id="panel-a5">
-<h2 data-i="a5_title">MRTP Intelligence</h2>
-<div class="section-sub" data-i="a5_sub">ZYN Modified Risk Tobacco Product application tracking</div>
-<div class="callout callout-blue" data-ih="a5_usecase"><strong>Enterprise Question:</strong> What is the regulatory landscape for nicotine pouches? How is ZYN's MRTP progressing and what does it mean for my product strategy? Is youth NP uptake a threat to MRTP approval?<br><strong>How to use:</strong> Track the NP use trend — the 3x surge from 2023-2025 is the single biggest risk to ZYN's MRTP. If you are developing a competing NP product, benchmark against ZYN's data. Use the FDA evaluation framework table to structure your own MRTP evidence package.</div>
-<div class="stats-row">
- <div class="stat-card"><div class="stat-label" data-i="a5_s1l">NP Use (All Youth)</div><div class="stat-value">1.7%</div><div class="stat-detail">NYTS 2025 weighted</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a5_s2l">12th Grade NP</div><div class="stat-value red">4.4%</div><div class="stat-detail">MTF 2025</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a5_s3l">ZYN Market Share</div><div class="stat-value">61.4%</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a5_s4l">MRTP Filed</div><div class="stat-value blue">Jun 2025</div></div>
-</div>
-<div class="chart-grid">
- <div class="chart-card full"><h3 data-i="a5_c1t">Nicotine Pouch Trend (MTF/NYTS)</h3><div class="chart-wrap"><canvas id="c-a5-trend"></canvas></div><span class="source-tag">MTF 2022–2025 (NIDA · 8th/10th/12th grade) · NYTS 2022–2025 (CDC/FDA CTP PUF · middle + high school)</span></div>
- <div class="chart-card"><h3 data-i="a5_c2t">NP Brand Share</h3><div class="chart-wrap"><canvas id="c-a5-brand"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth nicotine pouch users</span></div>
- <div class="chart-card"><h3 data-i="a5_c3t">NP Flavor Preferences</h3><div class="chart-wrap"><canvas id="c-a5-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth nicotine pouch users</span></div>
-</div>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> NP trend uses two parallel surveillance series with different sampling frames: MTF (Monitoring the Future) surveys 8th/10th/12th grade students annually (NIDA; NP item added 2022); NYTS surveys middle + high school students (CDC/FDA CTP; probability sample). Both are weighted for national representativeness but are not directly comparable due to differing age ranges and survey designs. Brand share and flavor estimates are complex survey-weighted proportions (NYTS PUF; Taylor linearization) conditional on current past-30-day NP use.</p>
-<h3 data-i="a5_tbl1_title">MRTP Timeline</h3>
-<table class="data-table">
- <thead><tr><th data-i="th_date">Date</th><th data-i="th_event">Event</th></tr></thead>
- <tbody>
-  <tr><td>Jan 2025</td><td data-i="a5_evt1">PMTA authorized for 20 ZYN products</td></tr>
-  <tr><td>Jun 2025</td><td data-i="a5_evt2">MRTP application filed by Philip Morris</td></tr>
-  <tr><td>Jan 2026</td><td data-i="a5_evt3">TPSAC review meeting</td></tr>
-  <tr><td>Mar 2026</td><td data-i="a5_evt4">Public comment period closed</td></tr>
- </tbody>
-</table>
-<span class="source-tag">FDA CTP Marketing Granted Orders · Philip Morris International public MRTP filings · FDA TPSAC advisory committee records</span>
-<h3 style="margin-top:20px" data-i="a5_tbl2_title">FDA MRTP Evaluation Framework</h3>
-<table class="data-table">
- <thead><tr><th>#</th><th data-i="th_criterion">Criterion</th></tr></thead>
- <tbody>
-  <tr><td>1</td><td data-i="a5_crit1">Product is appropriate for the protection of public health</td></tr>
-  <tr><td>2</td><td data-i="a5_crit2">Likelihood that current tobacco users will switch</td></tr>
-  <tr><td>3</td><td data-i="a5_crit3">Impact on initiation among non-users (especially youth)</td></tr>
-  <tr><td>4</td><td data-i="a5_crit4">Impact on cessation among current users</td></tr>
-  <tr><td>5</td><td data-i="a5_crit5">Health risks to individual product users</td></tr>
- </tbody>
-</table>
-<span class="source-tag">FD&amp;C Act § 911 (21 USC § 387k) · FDA MRTP Guidance for Industry · FDA CTP TPSAC framework</span>
-</div>
 
 <div class="panel" id="panel-a6">
 <h2 data-i="a6_title">PMTA Benchmark</h2>
@@ -566,7 +525,12 @@ function doLogin(e){
   <span class="source-tag">FDA Decision Summary · ZYN Jan 2025 · on! PLUS Dec 2025</span>
   <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6">Only NP authorizations had specific quantitative adult benefit metrics published in FDA Decision Summaries. E-cig and HTP Decision Summaries cite biomarker of exposure (BoE) reductions vs cigarettes; see FDA PMTA records for full details.</div>
  </div>
+
+<div class="chart-grid" style="margin-top:12px">
+ <div class="chart-card full"><h3 data-i="a5_c1t">Nicotine Pouch Trend (MTF/NYTS)</h3><div class="chart-wrap"><canvas id="c-a6-np-trend"></canvas></div><span class="source-tag">MTF 2022–2025 (NIDA · 8th/10th/12th grade) · NYTS 2021–2025 (CDC/FDA CTP PUF · middle + high school)</span></div>
+ <div class="chart-card"><h3 data-i="a5_c3t">NP Flavor Preferences</h3><div class="chart-wrap"><canvas id="c-a6-np-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted · Among current youth NP users</span></div>
 </div>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> NP trend uses two parallel surveillance series: MTF (Monitoring the Future) surveys 8th/10th/12th grade students (NIDA; NP item added 2022); NYTS surveys middle + high school students (CDC/FDA CTP; probability sample). Both weighted for national representativeness; not directly comparable due to differing age ranges and survey designs. Flavor estimates are complex survey-weighted proportions conditional on current past-30-day NP use.</p>
 
 <h3 style="margin-top:20px;padding:10px 14px;background:#f0fdfa;border-radius:8px;border-left:3px solid var(--teal)" data-i="a6_htp_title">Heated Tobacco Products — 1 Marketing Granted Order (2019) + MRTP (2020)</h3>
 <table class="data-table" style="margin-top:8px">
@@ -945,13 +909,11 @@ var I={
  tab_a2:{en:'Youth Prevalence',zh:'青少年使用率'},
  tab_a3:{en:'Adverse Events',zh:'不良事件监测'},
  tab_a4:{en:'Switching Simulator',zh:'切换模拟器'},
- tab_a5:{en:'MRTP Intelligence',zh:'MRTP情报'},
  /* Use case descriptions */
  a1_usecase:{en:'<strong>Enterprise Question:</strong> Is my brand appearing in NYTS youth surveillance data? How does my market share trend compare to competitors? Am I on FDA\'s enforcement radar?<br><strong>How to use:</strong> Check your brand\'s rank in the historical table below. If your brand appears in the top 10 among youth AND is not PMTA-authorized, expect FDA enforcement action. Authorized brands (Vuse, JUUL, NJOY) should monitor share trends to demonstrate their products are not disproportionately attracting youth.',zh:'<strong>企业问题：</strong>我的品牌是否出现在NYTS青少年监测数据中？我的市场份额趋势与竞品相比如何？我是否在FDA执法雷达上？<br><strong>使用方法：</strong>在下方历史排行表中查看品牌排名。如果品牌出现在青少年前10且未获PMTA授权，需预期FDA执法行动。已授权品牌（Vuse, JUUL, NJOY）应监测份额趋势，以证明产品未不成比例地吸引青少年。'},
  a2_usecase:{en:'<strong>Enterprise Question:</strong> What is the overall youth tobacco use trajectory? Is my product category growing or declining among youth? How do demographic disparities affect regulatory risk?<br><strong>How to use:</strong> Track your product category in the trend chart. Rising youth use = higher PMTA denial risk. Use demographic data to understand which populations your product may disproportionately affect — FDA considers equity in authorization decisions.',zh:'<strong>企业问题：</strong>青少年烟草使用的整体趋势如何？我的产品品类在青少年中是增长还是下降？人口统计学差异如何影响监管风险？<br><strong>使用方法：</strong>在趋势图中追踪您的产品品类。青少年使用率上升=PMTA被拒风险增高。利用人口统计数据了解您的产品可能不成比例地影响哪些人群——FDA在授权决策中考虑公平性。'},
  a3_usecase:{en:'<strong>Enterprise Question:</strong> How many adverse event reports are filed against my product category? Are there emerging safety signals? How does my product\'s AE profile compare to the EVALI baseline?<br><strong>How to use:</strong> Monitor the yearly trend for spikes. A sudden increase in AE reports (like the 2019 EVALI peak) can trigger FDA enforcement sweeps. The health problem breakdown helps identify which AEs to address in your PMTA safety narrative.',zh:'<strong>企业问题：</strong>我的产品品类有多少不良事件报告？是否存在新出现的安全信号？我的产品AE谱与EVALI基线相比如何？<br><strong>使用方法：</strong>监控年度趋势中的峰值。AE报告突然增加（如2019年EVALI高峰）可触发FDA执法行动。健康问题分布有助于确定PMTA安全叙事中需要解决的AE类型。'},
  a4_usecase:{en:'<strong>Enterprise Question:</strong> What is the population health impact if smokers switch to my product? How do I quantify the benefit for my PMTA/MRTP application?<br><strong>How to use:</strong> Select your target market, set the switching rate from your consumer studies, input the relative harm from your toxicology research, and the simulator projects avoided disease burden. Use these figures as supporting evidence in PMTA Section 5 (Health Risk Assessment) or MRTP population impact modeling.',zh:'<strong>企业问题：</strong>如果吸烟者转用我的产品，人群健康影响有多大？如何量化PMTA/MRTP申请中的收益？<br><strong>使用方法：</strong>选择目标市场，设置消费者研究中的切换率，输入毒理学研究的相对危害值，模拟器将预测避免的疾病负担。这些数据可用于PMTA第5部分（健康风险评估）或MRTP人群影响建模的支撑证据。'},
- a5_usecase:{en:'<strong>Enterprise Question:</strong> What is the regulatory landscape for nicotine pouches? How is ZYN\'s MRTP progressing and what does it mean for my product strategy? Is youth NP uptake a threat to MRTP approval?<br><strong>How to use:</strong> Track the NP use trend — the 3x surge from 2023-2025 is the single biggest risk to ZYN\'s MRTP. If you are developing a competing NP product, benchmark against ZYN\'s data. Use the FDA evaluation framework table to structure your own MRTP evidence package.',zh:'<strong>企业问题：</strong>尼古丁袋的监管格局如何？ZYN的MRTP进展如何，对我的产品策略意味着什么？青少年NP使用增长是否威胁MRTP审批？<br><strong>使用方法：</strong>追踪NP使用趋势——2023-2025年3倍增长是ZYN MRTP的最大风险。如果您正在开发竞争NP产品，以ZYN数据为基准。使用FDA评估框架表来构建您自己的MRTP证据包。'},
  a1_hist_title:{en:'Usual Brand Rankings — Youth E-Cigarette Users (2020-2025)',zh:'通常使用品牌排行 — 青少年电子烟用户 (2020-2025)'},
  a1_metric_note:{en:'<strong>📐 Two metrics, two questions:</strong> <strong>Contact Rate (64.1%)</strong> = % of current youth e-cig users who used Geek Bar in the past 30 days (NYTS multi-select; brands sum to &gt;100%). <strong>Usual Brand (49.2%, see table below)</strong> = % who name Geek Bar as their <em>most-used</em> brand (NYTS single-select; brands sum to ~100%). Contact rate = breadth of penetration; usual brand = loyalty / true share. Geek Bar leads on both — the fastest brand takeover in NYTS history.',zh:'<strong>📐 两个指标，两个问题：</strong><strong>接触率 (64.1%)</strong> = 当前青少年电子烟用户中，过去30天使用过 Geek Bar 的比例（NYTS 多选题，所有品牌相加 &gt;100%）。<strong>通常使用品牌 (49.2%，见下方表格)</strong> = 把 Geek Bar 作为<em>最常用</em>品牌的比例（NYTS 单选题，所有品牌相加 ≈100%）。接触率=渗透广度；通常使用品牌=忠诚度/真实份额。Geek Bar 在两个指标上都领先——NYTS 历史上最快的品牌颠覆。'},
  a1_brand_insight:{en:'<strong>Key Insight — 2025 NYTS FDA CTP PUF Weighted Analysis:</strong> The e-cigarette youth market has undergone 4 regime changes in 6 years: JUUL (2019-2020) → Puff Bar (2021-2022) → Elf Bar (2023-2024) → <strong>Geek Bar (2025, 64.1% contact rate)</strong>. Geek Bar was not even in the 2024 top 5, yet captured 64.1% of youth users in 2025 — the fastest brand takeover in NYTS history. Elf Bar continues declining (56.7% → 36.1% → 21.5%). New entrants Lost Mary (19.8%) and Raz (19.4%) also surged. Only 2 of the 2025 top 10 (Vuse #5, JUUL #9) hold FDA PMTA authorization. Disposables now account for 66.3% of e-cig device types (↑10.7pp from 2024). Daily use: 27.5%; frequent use (20-30 days): 41.2%.',zh:'<strong>核心洞察 — 2025 NYTS FDA CTP公开数据加权分析：</strong>青少年电子烟市场6年内经历4次格局变化：JUUL（2019-2020）→ Puff Bar（2021-2022）→ Elf Bar（2023-2024）→ <strong>Geek Bar（2025，64.1%接触率）</strong>。Geek Bar在2024年甚至未进前5，2025年即以64.1%占据青少年用户首位——NYTS历史上最快的品牌颠覆。Elf Bar持续下滑（56.7%→36.1%→21.5%）。新进入者Lost Mary（19.8%）和Raz（19.4%）也大幅增长。2025前10中仅2个品牌（Vuse #5, JUUL #9）持有FDA PMTA授权。一次性设备占电子烟设备类型的66.3%（较2024年↑10.7pp）。每日使用：27.5%；频繁使用（20-30天）：41.2%。'},
@@ -1010,46 +972,9 @@ var I={
  a4_pop:{en:'Smoker Population',zh:'吸烟人口'},a4_switchers:{en:'Switchers',zh:'切换人数'},a4_dalys:{en:'Avoided DALYs',zh:'避免的DALYs'},a4_reduction:{en:'Harm Reduction',zh:'危害减少'},
  a4_c1t:{en:'Population Attributable Fraction (PAF)',zh:'人群归因分值 (PAF)'},
  a4_c2t:{en:'Avoided DALYs by Disease',zh:'按疾病避免的DALYs'},
- /* A5 */
- a5_title:{en:'MRTP Intelligence',zh:'MRTP情报'},
- a5_sub:{en:'ZYN Modified Risk Tobacco Product application tracking',zh:'ZYN改良风险烟草产品申请追踪'},
- a5_s1l:{en:'NP Use (All Youth)',zh:'尼古丁袋使用率（全部青少年）'},
- a5_s2l:{en:'12th Grade NP',zh:'12年级尼古丁袋'},
- a5_s3l:{en:'ZYN Market Share',zh:'ZYN市场份额'},
- a5_s4l:{en:'MRTP Filed',zh:'MRTP提交'},
- a5_c1t:{en:'Nicotine Pouch Trend (MTF/NYTS)',zh:'尼古丁袋趋势（MTF/NYTS）'},
- a5_c2t:{en:'NP Brand Share',zh:'尼古丁袋品牌份额'},
- a5_c3t:{en:'NP Flavor Preferences',zh:'尼古丁袋口味偏好'},
- a5_tbl1_title:{en:'MRTP Timeline',zh:'MRTP时间线'},
- th_event:{en:'Event',zh:'事件'},
- a5_evt1:{en:'PMTA authorized for 20 ZYN products',zh:'20款ZYN产品获PMTA授权'},
- a5_evt2:{en:'MRTP application filed by Philip Morris',zh:'菲利普莫里斯提交MRTP申请'},
- a5_evt3:{en:'TPSAC review meeting',zh:'TPSAC审查会议'},
- a5_evt4:{en:'Public comment period closed',zh:'公众评论期结束'},
- a5_tbl2_title:{en:'FDA MRTP Evaluation Framework',zh:'FDA MRTP评估框架'},
- th_criterion:{en:'Criterion',zh:'评估标准'},
- a5_crit1:{en:'Product is appropriate for the protection of public health',zh:'产品适合保护公共健康'},
- a5_crit2:{en:'Likelihood that current tobacco users will switch',zh:'现有烟草用户切换的可能性'},
- a5_crit3:{en:'Impact on initiation among non-users (especially youth)',zh:'对非用户（尤其青少年）的启用影响'},
- a5_crit4:{en:'Impact on cessation among current users',zh:'对现有用户戒烟的影响'},
- a5_crit5:{en:'Health risks to individual product users',zh:'对个体产品使用者的健康风险'},
- /* Data Sources */
- ds_title:{en:'Data Sources',zh:'数据来源'},
- ds_sub:{en:'Primary regulatory and epidemiological data feeds',zh:'主要监管和流行病学数据源'},
- th_source:{en:'Source',zh:'数据源'},th_provider:{en:'Provider',zh:'提供方'},th_coverage:{en:'Coverage',zh:'覆盖范围'},th_license:{en:'License',zh:'授权'},
- ds_nyts_cov:{en:'U.S. Youth Tobacco, 2011-2025 · FDA CTP PUF weighted',zh:'美国青少年烟草，2011-2025 · FDA CTP PUF加权'},
- ds_mtf_cov:{en:'U.S. 8th/10th/12th Grade, 1975-2025',zh:'美国8/10/12年级，1975-2025'},
- ds_ctp_cov:{en:'Tobacco Product AE, 2017-2025',zh:'烟草产品不良事件，2017-2025'},
- ds_who_cov:{en:'Global Smoking Prevalence, 2000-2024',zh:'全球吸烟率，2000-2024'},
- ds_public:{en:'Public',zh:'公开'},ds_foia:{en:'FOIA',zh:'FOIA'},
- /* Footer */
- ft_about_title:{en:'About',zh:'关于'},
- ft_about_text:{en:'TobaccoEpi is a regulatory intelligence platform for tobacco epidemiology and youth surveillance monitoring.',zh:'TobaccoEpi 是用于烟草流行病学和青少年监测的监管情报平台。'},
- ft_sources_title:{en:'Data Sources',zh:'数据来源'},
- ft_contact_title:{en:'Contact',zh:'联系方式'},
- ft_contact_text:{en:'',zh:''},
- ft_legal:{en:'This platform is provided for informational and research purposes only. All data sourced from publicly available government databases. Not intended as medical, legal, or regulatory advice. Use at your own risk.',zh:'本平台仅供信息和研究用途。所有数据来源于公开政府数据库。不构成医学、法律或监管建议。使用者自行承担风险。'},
  /* A6 */
+ a5_c1t:{en:'Nicotine Pouch Trend (MTF/NYTS)',zh:'尼古丁袋趋势（MTF/NYTS）'},
+ a5_c3t:{en:'NP Flavor Preferences',zh:'尼古丁袋口味偏好'},
  tab_a6:{en:'PMTA Benchmark',zh:'PMTA基准'},
  a6_usecase:{en:'<strong>Enterprise Question:</strong> What youth prevalence threshold has FDA implicitly accepted for each product category? How do confirmed adult benefit metrics compare across categories? What is the regulatory bar my PMTA must clear?<br><strong>How to use:</strong> Review the authorization timeline charts — each vertical marker is an FDA MGO. Track how NYTS youth prevalence was trending at the time of each decision. Review the adult benefit evidence column to understand what FDA accepted as sufficient proof of benefit in each category. Use the three-category tables to benchmark your own product.',zh:'<strong>企业问题：</strong>FDA对每个产品品类隐性接受的青少年使用率阈值是多少？各品类已确认的成人获益指标如何比较？我的PMTA需要达到什么监管标准？<br><strong>使用方法：</strong>查看授权时间线图——每条垂直标记线代表一项FDA营销授权令（MGO）。追踪每次授权决策时NYTS青少年使用率的趋势。查看成人获益证据栏，了解FDA在各品类中接受的充分获益证明。使用三品类数据表为您的产品进行基准比较。'},
  a6_title:{en:'PMTA Benchmark',zh:'PMTA基准分析'},
@@ -1276,30 +1201,7 @@ function buildAllCharts(){
   datasets:[{data:[1066,110,83,15,14,12,8,7],backgroundColor:[amber,'#94a3b8','#cbd5e1',green,blue,teal,'#f59e0b','#fbbf24'],borderWidth:0}]
  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
 
- /* A5: NP trend — updated with 2025 NYTS weighted */
- charts.a5trend=new Chart(document.getElementById('c-a5-trend'),{type:'line',data:{
-  labels:['2021','2022','2023','2024','2025'],
-  datasets:[
-   {label:curLang==='zh'?'12年级 (MTF)':'12th Grade (MTF)',data:[null,null,1.4,2.6,4.4],borderColor:red,backgroundColor:'rgba(220,38,38,.1)',tension:.3,fill:false,spanGaps:true},
-   {label:curLang==='zh'?'终生使用 (MTF)':'Lifetime (MTF)',data:[null,null,3.0,5.4,null],borderColor:amber,backgroundColor:amberL,tension:.3,fill:false,borderDash:[4,4],spanGaps:true},
-   {label:curLang==='zh'?'全部青少年 (NYTS加权)':'All Youth (NYTS weighted)',data:[0.6,0.3,0.8,1.8,1.7],borderColor:blue,backgroundColor:blueL,tension:.3,fill:false}
-  ]
- },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}}}});
-
- /* A5: NP usual brand — 2025 weighted */
- charts.a5brand=new Chart(document.getElementById('c-a5-brand'),{type:'doughnut',data:{
-  labels:['ZYN','on!','Grizzly','Rogue','Other'],
-  datasets:[{data:[61.4,5.5,3.6,3.4,26.1],backgroundColor:[amber,blue,green,teal,'#94a3b8'],borderWidth:0}]
- },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right'}}}});
-
- /* A5: NP flavor — 2025 weighted */
- var npFlavorLabels=curLang==='zh'?['薄荷','水果','薄荷醇','香料','非酒精饮料','糖果']:['Mint','Fruit','Menthol','Spice','Non-alc Drinks','Candy'];
- charts.a5flavor=new Chart(document.getElementById('c-a5-flavor'),{type:'bar',data:{
-  labels:npFlavorLabels,
-  datasets:[{data:[59.6,24.3,18.1,9.6,9.1,8.0],backgroundColor:amber,borderRadius:4}]
- },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}}}});
-
- /* A6: PMTA Benchmark */
+  /* A6: PMTA Benchmark */
  var a6Years=['2019','2020','2021','2022','2023','2024','2025'];
  var a6EC   =[20.0, null,  7.5,  9.4,  7.7,  5.9,  5.2];
  var a6NP   =[null, null,  0.6,  0.3,  0.8,  1.8,  1.7];
