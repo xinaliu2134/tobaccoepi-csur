@@ -564,26 +564,6 @@ function doLogin(e){
 </div>
 <span class="source-tag">Analytical framework — EpiDataKit · Based on confirmed FDA MGO records · Not an official FDA statement</span>
 
-<!-- Clinical Evidence (moved from a7) -->
-<h3 style="margin-top:28px;margin-bottom:4px" data-i="a7_title">Clinical Evidence Atlas</h3>
-<div class="section-sub" data-i="a7_sub">TPL-confirmed clinical outcomes across FDA-authorized ENDS — switching rates, biomarker reduction, abuse liability, CPD trajectory</div>
-<div class="callout callout-info" data-ih="a7_usecase"><strong>Data Source:</strong> All data is extracted directly from FDA Technical Project Lead (TPL) Review documents — FDA's internal decision summaries for each PMTA. Only authorized products with available TPL documents are shown. This is the first cross-brand visualization of TPL-confirmed clinical endpoints.</div>
-<div class="stats-row">
- <div class="stat-card"><div class="stat-label" data-i="a7_s1l">Brands with TPL Data</div><div class="stat-value">7</div><div class="stat-detail">NJOY ACE · Daily · Menthol · Vuse · Logic · IQOS · JUUL</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s2l">Switching Rate Range</div><div class="stat-value blue">21–62%</div><div class="stat-detail" data-i="a7_s2d">3–24 months, complete switch</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s3l">Max CPD Reduction</div><div class="stat-value green">&gt;80%</div><div class="stat-detail" data-i="a7_s3d">Logic, Day 59 (60-day study)</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a7_s4l">Menthol Added Benefits</div><div class="stat-value" style="color:var(--amber);font-size:20px;font-family:var(--mono)">aOR/aRR 1.11–1.50</div><div class="stat-detail" data-i="a7_s4d">NJOY aOR 1.24–1.50 (3mo) · JUUL aRR 1.11–1.28 (24mo)</div></div>
-</div>
-
-<div class="chart-grid">
- <div class="chart-card full">
-  <h3 data-i="a7_c1t">Complete Switching Rate — TPL-Confirmed <span class="source-tag">Longitudinal Cohort Studies · Range = reported study timepoints</span></h3>
-  <div class="chart-wrap" style="height:220px"><canvas id="c-a7-switching"></canvas></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:6px">Floating bars show reported ranges across study timepoints (3–24 months). JUUL bar = ADJUSTST 2-yr modeled range (38.4–51.9%) to observed 24-month rate (61.5%). Logic shown as 60-day cohort exit range. Floating bar = uncertainty range; not confidence interval.<br><strong>Literature baseline (15–20%):</strong> PATH Wave 1–2 longitudinal cohort, 12-month complete switching rate (Yong et al., 2019, <em>Nicotine &amp; Tobacco Research</em>); corroborated by Hartmann-Boyce et al. (2022) Cochrane systematic review on electronic cigarettes for smoking cessation; represents real-world population-level switching without product-specific promotion or study support.</p>
-  <span class="source-tag">NJOY Daily TPL (PM0000630-631) · NJOY Menthol TPL (PM0000628-629) · Logic TPL (PM0000529-541) · JUUL TPL (PM0000864-878, Jul 2025) · Literature baseline: PATH Wave 1–2 (Yong et al., 2019, NTR) · Hartmann-Boyce et al., 2022 (Cochrane)</span>
- </div>
-</div>
-
 <div class="chart-grid">
  <div class="chart-card">
   <h3 data-i="a7_c2t">Abuse Liability Spectrum <span class="source-tag">Qualitative-ordinal from TPL language</span></h3>
@@ -596,15 +576,6 @@ function doLogin(e){
   <div class="chart-wrap tall"><canvas id="c-a7-menthol"></canvas></div>
   <p style="font-size:11px;color:var(--muted);margin-top:6px">FDA authorized NJOY Menthol (Jun 2024) despite higher youth flavor appeal (20.1% vs 6.4% tobacco) because menthol demonstrated statistically significant additional adult benefit (aOR 1.24–1.50 vs tobacco at 3 months; 24–50% higher switching odds). Device access restrictions were the only measure FDA found sufficient to mitigate menthol youth risk.</p>
   <span class="source-tag">NJOY Menthol TPL (PM0000628-629, Jun 2024) · NYTS 2023 current youth ENDS users</span>
- </div>
-</div>
-
-<div class="chart-grid">
- <div class="chart-card full">
-  <h3 data-i="a7_c4t">Logic CPD Reduction Trajectory — 3 Product Lines (60-Day Study) <span class="source-tag">Logic TPL PM0000529–541 · Mar 2022</span></h3>
-  <div class="chart-wrap"><canvas id="c-a7-cpd"></canvas></div>
-  <p style="font-size:11px;color:var(--muted);margin-top:6px">Mean CPD trajectory modeled from TPL-reported endpoints: baseline avg 13–16 CPD → 1–2 CPD by Day 59. Product-line trajectories reflect differential participation in ≥80% CPD reduction: Vapeleaf 73–77%, Pro 70–80%, Power 63–72%. ~2/3 of participants remained dual-users at exit. Logic is the only FDA-authorized ENDS brand with TPL-confirmed 60-day longitudinal CPD data.</p>
-  <span class="source-tag">Logic Technology Development LLC TPL (PM0000529-541, Mar 2022) · LP004/LP005 60-day longitudinal cohort studies</span>
  </div>
 </div>
 
