@@ -229,8 +229,9 @@ function doLogin(e){
 <div class="callout callout-amber" style="font-size:12px;line-height:1.6" data-ih="a1_metric_note"><strong>📐 Two metrics, two questions:</strong> <strong>Contact Rate (64.1%)</strong> = % of current youth e-cig users who used Geek Bar in the past 30 days (NYTS multi-select; brands sum to &gt;100%). <strong>Usual Brand (49.2%, see table below)</strong> = % who name Geek Bar as their <em>most-used</em> brand (NYTS single-select; brands sum to ~100%). Contact rate = breadth of penetration; usual brand = loyalty / true share. Geek Bar leads on both — the fastest brand takeover in NYTS history.</div>
 <div class="chart-grid">
  <div class="chart-card"><h3 data-i="a1_c1t">E-Cig Brand Share Among Youth</h3><div class="chart-wrap"><canvas id="c-a1-brand"></canvas></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Multi-select: past 30-day brands used; totals &gt;100%</div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
- <div class="chart-card"><h3 data-i="a1_c2t">Brand Contact Rate 2024 vs 2025</h3><div class="chart-wrap"><canvas id="c-a1-compare"></canvas></div><span class="source-tag">NYTS 2024-2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
+ <div class="chart-card"><h3 data-i="a1_c2t">Brand Contact Rate 2024 vs 2025</h3><div class="chart-wrap"><canvas id="c-a1-compare"></canvas></div><span class="source-tag">NYTS 2024–2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
 </div>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> Complex survey-weighted estimates using NYTS FDA CTP Public Use File (PUF) design variables (STRATUM, PSU); Taylor linearization for variance estimation. Contact rate = proportion of current youth e-cigarette users (past 30-day use) reporting each brand; multi-select, totals exceed 100%. n≈16,000 middle + high school students. Cross-validated against Altria Legacy Cohort Study (ALCS) independent estimates.</p>
 <h3 data-i="a1_tbl_title">PMTA Authorization Status</h3>
 <table class="data-table">
  <thead><tr><th data-i="th_brand">Brand</th><th data-i="th_status">Status</th><th data-i="th_date">Date</th><th data-i="th_products">Products</th></tr></thead>
@@ -283,12 +284,13 @@ function doLogin(e){
  <div class="stat-card"><div class="stat-label" data-i="a2_s4l">Cigarettes</div><div class="stat-value">1.4%</div><div class="stat-detail">394K · record low maintained</div></div>
 </div>
 <div class="chart-grid">
- <div class="chart-card full"><h3 data-i="a2_c1t">Youth Tobacco Use Trend 2011-2025 (Weighted)</h3><div class="chart-wrap tall"><canvas id="c-a2-trend"></canvas></div><span class="source-tag">NYTS 2011-2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
+ <div class="chart-card full"><h3 data-i="a2_c1t">Youth Tobacco Use Trend 2011-2025 (Weighted)</h3><div class="chart-wrap tall"><canvas id="c-a2-trend"></canvas></div><span class="source-tag">NYTS 2011–2025 · FDA CTP PUF weighted analysis (2025) · CDC MMWR published estimates (2011–2024)</span></div>
  <div class="chart-card"><h3 data-i="a2_c2t">Product Breakdown 2025</h3><div class="chart-wrap"><canvas id="c-a2-products"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
- <div class="chart-card"><h3 data-i="a2_c3t">High School vs Middle School</h3><div class="chart-wrap"><canvas id="c-a2-school"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
- <div class="chart-card"><h3 data-i="a2_c4t">E-Cigarette Flavor Preferences 2025</h3><div class="chart-wrap"><canvas id="c-a2-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
- <div class="chart-card"><h3 data-i="a2_c5t">E-Cigarette Device Type 2025</h3><div class="chart-wrap"><canvas id="c-a2-device"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
+ <div class="chart-card"><h3 data-i="a2_c3t">High School vs Middle School</h3><div class="chart-wrap"><canvas id="c-a2-school"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · School level subgroup</span></div>
+ <div class="chart-card"><h3 data-i="a2_c4t">E-Cigarette Flavor Preferences 2025</h3><div class="chart-wrap"><canvas id="c-a2-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth e-cig users</span></div>
+ <div class="chart-card"><h3 data-i="a2_c5t">E-Cigarette Device Type 2025</h3><div class="chart-wrap"><canvas id="c-a2-device"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth e-cig users</span></div>
 </div>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> Annual prevalence estimates are complex survey-weighted proportions using NYTS PUF design variables (STRATUM, PSU) with Taylor linearization for variance estimation. 2011–2024 trend points use CDC MMWR published estimates; 2025 independently re-estimated from FDA CTP PUF. Population denominator: U.S. middle + high school enrollment (~27M). Flavor and device estimates are conditional proportions among current past-30-day e-cigarette users. Subgroup estimates (race/ethnicity, school level) carry higher relative standard errors in smaller strata.</p>
 <h3 data-i="a2_tbl_title">Race/Ethnicity Breakdown</h3>
 <table class="data-table">
  <thead><tr><th data-i="th_race">Race/Ethnicity</th><th data-i="th_any_tobacco">Any Tobacco Use</th></tr></thead>
@@ -320,10 +322,11 @@ function doLogin(e){
  <div class="stat-card"><div class="stat-label" data-i="a3_s4l">Top AE: Seizure</div><div class="stat-value">239</div><div class="stat-detail" data-i="a3_seizure_note">*Includes suspected cases</div></div>
 </div>
 <div class="chart-grid">
- <div class="chart-card"><h3 data-i="a3_c1t">AE Reports by Year</h3><div class="chart-wrap"><canvas id="c-a3-year"></canvas></div><span class="source-tag">FDA CTP FOIA</span></div>
- <div class="chart-card"><h3 data-i="a3_c2t">Top Health Problems</h3><div class="chart-wrap"><canvas id="c-a3-health"></canvas></div><span class="source-tag">FDA CTP FOIA</span></div>
- <div class="chart-card"><h3 data-i="a3_c3t">AE by Product Type</h3><div class="chart-wrap"><canvas id="c-a3-type"></canvas></div><span class="source-tag">FDA CTP FOIA</span></div>
+ <div class="chart-card"><h3 data-i="a3_c1t">AE Reports by Year</h3><div class="chart-wrap"><canvas id="c-a3-year"></canvas></div><span class="source-tag">FDA CTP Adverse Event Reports · FOIA · 2017–2025 · n=1,337 total reports</span></div>
+ <div class="chart-card"><h3 data-i="a3_c2t">Top Health Problems</h3><div class="chart-wrap"><canvas id="c-a3-health"></canvas></div><span class="source-tag">FDA CTP Adverse Event Reports · FOIA · Problem categories per CTP coding schema</span></div>
+ <div class="chart-card"><h3 data-i="a3_c3t">AE by Product Type</h3><div class="chart-wrap"><canvas id="c-a3-type"></canvas></div><span class="source-tag">FDA CTP Adverse Event Reports · FOIA · Classification by submitted product category</span></div>
 </div>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> Raw counts of adverse event reports submitted to FDA CTP obtained via Freedom of Information Act (FOIA) request. Data represent report counts only — not adjusted for product sales volume, user population size, or market share. A single report may include multiple health problems. The 2019 peak reflects the EVALI (e-cigarette or vaping product use-associated lung injury) outbreak, predominantly linked to vitamin E acetate in illicit THC cartridges — not established as causally related to tobacco ENDS specifically.</p>
 <div class="callout callout-err"><strong data-i="a3_callout_title">EVALI Context:</strong> <span data-i="a3_callout_text">The 2019 spike was driven by the EVALI outbreak (Vitamin E acetate in THC cartridges). 2025 shows an uptick — monitoring ongoing.</span></div>
 </div>
 
@@ -367,8 +370,8 @@ function doLogin(e){
 <div data-ih="a4_method_body" style="margin-top:10px"><strong>Framework:</strong> Simplified PAF × DALY population health impact model — the standard framework used in FDA PMTA Section 5 (Population Health Impact Modeling).<br><br><strong>Formula:</strong><br>1. Smokers = Adult Population × Smoking Rate <em>(WHO GHO data)</em><br>2. Switchers = Smokers × Switch Rate (%) <em>(user input)</em><br>3. Harm Reduction % = (1 − Relative Harm %) × 100<br>4. <strong>Avoided DALYs = Switchers × 0.12 × avgPAF × (1 − RelHarm/100) × Years</strong><br>where 0.12 ≈ baseline annual DALYs per smoker (GBD), and avgPAF ≈ 0.50 averaged across 6 tobacco-related diseases.<br><br><strong>PAF values used (GBD/WHO):</strong> Lung Cancer 0.85 · COPD 0.75 · Esophageal Cancer 0.52 · Bladder Cancer 0.45 · Ischemic Heart Disease 0.25 · Stroke 0.18.<br><br><strong>⚠️ Model limitations</strong> (must be disclosed for any PMTA submission):<br>• Baseline DALY/smoker is a constant — not stratified by age, sex, or smoking duration.<br>• PAFs are static — does not model age-dependent risk or post-cessation recovery curves.<br>• Relative harm is a single scalar — no toxicology-weighted decomposition (NNK, TSNAs, aldehydes, etc.).<br>• <strong>Does not include initiation</strong> — FDA's net population benefit also requires subtracting harm from non-users newly attracted to the product.<br>• Linear model — real disease latency and dose-response are non-linear.<br><br><strong>Use case:</strong> Directional estimate for early commercial assessment and pre-PMTA planning — <em>not</em> a regulatory-grade submission. For PMTA filings, extend to a full dynamic population model (e.g., SimSmoke framework, Levy et al. 2017) with age-cohort tracking and initiation/cessation flows.</div>
 </details>
 <div class="chart-grid">
- <div class="chart-card"><h3 data-i="a4_c1t">Population Attributable Fraction (PAF)</h3><div class="chart-wrap"><canvas id="c-a4-paf"></canvas></div><span class="source-tag">GBD / WHO</span></div>
- <div class="chart-card"><h3 data-i="a4_c2t">Avoided DALYs by Disease</h3><div class="chart-wrap"><canvas id="c-a4-waterfall"></canvas></div><span class="source-tag">Model Output</span></div>
+ <div class="chart-card"><h3 data-i="a4_c1t">Population Attributable Fraction (PAF)</h3><div class="chart-wrap"><canvas id="c-a4-paf"></canvas></div><span class="source-tag">GBD 2019 (tobacco-attributable PAF) · WHO GHO 2024 (smoking prevalence by country)</span></div>
+ <div class="chart-card"><h3 data-i="a4_c2t">Avoided DALYs by Disease</h3><div class="chart-wrap"><canvas id="c-a4-waterfall"></canvas></div><span class="source-tag">Model output · Simplified PAF×DALY framework · Dynamic — reflects current simulator inputs</span></div>
 </div>
 </div>
 
@@ -384,10 +387,11 @@ function doLogin(e){
  <div class="stat-card"><div class="stat-label" data-i="a5_s4l">MRTP Filed</div><div class="stat-value blue">Jun 2025</div></div>
 </div>
 <div class="chart-grid">
- <div class="chart-card full"><h3 data-i="a5_c1t">Nicotine Pouch Trend (MTF/NYTS)</h3><div class="chart-wrap"><canvas id="c-a5-trend"></canvas></div><span class="source-tag">MTF / NYTS</span></div>
- <div class="chart-card"><h3 data-i="a5_c2t">NP Brand Share</h3><div class="chart-wrap"><canvas id="c-a5-brand"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
- <div class="chart-card"><h3 data-i="a5_c3t">NP Flavor Preferences</h3><div class="chart-wrap"><canvas id="c-a5-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
+ <div class="chart-card full"><h3 data-i="a5_c1t">Nicotine Pouch Trend (MTF/NYTS)</h3><div class="chart-wrap"><canvas id="c-a5-trend"></canvas></div><span class="source-tag">MTF 2022–2025 (NIDA · 8th/10th/12th grade) · NYTS 2022–2025 (CDC/FDA CTP PUF · middle + high school)</span></div>
+ <div class="chart-card"><h3 data-i="a5_c2t">NP Brand Share</h3><div class="chart-wrap"><canvas id="c-a5-brand"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth nicotine pouch users</span></div>
+ <div class="chart-card"><h3 data-i="a5_c3t">NP Flavor Preferences</h3><div class="chart-wrap"><canvas id="c-a5-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Among current youth nicotine pouch users</span></div>
 </div>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong>Analysis:</strong> NP trend uses two parallel surveillance series with different sampling frames: MTF (Monitoring the Future) surveys 8th/10th/12th grade students annually (NIDA; NP item added 2022); NYTS surveys middle + high school students (CDC/FDA CTP; probability sample). Both are weighted for national representativeness but are not directly comparable due to differing age ranges and survey designs. Brand share and flavor estimates are complex survey-weighted proportions (NYTS PUF; Taylor linearization) conditional on current past-30-day NP use.</p>
 <h3 data-i="a5_tbl1_title">MRTP Timeline</h3>
 <table class="data-table">
  <thead><tr><th data-i="th_date">Date</th><th data-i="th_event">Event</th></tr></thead>
@@ -398,7 +402,7 @@ function doLogin(e){
   <tr><td>Mar 2026</td><td data-i="a5_evt4">Public comment period closed</td></tr>
  </tbody>
 </table>
-<span class="source-tag">FDA / Philip Morris</span>
+<span class="source-tag">FDA CTP Marketing Granted Orders · Philip Morris International public MRTP filings · FDA TPSAC advisory committee records</span>
 <h3 style="margin-top:20px" data-i="a5_tbl2_title">FDA MRTP Evaluation Framework</h3>
 <table class="data-table">
  <thead><tr><th>#</th><th data-i="th_criterion">Criterion</th></tr></thead>
@@ -410,6 +414,7 @@ function doLogin(e){
   <tr><td>5</td><td data-i="a5_crit5">Health risks to individual product users</td></tr>
  </tbody>
 </table>
+<span class="source-tag">FD&amp;C Act § 911 (21 USC § 387k) · FDA MRTP Guidance for Industry · FDA CTP TPSAC framework</span>
 </div>
 
 <div class="panel" id="panel-a6">
