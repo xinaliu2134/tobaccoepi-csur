@@ -227,7 +227,7 @@ function doLogin(e){
 </div>
 <div class="callout callout-amber" style="font-size:12px;line-height:1.6" data-ih="a1_metric_note"><strong>📐 Two metrics, two questions:</strong> <strong>Contact Rate (64.1%)</strong> = % of current youth e-cig users who used Geek Bar in the past 30 days (NYTS multi-select; brands sum to &gt;100%). <strong>Usual Brand (49.2%, see table below)</strong> = % who name Geek Bar as their <em>most-used</em> brand (NYTS single-select; brands sum to ~100%). Contact rate = breadth of penetration; usual brand = loyalty / true share. Geek Bar leads on both — the fastest brand takeover in NYTS history.</div>
 <div class="chart-grid">
- <div class="chart-card"><h3 data-i="a1_c1t">E-Cig Brand Share Among Youth</h3><div class="chart-wrap"><canvas id="c-a1-brand"></canvas></div><div style="font-size:10px;color:var(--muted);margin-top:4px">Multi-select: past 30-day brands used; totals &gt;100%</div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
+ <div class="chart-card"><h3 data-i="a1_c1t">E-Cig Brand Share Among Youth</h3><div class="chart-wrap"><canvas id="c-a1-brand"></canvas></div><div style="font-size:10px;color:var(--muted);margin-top:4px" data-i="a1_brand_axis">Multi-select: past 30-day brands used; totals &gt;100%</div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
  <div class="chart-card"><h3 data-i="a1_c2t">Brand Contact Rate 2024 vs 2025</h3><div class="chart-wrap"><canvas id="c-a1-compare"></canvas></div><span class="source-tag">NYTS 2024–2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span></div>
 </div>
 <p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> Complex survey-weighted estimates using NYTS FDA CTP Public Use File (PUF) design variables (STRATUM, PSU); Taylor linearization for variance estimation. Contact rate = proportion of current youth e-cigarette users (past 30-day use) reporting each brand; multi-select, totals exceed 100%. n≈16,000 middle + high school students. Cross-validated against Altria Legacy Cohort Study (ALCS) independent estimates.</p>
@@ -268,12 +268,12 @@ function doLogin(e){
 <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5">Usual brand = single-select ("What brand do you usually use?"), weighted %. 2020-2021: NYTS/MMWR published data. 2022: NYTS usual brand data. 2023-2024: NYTS MMWR. 2025: FDA CTP PUF weighted analysis, cross-validated.<br>Note: 2023-2024 brand data used multi-select contact rate (totals >100%) as published by CDC. 2025 uses single-select usual brand from FDA CTP PUF weighted analysis (totals ~100%).</div>
 <span class="source-tag">NYTS 2020-2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span>
 
-<h3 style="margin-top:24px;margin-bottom:8px">FDA-Authorized Brand Historical Analysis — Youth Usual Brand Share (NYTS 2019–2025)</h3>
+<h3 style="margin-top:24px;margin-bottom:8px" data-i="a1_auth_trend_h3">FDA-Authorized Brand Historical Analysis — Youth Usual Brand Share (NYTS 2019–2025)</h3>
 <div class="chart-grid">
  <div class="chart-card full">
   <div class="chart-wrap tall"><canvas id="c-a1-auth-trend"></canvas></div>
   <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.8">
-   <strong>Authorization events (★):</strong>
+   <strong data-i="a6_auth_legend">Authorization events (★):</strong>
    &nbsp;<span style="color:#2563eb;font-weight:600">JUUL</span> ★ Jul 2025
    &nbsp;·&nbsp;<span style="color:#d97706;font-weight:600">Vuse</span> ★ Oct 2021
    &nbsp;·&nbsp;<span style="color:#16a34a;font-weight:600">NJOY</span> ★ Apr 2022
@@ -282,12 +282,12 @@ function doLogin(e){
  </div>
 </div>
 
-<h3 style="margin-top:24px;margin-bottom:8px">FDA-Authorized Brand Historical Analysis — Youth Contact Rate (Past 30-Day Use, NYTS 2019–2025)</h3>
+<h3 style="margin-top:24px;margin-bottom:8px" data-i="a1_contact_trend_h3">FDA-Authorized Brand Historical Analysis — Youth Contact Rate (Past 30-Day Use, NYTS 2019–2025)</h3>
 <div class="chart-grid">
  <div class="chart-card full">
   <div class="chart-wrap tall"><canvas id="c-a1-contact-trend"></canvas></div>
   <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.8">
-   <strong>Contact rate</strong> = past-30-day multi-select (% who used this brand in last 30 days; may sum >100%). Gaps indicate no published brand-level data for that year.
+   <span data-ih="a6_contact_legend"><strong>Contact rate</strong> = past-30-day multi-select (% who used this brand in last 30 days; may sum >100%). Gaps indicate no published brand-level data for that year.</span>
    &nbsp;·&nbsp;<span style="color:#2563eb;font-weight:600">JUUL</span> 2019: Gentzke et al. 2020 (NYTS PUF); 2023–2025: FDA CTP PUF / CDC MMWR
    &nbsp;·&nbsp;<span style="color:#d97706;font-weight:600">Vuse</span> 2019: Gentzke et al. 2020; 2023–2025: FDA CTP PUF / CDC MMWR
   </div>
@@ -483,9 +483,9 @@ function doLogin(e){
   <div class="chart-wrap tall"><canvas id="c-a6-trend"></canvas></div>
   <span class="source-tag">NYTS 2019–2025 · FDA CTP PUF weighted · FDA MGO records</span>
   <div style="margin-top:10px;font-size:11px;color:var(--muted);line-height:1.7">
-   <span style="display:inline-block;width:12px;height:3px;background:#d97706;margin-right:5px;vertical-align:middle;border-radius:2px"></span>E-cig authorization &nbsp;
-   <span style="display:inline-block;width:12px;height:3px;background:#2563eb;margin-right:5px;vertical-align:middle;border-radius:2px"></span>NP authorization &nbsp;
-   <span style="display:inline-block;width:12px;height:3px;background:#0d9488;margin-right:5px;vertical-align:middle;border-radius:2px"></span>HTP authorization (IQOS)
+   <span style="display:inline-block;width:12px;height:3px;background:#d97706;margin-right:5px;vertical-align:middle;border-radius:2px"></span><span data-i="a6_ecig_auth_legend">E-cig authorization</span> &nbsp;
+   <span style="display:inline-block;width:12px;height:3px;background:#2563eb;margin-right:5px;vertical-align:middle;border-radius:2px"></span><span data-i="a6_np_auth_legend">NP authorization</span> &nbsp;
+   <span style="display:inline-block;width:12px;height:3px;background:#0d9488;margin-right:5px;vertical-align:middle;border-radius:2px"></span><span data-i="a6_htp_auth_legend">HTP authorization (IQOS)</span>
   </div>
  </div>
 </div>
@@ -505,27 +505,27 @@ function doLogin(e){
   <h3 data-i="a6_c2t">Youth Risk vs Adult Benefit — FDA PMTA Authorization Decision Map</h3>
   <div class="chart-wrap" style="height:380px"><canvas id="c-a6-scatter"></canvas></div>
   <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.7">
-   <span style="display:inline-block;width:10px;height:10px;background:#d97706;border-radius:50%;margin-right:5px;vertical-align:middle"></span>E-cig — TPL-confirmed switching rate (bar = study range) &nbsp;
+   <span style="display:inline-block;width:10px;height:10px;background:#d97706;border-radius:50%;margin-right:5px;vertical-align:middle"></span><span data-i="a6_scatter_legend">E-cig — TPL-confirmed switching rate (bar = study range)</span> &nbsp;
    <span style="display:inline-block;width:10px;height:10px;background:#2563eb;border-radius:50%;margin-right:5px;vertical-align:middle"></span>NP — FDA Decision Summary (point estimate) &nbsp;
    <span style="border-top:2px dashed #94a3b8;display:inline-block;width:22px;margin-right:5px;vertical-align:middle"></span>Literature baseline 15–20% &nbsp; ★ JUUL = 2-yr ADJUSTST cohort; others = 2–3 months
   </div>
   <span class="source-tag">TPL: PM0000628-631 (NJOY) · PM0000529-541 (Logic) · PM0000864-878 (JUUL) · PM0004879 (Glas) · FDA Decision Summary (ZYN, on! PLUS) · NYTS 2019–2025 (X-axis) · Products with BOE-only benefit (Vuse, NJOY ACE, IQOS) excluded</span>
   <strong data-i="method_label" style="display:block;margin-top:6px;font-size:11px;color:var(--muted)">Analysis:</strong>
-  <span style="font-size:11px;color:var(--muted)">X-axis = NYTS youth E-cig or NP % at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range across study timepoints. Only TPL-confirmed or Decision Summary endpoints plotted.</span>
+  <span style="font-size:11px;color:var(--muted)" data-i="a6_scatter_analysis">X-axis = NYTS youth E-cig or NP % at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range across study timepoints. Only TPL-confirmed or Decision Summary endpoints plotted.</span>
  </div>
 </div>
 
 <div class="chart-grid" style="margin-top:16px">
  <div class="chart-card full">
-  <h3>Youth Usual Brand Share vs Adult Benefit — FDA PMTA Authorization Decision Map</h3>
+  <h3 data-i="a6_scatter_brand_h3">Youth Usual Brand Share vs Adult Benefit — FDA PMTA Authorization Decision Map</h3>
   <div class="chart-wrap" style="height:380px"><canvas id="c-a6-scatter-brand"></canvas></div>
   <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.7">
-   <span style="display:inline-block;width:10px;height:10px;background:#d97706;border-radius:50%;margin-right:5px;vertical-align:middle"></span>E-cig — TPL-confirmed switching rate (bar = study range) &nbsp;
+   <span style="display:inline-block;width:10px;height:10px;background:#d97706;border-radius:50%;margin-right:5px;vertical-align:middle"></span><span data-i="a6_scatter_legend">E-cig — TPL-confirmed switching rate (bar = study range)</span> &nbsp;
    <span style="border-top:2px dashed #94a3b8;display:inline-block;width:22px;margin-right:5px;vertical-align:middle"></span>Literature baseline 15–20% &nbsp; ★ JUUL = 2-yr ADJUSTST cohort; others = 2–3 months
   </div>
   <span class="source-tag">X-axis = NYTS usual brand share (% among current youth e-cig users) at year of authorization · NYTS 2022–2025 · Logic (Mar 2022) &amp; Glas (Mar 2026): not separately tracked in NYTS usual brand data — excluded · NP brands (ZYN, on! PLUS): NP brand-level data not published</span>
-  <strong style="display:block;margin-top:6px;font-size:11px;color:var(--muted)">Analysis:</strong>
-  <span style="font-size:11px;color:var(--muted)">X-axis = NYTS usual brand share (% among youth e-cig users) at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range. Only brands with NYTS usual brand data shown (NJOY, JUUL).</span>
+  <strong style="display:block;margin-top:6px;font-size:11px;color:var(--muted)" data-i="a6_scatter_brand_analysis_label">Analysis:</strong>
+  <span style="font-size:11px;color:var(--muted)" data-i="a6_scatter_brand_analysis">X-axis = NYTS usual brand share (% among youth e-cig users) at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range. Only brands with NYTS usual brand data shown (NJOY, JUUL).</span>
  </div>
 </div>
 
@@ -641,7 +641,7 @@ function doLogin(e){
   <h3 data-i="a6_c3t">Confirmed Adult Benefit — NP Authorizations (Decision Summary)</h3>
   <div class="chart-wrap"><canvas id="c-a6-np-benefit"></canvas></div>
   <span class="source-tag">FDA Decision Summary · ZYN Jan 2025 · on! PLUS Dec 2025</span>
-  <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6">Only NP authorizations had specific quantitative adult benefit metrics published in FDA Decision Summaries. E-cig and HTP Decision Summaries cite biomarker of exposure (BoE) reductions vs cigarettes; see FDA PMTA records for full details.</div>
+  <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6" data-i="a6_np_benefit_note">Only NP authorizations had specific quantitative adult benefit metrics published in FDA Decision Summaries. E-cig and HTP Decision Summaries cite biomarker of exposure (BoE) reductions vs cigarettes; see FDA PMTA records for full details.</div>
  </div>
  <div class="chart-card"><h3 data-i="a5_c3t">NP Flavor Preferences</h3><div class="chart-wrap"><canvas id="c-a6-np-flavor"></canvas></div><span class="source-tag">NYTS 2025 · FDA CTP PUF weighted · Among current youth NP users</span></div>
 </div>
@@ -689,7 +689,7 @@ function doLogin(e){
 <div style="overflow-x:auto">
 <table class="data-table">
  <thead><tr>
-  <th>Biomarker</th>
+  <th data-i="a6_boe_th_biomarker">Biomarker</th>
   <th>NJOY ACE<br><span style="font-weight:400;font-size:10px">PM0000613-622</span></th>
   <th>NJOY Daily<br><span style="font-weight:400;font-size:10px">PM0000630-631</span></th>
   <th>NJOY Menthol<br><span style="font-weight:400;font-size:10px">PM0000628-629</span></th>
@@ -709,12 +709,12 @@ function doLogin(e){
  </tbody>
 </table>
 </div>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7"><strong>Legend:</strong> ↓ = statistically significant reduction confirmed in TPL narrative. ↓↓ = quantitative reduction with reported value. ≤ LOD = at or below limit of detection. — = not primary endpoint; nicotine maintained by design. CEMA/3-HPMA = urinary acrolein metabolites. NNAL = 4-(methylnitrosamino)-1-(3-pyridyl)-1-butanol. TNE = total nicotine equivalent. HPHC = Harmful and Potentially Harmful Constituents. ELCR = Excess Lifetime Cancer Risk.</p>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7"><span data-i="a6_boe_legend"><strong>Legend:</strong> ↓ = statistically significant reduction confirmed in TPL narrative. ↓↓ = quantitative reduction with reported value. ≤ LOD = at or below limit of detection. — = not primary endpoint; nicotine maintained by design.</span> CEMA/3-HPMA = urinary acrolein metabolites. NNAL = 4-(methylnitrosamino)-1-(3-pyridyl)-1-butanol. TNE = total nicotine equivalent. HPHC = Harmful and Potentially Harmful Constituents. ELCR = Excess Lifetime Cancer Risk.</p>
 <span class="source-tag">All data: FDA TPL Review documents · PM0000613-622 (Apr 2022) · PM0000630-631 (Jun 2022) · PM0000628-629 (Jun 2024) · PM0000635-712 (May 2022) · PM0000529-541 (Mar 2022) · PM0000424 (Apr 2019) · PM0000864-878 (Jul 2025)</span>
 
 <h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_timeline_title">Authorization Timeline Benchmarks — All Confirmed ENDS/NP/HTP MGOs (12 MGOs)</h4>
 <table class="data-table" style="font-size:12px">
- <thead><tr><th>Product</th><th>Submitted</th><th>Authorized</th><th>Duration</th><th>Key Success Factor</th></tr></thead>
+ <thead><tr><th data-i="a6_timeline_th_product">Product</th><th data-i="a6_timeline_th_submitted">Submitted</th><th data-i="a6_timeline_th_authorized">Authorized</th><th data-i="a6_timeline_th_duration">Duration</th><th data-i="a6_timeline_th_key">Key Success Factor</th></tr></thead>
  <tbody>
   <tr><td>IQOS — HTP (Philip Morris)</td><td>May 2017</td><td>Apr 2019</td><td class="hl" style="color:#15803d;font-weight:700">~23 months</td><td>First HTP MGO; ambulatory switching cohort + HPHC aerosol reduction; aided by PMI's long MRTP data package</td></tr>
   <tr><td>Vuse Solo — tobacco (RJR/BAT)</td><td>Sep 2020</td><td>Oct 2021</td><td class="hl" style="color:#15803d;font-weight:700">~13 months</td><td>Tobacco-only; strong adult use data; first E-cig MGO ever granted</td></tr>
@@ -730,7 +730,7 @@ function doLogin(e){
   <tr><td>on! PLUS — 6 NP products</td><td>~2021</td><td>Dec 2025</td><td class="hl" style="color:var(--red)">~48 months</td><td>15% complete quit + 35% ≥50% CPD reduction at 6-wk actual-use study</td></tr>
  </tbody>
 </table>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6">Statutory 180-day clock is routinely paused when applicants submit amendments with new data; real-world review time significantly exceeds statutory limits. <strong>Tobacco-only ENDS:</strong> 13–27 months (2021–2022 era). <strong>Menthol/novel flavors:</strong> ~30 months. <strong>Novel product categories (NP) or MDO-challenged products:</strong> 4–5 years.</p>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><span data-i="a6_timeline_note">Statutory 180-day clock is routinely paused when applicants submit amendments with new data; real-world review time significantly exceeds statutory limits.</span> <strong>Tobacco-only ENDS:</strong> 13–27 months (2021–2022 era). <strong>Menthol/novel flavors:</strong> ~30 months. <strong>Novel product categories (NP) or MDO-challenged products:</strong> 4–5 years.</p>
 <span class="source-tag">FDA PMTA Marketing Granted Orders · FDA CTP PMTA records · Not an official FDA statement</span>
 
 </div>
@@ -873,7 +873,7 @@ function doLogin(e){
 <!-- Timeline Benchmarks -->
 <h4 style="margin-top:20px;margin-bottom:8px" data-i="a6_timeline_title">Authorization Timeline Benchmarks — All Confirmed ENDS/NP/HTP MGOs (12 MGOs)</h4>
 <table class="data-table" style="font-size:12px">
- <thead><tr><th>Product</th><th>Submitted</th><th>Authorized</th><th>Duration</th><th>Key Success Factor</th></tr></thead>
+ <thead><tr><th data-i="a6_timeline_th_product">Product</th><th data-i="a6_timeline_th_submitted">Submitted</th><th data-i="a6_timeline_th_authorized">Authorized</th><th data-i="a6_timeline_th_duration">Duration</th><th data-i="a6_timeline_th_key">Key Success Factor</th></tr></thead>
  <tbody>
   <tr><td>IQOS — HTP (Philip Morris)</td><td>May 2017</td><td>Apr 2019</td><td class="hl" style="color:#15803d;font-weight:700">~23 months</td><td>First HTP MGO; ambulatory switching cohort + HPHC aerosol reduction; aided by PMI's long MRTP data package</td></tr>
   <tr><td>Vuse Solo — tobacco (RJR/BAT)</td><td>Sep 2020</td><td>Oct 2021</td><td class="hl" style="color:#15803d;font-weight:700">~13 months</td><td>Tobacco-only; strong adult use data; first E-cig MGO ever granted</td></tr>
@@ -889,7 +889,7 @@ function doLogin(e){
   <tr><td>on! PLUS — 6 NP products</td><td>~2021</td><td>Dec 2025</td><td class="hl" style="color:var(--red)">~48 months</td><td>15% complete quit + 35% ≥50% CPD reduction at 6-wk actual-use study</td></tr>
  </tbody>
 </table>
-<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6">Statutory 180-day clock is routinely paused when applicants submit amendments with new data; real-world review time significantly exceeds statutory limits. <strong>Tobacco-only ENDS:</strong> 13–27 months (2021–2022 era). <strong>Menthol/novel flavors:</strong> ~30 months. <strong>Novel product categories (NP) or MDO-challenged products:</strong> 4–5 years.</p>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><span data-i="a6_timeline_note">Statutory 180-day clock is routinely paused when applicants submit amendments with new data; real-world review time significantly exceeds statutory limits.</span> <strong>Tobacco-only ENDS:</strong> 13–27 months (2021–2022 era). <strong>Menthol/novel flavors:</strong> ~30 months. <strong>Novel product categories (NP) or MDO-challenged products:</strong> 4–5 years.</p>
 
 <!-- MDO Reasons -->
 <div class="callout callout-err" style="margin-top:16px;font-size:12px">
@@ -1108,7 +1108,37 @@ var I={
  cta_btn:{en:'Request Demo',zh:'申请演示'},
  cta_linkedin:{en:'About the Founder',zh:'关于创始人'},
  about_title:{en:'Built by Epidemiologists',zh:'由流行病学家构建'},
- about_text:{en:'EpiDataKit is developed by Dr. Nana Liu (PhD, Erasmus MC), a Chief Scientist with expertise in epidemiology, biostatistics, and regulatory science. All analyses use survey-weighted methodologies validated against official sources.',zh:'EpiDataKit由刘晓娜博士（鹿特丹Erasmus MC流行病学博士）开发，她是一位在流行病学、生物统计学和监管科学领域具有专业背景的首席科学家。所有分析使用经官方数据源交叉验证的调查加权方法。'}
+ about_text:{en:'EpiDataKit is developed by Dr. Nana Liu (PhD, Erasmus MC), a Chief Scientist with expertise in epidemiology, biostatistics, and regulatory science. All analyses use survey-weighted methodologies validated against official sources.',zh:'EpiDataKit由刘晓娜博士（鹿特丹Erasmus MC流行病学博士）开发，她是一位在流行病学、生物统计学和监管科学领域具有专业背景的首席科学家。所有分析使用经官方数据源交叉验证的调查加权方法。'},
+ a6_th_switch:{en:'Complete Switching Rate (TPL)',zh:'完全转用率（TPL）'},
+ a6_th_cpd:{en:'CPD Reduction',zh:'日均吸烟量减少'},
+ a6_th_study:{en:'Study Design',zh:'研究设计'},
+ a7_c2t:{en:'Abuse Liability Spectrum',zh:'滥用倾向谱'},
+ a7_c3t:{en:'Menthol Policy Tradeoff',zh:'薄荷醇政策权衡'},
+ a7_boe_title:{en:'Biomarker of Exposure (BOE) Reduction Summary — Complete Switchers vs Continued CC',zh:'暴露生物标志物（BOE）降低摘要 — 完全转用者 vs 持续吸烟者'},
+ a6_scatter_h3:{en:'Youth Risk vs Adult Benefit — FDA PMTA Authorization Decision Map',zh:'青少年风险与成人收益 — FDA PMTA授权决策图'},
+ a6_scatter_brand_h3:{en:'Youth Usual Brand Share vs Adult Benefit — FDA PMTA Authorization Decision Map',zh:'青少年常用品牌份额与成人收益 — FDA PMTA授权决策图'},
+ a1_auth_trend_h3:{en:'FDA-Authorized Brand Historical Analysis — Youth Usual Brand Share (NYTS 2019–2025)',zh:'FDA已授权品牌历史分析 — 青少年常用品牌份额（NYTS 2019–2025）'},
+ a1_contact_trend_h3:{en:'FDA-Authorized Brand Historical Analysis — Youth Contact Rate (Past 30-Day Use, NYTS 2019–2025)',zh:'FDA已授权品牌历史分析 — 青少年接触率（近30天使用，NYTS 2019–2025）'},
+ a1_brand_axis:{en:'Multi-select: past 30-day brands used; totals >100%',zh:'多选：近30天使用品牌；合计>100%'},
+ a6_auth_legend:{en:'Authorization events (★):',zh:'授权事件（★）：'},
+ a6_contact_legend:{en:'Contact rate = past-30-day multi-select (% who used this brand in last 30 days; may sum >100%). Gaps indicate no published brand-level data for that year.',zh:'接触率 = 近30天多选（过去30天内使用该品牌的比例；合计可>100%）。空白表示该年度无已发布的品牌级数据。'},
+ a6_ecig_auth_legend:{en:'E-cig authorization',zh:'电子烟授权'},
+ a6_np_auth_legend:{en:'NP authorization',zh:'尼古丁袋授权'},
+ a6_htp_auth_legend:{en:'HTP authorization (IQOS)',zh:'加热烟草授权（IQOS）'},
+ a6_scatter_legend:{en:'E-cig — TPL-confirmed switching rate (bar = study range)',zh:'电子烟 — TPL确认转用率（竖线=研究范围）'},
+ a6_scatter_baseline:{en:'Literature baseline 15–20%',zh:'文献基线 15–20%'},
+ a6_scatter_analysis:{en:'X-axis = NYTS youth E-cig or NP % at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range across study timepoints. Only TPL-confirmed or Decision Summary endpoints plotted.',zh:'X轴 = 授权当年NYTS青少年电子烟或尼古丁袋使用率。Y轴 = 完全转用率中位值；竖线=各研究时间点报告范围。仅绘制TPL确认或决策摘要终点。'},
+ a6_scatter_brand_analysis:{en:'X-axis = NYTS usual brand share (% among youth e-cig users) at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range. Only brands with NYTS usual brand data shown (NJOY, JUUL).',zh:'X轴 = 授权当年NYTS青少年电子烟用户中的常用品牌份额。Y轴 = 完全转用率中位值；竖线=报告范围。仅展示有NYTS常用品牌数据的品牌（NJOY、JUUL）。'},
+ a6_scatter_brand_analysis_label:{en:'Analysis:',zh:'分析：'},
+ a6_np_benefit_note:{en:'Only NP authorizations had specific quantitative adult benefit metrics published in FDA Decision Summaries. E-cig and HTP Decision Summaries cite biomarker of exposure (BoE) reductions vs cigarettes; see FDA PMTA records for full details.',zh:'只有尼古丁袋授权在FDA决策摘要中发布了具体的定量成人获益指标。电子烟和加热烟草决策摘要引用了与卷烟相比的暴露生物标志物（BoE）降低数据；详见FDA PMTA记录。'},
+ a6_boe_legend:{en:'Legend: ↓ = statistically significant reduction confirmed in TPL narrative. ↓↓ = quantitative reduction with reported value. ≤ LOD = at or below limit of detection. — = not primary endpoint; nicotine maintained by design.',zh:'图例：↓ = TPL叙述确认统计学显著降低。↓↓ = 定量降低并报告具体数值。≤ LOD = 低于或达检出限。— = 非主要终点；尼古丁按设计维持。'},
+ a6_timeline_note:{en:'Statutory 180-day clock is routinely paused when applicants submit amendments with new data; real-world review time significantly exceeds statutory limits.',zh:'法定180天审评时钟在申请人提交含新数据的修订时通常暂停计时；实际审评时间显著超过法定限期。'},
+ a6_timeline_th_product:{en:'Product',zh:'产品'},
+ a6_timeline_th_submitted:{en:'Submitted',zh:'递交日期'},
+ a6_timeline_th_authorized:{en:'Authorized',zh:'授权日期'},
+ a6_timeline_th_duration:{en:'Duration',zh:'历时'},
+ a6_timeline_th_key:{en:'Key Success Factor',zh:'关键成功因素'},
+ a6_boe_th_biomarker:{en:'Biomarker',zh:'生物标志物'}
 };
 
 function toggleLang(){
@@ -1179,7 +1209,7 @@ function buildAllCharts(){
  charts.a1brand=new Chart(document.getElementById('c-a1-brand'),{type:'bar',data:{
   labels:['Geek Bar','Elf Bar','Lost Mary','Raz','Vuse','Breeze','Juicy Bar','Mr Fog','JUUL','Other'],
   datasets:[{data:[64.1,21.5,19.8,19.4,15.8,14.4,11.6,10.6,9.8,31.0],backgroundColor:[amber,'#f59e0b','#fbbf24','#fb923c',green,blue,teal,'#94a3b8','#6366f1','#cbd5e1'],borderRadius:4}]
- },options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:'% (multi-select, >100% expected)'}}}}});
+ },options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{beginAtZero:true,title:{display:true,text:curLang==='zh'?'%（多选，合计>100%）':'% (multi-select, >100% expected)'}}}}});
 
  /* A1: Brand compare 2024 vs 2025 contact rate */
  charts.a1compare=new Chart(document.getElementById('c-a1-compare'),{type:'bar',data:{
@@ -1188,7 +1218,7 @@ function buildAllCharts(){
    {label:'2024',data:[0,36.1,0,0,13.7,19.9,0,15.8,12.6],backgroundColor:amberL,borderColor:amber,borderWidth:1},
    {label:'2025',data:[64.1,21.5,19.8,19.4,15.8,14.4,11.6,10.6,9.8],backgroundColor:'rgba(37,99,235,.15)',borderColor:blue,borderWidth:1}
   ]
- },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,title:{display:true,text:'% contact rate'}}}}});
+ },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,title:{display:true,text:curLang==='zh'?'% 接触率':'% contact rate'}}}}});
 
  /* A1: Authorized brand historical trend (usual brand %, 2019-2025) */
  charts.a1authtrd=new Chart(document.getElementById('c-a1-auth-trend'),{
@@ -1327,15 +1357,15 @@ function buildAllCharts(){
   data:{
    labels:a6Years,
    datasets:[
-    {label:'E-Cig (all youth, NYTS weighted)',data:a6EC,borderColor:amber,backgroundColor:amberL,tension:.3,fill:true,spanGaps:true,pointRadius:4,pointHoverRadius:6},
-    {label:'Nic Pouch (all youth, NYTS weighted)',data:a6NP,borderColor:blue,backgroundColor:blueL,tension:.3,fill:false,spanGaps:true,borderDash:[4,4],pointRadius:4,pointHoverRadius:6}
+    {label:curLang==='zh'?'电子烟（全体青少年，NYTS加权）':'E-Cig (all youth, NYTS weighted)',data:a6EC,borderColor:amber,backgroundColor:amberL,tension:.3,fill:true,spanGaps:true,pointRadius:4,pointHoverRadius:6},
+    {label:curLang==='zh'?'尼古丁袋（全体青少年，NYTS加权）':'Nic Pouch (all youth, NYTS weighted)',data:a6NP,borderColor:blue,backgroundColor:blueL,tension:.3,fill:false,spanGaps:true,borderDash:[4,4],pointRadius:4,pointHoverRadius:6}
    ]
   },
   options:{
    responsive:true,maintainAspectRatio:false,
    layout:{padding:{top:18}},
    plugins:{legend:{display:true},authLines:{events:a6AuthEvents}},
-   scales:{y:{beginAtZero:true,title:{display:true,text:'% all youth (NYTS weighted)'}}}
+   scales:{y:{beginAtZero:true,title:{display:true,text:curLang==='zh'?'% 全体青少年（NYTS加权）':'% all youth (NYTS weighted)'}}}
   }
  });
  var a6ScatterEC=[
@@ -1362,7 +1392,7 @@ function buildAllCharts(){
    ctx.beginPath();ctx.moveTo(xs.left,y175);ctx.lineTo(xs.right,y175);ctx.stroke();
    ctx.setLineDash([]);
    ctx.font='9px -apple-system,sans-serif';ctx.fillStyle='#9ca3af';ctx.textAlign='right';
-   ctx.fillText('Literature baseline (15–20%)',xs.right-4,y175-4);
+   ctx.fillText(curLang==='zh'?'文献基线（15–20%）':'Literature baseline (15–20%)',xs.right-4,y175-4);
    ctx.restore();
    // Error bars + labels per dataset
    var groups=[
@@ -1395,11 +1425,11 @@ function buildAllCharts(){
   type:'scatter',
   plugins:[scatterAnnotPlugin],
   data:{datasets:[
-   {label:'E-cig (TPL switching rate)',
+   {label:curLang==='zh'?'电子烟（TPL转用率）':'E-cig (TPL switching rate)',
     data:a6ScatterEC.map(function(d){return{x:d.x,y:d.y};}),
     backgroundColor:'rgba(217,119,6,0.82)',borderColor:'#d97706',
     pointRadius:7,pointHoverRadius:9,borderWidth:1.5},
-   {label:'NP (Decision Summary)',
+   {label:curLang==='zh'?'尼古丁袋（决策摘要）':'NP (Decision Summary)',
     data:a6ScatterNP.map(function(d){return{x:d.x,y:d.y};}),
     backgroundColor:'rgba(37,99,235,0.82)',borderColor:'#2563eb',
     pointRadius:7,pointHoverRadius:9,borderWidth:1.5},
@@ -1413,12 +1443,12 @@ function buildAllCharts(){
      var ds=c.datasetIndex===0?a6ScatterEC:a6ScatterNP;
      var d=ds[c.dataIndex];
      var rate=d.lo!==null?d.lo+'–'+d.hi+'% (mid '+d.y+'%)':d.y+'%';
-     return[d.lbl,'Youth at auth: '+d.x+'%','Switching: '+rate,d.note];
+     return[d.lbl,(curLang==='zh'?'授权时青少年使用率：':'Youth at auth: ')+d.x+'%',(curLang==='zh'?'转用率：':'Switching: ')+rate,d.note];
     }}}
    },
    scales:{
-    x:{min:0,max:22,title:{display:true,text:'NYTS Youth Prevalence at Time of Authorization (%)'},grid:{color:'rgba(0,0,0,0.05)'}},
-    y:{min:0,max:70,title:{display:true,text:'Adult Complete Switching Rate (%)'},grid:{color:'rgba(0,0,0,0.05)'}}
+    x:{min:0,max:22,title:{display:true,text:curLang==='zh'?'授权当年NYTS青少年使用率（%）':'NYTS Youth Prevalence at Time of Authorization (%)'},grid:{color:'rgba(0,0,0,0.05)'}},
+    y:{min:0,max:70,title:{display:true,text:curLang==='zh'?'成人完全转用率（%）':'Adult Complete Switching Rate (%)'},grid:{color:'rgba(0,0,0,0.05)'}}
    }
   }
  });
@@ -1440,7 +1470,7 @@ function buildAllCharts(){
    ctx.beginPath();ctx.moveTo(xs.left,y175);ctx.lineTo(xs.right,y175);ctx.stroke();
    ctx.setLineDash([]);
    ctx.font='9px -apple-system,sans-serif';ctx.fillStyle='#9ca3af';ctx.textAlign='right';
-   ctx.fillText('Literature baseline (15–20%)',xs.right-4,y175-4);
+   ctx.fillText(curLang==='zh'?'文献基线（15–20%）':'Literature baseline (15–20%)',xs.right-4,y175-4);
    ctx.restore();
    var offsets=[[8,-14],[8,10],[-90,-6]];
    var meta=chart.getDatasetMeta(0);
@@ -1467,7 +1497,7 @@ function buildAllCharts(){
   type:'scatter',
   plugins:[scatterAnnotPluginBrand],
   data:{datasets:[
-   {label:'E-cig (TPL switching rate)',
+   {label:curLang==='zh'?'电子烟（TPL转用率）':'E-cig (TPL switching rate)',
     data:a6ScatterECBrand.map(function(d){return{x:d.x,y:d.y};}),
     backgroundColor:'rgba(217,119,6,0.82)',borderColor:'#d97706',
     pointRadius:7,pointHoverRadius:9,borderWidth:1.5},
@@ -1480,12 +1510,12 @@ function buildAllCharts(){
     tooltip:{callbacks:{label:function(c){
      var d=a6ScatterECBrand[c.dataIndex];
      var rate=d.lo!==null?d.lo+'–'+d.hi+'% (mid '+d.y+'%)':d.y+'%';
-     return[d.lbl,'Usual brand share: '+d.x+'%','Switching: '+rate,d.note];
+     return[d.lbl,(curLang==='zh'?'常用品牌份额：':'Usual brand share: ')+d.x+'%',(curLang==='zh'?'转用率：':'Switching: ')+rate,d.note];
     }}}
    },
    scales:{
-    x:{min:0,max:6,title:{display:true,text:'Youth Usual Brand Share at Time of Authorization (% among youth e-cig users)'},grid:{color:'rgba(0,0,0,0.05)'}},
-    y:{min:0,max:70,title:{display:true,text:'Adult Complete Switching Rate (%)'},grid:{color:'rgba(0,0,0,0.05)'}}
+    x:{min:0,max:6,title:{display:true,text:curLang==='zh'?'授权当年青少年常用品牌份额（%，电子烟用户中）':'Youth Usual Brand Share at Time of Authorization (% among youth e-cig users)'},grid:{color:'rgba(0,0,0,0.05)'}},
+    y:{min:0,max:70,title:{display:true,text:curLang==='zh'?'成人完全转用率（%）':'Adult Complete Switching Rate (%)'},grid:{color:'rgba(0,0,0,0.05)'}}
    }
   }
  });
