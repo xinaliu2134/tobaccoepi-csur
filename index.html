@@ -515,6 +515,20 @@ function doLogin(e){
  </div>
 </div>
 
+<div class="chart-grid" style="margin-top:16px">
+ <div class="chart-card full">
+  <h3>Youth Usual Brand Share vs Adult Benefit — FDA PMTA Authorization Decision Map</h3>
+  <div class="chart-wrap" style="height:380px"><canvas id="c-a6-scatter-brand"></canvas></div>
+  <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.7">
+   <span style="display:inline-block;width:10px;height:10px;background:#d97706;border-radius:50%;margin-right:5px;vertical-align:middle"></span>E-cig — TPL-confirmed switching rate (bar = study range) &nbsp;
+   <span style="border-top:2px dashed #94a3b8;display:inline-block;width:22px;margin-right:5px;vertical-align:middle"></span>Literature baseline 15–20% &nbsp; ★ JUUL = 2-yr ADJUSTST cohort; others = 2–3 months
+  </div>
+  <span class="source-tag">X-axis = NYTS usual brand share (% among current youth e-cig users) at year of authorization · NYTS 2022–2025 · Logic (Mar 2022) &amp; Glas (Mar 2026): not separately tracked in NYTS usual brand data — excluded · NP brands (ZYN, on! PLUS): NP brand-level data not published</span>
+  <strong style="display:block;margin-top:6px;font-size:11px;color:var(--muted)">Analysis:</strong>
+  <span style="font-size:11px;color:var(--muted)">X-axis = NYTS usual brand share (% among youth e-cig users) at year of authorization. Y-axis = complete switching rate midpoint; vertical bars = reported range. Only brands with NYTS usual brand data shown (NJOY, JUUL).</span>
+ </div>
+</div>
+
 <h3 style="margin-top:20px" data-i="a6_adult_title">Adult Benefit — TPL-Confirmed Complete Switching Rates &amp; CPD Reduction</h3>
 
 <table class="data-table" style="margin-top:8px">
@@ -1408,6 +1422,74 @@ function buildAllCharts(){
    }
   }
  });
+ /* A6: Brand-share scatter — Youth Usual Brand Share vs Adult Complete Switching */
+ var a6ScatterECBrand=[
+  {x:2.5,y:29,lo:21,hi:37,lbl:'NJOY Daily Tobacco',note:'Jun 2022 · usual brand 2.5% (NYTS)'},
+  {x:3.5,y:37.5,lo:32,hi:43,lbl:'NJOY Daily Menthol',note:'Jun 2024 · usual brand 3.5% (NYTS)'},
+  {x:1.3,y:50,lo:38,hi:52,lbl:'JUUL ★',note:'Jul 2025 · usual brand 1.3% (NYTS) · ADJUSTST 2-yr'},
+ ];
+ var scatterAnnotPluginBrand={
+  id:'scatterAnnotBrand',
+  afterDatasetsDraw:function(chart){
+   var ctx=chart.ctx,xs=chart.scales.x,ys=chart.scales.y;
+   var y15=ys.getPixelForValue(15),y20=ys.getPixelForValue(20),y175=ys.getPixelForValue(17.5);
+   ctx.save();
+   ctx.fillStyle='rgba(148,163,184,0.12)';
+   ctx.fillRect(xs.left,Math.min(y15,y20),xs.right-xs.left,Math.abs(y15-y20));
+   ctx.setLineDash([5,4]);ctx.strokeStyle='#94a3b8';ctx.lineWidth=1;
+   ctx.beginPath();ctx.moveTo(xs.left,y175);ctx.lineTo(xs.right,y175);ctx.stroke();
+   ctx.setLineDash([]);
+   ctx.font='9px -apple-system,sans-serif';ctx.fillStyle='#9ca3af';ctx.textAlign='right';
+   ctx.fillText('Literature baseline (15–20%)',xs.right-4,y175-4);
+   ctx.restore();
+   var offsets=[[8,-14],[8,10],[-90,-6]];
+   var meta=chart.getDatasetMeta(0);
+   meta.data.forEach(function(pt,pi){
+    var d=a6ScatterECBrand[pi],off=offsets[pi];
+    ctx.save();
+    if(d.lo!==null){
+     var yT=ys.getPixelForValue(d.hi),yB=ys.getPixelForValue(d.lo);
+     ctx.strokeStyle='#d9770699';ctx.lineWidth=1.5;
+     ctx.beginPath();ctx.moveTo(pt.x,yT);ctx.lineTo(pt.x,yB);ctx.stroke();
+     ctx.beginPath();
+     ctx.moveTo(pt.x-3,yT);ctx.lineTo(pt.x+3,yT);
+     ctx.moveTo(pt.x-3,yB);ctx.lineTo(pt.x+3,yB);
+     ctx.stroke();
+    }
+    ctx.font='10px -apple-system,sans-serif';ctx.fillStyle='#374151';
+    ctx.textAlign=off[0]<0?'right':'left';
+    ctx.fillText(d.lbl,pt.x+off[0],pt.y+off[1]);
+    ctx.restore();
+   });
+  }
+ };
+ charts.a6scatterbrand=new Chart(document.getElementById('c-a6-scatter-brand'),{
+  type:'scatter',
+  plugins:[scatterAnnotPluginBrand],
+  data:{datasets:[
+   {label:'E-cig (TPL switching rate)',
+    data:a6ScatterECBrand.map(function(d){return{x:d.x,y:d.y};}),
+    backgroundColor:'rgba(217,119,6,0.82)',borderColor:'#d97706',
+    pointRadius:7,pointHoverRadius:9,borderWidth:1.5},
+  ]},
+  options:{
+   responsive:true,maintainAspectRatio:false,
+   layout:{padding:{top:10,right:20}},
+   plugins:{
+    legend:{display:true,position:'top',labels:{usePointStyle:true,padding:16,font:{size:11}}},
+    tooltip:{callbacks:{label:function(c){
+     var d=a6ScatterECBrand[c.dataIndex];
+     var rate=d.lo!==null?d.lo+'–'+d.hi+'% (mid '+d.y+'%)':d.y+'%';
+     return[d.lbl,'Usual brand share: '+d.x+'%','Switching: '+rate,d.note];
+    }}}
+   },
+   scales:{
+    x:{min:0,max:6,title:{display:true,text:'Youth Usual Brand Share at Time of Authorization (% among youth e-cig users)'},grid:{color:'rgba(0,0,0,0.05)'}},
+    y:{min:0,max:70,title:{display:true,text:'Adult Complete Switching Rate (%)'},grid:{color:'rgba(0,0,0,0.05)'}}
+   }
+  }
+ });
+
  charts.a6npbenefit=new Chart(document.getElementById('c-a6-np-benefit'),{
   type:'bar',
   data:{
