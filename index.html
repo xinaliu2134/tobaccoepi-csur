@@ -282,6 +282,19 @@ function doLogin(e){
  </div>
 </div>
 
+<h3 style="margin-top:24px;margin-bottom:8px">FDA-Authorized Brand Historical Analysis — Youth Contact Rate (Past 30-Day Use, NYTS 2019–2025)</h3>
+<div class="chart-grid">
+ <div class="chart-card full">
+  <div class="chart-wrap tall"><canvas id="c-a1-contact-trend"></canvas></div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.8">
+   <strong>Contact rate</strong> = past-30-day multi-select (% who used this brand in last 30 days; may sum >100%). Gaps indicate no published brand-level data for that year.
+   &nbsp;·&nbsp;<span style="color:#2563eb;font-weight:600">JUUL</span> 2019: Gentzke et al. 2020 (NYTS PUF); 2023–2025: FDA CTP PUF / CDC MMWR
+   &nbsp;·&nbsp;<span style="color:#d97706;font-weight:600">Vuse</span> 2019: Gentzke et al. 2020; 2023–2025: FDA CTP PUF / CDC MMWR
+  </div>
+  <span class="source-tag">NYTS 2019–2025 · contact rate multi-select (% past-30-day use among current youth e-cig users) · 2020–2022 brand-level contact data not separately published</span>
+ </div>
+</div>
+
 <div style="overflow-x:auto;margin-top:16px">
 <table class="data-table" style="font-size:12px">
  <thead>
@@ -1172,6 +1185,20 @@ function buildAllCharts(){
   ]},
   options:{responsive:true,maintainAspectRatio:false,
    scales:{y:{beginAtZero:true,title:{display:true,text:curLang==='zh'?'% 常用品牌（青少年电子烟用户中）':'% usual brand (among youth e-cig users)'}}},
+   interaction:{mode:'index',intersect:false},
+   plugins:{legend:{position:'top'}}
+  }
+ });
+
+ /* A1: Authorized brand contact rate trend (past-30-day multi-select %, 2019-2025) */
+ charts.a1contacttrd=new Chart(document.getElementById('c-a1-contact-trend'),{
+  type:'line',data:{labels:[2019,2020,2021,2022,2023,2024,2025],datasets:[
+   {label:'JUUL',data:[59.0,null,null,null,16.5,12.6,9.8],borderColor:blue,backgroundColor:blueL,tension:.3,fill:false,spanGaps:false,pointRadius:5,pointHoverRadius:7},
+   {label:'Vuse',data:[14.0,null,null,null,20.7,13.7,15.8],borderColor:amber,backgroundColor:amberL,tension:.3,fill:false,spanGaps:false,pointRadius:5,pointHoverRadius:7},
+   {label:'NJOY',data:[null,null,null,null,3.2,null,null],borderColor:green,backgroundColor:'rgba(22,163,74,.1)',tension:.3,fill:false,spanGaps:false,pointRadius:5,pointHoverRadius:7}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+   scales:{y:{beginAtZero:true,title:{display:true,text:curLang==='zh'?'% 接触率（近30天使用）':'% contact rate (past-30-day use)'}}},
    interaction:{mode:'index',intersect:false},
    plugins:{legend:{position:'top'}}
   }
