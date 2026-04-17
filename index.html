@@ -1093,13 +1093,15 @@ function buildAllCharts(){
  var EC_W=[1.5,3.1,9.3,8.3,7.9,13.9,20.0,null,7.5,9.4,7.7,5.9,5.2];
  var CI_W=[7.1,5.5,5.4,3.1,3.0,3.6,2.8,null,1.9,1.6,1.6,1.4,1.4];
  var NP_W=[null,null,null,null,null,null,null,null,0.6,0.3,0.8,1.8,1.7];
+ var HTP_W=[null,null,null,null,null,null,0.5,0.4,0.4,0.7,0.7,0.8,0.8];
  charts.a2trend=new Chart(document.getElementById('c-a2-trend'),{type:'line',data:{
   labels:YR_FULL,
   datasets:[
    {label:curLang==='zh'?'任何烟草':'Any Tobacco',data:AT_W,borderColor:amber,backgroundColor:amberL,tension:.3,fill:true,spanGaps:true},
    {label:curLang==='zh'?'电子烟':'E-Cigarettes',data:EC_W,borderColor:blue,backgroundColor:blueL,tension:.3,fill:true,spanGaps:true},
    {label:curLang==='zh'?'卷烟':'Cigarettes',data:CI_W,borderColor:'#94a3b8',backgroundColor:'rgba(148,163,184,.1)',tension:.3,fill:true,spanGaps:true},
-   {label:curLang==='zh'?'尼古丁袋':'Nic Pouches',data:NP_W,borderColor:red,backgroundColor:'rgba(220,38,38,.1)',tension:.3,fill:false,spanGaps:true,borderDash:[4,4]}
+   {label:curLang==='zh'?'尼古丁袋':'Nic Pouches',data:NP_W,borderColor:red,backgroundColor:'rgba(220,38,38,.1)',tension:.3,fill:false,spanGaps:true,borderDash:[4,4]},
+   {label:curLang==='zh'?'加热烟草':'Heated Tobacco',data:HTP_W,borderColor:teal,backgroundColor:'rgba(13,148,136,.1)',tension:.3,fill:false,spanGaps:true,borderDash:[2,3]}
   ]
  },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}},interaction:{mode:'index',intersect:false}}});
 
