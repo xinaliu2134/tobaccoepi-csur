@@ -265,6 +265,80 @@ function doLogin(e){
 </div>
 <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5">Usual brand = single-select ("What brand do you usually use?"), weighted %. 2020-2021: NYTS/MMWR published data. 2022: NYTS usual brand data. 2023-2024: NYTS MMWR. 2025: FDA CTP PUF weighted analysis, cross-validated.<br>Note: 2023-2024 brand data used multi-select contact rate (totals >100%) as published by CDC. 2025 uses single-select usual brand from FDA CTP PUF weighted analysis (totals ~100%).</div>
 <span class="source-tag">NYTS 2020-2025 · FDA CTP PUF weighted analysis · Cross-validated with ALCS</span>
+
+<h3 style="margin-top:24px;margin-bottom:8px">FDA-Authorized Brand Historical Analysis — Youth Usual Brand Share (NYTS 2019–2025)</h3>
+<div class="chart-grid">
+ <div class="chart-card full">
+  <div class="chart-wrap tall"><canvas id="c-a1-auth-trend"></canvas></div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.8">
+   <strong>Authorization events (★):</strong>
+   &nbsp;<span style="color:#2563eb;font-weight:600">JUUL</span> ★ Jul 2025
+   &nbsp;·&nbsp;<span style="color:#d97706;font-weight:600">Vuse</span> ★ Oct 2021
+   &nbsp;·&nbsp;<span style="color:#16a34a;font-weight:600">NJOY</span> ★ Apr 2022
+  </div>
+  <span class="source-tag">NYTS 2019–2025 · usual brand single-select (% among current youth e-cig users) · 2019: NYTS PUF analysis (Gentzke et al. 2020); 2020–2024: CDC MMWR; 2025: FDA CTP PUF weighted</span>
+ </div>
+</div>
+
+<div style="overflow-x:auto;margin-top:16px">
+<table class="data-table" style="font-size:12px">
+ <thead>
+  <tr>
+   <th>Brand / Category</th>
+   <th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th>
+   <th style="background:#fef3c7;font-weight:700">2025</th>
+   <th>MGO Date</th><th>NYTS Regulatory Context</th>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><strong>JUUL</strong><br><span style="font-size:10px;color:var(--muted)">E-cig</span></td>
+   <td class="hl" style="color:#15803d"><strong>62.0%</strong></td><td>25.4%</td><td>5.9%</td><td>3.5%</td><td>16.5%</td><td>12.6%</td>
+   <td style="background:#fef3c7">1.3%</td>
+   <td><span class="badge-ok">Jul 2025</span></td>
+   <td style="font-size:10px;line-height:1.6">Peaked 2019 (62%). MDO Jun 2022 — stayed by 5th Circuit, remained on market. Partial recovery 2023–2024 under court stay. MGO Jul 2025 restricted to tobacco + menthol only → immediate share collapse. ADJUSTST 2-yr cohort was pivotal evidence.</td>
+  </tr>
+  <tr>
+   <td><strong>Vuse</strong><br><span style="font-size:10px;color:var(--muted)">E-cig (RJR/BAT)</span></td>
+   <td>14.5%</td><td>8.0%</td><td class="hl"><strong>11.0% ★</strong></td><td>12.5%</td><td class="hl" style="color:#15803d"><strong>20.7%</strong></td><td>13.7%</td>
+   <td style="background:#fef3c7">3.9%</td>
+   <td><span class="badge-ok">Oct 2021</span></td>
+   <td style="font-size:10px;line-height:1.6">First e-cig MGO ever (Oct 2021, tobacco). Gained share as JUUL faced MDO. Peak 20.7% in 2023. Vibe/Ciro added May 2022; Alto (slot machine) added Jul 2024. Declining 2024–2025 as disposables displaced pod systems.</td>
+  </tr>
+  <tr>
+   <td><strong>NJOY</strong><br><span style="font-size:10px;color:var(--muted)">E-cig</span></td>
+   <td>3.5%</td><td>3.2%</td><td>2.5%</td><td class="hl"><strong>2.5% ★</strong></td><td>3.2%</td><td>3.5%</td>
+   <td style="background:#fef3c7">&lt;0.2%</td>
+   <td><span class="badge-ok">Apr 2022</span></td>
+   <td style="font-size:10px;line-height:1.6">Steady low-level NYTS presence 2019–2024 (2.5–3.5%). MGO Apr 2022 (ACE tobacco), menthol added Jun 2024. Share fell below detection in 2025 — disposables entirely displaced closed pod systems in youth market.</td>
+  </tr>
+  <tr style="background:#f0fdfa">
+   <td><strong>ZYN</strong><br><span style="font-size:10px;color:var(--muted)">Nicotine pouch (NP)</span></td>
+   <td colspan="6" style="color:var(--muted);font-size:10px;text-align:center">NYTS NP brand tracking not published at brand level; ZYN is dominant NP brand in US market</td>
+   <td style="background:#fef3c7;font-size:10px">dominant NP</td>
+   <td><span class="badge-ok">Jan 2025</span></td>
+   <td style="font-size:10px;line-height:1.6">NYTS tracks NP category total: 1.7% youth (2025), peaked 1.8% (2024). Brand-level NP data not separately published. ZYN holds dominant share. FDA approved 20 products. Youth NP use now trending down.</td>
+  </tr>
+  <tr style="background:#f0fdfa">
+   <td><strong>on! PLUS</strong><br><span style="font-size:10px;color:var(--muted)">Nicotine pouch (NP)</span></td>
+   <td colspan="6" style="color:var(--muted);font-size:10px;text-align:center">No brand-level NYTS NP tracking available</td>
+   <td style="background:#fef3c7">—</td>
+   <td><span class="badge-ok">Dec 2025</span></td>
+   <td style="font-size:10px;line-height:1.6">6 NP products authorized Dec 2025. NYTS 2025 data predates authorization. 15% complete quit + 35% ≥50% CPD reduction at 6-wk actual-use study was pivotal.</td>
+  </tr>
+  <tr style="background:#f0fdf4">
+   <td><strong>IQOS</strong><br><span style="font-size:10px;color:var(--muted)">Heated tobacco (HTP)</span></td>
+   <td colspan="6" style="color:var(--muted);font-size:10px;text-align:center">NYTS tracks HTP as category (0.5% 2019 → 0.8% 2025) — no brand-level HTP question in NYTS</td>
+   <td style="background:#fef3c7">—</td>
+   <td><span class="badge-ok">Apr 2019</span></td>
+   <td style="font-size:10px;line-height:1.6">NYTS does not collect HTP brand names. Aggregate youth HTP use: 0.5% (2019) → 0.8% (2025). FDA PMTA decision cited "minimal" IQOS youth uptake as favorable APPH evidence. MRTP added Jul 2020.</td>
+  </tr>
+ </tbody>
+</table>
+</div>
+<p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5">★ = PMTA authorization year. Usual brand = single-select (% among current past-30-day youth e-cig users; sums to ~100%). 2019: NYTS 2019 PUF (Gentzke et al. 2020 MMWR); 2020–2024: CDC MMWR published; 2025: FDA CTP PUF weighted. ZYN, on! PLUS, and IQOS brand-level breakdowns not available in NYTS.</p>
+<span class="source-tag">NYTS 2019–2025 · CDC MMWR (Gentzke et al. 2020–2024) · FDA CTP PUF · FDA PMTA Marketing Granted Orders · Not an official FDA statement</span>
+
 <div style="margin-top:16px;padding:14px 18px;background:var(--blue-light);border-left:3px solid var(--blue);border-radius:10px;font-size:13px;color:#1e40af;line-height:1.7">
   <strong>NYTS 2025 Methodology:</strong> For detailed documentation of our weighted analysis methodology, variable definitions, and cross-validation results, see the <a href="https://www.fda.gov/media/191362/download" style="font-weight:600">Methodology Report &rarr;</a>
 </div>
@@ -1086,6 +1160,20 @@ function buildAllCharts(){
    {label:'2025',data:[64.1,21.5,19.8,19.4,15.8,14.4,11.6,10.6,9.8],backgroundColor:'rgba(37,99,235,.15)',borderColor:blue,borderWidth:1}
   ]
  },options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,title:{display:true,text:'% contact rate'}}}}});
+
+ /* A1: Authorized brand historical trend (usual brand %, 2019-2025) */
+ charts.a1authtrd=new Chart(document.getElementById('c-a1-auth-trend'),{
+  type:'line',data:{labels:[2019,2020,2021,2022,2023,2024,2025],datasets:[
+   {label:'JUUL',data:[62.0,25.4,5.9,3.5,16.5,12.6,1.3],borderColor:blue,backgroundColor:blueL,tension:.3,fill:false,pointRadius:5,pointHoverRadius:7},
+   {label:'Vuse',data:[14.5,8.0,11.0,12.5,20.7,13.7,3.9],borderColor:amber,backgroundColor:amberL,tension:.3,fill:false,pointRadius:5,pointHoverRadius:7},
+   {label:'NJOY',data:[3.5,3.2,2.5,2.5,3.2,3.5,0.1],borderColor:green,backgroundColor:'rgba(22,163,74,.1)',tension:.3,fill:false,pointRadius:5,pointHoverRadius:7}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+   scales:{y:{beginAtZero:true,title:{display:true,text:curLang==='zh'?'% 常用品牌（青少年电子烟用户中）':'% usual brand (among youth e-cig users)'}}},
+   interaction:{mode:'index',intersect:false},
+   plugins:{legend:{position:'top'}}
+  }
+ });
 
  /* A2: Trend line — FDA CTP PUF weighted data */
  var YR_FULL=[2011,2013,2014,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
