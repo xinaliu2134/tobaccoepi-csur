@@ -209,6 +209,7 @@ function doLogin(e){
  <button class="tab-btn" data-tab="a3" onclick="switchTab('a3')" data-i="tab_a3">Adverse Events</button>
  <button class="tab-btn" data-tab="a4" onclick="switchTab('a4')" data-i="tab_a4">Switching Simulator</button>
  <button class="tab-btn" data-tab="a6" onclick="switchTab('a6')" data-i="tab_a6">PMTA Benchmark</button>
+ <button class="tab-btn" data-tab="a9" onclick="switchTab('a9')" data-i="tab_a9">MGO Feasibility</button>
  <button class="tab-btn" data-tab="a8" onclick="switchTab('a8')" data-i="tab_a8">PMTA Roadmap</button>
 </div>
 
@@ -812,6 +813,74 @@ function doLogin(e){
 </div>
 
 
+<!-- ===== A9: MGO Feasibility Simulator ===== -->
+<div class="panel" id="panel-a9">
+<h2 data-i="a9_title">MGO Feasibility Simulator</h2>
+<div class="section-sub" data-i="a9_sub">Reverse-solve the minimum adult switching rate your product needs to clear FDA's implicit MGO bar — anchored on 2021–2026 authorized points from the PMTA Benchmark scatter · Tobacco vs Flavored/Non-tobacco analyzed separately</div>
+
+<div class="callout callout-blue" data-ih="a9_usecase"><strong>Enterprise Question:</strong> My in-development product projects X% youth use. What <em>minimum</em> adult complete-switching rate must my clinical program deliver to be authorizable under FDA's APPH standard — and how does that threshold shift for tobacco flavor vs menthol / non-tobacco flavors?<br><strong>How to use:</strong> Pick your product category and flavor class, drag the youth-use / brand-share sliders to your forecasted values, and the simulator reverses the PMTA Benchmark scatter to tell you the minimum switching rate that has historically cleared MGO — plus the nearest authorized benchmark product. Use these numbers to size the effect your clinical switching study (PMTA Section 6 adult-use endpoints) must deliver.</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+ <div class="sim-group">
+  <label data-i="a9_category">Product Category &amp; Flavor</label>
+  <select id="mgo-category" onchange="runFeasibility()">
+   <option value="ec_tobacco">E-Cigarette — Tobacco flavor</option>
+   <option value="ec_flavored">E-Cigarette — Menthol / Non-tobacco flavor</option>
+   <option value="np">Nicotine Pouch</option>
+   <option value="htp">Heated Tobacco (HTP)</option>
+  </select>
+  <label style="margin-top:10px" data-i="a9_youth_use">Forecasted Youth Use Rate (NYTS past-30-day, all youth)</label>
+  <input type="range" id="mgo-youth" min="0" max="20" step="0.1" value="5.0" oninput="runFeasibility()">
+  <div class="range-val"><span id="mgo-youth-val">5.0</span>%</div>
+  <label style="margin-top:10px" data-i="a9_brand_share">Forecasted Youth Usual-Brand Share (optional)</label>
+  <input type="range" id="mgo-brand" min="0" max="10" step="0.1" value="0" oninput="runFeasibility()">
+  <div class="range-val"><span id="mgo-brand-val">0.0</span>% <span data-i="a9_brand_optional" style="font-size:11px;color:var(--muted)">(0 = skip; affects "Youth Appeal" severity flag only)</span></div>
+ </div>
+ <div class="sim-group warn-box">
+  <div class="warn-label" data-i="a9_client_label">CLIENT-PROVIDED</div>
+  <label data-i="a9_proposed_rate">Proposed Adult Complete-Switching Rate</label>
+  <input type="range" id="mgo-proposed" min="0" max="70" step="1" value="30" oninput="runFeasibility()">
+  <div class="range-val"><span id="mgo-proposed-val">30</span>%</div>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5" data-i="a9_proposed_note">From your adult switching cohort / actual-use study endpoint (typically 3–12 month follow-up). Comparable to the "complete switching rate" that FDA TPL documents quote for authorized e-cig and NP products.</div>
+  <label style="margin-top:12px" data-i="a9_stringency">Stringency Anchor</label>
+  <select id="mgo-stringency" onchange="runFeasibility()">
+   <option value="bench">Benchmark (historical observed minimum)</option>
+   <option value="cons">Conservative (+20% safety buffer)</option>
+  </select>
+ </div>
+</div>
+
+<div class="stats-row">
+ <div class="stat-card"><div class="stat-label" data-i="a9_s1l">Min Switching Rate Required</div><div class="stat-value teal" id="mgo-min">-</div><div class="stat-detail" id="mgo-min-sub">—</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a9_s2l">Gap vs Proposed</div><div class="stat-value" id="mgo-gap">-</div><div class="stat-detail" id="mgo-gap-sub">—</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a9_s3l">Nearest Authorized Benchmark</div><div class="stat-value blue" id="mgo-bench" style="font-size:16px">-</div><div class="stat-detail" id="mgo-bench-sub">—</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a9_s4l">MGO Feasibility Verdict</div><div class="stat-value" id="mgo-verdict" style="font-size:18px">-</div><div class="stat-detail" id="mgo-verdict-sub">—</div></div>
+</div>
+
+<div class="chart-grid">
+ <div class="chart-card full">
+  <h3 data-i="a9_c1t">Decision Map — Your Product vs FDA-Authorized Benchmarks &amp; Minimum-Switching Threshold</h3>
+  <div class="chart-wrap" style="height:440px"><canvas id="c-a9-decision"></canvas></div>
+  <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.9">
+   <span style="display:inline-block;width:10px;height:10px;background:#d97706;border-radius:50%;margin-right:4px;vertical-align:middle"></span><span data-i="a9_legend_tobacco">Authorized — E-cig Tobacco</span> &nbsp;
+   <span style="display:inline-block;width:10px;height:10px;background:#7c3aed;border-radius:50%;margin-right:4px;vertical-align:middle"></span><span data-i="a9_legend_flavored">Authorized — E-cig Flavored/Menthol</span> &nbsp;
+   <span style="display:inline-block;width:10px;height:10px;background:#2563eb;border-radius:50%;margin-right:4px;vertical-align:middle"></span><span data-i="a9_legend_np">Authorized — Nicotine Pouch</span> &nbsp;
+   <span style="display:inline-block;width:10px;height:10px;background:#0d9488;border-radius:50%;margin-right:4px;vertical-align:middle"></span><span data-i="a9_legend_htp">Authorized — HTP (IQOS)</span><br>
+   <span style="color:#dc2626;font-weight:700">★</span>&nbsp;<span data-i="a9_legend_user">Your proposed product</span> &nbsp;
+   <span style="border-top:2px dashed #0d9488;display:inline-block;width:24px;margin-right:4px;vertical-align:middle"></span><span data-i="a9_legend_thresh">Minimum-switching threshold (category-specific, FDA historical floor)</span>
+  </div>
+  <span class="source-tag">Fits: E-cig Tobacco: min = 15 + 0.64·youth% · E-cig Flavored: min = 15 + 2.9·youth% (+penalty above 7%) · NP: min = 10 + 3.0·youth% · HTP: min = 15 + 0.8·youth% · Anchored on TPL lo-bounds from PMTA Benchmark</span>
+ </div>
+</div>
+
+<details class="callout callout-amber" style="font-size:12px;line-height:1.6;cursor:pointer;margin-top:12px">
+<summary style="font-weight:700;cursor:pointer" data-i="a9_method_summary">📐 Methodology — How the minimum switching threshold is estimated</summary>
+<div data-ih="a9_method_body" style="margin-top:10px"><strong>Framework:</strong> Reverse-empirical fit of FDA's observed MGO decisions. The simulator uses the lowest <em>reported</em> adult complete-switching rate (TPL lo-bound or Decision Summary quoted value) across all FDA-authorized products in the last five years (2021–2026), regressed on the NYTS past-30-day youth use rate at the time of authorization. This gives a product-category-and-flavor-conditional <em>floor</em>: the switching rate below which no product has been authorized in that category.<br><br><strong>Linear models (anchored on PMTA Benchmark scatter):</strong><br>• <strong>E-cig Tobacco</strong> — <code>min = 15 + 0.64 × youth%</code> (anchored on NJOY Daily Tobacco's 21% lo-bound at 9.4% youth use; literature baseline 15% floor)<br>• <strong>E-cig Flavored (Menthol / Non-tobacco)</strong> — <code>min = 15 + 2.9 × youth%</code> (anchored on NJOY Daily Menthol's 32% lo-bound at 5.9% youth); additional "Very Unlikely" verdict if youth use &gt; 7% because <em>no</em> flavored e-cig has been authorized above that threshold.<br>• <strong>Nicotine Pouch</strong> — <code>min = 10 + 3.0 × youth%</code> (anchored on on! PLUS's 15% at 1.7% youth NP; ZYN 24% as upper reference)<br>• <strong>HTP</strong> — <code>min = 15 + 0.8 × youth%</code> (single anchor IQOS; treat output as highly uncertain)<br><br><strong>Conservative mode</strong> adds a +20% safety buffer on top of the benchmark estimate, reflecting that the lo-bound is a lower bound on <em>historical</em> authorizations, not a guaranteed floor for future decisions — FDA's bar has trended upward post-JUUL.<br><br><strong>Verdict thresholds:</strong> Gap &lt; 0 → Insufficient · 0–5pp → Marginal · 5–15pp → Likely Feasible · ≥15pp → Strong. For flavored e-cig at youth use &gt; 7% → Very Unlikely regardless of switching rate.<br><br><strong>⚠ Hard caveats (must be disclosed in any PMTA submission):</strong><br>• Only 9 e-cig + 2 NP + 1 HTP MGOs are available as anchor points (2021–2026). The sample is small, and FDA's regulatory stance has shifted over this window (more stringent post-Elf Bar enforcement).<br>• The scatter only plots TPL-confirmed or Decision-Summary-quoted switching rates. Products like Vuse where only BoE/migration evidence was cited (switching rate not directly reported) are intentionally omitted from the fit.<br>• FDA's APPH determination is <strong>not</strong> a single-variable threshold — toxicology, abuse liability, consumer perception of reduced-risk/exposure claims, youth-access controls, and marketing plans all matter. A "pass" on switching rate does <em>not</em> guarantee authorization.<br>• Youth-use projections for a novel product are themselves highly uncertain; the simulator accepts the input but does not propagate its uncertainty.<br>• Glas G (approved Mar 2026 at 13–21% cessation) is an outlier: cessation is a stricter endpoint than switching, so Glas's raw number understates the equivalent switching rate. Do not anchor your own clinical plan on the 13% lo-bound alone.<br><br><strong>Use case:</strong> Early go/no-go screening and clinical-program sizing — <em>not</em> a regulatory-grade submission. For actual PMTA planning, extend with full youth-initiation modeling, abuse-liability data, toxicology, and consumer-perception studies; see FDA APPH guidance (2019) and Levy et al. (2017) SimSmoke framework.</div>
+</details>
+
+</div><!-- /panel-a9 -->
+
+
 <!-- ===== A8: PMTA Roadmap ===== -->
 <div class="panel" id="panel-a8">
 <h2 data-i="a8_title">PMTA Roadmap</h2>
@@ -1176,6 +1245,32 @@ var I={
  a6_mdo_title:{en:'⚠️ Common MDO Reasons — Why Applications Fail:',zh:'⚠️ 常见营销拒绝令（MDO）原因：'},
  a6_postmarket_title:{en:'Post-Market Obligations for MGO Holders (21 CFR § 1114.41)',zh:'授权后合规义务（MGO持有者）· 21 CFR § 1114.41'},
  method_label:{en:'Analysis:',zh:'分析方法：'},
+ /* A9 — MGO Feasibility Simulator */
+ tab_a9:{en:'MGO Feasibility',zh:'MGO可行性推演'},
+ a9_title:{en:'MGO Feasibility Simulator',zh:'MGO可行性推演模拟器'},
+ a9_sub:{en:"Reverse-solve the minimum adult switching rate your product needs to clear FDA's implicit MGO bar — anchored on 2021–2026 authorized points from the PMTA Benchmark scatter · Tobacco vs Flavored/Non-tobacco analyzed separately",zh:'反推产品要通过FDA MGO隐性门槛所需的最低成人切换率——基于PMTA基准散点图中2021–2026年已授权产品数据拟合；烟草口味与薄荷/非烟草口味分开分析'},
+ a9_usecase:{en:"<strong>Enterprise Question:</strong> My in-development product projects X% youth use. What <em>minimum</em> adult complete-switching rate must my clinical program deliver to be authorizable under FDA's APPH standard — and how does that threshold shift for tobacco flavor vs menthol / non-tobacco flavors?<br><strong>How to use:</strong> Pick your product category and flavor class, drag the youth-use / brand-share sliders to your forecasted values, and the simulator reverses the PMTA Benchmark scatter to tell you the minimum switching rate that has historically cleared MGO — plus the nearest authorized benchmark product. Use these numbers to size the effect your clinical switching study (PMTA Section 6 adult-use endpoints) must deliver.",zh:'<strong>企业问题：</strong>我在研的产品预计青少年使用率X%。在FDA APPH标准下，临床项目必须达到的<em>最低</em>成人完全切换率是多少？烟草口味与薄荷/非烟草口味的门槛有何差异？<br><strong>使用方法：</strong>选择品类与口味，拖动青少年使用率/品牌份额滑杆至你预测的值，模拟器会反推PMTA基准散点图，给出历史上通过MGO的最低切换率，以及最相近的已授权产品参照。用这些数字来规划你的成人切换临床研究（PMTA第6节成人使用终点）所需效应量。'},
+ a9_category:{en:'Product Category & Flavor',zh:'产品品类与口味'},
+ a9_youth_use:{en:'Forecasted Youth Use Rate (NYTS past-30-day, all youth)',zh:'预测青少年使用率（NYTS过去30天，全体青少年）'},
+ a9_brand_share:{en:'Forecasted Youth Usual-Brand Share (optional)',zh:'预测青少年常用品牌份额（可选）'},
+ a9_brand_optional:{en:'(0 = skip; affects "Youth Appeal" severity flag only)',zh:'（0=跳过；仅影响"青少年吸引力"严重度标记）'},
+ a9_client_label:{en:'CLIENT-PROVIDED',zh:'客户提供'},
+ a9_proposed_rate:{en:'Proposed Adult Complete-Switching Rate',zh:'拟议成人完全切换率'},
+ a9_proposed_note:{en:'From your adult switching cohort / actual-use study endpoint (typically 3–12 month follow-up). Comparable to the "complete switching rate" that FDA TPL documents quote for authorized e-cig and NP products.',zh:'来自成人切换队列/实际使用研究终点（通常3–12个月随访）。与FDA TPL文件中引用的已授权电子烟/尼古丁袋"完全切换率"可比。'},
+ a9_stringency:{en:'Stringency Anchor',zh:'严格度参照'},
+ a9_s1l:{en:'Min Switching Rate Required',zh:'所需最低切换率'},
+ a9_s2l:{en:'Gap vs Proposed',zh:'与拟议值差距'},
+ a9_s3l:{en:'Nearest Authorized Benchmark',zh:'最相近已授权产品'},
+ a9_s4l:{en:'MGO Feasibility Verdict',zh:'MGO可行性判定'},
+ a9_c1t:{en:'Decision Map — Your Product vs FDA-Authorized Benchmarks & Minimum-Switching Threshold',zh:'决策图 — 你的产品 vs FDA已授权参照品 与 最低切换率阈值'},
+ a9_legend_tobacco:{en:'Authorized — E-cig Tobacco',zh:'已授权 — 电子烟（烟草口味）'},
+ a9_legend_flavored:{en:'Authorized — E-cig Flavored/Menthol',zh:'已授权 — 电子烟（薄荷/非烟草口味）'},
+ a9_legend_np:{en:'Authorized — Nicotine Pouch',zh:'已授权 — 尼古丁袋'},
+ a9_legend_htp:{en:'Authorized — HTP (IQOS)',zh:'已授权 — 加热不燃烧烟草（IQOS）'},
+ a9_legend_user:{en:'Your proposed product',zh:'你的拟议产品'},
+ a9_legend_thresh:{en:'Minimum-switching threshold (category-specific, FDA historical floor)',zh:'最低切换率阈值（品类特定，FDA历史最低授权线）'},
+ a9_method_summary:{en:'📐 Methodology — How the minimum switching threshold is estimated',zh:'📐 方法说明 — 最低切换率阈值是如何估算的'},
+ a9_method_body:{en:"<strong>Framework:</strong> Reverse-empirical fit of FDA's observed MGO decisions. The simulator uses the lowest <em>reported</em> adult complete-switching rate (TPL lo-bound or Decision Summary quoted value) across all FDA-authorized products in the last five years (2021–2026), regressed on the NYTS past-30-day youth use rate at the time of authorization. This gives a product-category-and-flavor-conditional <em>floor</em>: the switching rate below which no product has been authorized in that category.<br><br><strong>Linear models (anchored on PMTA Benchmark scatter):</strong><br>• <strong>E-cig Tobacco</strong> — <code>min = 15 + 0.64 × youth%</code> (anchored on NJOY Daily Tobacco's 21% lo-bound at 9.4% youth use; literature baseline 15% floor)<br>• <strong>E-cig Flavored (Menthol / Non-tobacco)</strong> — <code>min = 15 + 2.9 × youth%</code> (anchored on NJOY Daily Menthol's 32% lo-bound at 5.9% youth); additional \"Very Unlikely\" verdict if youth use > 7% because <em>no</em> flavored e-cig has been authorized above that threshold.<br>• <strong>Nicotine Pouch</strong> — <code>min = 10 + 3.0 × youth%</code> (anchored on on! PLUS's 15% at 1.7% youth NP; ZYN 24% as upper reference)<br>• <strong>HTP</strong> — <code>min = 15 + 0.8 × youth%</code> (single anchor IQOS; treat output as highly uncertain)<br><br><strong>Conservative mode</strong> adds a +20% safety buffer on top of the benchmark estimate, reflecting that the lo-bound is a lower bound on <em>historical</em> authorizations, not a guaranteed floor for future decisions — FDA's bar has trended upward post-JUUL.<br><br><strong>Verdict thresholds:</strong> Gap < 0 → Insufficient · 0–5pp → Marginal · 5–15pp → Likely Feasible · ≥15pp → Strong. For flavored e-cig at youth use > 7% → Very Unlikely regardless of switching rate.<br><br><strong>⚠ Hard caveats (must be disclosed in any PMTA submission):</strong><br>• Only 9 e-cig + 2 NP + 1 HTP MGOs are available as anchor points (2021–2026). The sample is small, and FDA's regulatory stance has shifted over this window (more stringent post-Elf Bar enforcement).<br>• The scatter only plots TPL-confirmed or Decision-Summary-quoted switching rates. Products like Vuse where only BoE/migration evidence was cited (switching rate not directly reported) are intentionally omitted from the fit.<br>• FDA's APPH determination is <strong>not</strong> a single-variable threshold — toxicology, abuse liability, consumer perception of reduced-risk/exposure claims, youth-access controls, and marketing plans all matter. A \"pass\" on switching rate does <em>not</em> guarantee authorization.<br>• Youth-use projections for a novel product are themselves highly uncertain; the simulator accepts the input but does not propagate its uncertainty.<br>• Glas G (approved Mar 2026 at 13–21% cessation) is an outlier: cessation is a stricter endpoint than switching, so Glas's raw number understates the equivalent switching rate. Do not anchor your own clinical plan on the 13% lo-bound alone.<br><br><strong>Use case:</strong> Early go/no-go screening and clinical-program sizing — <em>not</em> a regulatory-grade submission. For actual PMTA planning, extend with full youth-initiation modeling, abuse-liability data, toxicology, and consumer-perception studies; see FDA APPH guidance (2019) and Levy et al. (2017) SimSmoke framework.",zh:'<strong>框架：</strong>对FDA MGO历史决策的反向经验拟合。本模拟器采用近五年（2021–2026）所有FDA已授权产品的最低<em>报告</em>成人完全切换率（TPL下限或决策摘要引用值），对授权当年NYTS青少年过去30天使用率做回归。得到按品类+口味分层的<em>下限</em>：在该品类中尚未有产品以低于此切换率获得授权。<br><br><strong>线性模型（锚定于PMTA基准散点图）：</strong><br>• <strong>电子烟（烟草口味）</strong> — <code>min = 15 + 0.64 × youth%</code>（锚定NJOY Daily Tobacco 21%下限@9.4%青少年使用率；文献基线下限15%）<br>• <strong>电子烟（薄荷/非烟草口味）</strong> — <code>min = 15 + 2.9 × youth%</code>（锚定NJOY Daily Menthol 32%下限@5.9%青少年使用率）；青少年使用率>7%时额外标记为"极不可行"，因为历史上 <em>从未</em>在此阈值之上授权过非烟草口味电子烟。<br>• <strong>尼古丁袋</strong> — <code>min = 10 + 3.0 × youth%</code>（锚定on! PLUS 15%@1.7%青少年NP使用率；ZYN 24%作为上限参照）<br>• <strong>加热不燃烧烟草</strong> — <code>min = 15 + 0.8 × youth%</code>（唯一锚点IQOS；输出高度不确定）<br><br><strong>保守模式</strong>在基准估计之上增加+20%安全缓冲，反映下限值是<em>历史</em>授权的下界，而非未来决策的保证性底线——FDA门槛在JUUL事件后呈上行趋势。<br><br><strong>判定阈值：</strong>差距<0 → 证据不足；0–5pp → 边缘；5–15pp → 可行；≥15pp → 强证据。非烟草口味电子烟在青少年使用率>7%时一律判为"极不可行"。<br><br><strong>⚠ 硬性警告（任何PMTA申报必须披露）：</strong><br>• 仅有9个电子烟+2个尼古丁袋+1个HTP MGO可作为锚点（2021–2026）。样本量小，且FDA监管立场在此窗口期内有所变化（Elf Bar执法后更趋严格）。<br>• 散点图仅绘制TPL确认或决策摘要引用的切换率。如Vuse等仅引用BoE/迁移证据（未直接报告切换率）的产品，刻意未纳入拟合。<br>• FDA APPH判定<strong>并非</strong>单变量阈值——毒理、滥用倾向、消费者对"减风险/减暴露"宣称的理解、青少年准入控制、营销计划等均起作用。仅切换率"通过"并<em>不</em>保证授权。<br>• 新产品的青少年使用率预测本身高度不确定；模拟器接受输入但不传播其不确定性。<br>• Glas G（2026年3月获批，13–21%戒烟率）是离群点：戒烟是比切换更严格的终点，Glas原始数值低估了等效切换率。请勿仅以13%下限为自身临床方案锚点。<br><br><strong>使用场景：</strong>早期 go/no-go 筛选与临床项目量级规划——<em>非</em>监管级申报。PMTA正式规划请扩展至完整的青少年起始建模、滥用倾向数据、毒理学与消费者认知研究；参见FDA APPH指南（2019）及Levy et al.（2017）SimSmoke框架。'},
  /* A8 */
  tab_a8:{en:'PMTA Roadmap',zh:'PMTA路线图'},
  a8_title:{en:'PMTA Roadmap',zh:'PMTA申请路线图'},
@@ -1227,13 +1322,18 @@ function toggleLang(){
 function applyLang(){
  document.querySelectorAll('[data-i]').forEach(function(el){
   var k=el.getAttribute('data-i');
-  if(I[k])el.textContent=I[k][curLang]||I[k].en;
+  if(!I[k])return;
+  // don't wipe child <option>s when a <select> has data-i (shouldn't happen, but guard)
+  if(el.tagName==='SELECT')return;
+  el.textContent=I[k][curLang]||I[k].en;
  });
  document.querySelectorAll('[data-ih]').forEach(function(el){
   var k=el.getAttribute('data-ih');
   if(I[k])el.innerHTML=I[k][curLang]||I[k].en;
  });
  document.documentElement.lang=curLang==='zh'?'zh-CN':'en';
+ // re-render feasibility chart so axis titles / tooltip labels switch language
+ if(typeof runFeasibility==='function')try{runFeasibility();}catch(e){}
 }
 
 /* ========== Navigation ========== */
@@ -1274,6 +1374,7 @@ function initCharts(){
  buildAllCharts();
  applyLang();
  runSim();
+ runFeasibility();
 }
 
 function buildAllCharts(){
@@ -1665,6 +1766,9 @@ function buildAllCharts(){
 
   /* A4: PAF chart (initial) */
  buildSimCharts();
+
+ /* A9: MGO Feasibility decision map */
+ buildFeasibilityChart();
 }
 
 function rebuildCharts(){
@@ -1729,6 +1833,234 @@ function buildSimCharts(switchers,hr,hz){
   labels:pafLabels,
   datasets:[{data:wfData,backgroundColor:teal,borderRadius:4}]
  },options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true}}}});
+}
+
+/* ========== A9: MGO Feasibility Simulator ========== */
+var MGO_ANCHOR={
+ ec_tobacco:{
+  label:'E-cig Tobacco',labelZh:'电子烟（烟草口味）',color:'#d97706',
+  intercept:15,slope:0.64,penaltyAbove:null,
+  benchmarks:[
+   {lbl:'NJOY Daily Tobacco',x:9.4,y:29,lo:21,hi:37,year:2022,note:'PM0000630-631'},
+   {lbl:'Logic (3 lines)',x:9.4,y:33,lo:29,hi:37,year:2022,note:'PM0000529-541'}
+  ]
+ },
+ ec_flavored:{
+  label:'E-cig Flavored/Menthol',labelZh:'电子烟（薄荷/非烟草口味）',color:'#7c3aed',
+  intercept:15,slope:2.9,penaltyAbove:7,
+  benchmarks:[
+   {lbl:'NJOY Daily Menthol',x:5.9,y:37.5,lo:32,hi:43,year:2024,note:'PM0000628-629'},
+   {lbl:'JUUL (Menthol+VA)',x:5.2,y:50,lo:38,hi:52,year:2025,note:'ADJUSTST 2-yr · PM0000864-878'},
+   {lbl:'Glas G',x:5.2,y:17,lo:13,hi:21,year:2026,note:'Cessation endpoint (stricter) · PM0004879'}
+  ]
+ },
+ np:{
+  label:'Nicotine Pouch',labelZh:'尼古丁袋',color:'#2563eb',
+  intercept:10,slope:3.0,penaltyAbove:null,
+  benchmarks:[
+   {lbl:'ZYN',x:1.7,y:24,lo:null,hi:null,year:2025,note:'Wk-10 cohort 24% (83/346)'},
+   {lbl:'on! PLUS',x:1.7,y:15,lo:null,hi:null,year:2025,note:'6-wk actual-use 15% complete quit'}
+  ]
+ },
+ htp:{
+  label:'HTP',labelZh:'加热不燃烧烟草',color:'#0d9488',
+  intercept:15,slope:0.8,penaltyAbove:null,
+  benchmarks:[
+   {lbl:'IQOS',x:20,y:25,lo:null,hi:null,year:2019,note:'E-cig youth% as proxy; IQOS own youth <1% · PM0000424'}
+  ]
+ }
+};
+
+function buildFeasibilityChart(){
+ var el=document.getElementById('c-a9-decision');
+ if(!el)return;
+ charts.a9decision=new Chart(el,{
+  type:'scatter',
+  data:{datasets:[]},
+  options:{
+   responsive:true,maintainAspectRatio:false,
+   layout:{padding:{top:10,right:20}},
+   plugins:{
+    legend:{display:false},
+    tooltip:{callbacks:{label:function(c){
+     var d=c.raw;
+     if(d._user)return[curLang==='zh'?'你的产品':'Your product',(curLang==='zh'?'青少年使用率：':'Youth use: ')+d.x+'%',(curLang==='zh'?'切换率：':'Switching: ')+d.y+'%'];
+     if(d._thresh)return[(curLang==='zh'?'阈值线：':'Threshold: ')+d.y.toFixed(1)+'%',(curLang==='zh'?'青少年使用率 ':'at youth ')+d.x+'%'];
+     if(d.lbl)return[d.lbl,(curLang==='zh'?'授权时青少年：':'Youth at auth: ')+d.x+'%',(curLang==='zh'?'切换率：':'Switching: ')+(d.lo!==null&&d.lo!==undefined?(d.lo+'–'+d.hi+'%'):(d.y+'%')),(d.year||'')+' · '+(d.note||'')];
+     return c.parsed.y+'%';
+    }}}
+   },
+   scales:{
+    x:{min:0,max:20,title:{display:true,text:curLang==='zh'?'青少年过去30天使用率（NYTS，%）':'NYTS Youth Past-30-Day Use (%)'},grid:{color:'rgba(0,0,0,0.05)'}},
+    y:{min:0,max:70,title:{display:true,text:curLang==='zh'?'成人完全切换率（%）':'Adult Complete-Switching Rate (%)'},grid:{color:'rgba(0,0,0,0.05)'}}
+   }
+  }
+ });
+ // Annotation plug-in: draw benchmark labels and error bars
+ var annotPlugin={
+  id:'a9Annot',
+  afterDatasetsDraw:function(chart){
+   var ctx=chart.ctx,xs=chart.scales.x,ys=chart.scales.y;
+   chart.data.datasets.forEach(function(ds,di){
+    if(!ds._bench)return;
+    var meta=chart.getDatasetMeta(di);
+    meta.data.forEach(function(pt,pi){
+     var d=ds.data[pi];
+     if(!d||d._user||d._thresh)return;
+     ctx.save();
+     // error bar
+     if(d.lo!==null&&d.lo!==undefined){
+      var yT=ys.getPixelForValue(d.hi),yB=ys.getPixelForValue(d.lo);
+      ctx.strokeStyle=ds.borderColor+'aa';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(pt.x,yT);ctx.lineTo(pt.x,yB);ctx.stroke();
+      ctx.beginPath();ctx.moveTo(pt.x-3,yT);ctx.lineTo(pt.x+3,yT);ctx.moveTo(pt.x-3,yB);ctx.lineTo(pt.x+3,yB);ctx.stroke();
+     }
+     // label
+     ctx.font='10px -apple-system,sans-serif';ctx.fillStyle='#374151';ctx.textAlign='left';
+     ctx.fillText(d.lbl,pt.x+9,pt.y-8);
+     ctx.restore();
+    });
+   });
+  }
+ };
+ charts.a9decision.options.plugins.a9Annot={};
+ Chart.register(annotPlugin);
+}
+
+function runFeasibility(){
+ if(typeof charts==='undefined'||!charts.a9decision){
+  // chart not built yet — will be called again after buildAllCharts
+  return;
+ }
+ var catEl=document.getElementById('mgo-category');
+ if(!catEl)return;
+ var cat=catEl.value;
+ var youth=parseFloat(document.getElementById('mgo-youth').value);
+ var brand=parseFloat(document.getElementById('mgo-brand').value);
+ var proposed=parseFloat(document.getElementById('mgo-proposed').value);
+ var stringency=document.getElementById('mgo-stringency').value;
+
+ document.getElementById('mgo-youth-val').textContent=youth.toFixed(1);
+ document.getElementById('mgo-brand-val').textContent=brand.toFixed(1);
+ document.getElementById('mgo-proposed-val').textContent=proposed;
+
+ var anchor=MGO_ANCHOR[cat];
+ var minSwitch=anchor.intercept+anchor.slope*youth;
+ if(stringency==='cons')minSwitch=minSwitch*1.2;
+ minSwitch=Math.max(minSwitch,10);
+
+ var gap=proposed-minSwitch;
+
+ // Nearest benchmark
+ var nearest=anchor.benchmarks[0],bestDist=Infinity;
+ anchor.benchmarks.forEach(function(b){
+  var dx=Math.abs(b.x-youth);
+  if(dx<bestDist){bestDist=dx;nearest=b;}
+ });
+
+ // Verdict
+ var verdict,vColor,vReason;
+ var hardBlock=(anchor.penaltyAbove!==null&&youth>anchor.penaltyAbove);
+ if(hardBlock){
+  verdict=curLang==='zh'?'极不可行':'Very Unlikely';vColor='#dc2626';
+  vReason=curLang==='zh'?('FDA 从未授权青少年使用率 >'+anchor.penaltyAbove+'% 的'+anchor.labelZh):('FDA has never authorized '+anchor.label+' above '+anchor.penaltyAbove+'% youth use');
+ } else if(gap<0){
+  verdict=curLang==='zh'?'证据不足':'Insufficient';vColor='#dc2626';
+  vReason=curLang==='zh'?('低于 FDA 历史最低授权线 '+Math.abs(gap).toFixed(1)+'pp'):(Math.abs(gap).toFixed(1)+'pp below historical floor');
+ } else if(gap<5){
+  verdict=curLang==='zh'?'边缘 / 需额外证据':'Marginal';vColor='#d97706';
+  vReason=curLang==='zh'?('仅高出阈值 '+gap.toFixed(1)+'pp，建议扩大临床样本'):('Only +'+gap.toFixed(1)+'pp above floor — consider larger clinical sample');
+ } else if(gap<15){
+  verdict=curLang==='zh'?'可行':'Likely Feasible';vColor='#16a34a';
+  vReason=curLang==='zh'?('+'+gap.toFixed(1)+'pp 高于历史最低线'):('+'+gap.toFixed(1)+'pp above FDA historical floor');
+ } else {
+  verdict=curLang==='zh'?'强证据':'Strong';vColor='#16a34a';
+  vReason=curLang==='zh'?('大幅超过阈值（+'+gap.toFixed(1)+'pp）'):('Well above floor (+'+gap.toFixed(1)+'pp)');
+ }
+
+ // Update stat cards
+ var minEl=document.getElementById('mgo-min');
+ minEl.textContent=minSwitch.toFixed(1)+'%';
+ document.getElementById('mgo-min-sub').textContent=
+  stringency==='cons'
+   ?(curLang==='zh'?'保守模式（+20% 安全缓冲）':'Conservative (+20% buffer)')
+   :(curLang==='zh'?'基准（历史观察最低）':'Benchmark (historical min)');
+
+ var gapEl=document.getElementById('mgo-gap');
+ gapEl.textContent=(gap>=0?'+':'')+gap.toFixed(1)+' pp';
+ gapEl.style.color=gap>=0?(gap<5?'#d97706':'#16a34a'):'#dc2626';
+ document.getElementById('mgo-gap-sub').textContent=
+  gap>=0
+   ?(curLang==='zh'?'高于 FDA 历史最低授权线':'above FDA historical floor')
+   :(curLang==='zh'?'低于 FDA 历史最低授权线':'below FDA historical floor');
+
+ document.getElementById('mgo-bench').textContent=nearest.lbl;
+ document.getElementById('mgo-bench-sub').textContent=
+  (curLang==='zh'?'授权青少年 ':'youth ')+nearest.x+'% · '
+  +(curLang==='zh'?'切换率 ':'switch ')
+  +(nearest.lo!==null?(nearest.lo+'–'+nearest.hi+'%'):(nearest.y+'%'))
+  +' · '+nearest.year;
+
+ var verdictEl=document.getElementById('mgo-verdict');
+ verdictEl.textContent=verdict;
+ verdictEl.style.color=vColor;
+ document.getElementById('mgo-verdict-sub').textContent=vReason;
+
+ // Build datasets
+ var cats=['ec_tobacco','ec_flavored','np','htp'];
+ var datasets=cats.map(function(k){
+  var a=MGO_ANCHOR[k];
+  return{
+   label:a.label,
+   data:a.benchmarks.map(function(b){return{x:b.x,y:b.y,lbl:b.lbl,lo:b.lo,hi:b.hi,year:b.year,note:b.note};}),
+   backgroundColor:a.color+(k===cat?'cc':'55'),
+   borderColor:a.color,
+   pointRadius:k===cat?8:5,
+   pointHoverRadius:10,
+   borderWidth:1.5,
+   showLine:false,
+   _bench:true
+  };
+ });
+ // Threshold line
+ var thresh=[];
+ for(var u=0;u<=20;u+=0.5){
+  var m=anchor.intercept+anchor.slope*u;
+  if(stringency==='cons')m=m*1.2;
+  m=Math.max(m,10);
+  if(m<=70)thresh.push({x:u,y:m,_thresh:true});
+ }
+ datasets.push({
+  label:(curLang==='zh'?'最低切换率阈值':'Min switching threshold'),
+  data:thresh,
+  borderColor:anchor.color,backgroundColor:'transparent',
+  showLine:true,pointRadius:0,borderWidth:2.5,borderDash:[6,4],
+  type:'line',tension:0
+ });
+ // Hard-block vertical band for flavored e-cig
+ if(anchor.penaltyAbove!==null){
+  var block=[];
+  for(var v=anchor.penaltyAbove;v<=20;v+=0.5){block.push({x:v,y:70});}
+  datasets.push({
+   label:'hardblock',data:block,
+   borderColor:'rgba(220,38,38,0.25)',backgroundColor:'rgba(220,38,38,0.08)',
+   showLine:true,fill:'origin',pointRadius:0,borderWidth:0,type:'line'
+  });
+ }
+ // User's point
+ datasets.push({
+  label:curLang==='zh'?'你的产品':'Your product',
+  data:[{x:youth,y:proposed,_user:true}],
+  backgroundColor:'#dc2626',borderColor:'#fff',
+  pointRadius:14,pointHoverRadius:16,pointStyle:'star',
+  borderWidth:2,showLine:false
+ });
+
+ charts.a9decision.data.datasets=datasets;
+ charts.a9decision.options.scales.x.max=20;
+ charts.a9decision.options.scales.x.title.text=curLang==='zh'?'青少年过去30天使用率（NYTS，%）':'NYTS Youth Past-30-Day Use (%)';
+ charts.a9decision.options.scales.y.title.text=curLang==='zh'?'成人完全切换率（%）':'Adult Complete-Switching Rate (%)';
+ charts.a9decision.update();
 }
 
 /* ========== Init ========== */
