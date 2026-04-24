@@ -240,7 +240,7 @@ function doLogin(e){
   <tr><td>ZYN</td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Jan 2025</td><td data-i="a1_zyn_prod">20 nicotine pouch products</td></tr>
   <tr><td>NJOY</td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Apr 2024</td><td data-i="a1_njoy_prod">Device + Tobacco + Menthol</td></tr>
   <tr><td>on! PLUS</td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Dec 2025</td><td>6 nicotine pouch products</td></tr>
-  <tr><td>IQOS <span style="font-size:10px;color:var(--muted)">(HTP)</span></td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Apr 2019 + MRTP Jul 2020</td><td>HEETS HeatSticks (PMTA) + Modified Risk order</td></tr>
+  <tr><td>IQOS <span style="font-size:10px;color:var(--muted)">(HTP)</span></td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Apr 2019 · MRTP Jul 2020 · MRTP Renewed Apr 17, 2026</td><td>IQOS 2.4 + 3.0 Holders & Chargers; Marlboro Amber/Green Menthol/Blue Menthol HeatSticks — PMTA + MRTP exposure-modification orders (renewed 2026)</td></tr>
   <tr><td>Elf Bar</td><td><span class="badge-no" data-i="not_authorized">Not Authorized</span></td><td>-</td><td data-i="a1_elfbar_prod">Enforcement target</td></tr>
   <tr><td>Mr Fog</td><td><span class="badge-no" data-i="not_authorized">Not Authorized</span></td><td>-</td><td data-i="a1_mrfog_prod">Enforcement target</td></tr>
  </tbody>
@@ -346,7 +346,7 @@ function doLogin(e){
    <td colspan="6" style="color:var(--muted);font-size:10px;text-align:center">NYTS tracks HTP as category (0.5% 2019 → 0.8% 2025) — no brand-level HTP question in NYTS</td>
    <td style="background:#fef3c7">—</td>
    <td><span class="badge-ok">Apr 2019</span></td>
-   <td style="font-size:10px;line-height:1.6">NYTS does not collect HTP brand names. Aggregate youth HTP use: 0.5% (2019) → 0.8% (2025). FDA PMTA decision cited "minimal" IQOS youth uptake as favorable APPH evidence. MRTP added Jul 2020.</td>
+   <td style="font-size:10px;line-height:1.6">NYTS does not collect HTP brand names. Aggregate youth HTP use: 0.5% (2019) → 0.8% (2025). FDA PMTA decision cited "minimal" IQOS youth uptake as favorable APPH evidence. MRTP exposure-modification order added Jul 2020; renewed by FDA Apr 17, 2026 following Oct 2025 TPSAC review.</td>
   </tr>
  </tbody>
 </table>
@@ -474,7 +474,7 @@ function doLogin(e){
  <div class="stat-card"><div class="stat-label" data-i="a6_s1l">E-Cig + NP Authorized Products</div><div class="stat-value">67</div><div class="stat-detail" data-i="a6_s1d">FDA Searchable Tobacco Products Database</div></div>
  <div class="stat-card"><div class="stat-label" data-i="a6_s2l">Authorized E-Cig Products</div><div class="stat-value blue">41</div><div class="stat-detail" data-i="a6_s2d">Vuse 16 · NJOY 10 · Logic 8 · JUUL 5 · Glas 2</div></div>
  <div class="stat-card"><div class="stat-label" data-i="a6_s3l">Authorized NP Products</div><div class="stat-value green">26</div><div class="stat-detail" data-i="a6_s3d">ZYN 20 · on! PLUS 6</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a6_s4l">HTP MGOs</div><div class="stat-value teal">1</div><div class="stat-detail" data-i="a6_s4d">IQOS (+ MRTP 2020)</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a6_s4l">HTP MGOs</div><div class="stat-value teal">1</div><div class="stat-detail" data-i="a6_s4d">IQOS · MRTP 2020 → Renewed 2026</div></div>
 </div>
 
 <div class="chart-grid">
@@ -647,7 +647,7 @@ function doLogin(e){
 </div>
 <p style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6"><strong data-i="method_label">Analysis:</strong> NP trend uses two parallel surveillance series: MTF (Monitoring the Future) surveys 8th/10th/12th grade students (NIDA; NP item added 2022); NYTS surveys middle + high school students (CDC/FDA CTP; probability sample). Both weighted for national representativeness; not directly comparable due to differing age ranges and survey designs. Flavor estimates are complex survey-weighted proportions conditional on current past-30-day NP use.</p>
 
-<h3 style="margin-top:20px;padding:10px 14px;background:#f0fdfa;border-radius:8px;border-left:3px solid var(--teal)" data-i="a6_htp_title">Heated Tobacco Products — 1 Marketing Granted Order (2019) + MRTP (2020)</h3>
+<h3 style="margin-top:20px;padding:10px 14px;background:#f0fdfa;border-radius:8px;border-left:3px solid var(--teal)" data-i="a6_htp_title">Heated Tobacco Products — IQOS PMTA (2019) + MRTP Exposure-Modification Order (2020) + MRTP Renewed (Apr 17, 2026)</h3>
 <table class="data-table" style="margin-top:8px">
  <thead><tr>
   <th data-i="th_date">Date</th>
@@ -658,17 +658,93 @@ function doLogin(e){
  </tr></thead>
  <tbody>
   <tr>
-   <td>Apr 2019</td><td>Philip Morris International (PMI)</td><td>IQOS device + HEETS tobacco sticks (PMTA)</td><td class="hl">20.0%</td>
+   <td>Apr 30, 2019</td><td>Philip Morris Products S.A. (PMI)</td><td>IQOS 2.4 device + HEETS tobacco sticks (PMTA — first HTP MGO)</td><td class="hl">20.0%</td>
    <td data-i="a6_benefit_iqos_pmta"><strong>TPL-confirmed (PM0000424, Apr 2019):</strong> Aerosol HPHC greatly reduced vs combusted cigarettes; clinical BoE reduction in switching studies; abuse liability similar to CC; supplemental consumables (Marlboro Sienna, Bronze, Amber HeatSticks) authorized via sPMTAs (PM0004337/PM0004691)</td>
   </tr>
   <tr>
-   <td>Jul 2020</td><td>Philip Morris International (PMI)</td><td>IQOS — Modified Risk Tobacco Product (MRTP) order</td><td class="hl" title="2020 NYTS data COVID-affected">~19.6%*</td>
-   <td data-i="a6_benefit_iqos_mrtp"><strong>MRTP Order:</strong> "Reduces exposure to harmful or potentially harmful chemicals" (aerosol vs smoke). PMI clinical submission cited reduced toxicant biomarker exposure in switching studies — see FDA MRTP Order (Jul 2020)</td>
+   <td>Jul 7, 2020</td><td>Philip Morris Products S.A. (PMI)</td><td>IQOS 2.4 System Holder &amp; Charger + Marlboro Amber / Green Menthol / Blue Menthol HeatSticks — Modified Risk Tobacco Product (MRTP) <em>exposure-modification</em> order</td><td class="hl" title="2020 NYTS data COVID-affected">~19.6%*</td>
+   <td data-i="a6_benefit_iqos_mrtp"><strong>MRTP Order (exposure-modification):</strong> FDA authorized PMI to market with the claims "<em>The IQOS system heats tobacco but does not burn it</em>," "<em>This significantly reduces the production of harmful and potentially harmful chemicals</em>," and "<em>Scientific studies have shown that switching completely from conventional cigarettes to the IQOS system significantly reduces your body's exposure to harmful or potentially harmful chemicals.</em>" FDA did <strong>not</strong> authorize "reduced-risk" claims. — see FDA MRTP Order (Jul 2020)</td>
+  </tr>
+  <tr>
+   <td>Dec 7, 2020 / Mar 11, 2022</td><td>Philip Morris Products S.A. (PMI)</td><td>IQOS 3.0 System Holder &amp; Charger — PMTA (Dec 2020) + supplemental MRTP exposure-modification order (Mar 2022)</td><td class="hl">7.7%</td>
+   <td>Authorized to carry the same "reduced-exposure" claim package as IQOS 2.4; marketing and youth-access conditions extended to the IQOS 3.0 form factor — see FDA Order (Mar 11, 2022)</td>
+  </tr>
+  <tr>
+   <td>May 9, 2024</td><td>Philip Morris Products S.A. (PMI)</td><td>MRTP <strong>renewal</strong> applications filed for scientific review: IQOS 2.4 &amp; IQOS 3.0 Systems + Marlboro Amber / Green Menthol / Blue Menthol HeatSticks</td><td class="hl">5.9%</td>
+   <td>Renewal package under FDCA §911(g)(2): cumulative PMSS post-market surveillance reports (2021–2024), real-world HPHC/BoE data, consumer perception updates, continued youth-access controls. Applications supplemented Dec 2024 and Aug 2025 (partial withdrawal + new scientific evidence amendments).</td>
+  </tr>
+  <tr>
+   <td>Oct 7, 2025</td><td>FDA / TPSAC</td><td>Virtual Tobacco Products Scientific Advisory Committee (TPSAC) meeting on the MRTP renewal applications</td><td class="hl">5.2%</td>
+   <td>TPSAC reviewed PMI's renewal evidence — including real-world marketing data, youth uptake trends, consumer understanding of the authorized exposure claims, and post-market biomarker data — and advised FDA on whether each product still met §911(g)(2).</td>
+  </tr>
+  <tr style="background:#f0fdfa">
+   <td><strong>Apr 17, 2026</strong></td><td>Philip Morris Products S.A. (PMI)</td><td><strong>FDA <em>renewed</em> the MRTP exposure-modification orders</strong> for IQOS 2.4 System Holder &amp; Charger, IQOS 3.0 System Holder &amp; Charger, Marlboro Amber HeatSticks, Marlboro Green Menthol HeatSticks and Marlboro Blue Menthol HeatSticks</td><td class="hl">5.2%</td>
+   <td><strong>Renewal granted.</strong> The authorized "reduced-exposure" claim package continues in force; no "reduced-risk" claim was authorized. Conditions on marketing, youth-access and ongoing post-market surveillance (annual PMTA/MRTPA reports) carry over. See FDA MRGO renewal letter (Apr 17, 2026) and FDA docket <a href="https://www.regulations.gov/docket/FDA-2017-D-3001" target="_blank" rel="noopener">FDA-2017-D-3001</a>.</td>
   </tr>
  </tbody>
 </table>
-<p style="font-size:11px;color:var(--muted);margin-top:6px">* 2020 NYTS data COVID-affected (in-person data collection suspended); figure estimated from trend. IQOS was the only HTP to receive FDA PMTA/MRTP authorization as of 2025.</p>
-<span class="source-tag">FDA PMTA / MRTP Marketing Granted Orders · NYTS 2019–2020 weighted (all youth)</span>
+<p style="font-size:11px;color:var(--muted);margin-top:6px">* 2020 NYTS data COVID-affected (in-person data collection suspended); figure estimated from trend. IQOS remains the only heated tobacco product with an FDA MRTP order; April 17, 2026 is the first MRTP renewal FDA has issued under §911(g)(2).</p>
+<span class="source-tag">FDA — <a href="https://www.fda.gov/tobacco-products/advertising-and-promotion/philip-morris-products-sa-modified-risk-tobacco-product-mrtp-applications" target="_blank" rel="noopener">PMI MRTP page</a> (content current as of 04/17/2026) · NYTS 2019–2025 weighted (all youth)</span>
+
+<!-- ===== IQOS MRTP Current Status Table ===== -->
+<h3 style="margin-top:22px;padding:10px 14px;background:#f0fdfa;border-radius:8px;border-left:3px solid var(--teal)">IQOS MRTP — Current Status (post-April 17, 2026 renewal)</h3>
+<table class="data-table" style="margin-top:8px;font-size:12.5px">
+ <thead><tr>
+  <th style="width:22%">Product</th>
+  <th style="width:13%">Order type</th>
+  <th>Authorized claim package (verbatim)</th>
+  <th style="width:13%">Original order</th>
+  <th style="width:13%">Renewal (Apr 17, 2026)</th>
+  <th style="width:10%">Status</th>
+ </tr></thead>
+ <tbody>
+  <tr>
+   <td>IQOS 2.4 System Holder &amp; Charger</td>
+   <td>MRTP <em>exposure-modification</em></td>
+   <td rowspan="5" style="font-size:11.5px;line-height:1.7;background:var(--bg3)">
+    "The IQOS system heats tobacco but does not burn it."<br>
+    "This significantly reduces the production of harmful and potentially harmful chemicals."<br>
+    "Scientific studies have shown that switching completely from conventional cigarettes to the IQOS system significantly reduces your body's exposure to harmful or potentially harmful chemicals."<br>
+    <em style="color:var(--muted)">FDA did NOT authorize any "reduced-risk" claim.</em>
+   </td>
+   <td>Jul 7, 2020</td>
+   <td>Renewed Apr 17, 2026</td>
+   <td><span class="badge-ok">Active</span></td>
+  </tr>
+  <tr>
+   <td>IQOS 3.0 System Holder &amp; Charger</td>
+   <td>MRTP <em>exposure-modification</em></td>
+   <td>Mar 11, 2022</td>
+   <td>Renewed Apr 17, 2026</td>
+   <td><span class="badge-ok">Active</span></td>
+  </tr>
+  <tr>
+   <td>Marlboro Amber HeatSticks<br><span style="font-size:10px;color:var(--muted)">(formerly Marlboro HeatSticks)</span></td>
+   <td>MRTP <em>exposure-modification</em></td>
+   <td>Jul 7, 2020</td>
+   <td>Renewed Apr 17, 2026</td>
+   <td><span class="badge-ok">Active</span></td>
+  </tr>
+  <tr>
+   <td>Marlboro Green Menthol HeatSticks<br><span style="font-size:10px;color:var(--muted)">(formerly Marlboro Smooth Menthol HeatSticks)</span></td>
+   <td>MRTP <em>exposure-modification</em></td>
+   <td>Jul 7, 2020</td>
+   <td>Renewed Apr 17, 2026</td>
+   <td><span class="badge-ok">Active</span></td>
+  </tr>
+  <tr>
+   <td>Marlboro Blue Menthol HeatSticks<br><span style="font-size:10px;color:var(--muted)">(formerly Marlboro Fresh Menthol HeatSticks)</span></td>
+   <td>MRTP <em>exposure-modification</em></td>
+   <td>Jul 7, 2020</td>
+   <td>Renewed Apr 17, 2026</td>
+   <td><span class="badge-ok">Active</span></td>
+  </tr>
+ </tbody>
+</table>
+<div class="callout callout-blue" style="margin-top:12px;font-size:12.5px;line-height:1.7">
+ <strong>Regulatory read-out.</strong> PMI's IQOS package remains an <em>exposure</em> MRTP, not a <em>risk</em> MRTP — FDA continues to reject the stronger "reduced-risk" language that PMI's 2016 filing originally sought. The April 17, 2026 renewal is notable as the <strong>first-ever MRTP renewal</strong> issued by FDA under §911(g)(2), and establishes a template for how post-market surveillance evidence (PMSS, annual reports, TPSAC review) is weighed against initial application data. For any manufacturer preparing a future MRTP filing, the IQOS file now provides a full end-to-end reference cycle: <span style="white-space:nowrap">filing → MRGO → 3–4 yr post-market evidence → TPSAC review → renewal</span>.
+</div>
+<span class="source-tag">FDA — <a href="https://www.fda.gov/tobacco-products/advertising-and-promotion/philip-morris-products-sa-modified-risk-tobacco-product-mrtp-applications" target="_blank" rel="noopener">Philip Morris MRTP applications (FDA page, updated 04/17/2026)</a> · TPSAC meeting Oct 7, 2025 · Regulations.gov docket FDA-2017-D-3001</span>
 
 <div class="chart-grid">
  <div class="chart-card">
@@ -1053,13 +1129,13 @@ var I={
  a6_s1l:{en:'E-Cig + NP Authorized Products',zh:'电子烟+尼古丁袋获批产品数'},a6_s1d:{en:'FDA Searchable Tobacco Products Database',zh:'FDA可搜索烟草产品数据库'},
  a6_s2l:{en:'Authorized E-Cig Products',zh:'已获批电子烟产品数'},a6_s2d:{en:'Vuse 16 · NJOY 10 · Logic 8 · JUUL 5 · Glas 2',zh:'Vuse 16 · NJOY 10 · Logic 8 · JUUL 5 · Glas 2'},
  a6_s3l:{en:'Authorized NP Products',zh:'已获批尼古丁袋产品数'},a6_s3d:{en:'ZYN 20 · on! PLUS 6',zh:'ZYN 20 · on! PLUS 6'},
- a6_s4l:{en:'HTP MGOs',zh:'加热烟草授权'},a6_s4d:{en:'IQOS (+ MRTP 2020)',zh:'IQOS（+MRTP 2020）'},
+ a6_s4l:{en:'HTP MGOs',zh:'加热烟草授权'},a6_s4d:{en:'IQOS · MRTP 2020 → Renewed 2026',zh:'IQOS · MRTP 2020 → 2026续期'},
  a6_c1t:{en:'NYTS Youth Prevalence Trend with FDA Authorization Events (All Youth, Weighted)',zh:'NYTS青少年使用率趋势与FDA授权事件（全部青少年，加权）'},
  a6_c2t:{en:'Youth Risk vs Adult Benefit — FDA PMTA Authorization Decision Map',zh:'青少年风险与成人获益 — FDA PMTA授权决策图'},
  a6_c3t:{en:'Confirmed Adult Benefit — NP Authorizations (Decision Summary)',zh:'已确认成人获益 — 尼古丁袋授权（决策摘要）'},
  a6_ecig_title:{en:'E-Cigarettes — 9 Marketing Granted Orders (2021–2026)',zh:'电子烟 — 9项营销授权令（2021–2026）'},
  a6_np_title:{en:'Nicotine Pouches — 2 Marketing Granted Orders (2025)',zh:'尼古丁袋 — 2项营销授权令（2025）'},
- a6_htp_title:{en:'Heated Tobacco Products — 1 Marketing Granted Order (2019) + MRTP (2020)',zh:'加热不燃烧烟草 — 1项营销授权令（2019）+ MRTP（2020）'},
+ a6_htp_title:{en:'Heated Tobacco Products — IQOS PMTA (2019) + MRTP Exposure-Modification Order (2020) + MRTP Renewed (Apr 17, 2026)',zh:'加热不燃烧烟草 — IQOS PMTA（2019）+ MRTP 暴露修饰性宣称令（2020）+ MRTP 续期（2026年4月17日）'},
  a6_th_products:{en:'Products Authorized',zh:'授权产品'},
  a6_th_nyts:{en:'NYTS Youth E-cig %',zh:'NYTS青少年电子烟%'},
  a6_th_nyts_np:{en:'NYTS Youth NP %',zh:'NYTS青少年尼古丁袋%'},
@@ -1078,7 +1154,7 @@ var I={
  a6_benefit_zyn:{en:'<strong>Quantified (Decision Summary Jan 2025):</strong> Meaningful share of participants completely switched from cigarettes by week 10 in prospective cohort; abuse liability ≤ smokeless tobacco comparators',zh:'<strong>量化数据（2025年1月决策摘要）：</strong>前瞻性队列研究中，第10周有相当比例参与者完全从卷烟转用ZYN；滥用倾向≤无烟烟草对照品'},
  a6_benefit_onplus:{en:'<strong>Quantified (Decision Summary Dec 2025):</strong> 15% of dip/snuff users completely quit; 35% of dual-users reduced cigarette use ≥50% at 6-week actual-use study endpoint',zh:'<strong>量化数据（2025年12月决策摘要）：</strong>15%无烟烟草用户完全戒除；35%双重使用者在6周实际使用研究终点时减少卷烟使用≥50%'},
  a6_benefit_iqos_pmta:{en:'<strong>TPL-confirmed (PM0000424, Apr 2019):</strong> Aerosol HPHC greatly reduced vs combusted cigarettes; clinical BoE reduction demonstrated in switching studies; abuse liability similar to CC; supplemental consumables (Marlboro Sienna, Bronze, Amber HeatSticks) authorized via sPMTAs (PM0004337/PM0004691)',zh:'<strong>TPL确认数据（PM0000424，2019年4月）：</strong>气溶胶HPHC与可燃卷烟相比大幅降低；转用研究中证实临床生物标志物暴露降低；滥用倾向与卷烟相似；补充消耗品（Marlboro Sienna、Bronze、Amber加热棒）经sPMTA获授权（PM0004337/PM0004691）'},
- a6_benefit_iqos_mrtp:{en:'<strong>MRTP Order:</strong> "Reduces exposure to harmful or potentially harmful chemicals" (aerosol vs smoke). PMI clinical submission cited reduced toxicant biomarker exposure in switching studies — see FDA MRTP Order (Jul 2020)',zh:'<strong>MRTP令：</strong>"减少有害或潜在有害化学物质暴露"（气溶胶vs烟雾）。PMI临床提交文件在转用研究中引用了毒素生物标志物暴露降低数据——见FDA MRTP令（2020年7月）'},
+ a6_benefit_iqos_mrtp:{en:'<strong>MRTP Order (exposure-modification):</strong> FDA authorized PMI to market with the claims "<em>The IQOS system heats tobacco but does not burn it</em>," "<em>This significantly reduces the production of harmful and potentially harmful chemicals</em>," and "<em>Scientific studies have shown that switching completely from conventional cigarettes to the IQOS system significantly reduces your body\'s exposure to harmful or potentially harmful chemicals.</em>" FDA did <strong>not</strong> authorize "reduced-risk" claims. — see FDA MRTP Order (Jul 2020)',zh:'<strong>MRTP令（暴露修饰性宣称）：</strong>FDA授权PMI使用以下宣称进行营销——"<em>IQOS系统加热而不燃烧烟草</em>"、"<em>这显著减少了有害和潜在有害化学物质的产生</em>"，以及"<em>科学研究表明，从传统卷烟完全转用IQOS系统可显著减少您身体对有害或潜在有害化学物质的暴露</em>"。FDA<strong>未</strong>批准任何"降低风险"宣称。— 见FDA MRTP令（2020年7月）'},
  a6_framework_title:{en:'FDA PMTA Decision Framework — Implicit Youth Risk Thresholds Observed:',zh:'FDA PMTA决策框架 — 观察到的隐性青少年风险阈值：'},
  a6_fw1:{en:'E-cigarettes: First MGO granted when youth e-cig use was 7.5% (Vuse Solo, Oct 2021) — down from the 2019 peak of 20.0%',zh:'电子烟：首个MGO授权时青少年电子烟使用率为7.5%（Vuse Solo，2021年10月）——较2019年峰值20.0%下降'},
  a6_fw2:{en:'Nicotine pouches: MGOs granted when youth NP use was 1.7% (2025) — FDA simultaneously required manufacturer commitments on youth access prevention',zh:'尼古丁袋：授权时青少年NP使用率为1.7%（2025年）——FDA同步要求厂商作出防止青少年获取的承诺'},
