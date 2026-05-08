@@ -223,7 +223,7 @@ function doLogin(e){
 <div class="stats-row">
  <div class="stat-card"><div class="stat-label" data-i="a1_s1l">Brands Tracked</div><div class="stat-value">12</div></div>
  <div class="stat-card"><div class="stat-label" data-i="a1_s2l">#1 Youth Brand</div><div class="stat-value">64.1%</div><div class="stat-detail">Geek Bar (contact rate, weighted)</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a1_s3l">FDA Authorized</div><div class="stat-value green">6</div><div class="stat-detail">Vuse, JUUL, ZYN, NJOY, on!, IQOS</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a1_s3l">FDA Authorized</div><div class="stat-value green">7</div><div class="stat-detail">Vuse, JUUL, ZYN, NJOY, on!, IQOS, <strong style="color:var(--amber)">Glas★</strong></div></div>
  <div class="stat-card"><div class="stat-label" data-i="a1_s4l">Youth E-Cig Use</div><div class="stat-value red">5.2%</div></div>
 </div>
 <div class="callout callout-amber" style="font-size:12px;line-height:1.6" data-ih="a1_metric_note"><strong>📐 Two metrics, two questions:</strong> <strong>Contact Rate (64.1%)</strong> = % of current youth e-cig users who used Geek Bar in the past 30 days (NYTS multi-select; brands sum to &gt;100%). <strong>Usual Brand (49.2%, see table below)</strong> = % who name Geek Bar as their <em>most-used</em> brand (NYTS single-select; brands sum to ~100%). Contact rate = breadth of penetration; usual brand = loyalty / true share. Geek Bar leads on both — the fastest brand takeover in NYTS history.</div>
@@ -242,6 +242,7 @@ function doLogin(e){
   <tr><td>NJOY</td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Apr 2024</td><td data-i="a1_njoy_prod">Device + Tobacco + Menthol</td></tr>
   <tr><td>on! PLUS</td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Dec 2025</td><td>6 nicotine pouch products</td></tr>
   <tr><td>IQOS <span style="font-size:10px;color:var(--muted)">(HTP)</span></td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Apr 2019 · MRTP Jul 2020 · MRTP Renewed Apr 17, 2026</td><td>IQOS 2.4 + 3.0 Holders & Chargers; Marlboro Amber/Green Menthol/Blue Menthol HeatSticks — PMTA + MRTP exposure-modification orders (renewed 2026)</td></tr>
+  <tr style="background:#fffbeb"><td><strong>Glas</strong> <span style="font-size:10px;color:var(--amber)">★ first non-tobacco non-menthol</span></td><td><span class="badge-ok" data-i="authorized">Authorized</span></td><td>Mar 12, 2026 · <strong>+ May 5, 2026</strong></td><td>Glas G2 device (zero-nic) + 6 Pods 50 mg/mL: <strong>Blonde Tobacco</strong> · <strong>Classic Menthol · Fresh Menthol · Gold (mango) · Sapphire (blueberry)</strong> ← May 5 expansion · Bluetooth+ID+biometric age-gating</td></tr>
   <tr><td>Elf Bar</td><td><span class="badge-no" data-i="not_authorized">Not Authorized</span></td><td>-</td><td data-i="a1_elfbar_prod">Enforcement target</td></tr>
   <tr><td>Mr Fog</td><td><span class="badge-no" data-i="not_authorized">Not Authorized</span></td><td>-</td><td data-i="a1_mrfog_prod">Enforcement target</td></tr>
  </tbody>
@@ -472,8 +473,8 @@ function doLogin(e){
 <div class="callout callout-blue" data-ih="a6_usecase"><strong>Enterprise Question:</strong> What youth prevalence threshold has FDA implicitly accepted for each product category? How do confirmed adult benefit metrics compare across categories? What is the regulatory bar my PMTA must clear?<br><strong>How to use:</strong> Review the authorization timeline charts — each vertical marker is an FDA MGO. Track how NYTS youth prevalence was trending at the time of each decision. Review the adult benefit evidence column to understand what FDA accepted as sufficient proof of benefit in each category. Use the three-category tables to benchmark your own product.</div>
 
 <div class="stats-row">
- <div class="stat-card"><div class="stat-label" data-i="a6_s1l">E-Cig + NP Authorized Products</div><div class="stat-value">67</div><div class="stat-detail" data-i="a6_s1d">FDA Searchable Tobacco Products Database</div></div>
- <div class="stat-card"><div class="stat-label" data-i="a6_s2l">Authorized E-Cig Products</div><div class="stat-value blue">41</div><div class="stat-detail" data-i="a6_s2d">Vuse 16 · NJOY 10 · Logic 8 · JUUL 5 · Glas 2</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a6_s1l">E-Cig + NP Authorized Products</div><div class="stat-value">71</div><div class="stat-detail" data-i="a6_s1d">FDA Searchable Tobacco Products Database (post-May 5, 2026)</div></div>
+ <div class="stat-card"><div class="stat-label" data-i="a6_s2l">Authorized E-Cig Products</div><div class="stat-value blue">45</div><div class="stat-detail" data-i="a6_s2d">Vuse 16 · NJOY 10 · Logic 8 · Glas 6 · JUUL 5 · <strong style="color:var(--amber)">+4 May 5 (Glas non-tobacco)</strong></div></div>
  <div class="stat-card"><div class="stat-label" data-i="a6_s3l">Authorized NP Products</div><div class="stat-value green">26</div><div class="stat-detail" data-i="a6_s3d">ZYN 20 · on! PLUS 6</div></div>
  <div class="stat-card"><div class="stat-label" data-i="a6_s4l">HTP MGOs</div><div class="stat-value teal">1</div><div class="stat-detail" data-i="a6_s4d">IQOS · MRTP 2020 → Renewed 2026</div></div>
 </div>
@@ -589,7 +590,8 @@ function doLogin(e){
 </table>
 <span class="source-tag">FDA TPL Review documents · PM0000529-541 (Logic, Mar 2022) · PM0000628-629 (NJOY Menthol, Jun 2024) · PM0000630-631 (NJOY Daily, Jun 2022) · PM0000864-878 (JUUL, Jul 2025) · PM0000424 (IQOS, Apr 2019)</span>
 
-<h3 style="margin-top:20px;padding:10px 14px;background:var(--amber-dim);border-radius:8px;border-left:3px solid var(--amber)" data-i="a6_ecig_title">E-Cigarettes — 9 Marketing Granted Orders (2021–2026)</h3>
+<h3 style="margin-top:20px;padding:10px 14px;background:var(--amber-dim);border-radius:8px;border-left:3px solid var(--amber)" data-i="a6_ecig_title">E-Cigarettes — 10 Marketing Granted Orders (2021–2026) · Glas May 5, 2026 = first non-tobacco non-menthol</h3>
+<div class="callout callout-amber" style="margin:10px 0;font-size:13px;line-height:1.7" data-ih="a6_glas_milestone"><strong>★ Regulatory milestone — May 5, 2026:</strong> FDA authorized Glas <strong>Gold (mango)</strong> and <strong>Sapphire (blueberry)</strong> e-liquid pods alongside Classic Menthol and Fresh Menthol — the agency's <strong>first-ever authorization of non-tobacco, non-menthol ENDS</strong>. Acting CTP Director Bret Koplow framed Glas's <em>device-level access restriction technology</em> (government-ID + Bluetooth pairing + random biometric check-ins; device inoperative when unpaired) as a "<strong>potential game changer</strong>." Per FDA's announcement, the human-factors data showed adults 21+ could complete age verification while youth/young-adults could not — establishing that <em>"a non-tobacco flavored product may be authorized where the application demonstrates its benefit in helping adults quit cigarette smoking outweighs its potential risks"</em> when paired with effective age-gating. Total authorized ENDS post-May 5: <strong>45 products</strong>. <a href="https://www.fda.gov/news-events/press-announcements/fda-expands-market-access-authorizes-new-ends-products" target="_blank" rel="noopener">FDA Press Release · May 5 2026</a></div>
 <table class="data-table" style="margin-top:8px">
  <thead><tr>
   <th data-i="th_date">Date</th>
@@ -606,8 +608,9 @@ function doLogin(e){
   <tr><td>Jun 2022</td><td>NJOY</td><td>NJOY Daily — tobacco flavor</td><td class="hl">9.4%</td><td data-i="a6_benefit_njoy_daily">Lower BoE vs cigarettes; adult switching patterns — see FDA Decision Summary</td></tr>
   <tr><td>Jun 2024</td><td>NJOY</td><td>NJOY ACE, NJOY Daily — menthol</td><td class="hl">5.9%</td><td data-i="a6_benefit_njoy_menthol">Expanded adult switching option for menthol smokers — see FDA Decision Summary</td></tr>
   <tr><td>Jul 2024</td><td>R.J. Reynolds (Vuse)</td><td>Vuse Alto — tobacco flavor</td><td class="hl">5.9%</td><td data-i="a6_benefit_vuse_alto">Lower BoE vs cigarettes; adult switching and migration data — see FDA Decision Summary</td></tr>
-  <tr><td>Mar 12, 2026</td><td>Glas Inc.</td><td>GLAS G2 Device + Blonde Tobacco Pod 50mg/ml — STN PM0004879.PD6/PD8 · <strong>First independent vape company (no Big Tobacco affiliation); first FDA-authorized device with built-in age-gating (Bluetooth app + selfie + ID verification)</strong></td><td class="hl">5.2%</td><td><strong>3-month RCT (n≈400 heavy smokers, Chemular/SRNT 2025):</strong> 13–21% complete cessation at 3mo (vs 11% NJOY ACE comparator); 79–92% any cigarette reduction; CO sig. ↓; Menthol group OR=3.20 for any reduction — see FDA MGO Order PM0004879</td></tr>
+  <tr><td>Mar 12, 2026</td><td>Glas Inc.</td><td>Glas G2 Device (zero-nicotine; <em>name corrected from "Glas G" Mar 18, 2026</em>) + Blonde Tobacco Pod 50 mg/mL — STN PM0004879.PD6 / PD8 · <strong>First independent vape company (no Big Tobacco affiliation)</strong>; built-in age-gating: government-ID verification + Bluetooth phone pairing (device inoperative when unpaired) + random biometric check-ins (per FDA Press Release May 5 2026)</td><td class="hl">5.2%</td><td><strong>3-month RCT (n≈400 heavy smokers, Chemular/SRNT 2025):</strong> 13–21% complete cessation at 3mo (vs 11% NJOY ACE comparator); 79–92% any cigarette reduction; CO sig. ↓; Menthol group OR=3.20 for any reduction. <em>Clinical numbers from PMTA submission via Chemular SRNT abstract — not reproduced in publicly-available MGO letter PM0004879.</em> Review timeline: 2 deficiency letters + Glas-filed "unreasonable delay" complaint (Jan 2026) → ~56 mo review.</td></tr>
   <tr><td>Jul 2025</td><td>Juul Labs</td><td>JUUL device — Virginia Tobacco, Menthol</td><td class="hl">5.2%</td><td data-i="a6_benefit_juul">Adult primary user profile; lower BoE vs cigarettes; cessation data — see FDA Decision Summary</td></tr>
+  <tr style="background:#fffbeb"><td><strong>May 5, 2026</strong></td><td>Glas Inc.</td><td><strong>Glas Pod expansion — 4 additional 50 mg/mL pods:</strong> Classic Menthol (PD4) · Fresh Menthol (PD3) · <strong>Gold = mango (PD1)</strong> · <strong>Sapphire = blueberry (PD2)</strong> — STN PM0004879.PD1–PD4. <strong style="color:var(--amber)">★ FDA's first-ever authorization of non-tobacco, non-menthol ENDS.</strong> Authorized only for use with the previously-cleared Glas G2 device — the device-level age-gating is the load-bearing youth-prevention argument.</td><td class="hl">5.2%</td><td><strong>FDA APPH rationale (May 5 press release):</strong> Human-factors testing showed most adults 21+ successfully completed age verification and found instructions easy; youth and young adults could not. Establishes precedent that "<em>a non-tobacco flavored product may be authorized where the application demonstrates its benefit in helping adults quit cigarette smoking outweighs its potential risks</em>" — gated by effective age-restriction tech. Adult switching evidence shared with Mar 12 4-arm RCT (Glas tobacco/menthol/flavored arms vs NJOY ACE control). Acting CTP Director Koplow: device access restrictions are "<em>a potential game changer</em>." See <a href="https://www.fda.gov/news-events/press-announcements/fda-expands-market-access-authorizes-new-ends-products" target="_blank" rel="noopener">FDA Press Release</a>.</td></tr>
  </tbody>
 </table>
 <span class="source-tag">FDA PMTA Marketing Granted Orders · NYTS 2021–2025 weighted (all youth)</span>
@@ -803,7 +806,7 @@ function doLogin(e){
   <tr><td>Vuse Alto — tobacco</td><td>Sep 2020</td><td>Jul 2024</td><td class="hl" style="color:#92400e">~46 months</td><td>Adult migration + BOE; slot machine form factor required extended review</td></tr>
   <tr><td>ZYN — 20 NP products</td><td>Mar 2020</td><td>Jan 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>First NP category; novel framework required; 10-wk cohort: 24% complete switch (83/346)</td></tr>
   <tr><td>JUUL — tobacco + menthol</td><td>Sep 2020</td><td>Jul 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>MDO Jun 2022 (stayed) → rescinded Jun 2024 → MGO Jul 2025; ADJUSTST 2-yr cohort pivotal</td></tr>
-  <tr><td>Glas G — tobacco (Glas Inc.)</td><td>Jul 21, 2021</td><td>Mar 12, 2026</td><td class="hl" style="color:var(--red)">~56 months</td><td>First independent vape company; first age-gated device (Bluetooth + ID); 3-month RCT submitted Apr 2025 after 2nd deficiency letter — pivotal for authorization</td></tr>
+  <tr><td>Glas G2 + Blonde Tobacco (Glas Inc.)</td><td>Jul 21, 2021</td><td>Mar 12, 2026 · <strong>+ May 5, 2026</strong></td><td class="hl" style="color:var(--red)">~56 mo (PD6/PD8)<br><span style="color:var(--amber);font-weight:600">+54 days</span> for 4 add'l pods</td><td>First independent vape company; device-level age-gating (gov-ID + Bluetooth pairing + biometric check-ins; per FDA Press May 5); 2 deficiency letters + Glas-filed "unreasonable delay" complaint Jan 2026; <strong>May 5 expansion authorized 4 pods including Gold (mango) + Sapphire (blueberry) — FDA's first non-tobacco non-menthol ENDS</strong></td></tr>
   <tr><td>on! PLUS — 6 NP products</td><td>~2021</td><td>Dec 2025</td><td class="hl" style="color:var(--red)">~48 months</td><td>15% complete quit + 35% ≥50% CPD reduction at 6-wk actual-use study</td></tr>
  </tbody>
 </table>
@@ -847,6 +850,12 @@ function doLogin(e){
    <option value="bench">Benchmark (historical observed minimum)</option>
    <option value="cons">Conservative (+20% safety buffer)</option>
   </select>
+  <label style="margin-top:12px" data-i="a9_agegate">Device-Level Age-Gating? <span style="font-size:11px;color:var(--amber);font-weight:600">★ Glas May 5, 2026 precedent</span></label>
+  <select id="mgo-agegate" onchange="runFeasibility()">
+   <option value="none">No — standard distribution</option>
+   <option value="device">Yes — Bluetooth+ID+biometric (Glas-style)</option>
+  </select>
+  <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.5" data-i="a9_agegate_note">FDA's May 5 2026 Glas authorization (Gold/Sapphire/Menthols) established that effective device-level age-gating — government-ID verification + Bluetooth phone pairing (device inoperative when unpaired) + random biometric check-ins — can substitute for low youth-use prevalence as the youth-prevention argument. Selecting "Yes" lowers the flavored-e-cig threshold and raises the youth-use ceiling from 7% → 12%.</div>
  </div>
 </div>
 
@@ -875,7 +884,7 @@ function doLogin(e){
 
 <details class="callout callout-amber" style="font-size:12px;line-height:1.6;cursor:pointer;margin-top:12px">
 <summary style="font-weight:700;cursor:pointer" data-i="a9_method_summary">📐 Methodology — How the minimum switching threshold is estimated</summary>
-<div data-ih="a9_method_body" style="margin-top:10px"><strong>Framework:</strong> Reverse-empirical fit of FDA's observed MGO decisions. The simulator uses the lowest <em>reported</em> adult complete-switching rate (TPL lo-bound or Decision Summary quoted value) across all FDA-authorized products in the last five years (2021–2026), regressed on the NYTS past-30-day youth use rate at the time of authorization. This gives a product-category-and-flavor-conditional <em>floor</em>: the switching rate below which no product has been authorized in that category.<br><br><strong>Linear models (anchored on PMTA Benchmark scatter):</strong><br>• <strong>E-cig Tobacco</strong> — <code>min = 15 + 0.64 × youth%</code> (anchored on NJOY Daily Tobacco's 21% lo-bound at 9.4% youth use; literature baseline 15% floor)<br>• <strong>E-cig Flavored (Menthol / Non-tobacco)</strong> — <code>min = 15 + 2.9 × youth%</code> (anchored on NJOY Daily Menthol's 32% lo-bound at 5.9% youth); additional "Very Unlikely" verdict if youth use &gt; 7% because <em>no</em> flavored e-cig has been authorized above that threshold.<br>• <strong>Nicotine Pouch</strong> — <code>min = 10 + 3.0 × youth%</code> (anchored on on! PLUS's 15% at 1.7% youth NP; ZYN 24% as upper reference)<br>• <strong>HTP</strong> — <code>min = 15 + 0.8 × youth%</code> (single anchor IQOS; treat output as highly uncertain)<br><br><strong>Conservative mode</strong> adds a +20% safety buffer on top of the benchmark estimate, reflecting that the lo-bound is a lower bound on <em>historical</em> authorizations, not a guaranteed floor for future decisions — FDA's bar has trended upward post-JUUL.<br><br><strong>Verdict thresholds:</strong> Gap &lt; 0 → Insufficient · 0–5pp → Marginal · 5–15pp → Likely Feasible · ≥15pp → Strong. For flavored e-cig at youth use &gt; 7% → Very Unlikely regardless of switching rate.<br><br><strong>⚠ Hard caveats (must be disclosed in any PMTA submission):</strong><br>• Only 9 e-cig + 2 NP + 1 HTP MGOs are available as anchor points (2021–2026). The sample is small, and FDA's regulatory stance has shifted over this window (more stringent post-Elf Bar enforcement).<br>• The scatter only plots TPL-confirmed or Decision-Summary-quoted switching rates. Products like Vuse where only BoE/migration evidence was cited (switching rate not directly reported) are intentionally omitted from the fit.<br>• FDA's APPH determination is <strong>not</strong> a single-variable threshold — toxicology, abuse liability, consumer perception of reduced-risk/exposure claims, youth-access controls, and marketing plans all matter. A "pass" on switching rate does <em>not</em> guarantee authorization.<br>• Youth-use projections for a novel product are themselves highly uncertain; the simulator accepts the input but does not propagate its uncertainty.<br>• Glas G (approved Mar 2026 at 13–21% cessation) is an outlier: cessation is a stricter endpoint than switching, so Glas's raw number understates the equivalent switching rate. Do not anchor your own clinical plan on the 13% lo-bound alone.<br><br><strong>Use case:</strong> Early go/no-go screening and clinical-program sizing — <em>not</em> a regulatory-grade submission. For actual PMTA planning, extend with full youth-initiation modeling, abuse-liability data, toxicology, and consumer-perception studies; see FDA APPH guidance (2019) and Levy et al. (2017) SimSmoke framework.</div>
+<div data-ih="a9_method_body" style="margin-top:10px"><strong>Framework:</strong> Reverse-empirical fit of FDA's observed MGO decisions. Anchored on the lowest <em>reported</em> adult complete-switching rate (TPL lo-bound or Decision Summary quoted value) across all FDA-authorized products 2021–2026, regressed on NYTS past-30-day youth use rate at time of authorization. Gives a category-and-flavor-conditional <em>floor</em> below which no product has been authorized.<br><br><strong>Default linear models (no device-level age-gating):</strong><br>• <strong>E-cig Tobacco</strong> — <code>min = 15 + 0.64 × youth%</code> (NJOY Daily Tobacco 21% lo @ 9.4% youth)<br>• <strong>E-cig Flavored (Menthol/Non-tobacco)</strong> — <code>min = 15 + 2.9 × youth%</code> (NJOY Menthol 32% lo @ 5.9% youth); hard "Very Unlikely" if youth use &gt; 7%<br>• <strong>Nicotine Pouch</strong> — <code>min = 10 + 3.0 × youth%</code> (on! PLUS 15% @ 1.7% youth)<br>• <strong>HTP</strong> — <code>min = 15 + 0.8 × youth%</code> (single anchor IQOS — high uncertainty)<br><br><strong>★ Glas May 5, 2026 precedent — alternative model when device-level age-gating is selected:</strong> FDA authorized Glas Gold (mango), Sapphire (blueberry), Classic Menthol, and Fresh Menthol — the agency's first-ever non-tobacco/non-menthol ENDS authorizations — at 5.2% youth use. Acting CTP Director Bret Koplow framed Glas's device-level access restrictions (gov-ID + Bluetooth phone pairing + random biometric check-ins) as a "<em>potential game changer</em>." When the "Device-Level Age-Gating?" toggle is set to "Yes":<br>• <strong>E-cig Flavored</strong> threshold relaxes to <code>min = 10 + 1.5 × youth%</code><br>• Hard-block ceiling rises from 7% → 12% youth use<br>• Other categories unchanged (age-gating not pivotal there)<br>This alternative model is anchored on Glas's 13% cessation lo-bound at 5.2% youth use. Cessation is a stricter endpoint than complete switching, so the 13% number understates the equivalent switching rate — do not anchor your clinical plan on 13% alone.<br><br><strong>Conservative mode</strong> adds +20% safety buffer on top of either model — FDA's bar has trended upward post-JUUL.<br><br><strong>Verdict thresholds:</strong> Gap &lt; 0 → Insufficient · 0–5pp → Marginal · 5–15pp → Likely Feasible · ≥15pp → Strong. Above the (mode-specific) youth-use ceiling → Very Unlikely.<br><br><strong>⚠ Hard caveats (must be disclosed in any PMTA submission):</strong><br>• Only 10 e-cig + 2 NP + 1 HTP MGOs are available as anchor points (2021–2026); the Glas May 5, 2026 expansion adds 4 SKUs but only 1 independent x,y data point.<br>• The Glas precedent is a single applicant; FDA may or may not extend the same standard to other applicants without comparable age-gating tech.<br>• FDA's APPH determination is <strong>not</strong> a single-variable threshold — toxicology, abuse liability, consumer perception, youth-access controls, marketing plans, and human-factors data on age-verification effectiveness all matter. "Pass" on switching rate does <em>not</em> guarantee authorization.<br>• Youth-use projections for a novel product are themselves highly uncertain; the simulator accepts the input but does not propagate its uncertainty.<br>• For age-gated mode: FDA's May 5 ruling specifies that the device must be effective in human-factors testing — adults 21+ complete activation, youth/young adults cannot. Without comparable HF data, the relaxed threshold does not apply.<br><br><strong>Use case:</strong> Early go/no-go screening and clinical-program sizing — <em>not</em> a regulatory-grade submission. For actual PMTA planning, extend with full youth-initiation modeling, abuse-liability data, toxicology, consumer-perception, and HF studies of any age-gating technology you propose. See FDA APPH guidance (2019), Levy et al. (2017) SimSmoke framework, and FDA Press Release May 5 2026 on Glas.</div>
 </details>
 
 </div><!-- /panel-a9 -->
@@ -1030,7 +1039,7 @@ function doLogin(e){
   <tr><td>Vuse Alto — tobacco</td><td>Sep 2020</td><td>Jul 2024</td><td class="hl" style="color:#92400e">~46 months</td><td>Adult migration + BOE; slot machine form factor required extended review</td></tr>
   <tr><td>ZYN — 20 NP products</td><td>Mar 2020</td><td>Jan 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>First NP category; novel framework required; 10-wk cohort: 24% complete switch (83/346)</td></tr>
   <tr><td>JUUL — tobacco + menthol</td><td>Sep 2020</td><td>Jul 2025</td><td class="hl" style="color:var(--red)">~58 months</td><td>MDO Jun 2022 (stayed) → rescinded Jun 2024 → MGO Jul 2025; ADJUSTST 2-yr cohort pivotal</td></tr>
-  <tr><td>Glas G — tobacco (Glas Inc.)</td><td>Jul 21, 2021</td><td>Mar 12, 2026</td><td class="hl" style="color:var(--red)">~56 months</td><td>First independent vape company; first age-gated device (Bluetooth + ID); 3-month RCT submitted Apr 2025 after 2nd deficiency letter — pivotal for authorization</td></tr>
+  <tr><td>Glas G2 + Blonde Tobacco (Glas Inc.)</td><td>Jul 21, 2021</td><td>Mar 12, 2026 · <strong>+ May 5, 2026</strong></td><td class="hl" style="color:var(--red)">~56 mo (PD6/PD8)<br><span style="color:var(--amber);font-weight:600">+54 days</span> for 4 add'l pods</td><td>First independent vape company; device-level age-gating (gov-ID + Bluetooth pairing + biometric check-ins; per FDA Press May 5); 2 deficiency letters + Glas-filed "unreasonable delay" complaint Jan 2026; <strong>May 5 expansion authorized 4 pods including Gold (mango) + Sapphire (blueberry) — FDA's first non-tobacco non-menthol ENDS</strong></td></tr>
   <tr><td>on! PLUS — 6 NP products</td><td>~2021</td><td>Dec 2025</td><td class="hl" style="color:var(--red)">~48 months</td><td>15% complete quit + 35% ≥50% CPD reduction at 6-wk actual-use study</td></tr>
  </tbody>
 </table>
@@ -1196,13 +1205,14 @@ var I={
  a6_title:{en:'PMTA Benchmark',zh:'PMTA基准分析'},
  a6_sub:{en:'FDA Marketing Granted Orders — Youth Risk vs Adult Benefit Framework · 3 Product Categories',zh:'FDA营销授权令 — 青少年风险与成人获益框架 · 三个产品品类'},
  a6_s1l:{en:'E-Cig + NP Authorized Products',zh:'电子烟+尼古丁袋获批产品数'},a6_s1d:{en:'FDA Searchable Tobacco Products Database',zh:'FDA可搜索烟草产品数据库'},
- a6_s2l:{en:'Authorized E-Cig Products',zh:'已获批电子烟产品数'},a6_s2d:{en:'Vuse 16 · NJOY 10 · Logic 8 · JUUL 5 · Glas 2',zh:'Vuse 16 · NJOY 10 · Logic 8 · JUUL 5 · Glas 2'},
+ a6_s2l:{en:'Authorized E-Cig Products',zh:'已获批电子烟产品数'},a6_s2d:{en:'Vuse 16 · NJOY 10 · Logic 8 · Glas 6 · JUUL 5 · <strong style="color:var(--amber)">+4 May 5 (Glas non-tobacco)</strong>',zh:'Vuse 16 · NJOY 10 · Logic 8 · Glas 6 · JUUL 5 · <strong style="color:var(--amber)">+4 5月5日（Glas 非烟草口味）</strong>'},
  a6_s3l:{en:'Authorized NP Products',zh:'已获批尼古丁袋产品数'},a6_s3d:{en:'ZYN 20 · on! PLUS 6',zh:'ZYN 20 · on! PLUS 6'},
  a6_s4l:{en:'HTP MGOs',zh:'加热烟草授权'},a6_s4d:{en:'IQOS · MRTP 2020 → Renewed 2026',zh:'IQOS · MRTP 2020 → 2026续期'},
  a6_c1t:{en:'NYTS Youth Prevalence Trend with FDA Authorization Events (All Youth, Weighted)',zh:'NYTS青少年使用率趋势与FDA授权事件（全部青少年，加权）'},
  a6_c2t:{en:'Youth Risk vs Adult Benefit — FDA PMTA Authorization Decision Map',zh:'青少年风险与成人获益 — FDA PMTA授权决策图'},
  a6_c3t:{en:'Confirmed Adult Benefit — NP Authorizations (Decision Summary)',zh:'已确认成人获益 — 尼古丁袋授权（决策摘要）'},
- a6_ecig_title:{en:'E-Cigarettes — 9 Marketing Granted Orders (2021–2026)',zh:'电子烟 — 9项营销授权令（2021–2026）'},
+ a6_ecig_title:{en:'E-Cigarettes — 10 Marketing Granted Orders (2021–2026) · Glas May 5, 2026 = first non-tobacco non-menthol',zh:'电子烟 — 10项营销授权令（2021–2026）· Glas 2026年5月5日 = 史上首例非烟草非薄荷口味'},
+ a6_glas_milestone:{en:'<strong>★ Regulatory milestone — May 5, 2026:</strong> FDA authorized Glas <strong>Gold (mango)</strong> and <strong>Sapphire (blueberry)</strong> e-liquid pods alongside Classic Menthol and Fresh Menthol — the agency\'s <strong>first-ever authorization of non-tobacco, non-menthol ENDS</strong>. Acting CTP Director Bret Koplow framed Glas\'s <em>device-level access restriction technology</em> (government-ID + Bluetooth pairing + random biometric check-ins; device inoperative when unpaired) as a "<strong>potential game changer</strong>." Per FDA\'s announcement, the human-factors data showed adults 21+ could complete age verification while youth/young-adults could not — establishing that <em>"a non-tobacco flavored product may be authorized where the application demonstrates its benefit in helping adults quit cigarette smoking outweighs its potential risks"</em> when paired with effective age-gating. Total authorized ENDS post-May 5: <strong>45 products</strong>. <a href="https://www.fda.gov/news-events/press-announcements/fda-expands-market-access-authorizes-new-ends-products" target="_blank" rel="noopener">FDA Press Release · May 5 2026</a>',zh:'<strong>★ 监管里程碑 — 2026年5月5日：</strong>FDA 授权 Glas <strong>Gold（芒果）</strong>、<strong>Sapphire（蓝莓）</strong>电子烟 pod 以及 Classic Menthol、Fresh Menthol —— 这是 FDA <strong>史上首次授权非烟草、非薄荷口味 ENDS 产品</strong>。FDA 烟草产品中心代理署长 Bret Koplow 将 Glas 的 <em>设备级访问限制技术</em>（政府 ID 验证 + 蓝牙手机配对，未配对时设备无法工作 + 随机生物识别核验）称为"<strong>潜在的游戏规则改变者</strong>"。FDA 新闻稿表明：人因测试显示 21+ 成人可顺利完成年龄验证，而青少年/青年人无法完成 —— 由此确立了"<em>非烟草口味产品在帮助成年人戒烟收益大于潜在风险时也可获批</em>"的先例（前提：搭配有效年龄门控）。5月5日之后美国共 <strong>45 款 ENDS 产品获授权</strong>。<a href="https://www.fda.gov/news-events/press-announcements/fda-expands-market-access-authorizes-new-ends-products" target="_blank" rel="noopener">FDA 新闻稿 · 2026年5月5日</a>'},
  a6_np_title:{en:'Nicotine Pouches — 2 Marketing Granted Orders (2025)',zh:'尼古丁袋 — 2项营销授权令（2025）'},
  a6_htp_title:{en:'Heated Tobacco Products — IQOS PMTA (2019) + MRTP Exposure-Modification Order (2020) + MRTP Renewed (Apr 17, 2026)',zh:'加热不燃烧烟草 — IQOS PMTA（2019）+ MRTP 暴露修饰性宣称令（2020）+ MRTP 续期（2026年4月17日）'},
  a6_th_products:{en:'Products Authorized',zh:'授权产品'},
@@ -1258,6 +1268,8 @@ var I={
  a9_proposed_rate:{en:'Proposed Adult Complete-Switching Rate',zh:'拟议成人完全切换率'},
  a9_proposed_note:{en:'From your adult switching cohort / actual-use study endpoint (typically 3–12 month follow-up). Comparable to the "complete switching rate" that FDA TPL documents quote for authorized e-cig and NP products.',zh:'来自成人切换队列/实际使用研究终点（通常3–12个月随访）。与FDA TPL文件中引用的已授权电子烟/尼古丁袋"完全切换率"可比。'},
  a9_stringency:{en:'Stringency Anchor',zh:'严格度参照'},
+ a9_agegate:{en:'Device-Level Age-Gating? <span style="font-size:11px;color:var(--amber);font-weight:600">★ Glas May 5, 2026 precedent</span>',zh:'设备级年龄门控？<span style="font-size:11px;color:var(--amber);font-weight:600">★ Glas 2026年5月5日先例</span>'},
+ a9_agegate_note:{en:"FDA's May 5 2026 Glas authorization (Gold/Sapphire/Menthols) established that effective device-level age-gating — government-ID verification + Bluetooth phone pairing (device inoperative when unpaired) + random biometric check-ins — can substitute for low youth-use prevalence as the youth-prevention argument. Selecting \"Yes\" lowers the flavored-e-cig threshold and raises the youth-use ceiling from 7% → 12%.",zh:'FDA 2026年5月5日 Glas 授权（Gold/Sapphire/薄荷系列）确立了：有效的设备级年龄门控——政府 ID 验证 + 蓝牙手机配对（未配对时设备无法工作）+ 随机生物识别核验——可作为青少年预防论证、替代"低青少年使用率"这一传统门槛。选"是"会降低非烟草口味电子烟的阈值，并把青少年使用率上限从 7% 提到 12%。'},
  a9_s1l:{en:'Min Switching Rate Required',zh:'所需最低切换率'},
  a9_s2l:{en:'Gap vs Proposed',zh:'与拟议值差距'},
  a9_s3l:{en:'Nearest Authorized Benchmark',zh:'最相近已授权产品'},
@@ -1270,7 +1282,7 @@ var I={
  a9_legend_user:{en:'Your proposed product',zh:'你的拟议产品'},
  a9_legend_thresh:{en:'Minimum-switching threshold (category-specific, FDA historical floor)',zh:'最低切换率阈值（品类特定，FDA历史最低授权线）'},
  a9_method_summary:{en:'📐 Methodology — How the minimum switching threshold is estimated',zh:'📐 方法说明 — 最低切换率阈值是如何估算的'},
- a9_method_body:{en:"<strong>Framework:</strong> Reverse-empirical fit of FDA's observed MGO decisions. The simulator uses the lowest <em>reported</em> adult complete-switching rate (TPL lo-bound or Decision Summary quoted value) across all FDA-authorized products in the last five years (2021–2026), regressed on the NYTS past-30-day youth use rate at the time of authorization. This gives a product-category-and-flavor-conditional <em>floor</em>: the switching rate below which no product has been authorized in that category.<br><br><strong>Linear models (anchored on PMTA Benchmark scatter):</strong><br>• <strong>E-cig Tobacco</strong> — <code>min = 15 + 0.64 × youth%</code> (anchored on NJOY Daily Tobacco's 21% lo-bound at 9.4% youth use; literature baseline 15% floor)<br>• <strong>E-cig Flavored (Menthol / Non-tobacco)</strong> — <code>min = 15 + 2.9 × youth%</code> (anchored on NJOY Daily Menthol's 32% lo-bound at 5.9% youth); additional \"Very Unlikely\" verdict if youth use > 7% because <em>no</em> flavored e-cig has been authorized above that threshold.<br>• <strong>Nicotine Pouch</strong> — <code>min = 10 + 3.0 × youth%</code> (anchored on on! PLUS's 15% at 1.7% youth NP; ZYN 24% as upper reference)<br>• <strong>HTP</strong> — <code>min = 15 + 0.8 × youth%</code> (single anchor IQOS; treat output as highly uncertain)<br><br><strong>Conservative mode</strong> adds a +20% safety buffer on top of the benchmark estimate, reflecting that the lo-bound is a lower bound on <em>historical</em> authorizations, not a guaranteed floor for future decisions — FDA's bar has trended upward post-JUUL.<br><br><strong>Verdict thresholds:</strong> Gap < 0 → Insufficient · 0–5pp → Marginal · 5–15pp → Likely Feasible · ≥15pp → Strong. For flavored e-cig at youth use > 7% → Very Unlikely regardless of switching rate.<br><br><strong>⚠ Hard caveats (must be disclosed in any PMTA submission):</strong><br>• Only 9 e-cig + 2 NP + 1 HTP MGOs are available as anchor points (2021–2026). The sample is small, and FDA's regulatory stance has shifted over this window (more stringent post-Elf Bar enforcement).<br>• The scatter only plots TPL-confirmed or Decision-Summary-quoted switching rates. Products like Vuse where only BoE/migration evidence was cited (switching rate not directly reported) are intentionally omitted from the fit.<br>• FDA's APPH determination is <strong>not</strong> a single-variable threshold — toxicology, abuse liability, consumer perception of reduced-risk/exposure claims, youth-access controls, and marketing plans all matter. A \"pass\" on switching rate does <em>not</em> guarantee authorization.<br>• Youth-use projections for a novel product are themselves highly uncertain; the simulator accepts the input but does not propagate its uncertainty.<br>• Glas G (approved Mar 2026 at 13–21% cessation) is an outlier: cessation is a stricter endpoint than switching, so Glas's raw number understates the equivalent switching rate. Do not anchor your own clinical plan on the 13% lo-bound alone.<br><br><strong>Use case:</strong> Early go/no-go screening and clinical-program sizing — <em>not</em> a regulatory-grade submission. For actual PMTA planning, extend with full youth-initiation modeling, abuse-liability data, toxicology, and consumer-perception studies; see FDA APPH guidance (2019) and Levy et al. (2017) SimSmoke framework.",zh:'<strong>框架：</strong>对FDA MGO历史决策的反向经验拟合。本模拟器采用近五年（2021–2026）所有FDA已授权产品的最低<em>报告</em>成人完全切换率（TPL下限或决策摘要引用值），对授权当年NYTS青少年过去30天使用率做回归。得到按品类+口味分层的<em>下限</em>：在该品类中尚未有产品以低于此切换率获得授权。<br><br><strong>线性模型（锚定于PMTA基准散点图）：</strong><br>• <strong>电子烟（烟草口味）</strong> — <code>min = 15 + 0.64 × youth%</code>（锚定NJOY Daily Tobacco 21%下限@9.4%青少年使用率；文献基线下限15%）<br>• <strong>电子烟（薄荷/非烟草口味）</strong> — <code>min = 15 + 2.9 × youth%</code>（锚定NJOY Daily Menthol 32%下限@5.9%青少年使用率）；青少年使用率>7%时额外标记为"极不可行"，因为历史上 <em>从未</em>在此阈值之上授权过非烟草口味电子烟。<br>• <strong>尼古丁袋</strong> — <code>min = 10 + 3.0 × youth%</code>（锚定on! PLUS 15%@1.7%青少年NP使用率；ZYN 24%作为上限参照）<br>• <strong>加热不燃烧烟草</strong> — <code>min = 15 + 0.8 × youth%</code>（唯一锚点IQOS；输出高度不确定）<br><br><strong>保守模式</strong>在基准估计之上增加+20%安全缓冲，反映下限值是<em>历史</em>授权的下界，而非未来决策的保证性底线——FDA门槛在JUUL事件后呈上行趋势。<br><br><strong>判定阈值：</strong>差距<0 → 证据不足；0–5pp → 边缘；5–15pp → 可行；≥15pp → 强证据。非烟草口味电子烟在青少年使用率>7%时一律判为"极不可行"。<br><br><strong>⚠ 硬性警告（任何PMTA申报必须披露）：</strong><br>• 仅有9个电子烟+2个尼古丁袋+1个HTP MGO可作为锚点（2021–2026）。样本量小，且FDA监管立场在此窗口期内有所变化（Elf Bar执法后更趋严格）。<br>• 散点图仅绘制TPL确认或决策摘要引用的切换率。如Vuse等仅引用BoE/迁移证据（未直接报告切换率）的产品，刻意未纳入拟合。<br>• FDA APPH判定<strong>并非</strong>单变量阈值——毒理、滥用倾向、消费者对"减风险/减暴露"宣称的理解、青少年准入控制、营销计划等均起作用。仅切换率"通过"并<em>不</em>保证授权。<br>• 新产品的青少年使用率预测本身高度不确定；模拟器接受输入但不传播其不确定性。<br>• Glas G（2026年3月获批，13–21%戒烟率）是离群点：戒烟是比切换更严格的终点，Glas原始数值低估了等效切换率。请勿仅以13%下限为自身临床方案锚点。<br><br><strong>使用场景：</strong>早期 go/no-go 筛选与临床项目量级规划——<em>非</em>监管级申报。PMTA正式规划请扩展至完整的青少年起始建模、滥用倾向数据、毒理学与消费者认知研究；参见FDA APPH指南（2019）及Levy et al.（2017）SimSmoke框架。'},
+ a9_method_body:{en:"<strong>Framework:</strong> Reverse-empirical fit of FDA's observed MGO decisions. Anchored on the lowest <em>reported</em> adult complete-switching rate (TPL lo-bound or Decision Summary quoted value) across all FDA-authorized products 2021–2026, regressed on NYTS past-30-day youth use rate at time of authorization. Gives a category-and-flavor-conditional <em>floor</em> below which no product has been authorized.<br><br><strong>Default linear models (no device-level age-gating):</strong><br>• <strong>E-cig Tobacco</strong> — <code>min = 15 + 0.64 × youth%</code> (NJOY Daily Tobacco 21% lo @ 9.4% youth)<br>• <strong>E-cig Flavored (Menthol/Non-tobacco)</strong> — <code>min = 15 + 2.9 × youth%</code> (NJOY Menthol 32% lo @ 5.9% youth); hard \"Very Unlikely\" if youth use > 7%<br>• <strong>Nicotine Pouch</strong> — <code>min = 10 + 3.0 × youth%</code> (on! PLUS 15% @ 1.7% youth)<br>• <strong>HTP</strong> — <code>min = 15 + 0.8 × youth%</code> (single anchor IQOS — high uncertainty)<br><br><strong>★ Glas May 5, 2026 precedent — alternative model when device-level age-gating is selected:</strong> FDA authorized Glas Gold (mango), Sapphire (blueberry), Classic Menthol, and Fresh Menthol — the agency's first-ever non-tobacco/non-menthol ENDS authorizations — at 5.2% youth use. Acting CTP Director Bret Koplow framed Glas's device-level access restrictions (gov-ID + Bluetooth phone pairing + random biometric check-ins) as a \"<em>potential game changer</em>.\" When the \"Device-Level Age-Gating?\" toggle is set to \"Yes\":<br>• <strong>E-cig Flavored</strong> threshold relaxes to <code>min = 10 + 1.5 × youth%</code><br>• Hard-block ceiling rises from 7% → 12% youth use<br>• Other categories unchanged (age-gating not pivotal there)<br>This alternative model is anchored on Glas's 13% cessation lo-bound at 5.2% youth use. Cessation is a stricter endpoint than complete switching, so the 13% number understates the equivalent switching rate — do not anchor your clinical plan on 13% alone.<br><br><strong>Conservative mode</strong> adds +20% safety buffer on top of either model — FDA's bar has trended upward post-JUUL.<br><br><strong>Verdict thresholds:</strong> Gap < 0 → Insufficient · 0–5pp → Marginal · 5–15pp → Likely Feasible · ≥15pp → Strong. Above the (mode-specific) youth-use ceiling → Very Unlikely.<br><br><strong>⚠ Hard caveats (must be disclosed in any PMTA submission):</strong><br>• Only 10 e-cig + 2 NP + 1 HTP MGOs are available as anchor points (2021–2026); the Glas May 5, 2026 expansion adds 4 SKUs but only 1 independent x,y data point.<br>• The Glas precedent is a single applicant; FDA may or may not extend the same standard to other applicants without comparable age-gating tech.<br>• FDA's APPH determination is <strong>not</strong> a single-variable threshold — toxicology, abuse liability, consumer perception, youth-access controls, marketing plans, and human-factors data on age-verification effectiveness all matter. \"Pass\" on switching rate does <em>not</em> guarantee authorization.<br>• Youth-use projections for a novel product are themselves highly uncertain; the simulator accepts the input but does not propagate its uncertainty.<br>• For age-gated mode: FDA's May 5 ruling specifies that the device must be effective in human-factors testing — adults 21+ complete activation, youth/young adults cannot. Without comparable HF data, the relaxed threshold does not apply.<br><br><strong>Use case:</strong> Early go/no-go screening and clinical-program sizing — <em>not</em> a regulatory-grade submission. For actual PMTA planning, extend with full youth-initiation modeling, abuse-liability data, toxicology, consumer-perception, and HF studies of any age-gating technology you propose. See FDA APPH guidance (2019), Levy et al. (2017) SimSmoke framework, and FDA Press Release May 5 2026 on Glas.",zh:'<strong>框架：</strong>对 FDA MGO 历史决策的反向经验拟合。锚定于 2021–2026 年所有 FDA 已授权产品的最低<em>报告</em>成人完全切换率（TPL 下限或决策摘要引用值），对授权当年 NYTS 青少年过去 30 天使用率做回归。得到按品类+口味分层的<em>下限</em>：在该品类中尚未有产品以低于此切换率获批。<br><br><strong>默认线性模型（无设备级年龄门控）：</strong><br>• <strong>电子烟（烟草口味）</strong> — <code>min = 15 + 0.64 × youth%</code>（NJOY Daily Tobacco 21% 下限 @ 9.4% 青少年）<br>• <strong>电子烟（薄荷/非烟草口味）</strong> — <code>min = 15 + 2.9 × youth%</code>（NJOY Menthol 32% 下限 @ 5.9% 青少年）；青少年使用率 >7% 时硬性判为"极不可行"<br>• <strong>尼古丁袋</strong> — <code>min = 10 + 3.0 × youth%</code>（on! PLUS 15% @ 1.7% 青少年）<br>• <strong>加热不燃烧烟草</strong> — <code>min = 15 + 0.8 × youth%</code>（唯一锚点 IQOS — 高度不确定）<br><br><strong>★ Glas 2026 年 5 月 5 日先例——选择"设备级年龄门控"时的替代模型：</strong>FDA 授权 Glas Gold（芒果）、Sapphire（蓝莓）、Classic Menthol、Fresh Menthol——FDA 史上首批非烟草/非薄荷 ENDS 授权——在 5.2% 青少年使用率下。CTP 代理署长 Bret Koplow 将 Glas 的设备级访问限制（政府 ID + 蓝牙手机配对 + 随机生物识别核验）称为"<em>潜在的游戏规则改变者</em>"。当"设备级年龄门控？"选"是"时：<br>• <strong>电子烟（薄荷/非烟草口味）</strong>阈值放宽至 <code>min = 10 + 1.5 × youth%</code><br>• 硬性上限从 7% 提至 12% 青少年使用率<br>• 其他品类不变（年龄门控对它们不是关键）<br>此替代模型锚定 Glas 在 5.2% 青少年使用率下的 13% 戒烟下限。戒烟是比完全切换更严格的终点，13% 这个数字低估了等效切换率——不要仅以 13% 作为临床方案锚点。<br><br><strong>保守模式</strong>在两个模型之上增加 +20% 安全缓冲——FDA 门槛在 JUUL 事件后呈上行趋势。<br><br><strong>判定阈值：</strong>差距 <0 → 证据不足 · 0–5pp → 边缘 · 5–15pp → 可行 · ≥15pp → 强证据。超出（模式相应的）青少年使用率上限 → 极不可行。<br><br><strong>⚠ 硬性警告（任何 PMTA 申报必须披露）：</strong><br>• 仅有 10 个电子烟 + 2 个尼古丁袋 + 1 个 HTP MGO 可作为锚点（2021–2026）；Glas 2026 年 5 月 5 日扩展加了 4 个 SKU，但仅产生 1 个独立 x,y 数据点。<br>• Glas 先例是单一申请人；FDA 是否会对没有可比年龄门控技术的其他申请人延伸同等标准，尚未明朗。<br>• FDA APPH 判定<strong>并非</strong>单变量阈值——毒理、滥用倾向、消费者认知、青少年准入控制、营销计划，以及年龄核验有效性的人因数据等均起作用。仅切换率"通过"<em>不</em>保证授权。<br>• 新产品的青少年使用率预测本身高度不确定；模拟器接受输入但不传播其不确定性。<br>• 关于年龄门控模式：FDA 5月5日裁决要求设备在人因测试中有效——21+ 成人能完成激活，青少年/青年人无法完成。没有可比 HF 数据，放宽阈值不适用。<br><br><strong>使用场景：</strong>早期 go/no-go 筛选与临床项目量级规划——<em>非</em>监管级申报。PMTA 正式规划请扩展至完整的青少年起始建模、滥用倾向数据、毒理学、消费者认知，以及任何拟议年龄门控技术的 HF 研究。参见 FDA APPH 指南（2019）、Levy et al.（2017）SimSmoke 框架，以及 FDA 2026 年 5 月 5 日 Glas 新闻稿。'},
  /* A8 */
  tab_a8:{en:'PMTA Roadmap',zh:'PMTA路线图'},
  a8_title:{en:'PMTA Roadmap',zh:'PMTA申请路线图'},
@@ -1836,27 +1848,40 @@ function buildSimCharts(switchers,hr,hz){
 }
 
 /* ========== A9: MGO Feasibility Simulator ========== */
+// Age-gating mode (set by UI dropdown #mgo-agegate). When 'device' is selected
+// AND the category is ec_flavored, an alternative threshold formula is used,
+// based on the Glas May 5, 2026 precedent (Bluetooth+ID+biometric → first-ever
+// non-tobacco non-menthol authorization at 5.2% youth use).
 var MGO_ANCHOR={
  ec_tobacco:{
   label:'E-cig Tobacco',labelZh:'电子烟（烟草口味）',color:'#d97706',
   intercept:15,slope:0.64,penaltyAbove:null,
+  // age-gating doesn't change the tobacco bar — already permissive
+  ageGated:{intercept:15,slope:0.64,penaltyAbove:null},
   benchmarks:[
    {lbl:'NJOY Daily Tobacco',x:9.4,y:29,lo:21,hi:37,year:2022,note:'PM0000630-631'},
-   {lbl:'Logic (3 lines)',x:9.4,y:33,lo:29,hi:37,year:2022,note:'PM0000529-541'}
+   {lbl:'Logic (3 lines)',x:9.4,y:33,lo:29,hi:37,year:2022,note:'PM0000529-541'},
+   {lbl:'Glas Blonde Tobacco',x:5.2,y:17,lo:13,hi:21,year:2026,note:'Mar 12 2026 · PM0004879.PD6 · cessation (stricter than switching) · 4-arm RCT n≈400'}
   ]
  },
  ec_flavored:{
   label:'E-cig Flavored/Menthol',labelZh:'电子烟（薄荷/非烟草口味）',color:'#7c3aed',
   intercept:15,slope:2.9,penaltyAbove:7,
+  // WITH device-level age-gating (Glas precedent May 5 2026): bar is significantly
+  // lower because youth-prevention argument shifts from "low youth use rate" to
+  // "device cannot be activated by youth". Slope reduced; penalty raised to 12%.
+  ageGated:{intercept:10,slope:1.5,penaltyAbove:12},
   benchmarks:[
-   {lbl:'NJOY Daily Menthol',x:5.9,y:37.5,lo:32,hi:43,year:2024,note:'PM0000628-629'},
-   {lbl:'JUUL (Menthol+VA)',x:5.2,y:50,lo:38,hi:52,year:2025,note:'ADJUSTST 2-yr · PM0000864-878'},
-   {lbl:'Glas G',x:5.2,y:17,lo:13,hi:21,year:2026,note:'Cessation endpoint (stricter) · PM0004879'}
+   {lbl:'NJOY Daily Menthol',x:5.9,y:37.5,lo:32,hi:43,year:2024,note:'PM0000628-629 · no device-level age-gating'},
+   {lbl:'JUUL (Menthol+VA)',x:5.2,y:50,lo:38,hi:52,year:2025,note:'ADJUSTST 2-yr · PM0000864-878 · no device-level age-gating'},
+   {lbl:'Glas Menthols (Classic+Fresh)',x:5.2,y:17,lo:13,hi:21,year:2026,note:'May 5 2026 · PM0004879.PD3/PD4 · WITH Bluetooth+ID+biometric age-gating'},
+   {lbl:'Glas Gold (mango) · Sapphire (blueberry)',x:5.2,y:17,lo:13,hi:21,year:2026,note:'May 5 2026 · PM0004879.PD1/PD2 · ★ FIRST non-tobacco non-menthol ENDS · WITH age-gating'}
   ]
  },
  np:{
   label:'Nicotine Pouch',labelZh:'尼古丁袋',color:'#2563eb',
   intercept:10,slope:3.0,penaltyAbove:null,
+  ageGated:{intercept:10,slope:3.0,penaltyAbove:null},
   benchmarks:[
    {lbl:'ZYN',x:1.7,y:24,lo:null,hi:null,year:2025,note:'Wk-10 cohort 24% (83/346)'},
    {lbl:'on! PLUS',x:1.7,y:15,lo:null,hi:null,year:2025,note:'6-wk actual-use 15% complete quit'}
@@ -1865,6 +1890,7 @@ var MGO_ANCHOR={
  htp:{
   label:'HTP',labelZh:'加热不燃烧烟草',color:'#0d9488',
   intercept:15,slope:0.8,penaltyAbove:null,
+  ageGated:{intercept:15,slope:0.8,penaltyAbove:null},
   benchmarks:[
    {lbl:'IQOS',x:20,y:25,lo:null,hi:null,year:2019,note:'E-cig youth% as proxy; IQOS own youth <1% · PM0000424'}
   ]
@@ -1939,31 +1965,42 @@ function runFeasibility(){
  var brand=parseFloat(document.getElementById('mgo-brand').value);
  var proposed=parseFloat(document.getElementById('mgo-proposed').value);
  var stringency=document.getElementById('mgo-stringency').value;
+ var ageGateEl=document.getElementById('mgo-agegate');
+ var ageGate=ageGateEl?ageGateEl.value:'none';
 
  document.getElementById('mgo-youth-val').textContent=youth.toFixed(1);
  document.getElementById('mgo-brand-val').textContent=brand.toFixed(1);
  document.getElementById('mgo-proposed-val').textContent=proposed;
 
  var anchor=MGO_ANCHOR[cat];
- var minSwitch=anchor.intercept+anchor.slope*youth;
+ // Switch threshold formula based on age-gating selection (Glas May 5 2026 precedent)
+ var params=(ageGate==='device'&&anchor.ageGated)?anchor.ageGated:anchor;
+ var minSwitch=params.intercept+params.slope*youth;
  if(stringency==='cons')minSwitch=minSwitch*1.2;
  minSwitch=Math.max(minSwitch,10);
 
  var gap=proposed-minSwitch;
 
- // Nearest benchmark
+ // Nearest benchmark — when age-gating selected, prefer same-mode benchmark when possible
  var nearest=anchor.benchmarks[0],bestDist=Infinity;
  anchor.benchmarks.forEach(function(b){
   var dx=Math.abs(b.x-youth);
+  // Mild preference for matching age-gating mode in benchmark selection
+  if(ageGate==='device'&&/Glas/i.test(b.lbl))dx-=0.5;
+  if(ageGate!=='device'&&/Glas/i.test(b.lbl))dx+=0.5;
   if(dx<bestDist){bestDist=dx;nearest=b;}
  });
 
  // Verdict
  var verdict,vColor,vReason;
- var hardBlock=(anchor.penaltyAbove!==null&&youth>anchor.penaltyAbove);
+ var hardBlock=(params.penaltyAbove!==null&&youth>params.penaltyAbove);
  if(hardBlock){
   verdict=curLang==='zh'?'极不可行':'Very Unlikely';vColor='#dc2626';
-  vReason=curLang==='zh'?('FDA 从未授权青少年使用率 >'+anchor.penaltyAbove+'% 的'+anchor.labelZh):('FDA has never authorized '+anchor.label+' above '+anchor.penaltyAbove+'% youth use');
+  if(ageGate==='device'){
+   vReason=curLang==='zh'?('即使带年龄门控，青少年使用率 >'+params.penaltyAbove+'% 的'+anchor.labelZh+'仍超出 Glas May 5 2026 先例适用范围'):('Even with device-level age-gating, '+anchor.label+' above '+params.penaltyAbove+'% youth use exceeds the Glas May 5 2026 precedent envelope');
+  } else {
+   vReason=curLang==='zh'?('FDA 从未授权青少年使用率 >'+params.penaltyAbove+'% 的'+anchor.labelZh+'（无设备级年龄门控时）'):('FDA has never authorized '+anchor.label+' above '+params.penaltyAbove+'% youth use without device-level age-gating');
+  }
  } else if(gap<0){
   verdict=curLang==='zh'?'证据不足':'Insufficient';vColor='#dc2626';
   vReason=curLang==='zh'?('低于 FDA 历史最低授权线 '+Math.abs(gap).toFixed(1)+'pp'):(Math.abs(gap).toFixed(1)+'pp below historical floor');
@@ -2022,25 +2059,26 @@ function runFeasibility(){
    _bench:true
   };
  });
- // Threshold line
+ // Threshold line — uses params (age-gating-aware) instead of raw anchor
  var thresh=[];
  for(var u=0;u<=20;u+=0.5){
-  var m=anchor.intercept+anchor.slope*u;
+  var m=params.intercept+params.slope*u;
   if(stringency==='cons')m=m*1.2;
   m=Math.max(m,10);
   if(m<=70)thresh.push({x:u,y:m,_thresh:true});
  }
  datasets.push({
-  label:(curLang==='zh'?'最低切换率阈值':'Min switching threshold'),
+  label:(curLang==='zh'?'最低切换率阈值':'Min switching threshold')
+        +(ageGate==='device'&&cat==='ec_flavored'?' (with age-gating)':''),
   data:thresh,
   borderColor:anchor.color,backgroundColor:'transparent',
   showLine:true,pointRadius:0,borderWidth:2.5,borderDash:[6,4],
   type:'line',tension:0
  });
- // Hard-block vertical band for flavored e-cig
- if(anchor.penaltyAbove!==null){
+ // Hard-block vertical band — also uses age-gating-aware penaltyAbove
+ if(params.penaltyAbove!==null){
   var block=[];
-  for(var v=anchor.penaltyAbove;v<=20;v+=0.5){block.push({x:v,y:70});}
+  for(var v=params.penaltyAbove;v<=20;v+=0.5){block.push({x:v,y:70});}
   datasets.push({
    label:'hardblock',data:block,
    borderColor:'rgba(220,38,38,0.25)',backgroundColor:'rgba(220,38,38,0.08)',
